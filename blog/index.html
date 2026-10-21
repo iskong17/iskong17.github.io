@@ -1,16 +1,17 @@
 ---
 layout: default
 title: Blog
-lang: ko
-description: 공부한 내용, 사진, 그리고 F1 레이스 기록
+lang: en
+description: Notes from study, photos from conferences and travel, and Formula 1 race reports.
 ---
 {%- assign race_posts = site.posts | where: "category", "race" -%}
+{%- assign current_season = site.time | date: "%Y" -%}
 <section class="page-hero">
   <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
   <div class="container" style="position: relative;">
-    <p class="eyebrow">Study · Gallery · Race</p>
+    <p class="eyebrow">Study · Gallery · Formula 1</p>
     <h1>Blog</h1>
-    <p>공부한 내용, 사진, 그리고 F1 레이스 기록을 모아 둡니다.</p>
+    <p>Notes from study, photos from conferences and travel, and Formula 1 race reports.</p>
   </div>
 </section>
 
@@ -23,24 +24,30 @@ description: 공부한 내용, 사진, 그리고 F1 레이스 기록
       {%- endfor %}
     </div>
 
-    <!-- All: every category, latest first -->
+    <!-- All: a bar per category, then the three latest posts -->
     <div class="blog-panel" data-panel="all">
-      {%- for c in site.data.categories %}
-      {%- assign posts = site.posts | where: "category", c.key -%}
+      <div class="cat-bars">
+        {%- for c in site.data.categories %}
+        {%- assign posts = site.posts | where: "category", c.key -%}
+        <button type="button" class="cat-bar cat-bar-{{ c.key }}" data-goto="{{ c.key }}">
+          <span class="cat-bar-name">{{ c.label }}</span>
+          <span class="cat-bar-desc">{{ c.blurb }}</span>
+          <span class="cat-bar-count">{{ posts.size }} {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
+          {% include icon.html name="arrow" %}
+        </button>
+        {%- endfor %}
+      </div>
+
       <div class="blog-group">
-        <div class="blog-group-head">
-          <h2>{{ c.label }}</h2>
-          {%- if posts.size > 8 %}<button type="button" class="more-link" data-goto="{{ c.key }}">All {{ posts.size }} {% include icon.html name="arrow" %}</button>{% endif %}
-        </div>
-        {%- if posts.size > 0 %}
-        <div class="sq-grid">
-          {%- for post in posts limit: 8 %}{% include post-card.html post=post %}{% endfor %}
+        <div class="blog-group-head"><h2>Latest</h2></div>
+        {%- if site.posts.size > 0 %}
+        <div class="sq-grid sq-grid-3">
+          {%- for post in site.posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
         </div>
         {%- else %}
-        <p class="empty">아직 글이 없습니다.</p>
+        <p class="empty">No posts yet.</p>
         {%- endif %}
       </div>
-      {%- endfor %}
     </div>
 
     <!-- Study / Gallery -->
@@ -67,15 +74,15 @@ description: 공부한 내용, 사진, 그리고 F1 레이스 기록
         {%- for post in posts %}{% include post-card.html post=post %}{% endfor %}
       </div>
       {%- else %}
-      <p class="empty">아직 글이 없습니다.</p>
+      <p class="empty">No posts yet.</p>
       {%- endif %}
     </div>
     {%- endif %}
     {%- endfor %}
 
-    <!-- Race: seasons, circuits, drivers -->
+    <!-- Formula 1: seasons, circuits, drivers -->
     <div class="blog-panel" data-panel="race" hidden>
-      <div class="session-tabs session-tabs-sub" id="race-tabs" role="tablist" aria-label="Race sections">
+      <div class="session-tabs session-tabs-sub" id="race-tabs" role="tablist" aria-label="Formula 1 sections">
         <button type="button" class="session-tab is-active" data-sub="seasons">Seasons</button>
         <button type="button" class="session-tab" data-sub="circuits">Circuits</button>
         <button type="button" class="session-tab" data-sub="drivers">Drivers</button>
@@ -84,23 +91,29 @@ description: 공부한 내용, 사진, 그리고 F1 레이스 기록
       <div class="race-sub" data-sub="seasons">
         {%- assign seasons = race_posts | group_by: "season" -%}
         {%- for s in seasons %}
-        <div class="blog-group">
-          <div class="blog-group-head"><h2>{{ s.name }} season</h2><span class="sq-meta">{{ s.items.size }} races</span></div>
+        {%- assign items = s.items | sort: "round" | reverse -%}
+        {%- assign wins = items | where: "result", "P1" -%}
+        <details class="season-group"{% if forloop.first %} open{% endif %}>
+          <summary>
+            <span class="season-year">{{ s.name }}</span>
+            <span class="season-meta">{{ s.items.size }} races · Max won {{ wins.size }}</span>
+            <span class="season-toggle"><span class="when-closed">More</span><span class="when-open">Less</span></span>
+          </summary>
           <div class="sq-grid">
-            {%- assign items = s.items | sort: "round" | reverse -%}
             {%- for post in items %}{% include post-card.html post=post %}{% endfor %}
           </div>
-        </div>
+        </details>
         {%- endfor %}
         {%- if seasons.size == 0 %}<p class="empty">No race reports yet.</p>{% endif %}
       </div>
 
       <div class="race-sub" data-sub="circuits" hidden>
-        <p class="race-sub-intro">Circuits on the current calendar. Click a country on the map to see its circuits.</p>
+        <p class="race-sub-intro">Pins mark every circuit raced in the last five seasons. Click a country, a pin, or a circuit in the list.</p>
         <div class="map-block">
           <div class="world-map" id="circuit-map"></div>
           <aside class="map-panel" id="circuit-panel" aria-live="polite"></aside>
         </div>
+        <div class="blog-group-head"><h2>{{ current_season }} calendar</h2></div>
         <div class="sq-grid">
           {%- assign circuits = site.circuits | sort: "country" -%}
           {%- for c in circuits %}{% include circuit-card.html circuit=c %}{% endfor %}
@@ -108,19 +121,18 @@ description: 공부한 내용, 사진, 그리고 F1 레이스 기록
       </div>
 
       <div class="race-sub" data-sub="drivers" hidden>
-        <p class="race-sub-intro">The current grid, ordered by championship position.</p>
+        <p class="race-sub-intro">Drivers racing this season, in championship order.</p>
         <div class="sq-grid">
           {%- for i in (1..40) %}
           {%- for d in site.drivers %}{% if d.current.position == i %}{% include driver-card.html driver=d %}{% endif %}{% endfor %}
           {%- endfor %}
-          {%- for d in site.drivers %}{% unless d.current.position %}{% include driver-card.html driver=d %}{% endunless %}{% endfor %}
         </div>
       </div>
     </div>
   </div>
 </section>
 
-{%- comment %} Map data: gallery posts with a location, and circuits with coordinates. {% endcomment %}
+{%- comment %} Map data: visited countries, gallery posts with a location, circuits. {% endcomment %}
 {%- assign gallery_posts = site.posts | where: "category", "gallery" -%}
 <script type="application/json" id="gallery-data">
 {
@@ -135,14 +147,16 @@ description: 공부한 내용, 사진, 그리고 F1 레이스 기록
 }
 </script>
 <script type="application/json" id="circuit-data">
-[
-  {%- for c in site.circuits %}
-  {"label": {{ c.title | jsonify }}, "url": {{ c.url | relative_url | jsonify }}, "country": {{ c.country | jsonify }}, "locality": {{ c.locality | jsonify }}, "lat": {{ c.lat | default: "null" }}, "lng": {{ c.lng | default: "null" }}, "races": {{ c.races_held | default: 0 }}, "lastWinner": {{ c.recent_winners[0].driver | jsonify }}, "lastSeason": {{ c.recent_winners[0].season | jsonify }}, "record": {{ c.lap_record.time | jsonify }}, "recordBy": {{ c.lap_record.driver | jsonify }}, "path": {{ c.track_path | jsonify }}, "viewBox": {{ c.track_viewbox | default: "0 0 400 400" | jsonify }}}{% unless forloop.last %},{% endunless %}
-  {%- endfor %}
-]
+{
+  "pages": [
+    {%- for c in site.circuits %}
+    {"id": {{ c.circuit_id | jsonify }}, "label": {{ c.title | jsonify }}, "url": {{ c.url | relative_url | jsonify }}, "country": {{ c.country | jsonify }}, "locality": {{ c.locality | jsonify }}, "lat": {{ c.lat | default: "null" }}, "lng": {{ c.lng | default: "null" }}, "races": {{ c.races_held | default: 0 }}, "lastWinner": {{ c.recent_winners[0].driver | jsonify }}, "lastSeason": {{ c.recent_winners[0].season | jsonify }}, "record": {{ c.lap_record.time | jsonify }}, "recordBy": {{ c.lap_record.driver | jsonify }}, "path": {{ c.track_path | jsonify }}, "viewBox": {{ c.track_viewbox | default: "0 0 400 400" | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "venues": {{ site.data.f1_venues | jsonify }}
+}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js" defer></script>
 <script src="{{ '/assets/js/world-map.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/blog-maps.js' | relative_url }}" defer></script>
-

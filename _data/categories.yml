@@ -1,7 +1,10 @@
 # Blog categories. Use the key in a post's `category:` front matter.
 # Study and Gallery posts also take a `topic:` key from their list below.
+# `short` is used on small labels; `blurb` appears on the All tab.
 - key: study
   label: "Study"
+  short: "Study"
+  blurb: "Deep Learning · Linear Algebra · Computer Vision · Algorithm · Paper Review"
   topics:
     - { key: deep-learning, label: "Deep Learning" }
     - { key: linear-algebra, label: "Linear Algebra" }
@@ -10,8 +13,12 @@
     - { key: paper-review, label: "Paper Review" }
 - key: gallery
   label: "Gallery"
+  short: "Gallery"
+  blurb: "Conference · Travel, on a world map"
   topics:
     - { key: conference, label: "Conference" }
     - { key: travel, label: "Travel" }
 - key: race
-  label: "Race"
+  label: "Formula 1 (F1)"
+  short: "F1"
+  blurb: "Race reports since 2021 · Circuits · Drivers"

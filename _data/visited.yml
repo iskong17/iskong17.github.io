@@ -1,4 +1,9 @@
-# Countries you have visited, filled in on the Gallery map.
-# Use English country names (e.g. "Japan", "France", "United States of America").
-# Countries of Gallery posts with a `location` are filled in automatically.
-- South Korea
+# Countries you have visited, filled in on the Gallery map and listed beside it.
+# Each entry needs `country` (English name). `note`, `lat`, `lng` are optional;
+# with lat/lng a pin is added. Gallery posts with a `location` are added automatically.
+- country: "South Korea"
+  note: "Home · Seoul"
+- country: "France"
+  note: "ICPR 2026 · Lyon"
+  lat: 45.764
+  lng: 4.8357

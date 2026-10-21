@@ -10,10 +10,10 @@ layout: default
     <div class="container">
       <div class="post-meta">
         {%- assign topic = cat.topics | where: "key", page.topic | first %}
-        <span class="post-cat cat-{{ page.category | default: 'study' }}">{{ cat.label | default: page.category }}</span>
+        <span class="post-cat cat-{{ page.category | default: 'study' }}">{{ cat.short | default: cat.label | default: page.category }}</span>
         {%- if topic %}<span class="post-topic">{{ topic.label }}</span>{% endif %}
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
-        <span>· {% if page.lang == "en" %}{{ minutes }} min read{% else %}{{ minutes }}분 읽기{% endif %}</span>
+        <span>· {{ minutes }} min read</span>
       </div>
       <h1>{{ page.title }}</h1>
       {%- if page.description %}<p class="post-desc">{{ page.description }}</p>{% endif %}
@@ -35,7 +35,7 @@ layout: default
   <div class="post-body">
     {{ content }}
     {%- if page.auto %}
-    <p class="auto-note">이 글은 <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a> 데이터로 자동 생성된 레이스 리포트입니다.</p>
+    <p class="auto-note">This report was generated automatically from <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a> data.</p>
     {%- endif %}
   </div>
 

@@ -87,7 +87,7 @@
       if (!empty) {
         empty = document.createElement('p');
         empty.className = 'empty topic-empty';
-        empty.textContent = '아직 글이 없습니다.';
+        empty.textContent = 'No posts yet.';
         panel.appendChild(empty);
       }
       empty.hidden = any || cards.length === 0;

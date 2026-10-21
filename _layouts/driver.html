@@ -36,19 +36,15 @@ layout: default
   </div>
   {%- endif %}
 
-  <h2>Last three seasons</h2>
-  {%- if page.recent_seasons.size > 0 %}
+  <h2>Every season since debut</h2>
   <table>
     <thead><tr><th>Season</th><th>Position</th><th>Points</th><th>Wins</th><th>Team</th></tr></thead>
     <tbody>
-      {%- for s in page.recent_seasons %}
-      <tr><td>{{ s.season }}</td><td>{% if s.position == '1' %}<b>Champion</b>{% else %}P{{ s.position }}{% endif %}</td><td>{{ s.points }}</td><td>{{ s.wins }}</td><td>{{ s.team }}</td></tr>
+      {%- for s in page.seasons %}
+      <tr><td>{{ s.season }}{% if s.season == page.current.season %} <small>(in progress)</small>{% endif %}</td><td>{% if s.position == '1' and s.season != page.current.season %}<b>Champion</b>{% else %}P{{ s.position }}{% endif %}</td><td>{{ s.points }}</td><td>{{ s.wins }}</td><td>{{ s.team }}</td></tr>
       {%- endfor %}
     </tbody>
   </table>
-  {%- else %}
-  <p>{{ page.current.season | default: 'This' }} is his rookie season.</p>
-  {%- endif %}
 
   <h2>Teams since debut</h2>
   <ol class="team-history">

@@ -18,6 +18,17 @@
     return ALIASES[n] || n;
   }
 
+  // Natural Earth draws France with its overseas departments (e.g. French Guiana).
+  // Keep the European part so highlighting France does not paint South America.
+  function mainland(f) {
+    if (f.properties.name !== 'France' || f.geometry.type !== 'MultiPolygon') return f;
+    var polys = f.geometry.coordinates.filter(function (poly) {
+      var lon = poly[0][0][0], lat = poly[0][0][1];
+      return lon > -10 && lon < 20 && lat > 35;
+    });
+    return { type: 'Feature', id: f.id, properties: f.properties, geometry: { type: 'MultiPolygon', coordinates: polys } };
+  }
+
   function loadAtlas() {
     if (!atlasPromise) {
       atlasPromise = fetch(ATLAS).then(function (r) {
@@ -28,11 +39,13 @@
     return atlasPromise;
   }
 
-  window.WorldMap = function (el, opts) {
+  var WorldMap = window.WorldMap = function (el, opts) {
     var width = 960, height = 480;
     var highlight = {};
     (opts.highlight || []).forEach(function (n) { highlight[norm(n)] = true; });
-    var markers = (opts.markers || []).filter(function (m) { return isFinite(m.lat) && isFinite(m.lng); });
+    var markers = (opts.markers || []).filter(function (m) {
+      return m.lat != null && m.lng != null && m.lat !== '' && isFinite(m.lat) && isFinite(m.lng);
+    });
 
     var svg = d3.select(el).append('svg')
       .attr('viewBox', '0 0 ' + width + ' ' + height)
@@ -102,8 +115,9 @@
     resetBtn.addEventListener('click', reset);
     el.appendChild(resetBtn);
 
-    loadAtlas().then(function (topo) {
-      var countries = topojson.feature(topo, topo.objects.countries).features;
+    var countries = [];
+    var ready = loadAtlas().then(function (topo) {
+      countries = topojson.feature(topo, topo.objects.countries).features.map(mainland);
       g.append('path').datum({ type: 'Sphere' }).attr('class', 'map-sphere').attr('d', path).on('click', reset);
       g.selectAll('.map-country')
         .data(countries)
@@ -120,7 +134,7 @@
       g.selectAll('.map-marker')
         .data(markers)
         .join('circle')
-        .attr('class', 'map-marker')
+        .attr('class', function (m) { return 'map-marker' + (m.dim ? ' is-dim' : ''); })
         .attr('cx', function (m) { return projection([m.lng, m.lat])[0]; })
         .attr('cy', function (m) { return projection([m.lng, m.lat])[1]; })
         .attr('r', 5)
@@ -137,6 +151,28 @@
       el.classList.add('is-failed');
     });
 
-    return { reset: reset };
+    function featureOf(name) {
+      return countries.filter(function (d) { return norm(d.properties.name) === name; })[0] || null;
+    }
+
+    return {
+      reset: reset,
+      // Select a country by name, as if it was clicked on the map.
+      selectCountry: function (name) {
+        ready.then(function () { var n = norm(name); select(featureOf(n), n); });
+      },
+      // Zoom to one marker and report only that marker.
+      focusMarker: function (m) {
+        ready.then(function () {
+          var n = norm(m.country);
+          var p = projection([m.lng, m.lat]);
+          g.selectAll('.map-country').classed('is-selected', function (d) { return norm(d.properties.name) === n; });
+          selected = n;
+          zoomToBounds([[p[0] - 14, p[1] - 7], [p[0] + 14, p[1] + 7]]);
+          if (opts.onSelect) opts.onSelect(m.country, [m]);
+        });
+      }
+    };
   };
+  WorldMap.norm = norm;
 })();
