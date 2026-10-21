@@ -5,6 +5,7 @@ backoff on rate limits, so a long backfill can run unattended.
 """
 
 import json
+import os
 import sys
 import time
 import urllib.error
@@ -18,7 +19,7 @@ UA = {"User-Agent": "iskong17.github.io F1 pages"}
 _cache = {}
 
 
-def _fetch(url, pause, retries=8):
+def _fetch(url, pause, retries=12):
     if url in _cache:
         return _cache[url]
     for attempt in range(retries):
@@ -34,7 +35,7 @@ def _fetch(url, pause, retries=8):
                 raise  # a client error will not fix itself
             if attempt == retries - 1:
                 raise
-            wait = 20 * (attempt + 1) if getattr(e, "code", None) == 429 else 3 * (attempt + 1)
+            wait = min(60 * (attempt + 1), 300) if code == 429 else 3 * (attempt + 1)
             print(f"retry in {wait}s ({e}): {url}", file=sys.stderr)
             time.sleep(wait)
 
@@ -42,7 +43,8 @@ def _fetch(url, pause, retries=8):
 def jolpica(path, limit=100, offset=0):
     """MRData for an Ergast-style path, e.g. jolpica('2026/17/results')."""
     url = f"{JOLPICA}/{path}/?format=json&limit={limit}&offset={offset}"
-    return _fetch(url, pause=0.6)["MRData"]
+    # JOLPICA_PAUSE slows long backfills down to the API's sustained limit (about 500 requests/hour).
+    return _fetch(url, pause=float(os.environ.get("JOLPICA_PAUSE", "0.6")))["MRData"]
 
 
 def jolpica_all(path, table, key):
