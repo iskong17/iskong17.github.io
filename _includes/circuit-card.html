@@ -1,7 +1,7 @@
 {%- assign c = include.circuit -%}
 <a class="sq-card sq-circuit" href="{{ c.url | relative_url }}">
   <div class="sq-top">
-    <span class="sq-label">{{ c.country }}</span>
+    <span class="sq-label">{% if c.calendar_round %}R{{ c.calendar_round }} · {% endif %}{{ c.country }}</span>
     {%- if c.races_held %}<span class="sq-meta">{{ c.races_held }} GPs</span>{% endif %}
   </div>
   {%- if c.track_path %}

@@ -24,29 +24,27 @@ description: Notes from study, photos from conferences and travel, and Formula 1
       {%- endfor %}
     </div>
 
-    <!-- All: a bar per category, then the three latest posts -->
+    <!-- All: a panel per category with its three latest posts -->
     <div class="blog-panel" data-panel="all">
       <div class="cat-bars">
         {%- for c in site.data.categories %}
         {%- assign posts = site.posts | where: "category", c.key -%}
-        <button type="button" class="cat-bar cat-bar-{{ c.key }}" data-goto="{{ c.key }}">
-          <span class="cat-bar-name">{{ c.label }}</span>
-          <span class="cat-bar-desc">{{ c.blurb }}</span>
-          <span class="cat-bar-count"><b>{{ posts.size }}</b> {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
-          {% include icon.html name="arrow" %}
-        </button>
-        {%- endfor %}
-      </div>
-
-      <div class="blog-group">
-        <div class="blog-group-head"><h2>Latest</h2></div>
-        {%- if site.posts.size > 0 %}
-        <div class="sq-grid sq-grid-3">
-          {%- for post in site.posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
+        <div class="cat-bar cat-bar-{{ c.key }}">
+          <button type="button" class="cat-bar-head" data-goto="{{ c.key }}">
+            <span class="cat-bar-name">{{ c.label }}</span>
+            <span class="cat-bar-desc">{{ c.blurb }}</span>
+            <span class="cat-bar-count"><b>{{ posts.size }}</b> {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
+            {% include icon.html name="arrow" %}
+          </button>
+          {%- if posts.size > 0 %}
+          <div class="cat-bar-posts">
+            {%- for post in posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
+          </div>
+          {%- else %}
+          <p class="cat-bar-empty">No posts yet.</p>
+          {%- endif %}
         </div>
-        {%- else %}
-        <p class="empty">No posts yet.</p>
-        {%- endif %}
+        {%- endfor %}
       </div>
     </div>
 
@@ -94,9 +92,19 @@ description: Notes from study, photos from conferences and travel, and Formula 1
         {%- assign items = s.items | sort: "round" | reverse -%}
         {%- assign wins = items | where: "result", "P1" -%}
         <details class="season-group"{% if forloop.first %} open{% endif %}>
+          {%- assign info = site.data.f1_seasons[s.name] -%}
           <summary>
             <span class="season-year">{{ s.name }}</span>
-            <span class="season-meta">{{ s.items.size }} races · Max won {{ wins.size }}</span>
+            <span class="season-facts">
+              {%- if info %}
+              <span class="season-fact"><em>{% if info.final %}Drivers' champion{% else %}Leader after R{{ info.round }}{% endif %}</em>{{ info.driver_champion }} <small>{{ info.driver_team }}</small></span>
+              <span class="season-fact"><em>{% if info.final %}Constructors' champion{% else %}Constructors' leader{% endif %}</em>{{ info.constructor_champion }}</span>
+              <span class="season-fact is-max"><em>Max Verstappen</em>P{{ info.max_position }} · {{ info.max_points }} pts · {{ info.max_wins }} {% if info.max_wins == 1 %}win{% else %}wins{% endif %}</span>
+              <span class="season-fact is-rb"><em>Red Bull</em>P{{ info.red_bull_position }} · {{ info.red_bull_points }} pts</span>
+              {%- else %}
+              <span class="season-meta">{{ s.items.size }} races · Max won {{ wins.size }}</span>
+              {%- endif %}
+            </span>
             <span class="season-toggle"><span class="when-closed">More</span><span class="when-open">Less</span></span>
           </summary>
           <div class="sq-grid">
@@ -115,7 +123,7 @@ description: Notes from study, photos from conferences and travel, and Formula 1
         </div>
         <div class="blog-group-head"><h2>{{ current_season }} calendar</h2></div>
         <div class="sq-grid">
-          {%- assign circuits = site.circuits | sort: "country" -%}
+          {%- assign circuits = site.circuits | sort: "calendar_round" -%}
           {%- for c in circuits %}{% include circuit-card.html circuit=c %}{% endfor %}
         </div>
       </div>
