@@ -170,7 +170,13 @@ body_class: page-home
         <ol class="awards certs">
           {%- for c in site.data.career.certifications %}
           <li>
+            {%- if c.cert %}
+            <button type="button" class="award-cert" data-lightbox="{{ c.cert | relative_url }}" aria-label="View certificate: {{ c.title }}">
+              <img src="{{ c.cert | relative_url }}" alt="" loading="lazy">
+            </button>
+            {%- else %}
             <span class="award-icon">{% include icon.html name="cv" %}</span>
+            {%- endif %}
             <div><b>{{ c.title }}</b><span>{{ c.issuer }}</span></div>
             <time>{{ c.date }}</time>
           </li>

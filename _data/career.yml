@@ -103,5 +103,5 @@ awards:
     cert: /images/awards/aicoss-dean-award-2025.jpg
 
 certifications:
-  - { title: "ADsP (Advanced Data Analytics Semi-Professional)", issuer: "Korea Data Agency", date: "Nov. 2024" }
-  - { title: "SQLD (SQL Developer)", issuer: "Korea Data Agency", date: "Dec. 2024" }
+  - { title: "ADsP (Advanced Data Analytics Semi-Professional)", issuer: "Korea Data Agency", date: "Nov. 2024", cert: /images/awards/adsp-2024.jpg }
+  - { title: "SQLD (SQL Developer)", issuer: "Korea Data Agency", date: "Dec. 2024", cert: /images/awards/sqld-2024.jpg }
