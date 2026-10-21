@@ -54,32 +54,96 @@
     }, (location.hash || '#all').slice(1));
   }
 
-  // Lightbox for publication figures.
+  // Lightbox for publication figures and certificates.
   var lightbox = document.getElementById('lightbox');
   var lightboxImg = document.getElementById('lightbox-img');
   if (lightbox && lightboxImg) {
+    function open(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('is-open');
+    }
     document.querySelectorAll('img[data-zoom]').forEach(function (img) {
-      img.addEventListener('click', function () {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add('is-open');
-      });
+      img.addEventListener('click', function () { open(img.src, img.alt); });
+    });
+    document.querySelectorAll('[data-lightbox]').forEach(function (btn) {
+      btn.addEventListener('click', function () { open(btn.getAttribute('data-lightbox'), btn.getAttribute('aria-label')); });
     });
     function close() { lightbox.classList.remove('is-open'); }
     lightbox.addEventListener('click', close);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   }
 
-  // Copy buttons (BibTeX on project pages).
-  document.querySelectorAll('[data-copy]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var target = document.getElementById(btn.getAttribute('data-copy'));
-      if (!target || !navigator.clipboard) return;
-      navigator.clipboard.writeText(target.innerText).then(function () {
-        var label = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(function () { btn.textContent = label; }, 1800);
+  // Live F1 data for Max Verstappen from the Jolpica F1 API (Ergast-compatible).
+  // The widget stays hidden if any request fails.
+  var f1 = document.getElementById('f1-live');
+  if (f1 && window.fetch) {
+    var API = 'https://api.jolpi.ca/ergast/f1/current/';
+    var DRIVER = 'max_verstappen';
+    var CACHE_KEY = 'f1-live-v1';
+    var CACHE_MS = 30 * 60 * 1000;
+
+    function getJSON(path) {
+      return fetch(API + path + '?format=json').then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
       });
-    });
-  });
+    }
+    function set(name, text) {
+      var el = f1.querySelector('[data-f1="' + name + '"]');
+      if (el) el.textContent = text;
+    }
+    function render(d) {
+      set('pos', 'P' + d.standing.position);
+      set('pts', d.standing.points + ' pts · ' + d.standing.wins + (d.standing.wins === '1' ? ' win' : ' wins'));
+
+      if (d.last) {
+        set('last-name', d.last.raceName.replace('Grand Prix', 'GP'));
+        var finished = /^\d+$/.test(d.last.positionText);
+        set('last-pos', finished ? 'P' + d.last.positionText : 'DNF');
+        set('last-detail', (d.last.grid === '0' ? 'Pit lane start' : 'Started P' + d.last.grid) + (finished ? '' : ' · ' + d.last.status));
+      } else {
+        set('last-pos', '–');
+      }
+
+      if (d.next) {
+        set('next-name', d.next.raceName.replace('Grand Prix', 'GP'));
+        var when = new Date(d.next.date + 'T' + (d.next.time || '00:00:00Z'));
+        var days = Math.ceil((when - Date.now()) / 86400000);
+        var date = when.toLocaleDateString('en-GB', { timeZone: 'Asia/Seoul', day: 'numeric', month: 'short' });
+        set('next-when', date + (days > 0 ? ' · D-' + days : ' · Race week'));
+      } else {
+        set('next-name', 'Season over');
+      }
+
+      set('round', d.season + ' season · after round ' + d.round);
+      f1.hidden = false;
+    }
+
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch (e) {}
+    if (cached && Date.now() - cached.t < CACHE_MS) {
+      render(cached.d);
+    } else {
+      Promise.all([
+        getJSON('drivers/' + DRIVER + '/driverStandings/'),
+        getJSON('last/results/'),
+        getJSON('next/')
+      ]).then(function (res) {
+        var list = res[0].MRData.StandingsTable.StandingsLists[0];
+        var race = res[1].MRData.RaceTable.Races[0];
+        var next = res[2].MRData.RaceTable.Races[0];
+        var mine = race && race.Results.filter(function (r) { return r.Driver.driverId === DRIVER; })[0];
+        var d = {
+          season: list.season,
+          round: list.round,
+          standing: list.DriverStandings[0],
+          last: mine ? { raceName: race.raceName, positionText: mine.positionText, grid: mine.grid, status: mine.status } : null,
+          next: next ? { raceName: next.raceName, date: next.date, time: next.time } : null
+        };
+        render(d);
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
+      }).catch(function () { /* keep the widget hidden */ });
+    }
+  }
 })();

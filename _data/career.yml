@@ -56,12 +56,18 @@ projects:
     sub: "Football Big Data Camp"
     period: "Feb. 2025"
     text: "Investigated practical applications of LLMs and RAG in football performance analytics."
+    cert: /images/awards/football-bigdata-camp-2025.jpg
 
-# Newest first.
+# Newest first. `cert` is an optional certificate image shown in a lightbox.
 awards:
-  - { title: "Creativity Award", event: "K-DATA Science Conference & Hackathon", date: "Sep. 2026" }
-  - { title: "Excellence Award", event: "Seoul RISE AI Competition (Project: SATOR)", date: "Jun. 2026" }
-  - { title: "Excellence Award", event: "UOS Capstone Design Project", date: "Jan. 2026" }
-  - { title: "Grand Prize (Seoul Mayor Award)", event: "Seoul Metropolitan Big Data Campus Competition", date: "Oct. 2025" }
-  - { title: "Encouragement Award", event: "AICOSS Industry-Academia Hackathon", date: "Aug. 2025" }
-  - { title: "Dean's Award of College of Engineering", event: "AICOSS Deep Learning Bootcamp", date: "Jan. 2025" }
+  - { title: "Creativity Award", event: "K-DATA Science Conference & Hackathon", date: "Sep. 2026", cert: /images/awards/kds-creativity-2026.jpg }
+  - { title: "Excellence Award", event: "Seoul RISE AI Competition (Project: SATOR)", date: "Jun. 2026", cert: /images/awards/rise-excellence-2026.jpg }
+  - { title: "Academic Award (University President's Award)", event: "University of Seoul · 2025 Seoul Big Data Campus Competition Grand Prize", date: "May 2026", cert: /images/awards/uos-academic-award-2026.jpg }
+  - { title: "Excellence Award", event: "UOS Capstone Design Project", date: "Jan. 2026", cert: /images/awards/capstone-excellence-2026.jpg }
+  - { title: "Grand Prize (Seoul Mayor Award)", event: "Seoul Metropolitan Big Data Campus Competition", date: "Oct. 2025", cert: /images/awards/seoul-bigdata-grand-prize-2025.jpg }
+  - { title: "Encouragement Award", event: "AICOSS Industry-Academia Hackathon", date: "Aug. 2025", cert: /images/awards/aicoss-hackathon-encouragement-2025.jpg }
+  - { title: "Dean's Award of College of Engineering", event: "AICOSS Deep Learning Bootcamp", date: "Jan. 2025", cert: /images/awards/aicoss-dean-award-2025.jpg }
+
+certifications:
+  - { title: "ADsP (Advanced Data Analytics Semi-Professional)", issuer: "Korea Data Agency", date: "Nov. 2024" }
+  - { title: "SQLD (SQL Developer)", issuer: "Korea Data Agency", date: "Dec. 2024" }

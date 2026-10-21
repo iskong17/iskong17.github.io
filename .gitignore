@@ -10,3 +10,9 @@
 cv.tex_site/
 .jekyll-cache/
 .sass-cache/
+
+# Original scans and uploads kept locally, never published
+/*.jpeg
+/*.jpg
+/*.png
+/*.pdf

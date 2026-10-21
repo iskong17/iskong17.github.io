@@ -17,6 +17,7 @@
     - { label: Paper, url: "https://arxiv.org/abs/2610.21367" }
     - { label: Project, url: "/sator/" }
     - { label: Code, url: "https://github.com/iskong17/SATOR" }
+    - { label: Poster, url: "/files/SATOR_Poster.pdf" }
 
 - id: mamvi
   title: "MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds"

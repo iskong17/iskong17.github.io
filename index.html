@@ -153,9 +153,26 @@ body_class: page-home
         <ol class="awards">
           {%- for a in site.data.career.awards %}
           <li>
+            {%- if a.cert %}
+            <button type="button" class="award-cert" data-lightbox="{{ a.cert | relative_url }}" aria-label="View certificate: {{ a.title }}">
+              <img src="{{ a.cert | relative_url }}" alt="" loading="lazy">
+            </button>
+            {%- else %}
             <span class="award-icon">{% include icon.html name="trophy" %}</span>
+            {%- endif %}
             <div><b>{{ a.title }}</b><span>{{ a.event }}</span></div>
             <time>{{ a.date }}</time>
+          </li>
+          {%- endfor %}
+        </ol>
+
+        <h3 class="sub-head">Certifications</h3>
+        <ol class="awards certs">
+          {%- for c in site.data.career.certifications %}
+          <li>
+            <span class="award-icon">{% include icon.html name="cv" %}</span>
+            <div><b>{{ c.title }}</b><span>{{ c.issuer }}</span></div>
+            <time>{{ c.date }}</time>
           </li>
           {%- endfor %}
         </ol>
@@ -175,6 +192,9 @@ body_class: page-home
         <h3>{{ pr.name }}</h3>
         <p class="project-sub">{{ pr.sub }}</p>
         <p>{{ pr.text }}</p>
+        {%- if pr.cert %}
+        <button type="button" class="text-link" data-lightbox="{{ pr.cert | relative_url }}">Certificate</button>
+        {%- endif %}
       </article>
       {%- endfor %}
     </div>
@@ -186,22 +206,47 @@ body_class: page-home
   <div class="container">
     <div class="paddock">
       <div class="paddock-number" aria-hidden="true">3</div>
-      <div class="paddock-text">
+      <div class="paddock-main">
         <p class="paddock-kicker">Off the Track</p>
         <h2>Max Verstappen <span>· #3 · Oracle Red Bull Racing</span></h2>
         <p>
           I follow every race weekend with Max and Oracle Red Bull Racing,
           and write race reviews, in Korean, on the blog.
         </p>
+
+        <div class="f1-live" id="f1-live" hidden>
+          <div class="f1-cards">
+            <div class="f1-card">
+              <span class="f1-label">Championship</span>
+              <b data-f1="pos"></b>
+              <small data-f1="pts"></small>
+            </div>
+            <div class="f1-card">
+              <span class="f1-label" data-f1="last-name">Last race</span>
+              <b data-f1="last-pos"></b>
+              <small data-f1="last-detail"></small>
+            </div>
+            <div class="f1-card">
+              <span class="f1-label">Next race</span>
+              <b data-f1="next-name"></b>
+              <small data-f1="next-when"></small>
+            </div>
+          </div>
+          <p class="f1-source"><span class="f1-dot"></span>Live from the Jolpica F1 API · <span data-f1="round"></span></p>
+        </div>
+
         <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}#race">Race reviews {% include icon.html name="arrow" %}</a>
+        {%- if reviews.size > 0 %}
+        <ul class="paddock-list">
+          {%- for r in reviews limit: 3 %}
+          <li><a href="{{ r.url | relative_url }}"><time>{{ r.date | date: "%Y.%m.%d" }}</time>{{ r.title }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
       </div>
-      {%- if reviews.size > 0 %}
-      <ul class="paddock-list">
-        {%- for r in reviews limit: 3 %}
-        <li><a href="{{ r.url | relative_url }}"><time>{{ r.date | date: "%Y.%m.%d" }}</time>{{ r.title }}</a></li>
-        {%- endfor %}
-      </ul>
-      {%- endif %}
+      <figure class="paddock-photo">
+        <img src="{{ '/images/max-verstappen.jpg' | relative_url }}" alt="Max Verstappen" loading="lazy">
+      </figure>
     </div>
   </div>
 </section>
