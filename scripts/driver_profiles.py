@@ -3,7 +3,7 @@
 
 For each driver page in _drivers/ (which links to the driver's Wikipedia article):
   photo        - the article's lead image from Wikimedia Commons, only if it is
-                 freely licensed (CC BY, CC BY-SA, CC0, public domain); saved
+                 freely licensed (CC BY, CC BY-SA, CC0, OGL, public domain); saved
                  resized to images/drivers/<id>.jpg with author and license
   born, birthplace, height
                - from Wikidata
@@ -30,7 +30,7 @@ DRIVERS = ROOT / "_drivers"
 PHOTOS = ROOT / "images" / "drivers"
 DATA = ROOT / "_data" / "driver_profiles.yml"
 UA = {"User-Agent": "iskong17.github.io driver pages (https://iskong17.github.io; kong7963@uos.ac.kr)"}
-FREE = ("cc by", "cc-by", "cc0", "public domain", "pd")
+FREE = ("cc by", "cc-by", "cc0", "public domain", "pd", "ogl")  # OGL: UK Open Government Licence
 STYLE_HEADINGS = re.compile(r"^(driving style|racing style|driver profile|style|personality and driving style)$", re.I)
 
 

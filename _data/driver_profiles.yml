@@ -122,6 +122,11 @@ hamilton:
   born: "1985-01-07"
   birthplace: "Stevenage, United Kingdom"
   height_cm: 174
+  photo:
+    src: "/images/drivers/hamilton.jpg"
+    author: "Picture by Lauren Hurley / No 10 Downing Street"
+    license: "OGL 3"
+    source: "https://commons.wikimedia.org/wiki/File:Prime_Minister_Keir_Starmer_meets_Sir_Lewis_Hamilton_(54566928382)_(cropped).jpg"
   style_heading: "Driver profile"
   style: "Hamilton is regarded as one of the most complete drivers on the grid, excelling across a wide range of areas. He has been described as having an aggressive driving style, with a natural aptitude for identifying the limits of the car. Mark Hughes, writing for the official Formula One website, described how Hamilton is \"super-hard on the brakes ... but has a fantastic ability to match how quickly the downforce is bleeding off with his modulation of the pressure so that there's no wasted grip but no locked wheels either.\" Paddy Lowe, previously the engineering director for McLaren, described how Hamilton is comfortable with levels of rear instability that most other drivers would find intolerable."
 hulkenberg:
