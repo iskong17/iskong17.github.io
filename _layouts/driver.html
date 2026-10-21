@@ -16,6 +16,42 @@ layout: default
 </header>
 
 <div class="post-body f1-page">
+  {%- assign profile = site.data.driver_profiles[page.driver_id] -%}
+  {%- if profile %}
+  <section class="driver-profile">
+    {%- if profile.photo %}
+    <figure class="driver-photo">
+      <img src="{{ profile.photo.src | relative_url }}" alt="{{ page.title }}">
+      <figcaption>Photo: {{ profile.photo.author }}, <a href="{{ profile.photo.source }}" target="_blank" rel="noopener">{{ profile.photo.license }}</a>, via Wikimedia Commons</figcaption>
+    </figure>
+    {%- endif %}
+    <dl class="driver-facts">
+      {%- if profile.born %}
+      {%- assign by = profile.born | slice: 0, 4 | plus: 0 -%}
+      {%- assign bmd = profile.born | slice: 5, 5 | remove: "-" | plus: 0 -%}
+      {%- assign ny = site.time | date: "%Y" | plus: 0 -%}
+      {%- assign nmd = site.time | date: "%m%d" | plus: 0 -%}
+      {%- assign age = ny | minus: by -%}{%- if nmd < bmd %}{% assign age = age | minus: 1 %}{% endif -%}
+      <div><dt>Born</dt><dd>{{ profile.born | date: "%-d %B %Y" }} <small>(age {{ age }})</small></dd></div>
+      {%- endif %}
+      {%- if profile.birthplace %}<div><dt>Birthplace</dt><dd>{{ profile.birthplace }}</dd></div>{% endif %}
+      <div><dt>Nationality</dt><dd>{{ page.nationality }}</dd></div>
+      {%- if profile.height_cm %}<div><dt>Height</dt><dd>{{ profile.height_cm }} cm</dd></div>{% endif %}
+      <div><dt>Number</dt><dd>#{{ page.number }} · {{ page.code }}</dd></div>
+      <div><dt>Team</dt><dd>{{ page.team }}</dd></div>
+      <div><dt>F1 debut</dt><dd>{{ page.debut }}</dd></div>
+    </dl>
+  </section>
+
+  {%- if profile.style %}
+  <h2>{% if profile.style_heading == 'Summary' %}About{% else %}Racing style{% endif %}</h2>
+  <blockquote class="driver-style">
+    {{ profile.style | newline_to_br }}
+    <footer>From <a href="https://en.wikipedia.org/wiki/{{ profile.wiki_title | replace: ' ', '_' }}" target="_blank" rel="noopener">Wikipedia</a>{% if profile.style_heading != 'Summary' %}, “{{ profile.style_heading }}”{% endif %} · CC BY-SA 4.0</footer>
+  </blockquote>
+  {%- endif %}
+  {%- endif %}
+
   {%- if page.current %}
   <div class="stat-cards stat-cards-row">
     <div class="stat-card">

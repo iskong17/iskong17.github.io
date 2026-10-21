@@ -1,6 +1,7 @@
 {%- assign d = include.driver -%}
 {%- assign color = site.data.teams[d.team_id] | default: '#7f8bad' -%}
-<a class="sq-card sq-driver{% if d.driver_id == 'max_verstappen' %} is-max{% endif %}" href="{{ d.url | relative_url }}" style="--team: {{ color }}">
+{%- assign profile = site.data.driver_profiles[d.driver_id] -%}
+<a class="sq-card sq-driver{% if d.driver_id == 'max_verstappen' %} is-max{% endif %}{% if profile.photo %} has-photo{% endif %}" href="{{ d.url | relative_url }}" style="--team: {{ color }}{% if profile.photo %}; --photo: url('{{ profile.photo.src | relative_url }}'){% endif %}">
   <span class="sq-number" aria-hidden="true">{{ d.number }}</span>
   <div class="sq-top">
     <span class="sq-label">{{ d.code }}</span>

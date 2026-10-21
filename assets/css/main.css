@@ -959,3 +959,33 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .season-fact.is-max { border-color: color-mix(in srgb, var(--red) 45%, var(--line)); }
 .season-fact.is-rb { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
 
+
+/* Driver profile */
+.driver-profile { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 24px; align-items: start; margin-bottom: 8px; }
+.driver-photo { margin: 0; }
+.driver-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 12px; margin: 0; border: 1px solid var(--line); }
+.driver-photo figcaption { margin-top: 6px; font-size: 11px; line-height: 1.4; color: var(--muted); }
+.driver-photo figcaption a { color: var(--muted); }
+.driver-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.driver-facts div { padding: 10px 14px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.driver-facts dt { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.driver-facts dd { margin: 2px 0 0; font-weight: 600; color: var(--text); line-height: 1.4; }
+.driver-facts small { font-weight: 400; color: var(--text-2); }
+.driver-style { font-size: 16px; }
+.driver-style footer { margin-top: 10px; font-size: 12px; color: var(--muted); }
+.driver-style footer a { color: var(--muted); }
+.sq-driver.has-photo { background: #0b1430 var(--photo) center top / cover no-repeat; color: #fff; }
+.sq-driver.has-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 13, 31, 0.6) 0%, rgba(7, 13, 31, 0) 28%, rgba(7, 13, 31, 0) 45%, rgba(7, 13, 31, 0.92) 85%); }
+.sq-driver.has-photo .sq-top,
+.sq-driver.has-photo .sq-title,
+.sq-driver.has-photo .sq-bottom { z-index: 1; }
+.sq-driver.has-photo .sq-title { margin-top: auto; color: #fff; }
+.sq-driver.has-photo .sq-label,
+.sq-driver.has-photo .sq-sub,
+.sq-driver.has-photo .sq-meta { color: #dfe4f2; }
+.sq-driver.has-photo .sq-bottom { margin-top: 4px; }
+.sq-driver.has-photo .sq-number { display: none; }
+@media (max-width: 760px) {
+  .driver-profile { grid-template-columns: 1fr; }
+  .driver-photo { max-width: 240px; }
+}
