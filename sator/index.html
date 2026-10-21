@@ -1,116 +1,494 @@
----
-layout: project
-title: "SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing"
-short: SATOR
-description: "SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing (WACV 2027)."
-image: /images/sator.png
-venue: "IEEE/CVF WACV 2027"
-math: true
-authors:
-  - { name: "Inseok Kong", sup: "1", me: true }
-  - { name: "Geunyoung Jung", sup: "2" }
-  - { name: "Jiyoung Jung", sup: "2,*" }
-affiliations:
-  - "Department of GeoInformatics, University of Seoul"
-  - "Department of Artificial Intelligence, University of Seoul"
-links:
-  - { label: "Paper", url: "https://arxiv.org/pdf/2610.21367", icon: "cv" }
-  - { label: "arXiv", url: "https://arxiv.org/abs/2610.21367" }
-  - { label: "Code", url: "https://github.com/iskong17/SATOR", icon: "github" }
-teaser: /images/sator.png
-teaser_caption: "SATOR introduces a source-free and backpropagation-free 3D TTA architecture that computes token abnormality scores from complementary attention and geometric relation graphs, adaptively derives sample-specific token partitions via Otsu-based separability, and routes predictions using keep-ratio-calibrated routing without evaluating candidate purge sizes."
-bibtex: |
-  @inproceedings{kong2027sator,
-    title={SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing},
-    author={Kong, Inseok and Jung, Geunyoung and Jung, Jiyoung},
-    booktitle={IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-    year={2027}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing (IEEE/CVF WACV 2027).">
+  <meta property="og:title" content="SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing"/>
+  <meta property="og:description" content="Official project page for SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing. Accepted to IEEE/CVF WACV 2027."/>
+  <meta property="og:url" content="https://iskong17.github.io/sator/"/>
+  <meta property="og:image" content="https://iskong17.github.io/images/sator.png"/>
+  <meta name="keywords" content="SATOR, 3D Test-Time Adaptation, Backpropagation-Free, Point Clouds, WACV 2027, Inseok Kong, Computer Vision">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- Bulma & Icons CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      color: #363636;
+      line-height: 1.6;
+    }
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.5rem !important;
+    }
+    .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .publication-authors a {
+      color: #3273dc;
+    }
+    .publication-authors a:hover {
+      text-decoration: underline;
+    }
+    .author-block {
+      display: inline-block;
+      margin-right: 8px;
+    }
+    .publication-institution {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+    .publication-links {
+      margin-top: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .link-block {
+      display: inline-block;
+      margin: 4px;
+    }
+    .teaser img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      border: 1px solid #e9ecef;
+    }
+    .teaser .subtitle {
+      font-size: 1rem;
+      color: #4a4a4a;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .stat-box:hover {
+      transform: translateY(-2px);
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0284c7;
+      line-height: 1.2;
+    }
+    .stat-desc {
+      font-size: 0.95rem;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .highlight-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #0284c7;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .highlight-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      color: #363636;
+      font-size: 0.9em;
+      border-radius: 8px;
+      position: relative;
+    }
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ffffff;
+      border: 1px solid #dbdbdb;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #363636;
+      transition: all 0.2s;
+    }
+    .copy-button:hover {
+      background: #f0f0f0;
+    }
+    .results-table {
+      width: 100%;
+      font-size: 0.95rem;
+    }
+    .results-table th, .results-table td {
+      text-align: center !important;
+      vertical-align: middle !important;
+    }
+    .results-table th:first-child, .results-table td:first-child {
+      text-align: left !important;
+    }
+    .results-table tr.is-ours td {
+      background: #f0f9ff;
+      font-weight: 700;
+    }
+    .results-table .best {
+      font-weight: 800;
+      color: #0284c7;
+    }
+    .results-table .second {
+      text-decoration: underline;
+    }
+    .results-caption {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header / Hero Section -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <!-- Conference Badge -->
+          <div style="margin-bottom: 1rem;">
+            <span class="tag is-info is-light is-medium is-rounded" style="font-weight: 700; border: 1px solid #bce3fb;">
+              <i class="fas fa-award mr-2"></i> IEEE/CVF WACV 2027
+            </span>
+          </div>
+
+          <!-- Publication Title -->
+          <h1 class="title is-1 publication-title">
+            SATOR: Backpropagation-Free 3D Test-Time Adaptation<br>via Sample-Adaptive Token Routing
+          </h1>
+
+          <!-- Authors -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <strong><a href="https://iskong17.github.io/">Inseok Kong</a></strong><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              Geunyoung Jung<sup>2</sup>,
+            </span>
+            <span class="author-block">
+              Jiyoung Jung<sup>2,*</sup>
+            </span>
+          </div>
+
+          <!-- Institutions -->
+          <div class="publication-institution">
+            <span class="author-block"><sup>1</sup> Department of GeoInformatics, University of Seoul</span> &nbsp;•&nbsp;
+            <span class="author-block"><sup>2</sup> Department of Artificial Intelligence, University of Seoul</span>
+            <div style="font-size: 0.9rem; color: #7a7a7a; margin-top: 4px;">* Corresponding author</div>
+          </div>
+
+          <!-- Publication Links -->
+          <div class="publication-links">
+            <!-- Paper (PDF) link -->
+            <span class="link-block">
+              <a href="https://arxiv.org/pdf/2610.21367" target="_blank" rel="noopener noreferrer"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+
+            <!-- ArXiv link -->
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2610.21367" target="_blank" rel="noopener noreferrer"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+            <!-- Code link -->
+            <span class="link-block">
+              <a href="https://github.com/iskong17/SATOR" target="_blank" rel="noopener noreferrer"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+
+            <!-- BibTeX Link -->
+            <span class="link-block">
+              <a href="#BibTeX" class="button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-quote-right"></i>
+                </span>
+                <span>BibTeX</span>
+              </a>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser Image -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body pt-0">
+      <img src="../images/sator.png" alt="SATOR Framework Architecture Overview"/>
+      <h2 class="subtitle has-text-centered">
+        <em><b>Overview of the proposed SATOR framework.</b></em> SATOR introduces a source-free and backpropagation-free 3D TTA architecture that computes token abnormality scores from complementary attention and geometric relation graphs, adaptively derives sample-specific token partitions via Otsu-based separability, and routes predictions using keep-ratio-calibrated routing without evaluating candidate purge sizes.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Paper Abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-title">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Test-time adaptation (TTA) mitigates the performance degradation of source-pretrained models on unlabeled test data under distribution shifts. Recent backpropagation-free token-purging methods address 3D point cloud distribution shifts by filtering unreliable tokens. However, their reliance on predefined purge-size candidates requires multiple forward passes per sample and increases inference cost.
+          </p>
+          <p>
+            We propose <strong>SATOR (Sample-Adaptive TOken Routing)</strong>, a source-free and backpropagation-free 3D TTA framework that eliminates this search by deriving both the partitioning threshold and routing decision directly from each sample. SATOR computes token abnormality scores from complementary attention and geometric relation graphs. It then derives a sample-specific partition into retained and pruned tokens via Otsu-based separability, without evaluating candidate sizes. Keep-ratio-calibrated routing then selects the pruned prediction only when its entropy, penalized by the keep ratio, is lower than that of the original prediction. Extensive experiments on <strong>ModelNet40-C</strong>, <strong>ScanObjectNN-C</strong>, and <strong>ShapeNet-C</strong> demonstrate that SATOR achieves <strong>state-of-the-art accuracy</strong> on three 3D corruption benchmarks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Insights & Method Details -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 section-title has-text-centered">Key Highlights & Contributions</h2>
+
+        <!-- Stat Row -->
+        <div class="columns is-multiline mb-5">
+          <div class="column is-4">
+            <div class="stat-box">
+              <div class="stat-number">BP-Free</div>
+              <div class="stat-desc">Zero Backward Passes Required</div>
+            </div>
+          </div>
+          <div class="column is-4">
+            <div class="stat-box">
+              <div class="stat-number">Search-Free</div>
+              <div class="stat-desc">Zero Candidate Purge-Size Search</div>
+            </div>
+          </div>
+          <div class="column is-4">
+            <div class="stat-box">
+              <div class="stat-number">SOTA</div>
+              <div class="stat-desc">ModelNet40-C, ScanObjectNN-C, ShapeNet-C</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlight Cards -->
+        <div class="highlight-card">
+          <div class="highlight-title"><i class="fas fa-bolt mr-2 has-text-info"></i> Backpropagation-Free 3D Adaptation</div>
+          <p>Conventional 3D TTA approaches rely on gradient-based backpropagation during inference, incurring excessive computational cost and memory footprints. SATOR operates completely without backward passes or source data, making it highly suitable for resource-constrained edge systems.</p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-title"><i class="fas fa-diagram-project mr-2 has-text-info"></i> Complementary Attention & Geometric Relation Graphs</div>
+          <p>Instead of relying on stored global statistics or self-attention alone, SATOR synergizes internal self-attention maps with spatial geometric relation graphs ($K_g$-NN affinity) to quantify how corruptions disrupt local neighborhood structures and reliably score abnormal tokens.</p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-title"><i class="fas fa-chart-pie mr-2 has-text-info"></i> Otsu-Based Search-Free Token Partitioning</div>
+          <p>Prior token-purging methods evaluate multiple predefined purge-size candidates through iterative forward passes. SATOR completely eliminates candidate search by deriving an optimal sample-specific threshold directly from the score distribution via Otsu-based separability.</p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-title"><i class="fas fa-route mr-2 has-text-info"></i> Keep-Ratio-Calibrated Dual-Branch Routing</div>
+          <p>SATOR compares predictions from the original sequence and the pruned sequence. To prevent low entropy from being favored solely due to aggressive token reduction, it calibrates prediction entropy by the keep ratio ($\rho = |\mathcal{K}|/M$), selecting the pruned branch only when $\frac{H(z_{\mathrm{prune}})}{\rho} < H(z_{\mathrm{orig}})$.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Results -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 section-title has-text-centered">Main Results</h2>
+
+        <h3 class="title is-5">Mean accuracy under 15 corruption types</h3>
+        <div class="table-container">
+          <table class="table is-bordered is-hoverable results-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Venue</th>
+                <th>ModelNet40-C</th>
+                <th>ShapeNet-C</th>
+                <th>ScanObjectNN-C</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Source-only</td><td>–</td><td>54.16</td><td>61.35</td><td>36.96</td></tr>
+              <tr><td>TENT</td><td>ICLR'21</td><td>63.53</td><td>54.98</td><td>43.45</td></tr>
+              <tr><td>SAR</td><td>ICLR'23</td><td>59.64</td><td>60.17</td><td class="second">48.78</td></tr>
+              <tr><td>BFTT3D</td><td>CVPR'24</td><td>57.16</td><td>60.73</td><td>33.00</td></tr>
+              <tr><td>PG</td><td>ICCV'25</td><td>68.68</td><td class="second">64.40</td><td>46.78</td></tr>
+              <tr><td>LN-TTA</td><td>WACV'26</td><td class="second">69.71</td><td>64.35</td><td>48.50</td></tr>
+              <tr class="is-ours"><td>SATOR (Ours)</td><td>–</td><td class="best">70.26 <small>(+16.10)</small></td><td class="best">64.92 <small>(+3.57)</small></td><td class="best">49.43 <small>(+12.47)</small></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="results-caption">
+          Top-1 accuracy (%) averaged over 15 corruption types. Values in parentheses are gains over source-only. <span class="has-text-info has-text-weight-bold">Best</span> and <u>second best</u> are marked. Full per-corruption results and more baselines are in the paper.
+        </p>
+
+        <div class="columns">
+          <div class="column is-7">
+            <h3 class="title is-5">Runtime and memory (ScanObjectNN-C)</h3>
+            <div class="table-container">
+              <table class="table is-bordered is-hoverable results-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Acc. (%)</th>
+                    <th>FPS</th>
+                    <th>Mem. (GB)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>BFTT3D</td><td>33.00</td><td>55.9</td><td>8.77</td></tr>
+                  <tr><td>PG</td><td>46.78</td><td>174.1</td><td>1.38</td></tr>
+                  <tr><td>LN-TTA</td><td>48.50</td><td>790.0</td><td>1.38</td></tr>
+                  <tr class="is-ours"><td>SATOR</td><td class="best">49.43</td><td>483.2</td><td>1.38</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="results-caption">
+              Skipping the purge-size search makes SATOR about 2.8× faster than PG, with higher accuracy and the same memory use.
+            </p>
+          </div>
+          <div class="column is-5">
+            <h3 class="title is-5">Noise token localization</h3>
+            <div class="table-container">
+              <table class="table is-bordered is-hoverable results-table">
+                <thead>
+                  <tr>
+                    <th>Score</th>
+                    <th>AUROC</th>
+                    <th>AP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Attention only</td><td>0.751</td><td>0.765</td></tr>
+                  <tr><td>Geometry only</td><td>0.794</td><td>0.683</td></tr>
+                  <tr class="is-ours"><td>Adaptive fusion</td><td class="best">0.839</td><td class="best">0.783</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="results-caption">
+              On background corruption (ScanObjectNN-C), fusing the attention and geometry scores locates corrupted tokens best.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 section-title">BibTeX</h2>
+    <div style="position: relative;">
+      <button class="copy-button" onclick="copyBibtex()">
+        <i class="far fa-copy mr-1"></i> <span id="copy-btn-text">Copy</span>
+      </button>
+      <pre><code id="bibtex-code">@inproceedings{kong2027sator,
+  title={SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing},
+  author={Kong, Inseok and Jung, Geunyoung and Jung, Jiyoung},
+  booktitle={IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year={2027}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a> adapted from <a href="https://nerfies.github.io" target="_blank" rel="noopener noreferrer">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function copyBibtex() {
+    const code = document.getElementById('bibtex-code').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      const btnText = document.getElementById('copy-btn-text');
+      btnText.innerText = 'Copied!';
+      setTimeout(() => {
+        btnText.innerText = 'Copy';
+      }, 2000);
+    });
   }
----
+</script>
 
-<section class="proj-section">
-  <h2 class="proj-h2"><span>Abstract</span></h2>
-  <div class="proj-text">
-    <p>Test-time adaptation (TTA) mitigates the performance degradation of source-pretrained models on unlabeled test data under distribution shifts. Recent backpropagation-free token-purging methods address 3D point cloud distribution shifts by filtering unreliable tokens. However, their reliance on predefined purge-size candidates requires multiple forward passes per sample and increases inference cost.</p>
-    <p>We propose <b>SATOR (Sample-Adaptive TOken Routing)</b>, a source-free and backpropagation-free 3D TTA framework that eliminates this search by deriving both the partitioning threshold and routing decision directly from each sample. SATOR computes token abnormality scores from complementary attention and geometric relation graphs. It then derives a sample-specific partition into retained and pruned tokens via Otsu-based separability, without evaluating candidate sizes. Keep-ratio-calibrated routing then selects the pruned prediction only when its entropy, penalized by the keep ratio, is lower than that of the original prediction. Extensive experiments on <b>ModelNet40-C</b>, <b>ScanObjectNN-C</b>, and <b>ShapeNet-C</b> demonstrate that SATOR achieves <b>state-of-the-art accuracy</b> on three 3D corruption benchmarks.</p>
-  </div>
-</section>
-
-<section class="proj-section">
-  <h2 class="proj-h2"><span>Key Highlights</span></h2>
-  <div class="stat-row">
-    <div class="stat"><b>BP-Free</b><span>No backward passes</span></div>
-    <div class="stat"><b>Search-Free</b><span>No candidate purge-size search</span></div>
-    <div class="stat"><b>SOTA</b><span>ModelNet40-C, ScanObjectNN-C, ShapeNet-C</span></div>
-  </div>
-  <div class="highlight-grid">
-    <div class="highlight">
-      <h3>Backpropagation-Free 3D Adaptation</h3>
-      <p>Conventional 3D TTA approaches rely on gradient-based backpropagation during inference, incurring computational cost and memory footprint. SATOR operates without backward passes or source data, making it suitable for resource-constrained systems.</p>
-    </div>
-    <div class="highlight">
-      <h3>Complementary Attention &amp; Geometric Relation Graphs</h3>
-      <p>SATOR combines internal self-attention maps with spatial geometric relation graphs ($K_g$-NN affinity) to quantify how corruptions disrupt local neighborhood structures and to score abnormal tokens reliably.</p>
-    </div>
-    <div class="highlight">
-      <h3>Otsu-Based Search-Free Token Partitioning</h3>
-      <p>Prior token-purging methods evaluate multiple predefined purge-size candidates through repeated forward passes. SATOR removes this search by deriving a sample-specific threshold directly from the score distribution via Otsu-based separability.</p>
-    </div>
-    <div class="highlight">
-      <h3>Keep-Ratio-Calibrated Dual-Branch Routing</h3>
-      <p>SATOR compares predictions from the original and pruned sequences, calibrating entropy by the keep ratio ($\rho = |\mathcal{K}|/M$) and selecting the pruned branch only when $\frac{H(z_{\mathrm{prune}})}{\rho} &lt; H(z_{\mathrm{orig}})$.</p>
-    </div>
-  </div>
-</section>
-
-<section class="proj-section">
-  <h2 class="proj-h2"><span>Main Results</span></h2>
-  <h3 class="proj-h3">Mean accuracy under 15 corruption types</h3>
-  <div class="table-wrap">
-    <table class="results-table">
-      <thead><tr><th>Method</th><th>Venue</th><th>ModelNet40-C</th><th>ShapeNet-C</th><th>ScanObjectNN-C</th></tr></thead>
-      <tbody>
-        <tr><td>Source-only</td><td>–</td><td>54.16</td><td>61.35</td><td>36.96</td></tr>
-        <tr><td>TENT</td><td>ICLR'21</td><td>63.53</td><td>54.98</td><td>43.45</td></tr>
-        <tr><td>SAR</td><td>ICLR'23</td><td>59.64</td><td>60.17</td><td class="second">48.78</td></tr>
-        <tr><td>BFTT3D</td><td>CVPR'24</td><td>57.16</td><td>60.73</td><td>33.00</td></tr>
-        <tr><td>PG</td><td>ICCV'25</td><td>68.68</td><td class="second">64.40</td><td>46.78</td></tr>
-        <tr><td>LN-TTA</td><td>WACV'26</td><td class="second">69.71</td><td>64.35</td><td>48.50</td></tr>
-        <tr class="is-ours"><td>SATOR (Ours)</td><td>–</td><td class="best">70.26 <small>(+16.10)</small></td><td class="best">64.92 <small>(+3.57)</small></td><td class="best">49.43 <small>(+12.47)</small></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="table-caption">Top-1 accuracy (%) averaged over 15 corruption types. Values in parentheses are gains over source-only. <span class="best">Best</span> and <span class="second">second best</span> are marked. Full per-corruption results and more baselines are in the paper.</p>
-
-  <div class="two-col">
-    <div>
-      <h3 class="proj-h3">Runtime and memory (ScanObjectNN-C)</h3>
-      <div class="table-wrap">
-        <table class="results-table">
-          <thead><tr><th>Method</th><th>Acc. (%)</th><th>FPS</th><th>Mem. (GB)</th></tr></thead>
-          <tbody>
-            <tr><td>BFTT3D</td><td>33.00</td><td>55.9</td><td>8.77</td></tr>
-            <tr><td>PG</td><td>46.78</td><td>174.1</td><td>1.38</td></tr>
-            <tr><td>LN-TTA</td><td>48.50</td><td>790.0</td><td>1.38</td></tr>
-            <tr class="is-ours"><td>SATOR</td><td class="best">49.43</td><td>483.2</td><td>1.38</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="table-caption">Skipping the purge-size search makes SATOR about 2.8× faster than PG, with higher accuracy and the same memory use.</p>
-    </div>
-    <div>
-      <h3 class="proj-h3">Noise token localization</h3>
-      <div class="table-wrap">
-        <table class="results-table">
-          <thead><tr><th>Score</th><th>AUROC</th><th>AP</th></tr></thead>
-          <tbody>
-            <tr><td>Attention only</td><td>0.751</td><td>0.765</td></tr>
-            <tr><td>Geometry only</td><td>0.794</td><td>0.683</td></tr>
-            <tr class="is-ours"><td>Adaptive fusion</td><td class="best">0.839</td><td class="best">0.783</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="table-caption">On background corruption (ScanObjectNN-C), fusing the attention and geometry scores locates corrupted tokens best.</p>
-    </div>
-  </div>
-</section>
+</body>
+</html>
