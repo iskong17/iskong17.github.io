@@ -142,7 +142,7 @@
             return '<button type="button" class="map-bar' + (v.page ? '' : ' is-past') + (i >= SHOWN ? ' is-extra' : '') + '" data-venue="' + esc(v.id) + '"' + (i >= SHOWN ? ' hidden' : '') + '>' +
               '<b>' + esc(v.label) + '</b><span>' + esc(v.country) + (v.page ? '' : ' · past') + '</span></button>';
           }).join('') +
-          (list.length > SHOWN ? '<button type="button" class="map-group-more" data-more>More (' + (list.length - SHOWN) + ')</button>' : '') +
+          (list.length > SHOWN ? '<button type="button" class="map-group-more" data-more aria-label="Show ' + (list.length - SHOWN) + ' more"><span class="tri" aria-hidden="true"></span>' + (list.length - SHOWN) + '</button>' : '') +
           '</div>';
       });
       return html;
@@ -165,7 +165,6 @@
         var group = more.closest('.map-group');
         var open = group.classList.toggle('is-open');
         group.querySelectorAll('.is-extra').forEach(function (b) { b.hidden = !open; });
-        more.textContent = open ? 'Less' : 'More (' + group.querySelectorAll('.is-extra').length + ')';
         return;
       }
       var bar = e.target.closest('[data-venue]');

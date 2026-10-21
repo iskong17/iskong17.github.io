@@ -897,10 +897,18 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .season-group > summary::-webkit-details-marker { display: none; }
 .season-year { font-size: 22px; font-weight: 700; }
 .season-meta { font-size: 14px; color: var(--muted); }
-.season-toggle { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--link); }
-.season-group .when-open,
-.season-group[open] .when-closed { display: none; }
-.season-group[open] .when-open { display: inline; }
+.season-toggle,
+.map-group-more .tri {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--muted);
+  transition: transform 0.2s, border-top-color 0.2s;
+}
+.season-toggle { margin-left: auto; transform: rotate(-90deg); }
+.season-group > summary:hover .season-toggle { border-top-color: var(--red); }
+.season-group[open] .season-toggle { transform: rotate(0deg); border-top-color: var(--red); }
 .season-group > .sq-grid { padding: 0 18px 18px; }
 
 .map-marker.is-dim { fill: var(--muted); }
@@ -927,7 +935,10 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .map-group { margin-top: 14px; display: grid; gap: 6px; }
 .map-group-head { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-2); }
 .map-group-head span { margin-left: 4px; color: var(--muted); font-weight: 400; }
-.map-group-more { justify-self: start; padding: 2px 0; border: 0; background: none; color: var(--link); font: 600 13px/1.4 "Titillium Web", sans-serif; cursor: pointer; }
+.map-group-more { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 2px 0; border: 0; background: none; color: var(--muted); font: 600 12px/1.4 "JetBrains Mono", monospace; cursor: pointer; }
+.map-group-more .tri { transform: rotate(-90deg); }
+.map-group-more:hover .tri { border-top-color: var(--red); }
+.map-group.is-open .map-group-more .tri { transform: rotate(0deg); border-top-color: var(--red); }
 .map-circuit.is-past { opacity: 0.85; }
 .map-more { color: var(--link) !important; font-weight: 600; }
 

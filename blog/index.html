@@ -105,7 +105,7 @@ description: Notes from study, photos from conferences and travel, and Formula 1
               <span class="season-meta">{{ s.items.size }} races · Max won {{ wins.size }}</span>
               {%- endif %}
             </span>
-            <span class="season-toggle"><span class="when-closed">More</span><span class="when-open">Less</span></span>
+            <span class="season-toggle" aria-hidden="true"></span>
           </summary>
           <div class="sq-grid">
             {%- for post in items %}{% include post-card.html post=post %}{% endfor %}
