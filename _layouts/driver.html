@@ -1,0 +1,61 @@
+---
+layout: default
+---
+{%- assign color = site.data.teams[page.team_id] | default: '#7f8bad' -%}
+<header class="post-header driver-header" style="--team: {{ color }}">
+  <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
+  <span class="driver-number" aria-hidden="true">{{ page.number }}</span>
+  <div class="container">
+    <div class="post-meta">
+      <a class="post-cat cat-race" href="{{ '/blog/' | relative_url }}#race/drivers">Driver</a>
+      <span>{{ page.code }}{% if page.number %} · #{{ page.number }}{% endif %}</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="post-desc">{{ page.nationality }} · {{ page.team }} · F1 debut {{ page.debut }}</p>
+  </div>
+</header>
+
+<div class="post-body f1-page">
+  {%- if page.current %}
+  <div class="stat-cards stat-cards-row">
+    <div class="stat-card">
+      <span class="f1-label">{{ page.current.season }} championship</span>
+      <b>{% if page.current.position %}P{{ page.current.position }}{% else %}–{% endif %}</b>
+      <small>after round {{ page.current.round }}</small>
+    </div>
+    <div class="stat-card">
+      <span class="f1-label">Points</span>
+      <b>{{ page.current.points }}</b>
+      <small>{{ page.current.season }} season</small>
+    </div>
+    <div class="stat-card">
+      <span class="f1-label">Wins</span>
+      <b>{{ page.current.wins }}</b>
+      <small>{{ page.current.season }} season</small>
+    </div>
+  </div>
+  {%- endif %}
+
+  <h2>Last three seasons</h2>
+  {%- if page.recent_seasons.size > 0 %}
+  <table>
+    <thead><tr><th>Season</th><th>Position</th><th>Points</th><th>Wins</th><th>Team</th></tr></thead>
+    <tbody>
+      {%- for s in page.recent_seasons %}
+      <tr><td>{{ s.season }}</td><td>{% if s.position == '1' %}<b>Champion</b>{% else %}P{{ s.position }}{% endif %}</td><td>{{ s.points }}</td><td>{{ s.wins }}</td><td>{{ s.team }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+  {%- else %}
+  <p>{{ page.current.season | default: 'This' }} is his rookie season.</p>
+  {%- endif %}
+
+  <h2>Teams since debut</h2>
+  <ol class="team-history">
+    {%- for t in page.teams %}
+    <li><time>{{ t.years }}</time><span>{{ t.team }}</span></li>
+    {%- endfor %}
+  </ol>
+
+  <p class="auto-note">Data from the <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a>. Seasons count only years with a championship classification. <a href="{{ page.wiki }}" target="_blank" rel="noopener">Wikipedia</a></p>
+</div>

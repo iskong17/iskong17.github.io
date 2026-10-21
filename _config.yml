@@ -28,15 +28,31 @@ kramdown:
 
 permalink: /blog/:year/:month/:day/:title/
 
+collections:
+  circuits:
+    output: true
+    permalink: /blog/race/circuits/:name/
+  drivers:
+    output: true
+    permalink: /blog/race/drivers/:name/
+
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
 
-feed:
-  path: blog/feed.xml
-
 defaults:
+  - scope:
+      path: ""
+      type: circuits
+    values:
+      layout: circuit
+      lang: en
+  - scope:
+      path: ""
+      type: drivers
+    values:
+      layout: driver
+      lang: en
   - scope:
       path: ""
       type: posts

@@ -1,14 +1,27 @@
 {%- assign p = include.post -%}
-{%- assign cat = site.data.categories | where: "key", p.category | first -%}
-<a class="post-card cat-{{ p.category | default: 'study' }}" href="{{ p.url | relative_url }}" data-category="{{ p.category | default: 'study' }}">
-  {%- if p.image %}
-  <div class="post-card-img"><img src="{{ p.image | relative_url }}" alt="" loading="lazy"></div>
-  {%- endif %}
-  <div class="post-card-top">
-    <span class="post-cat">{{ cat.label | default: p.category }}</span>
+{%- assign cat_key = p.category | default: 'study' -%}
+{%- assign cat = site.data.categories | where: "key", cat_key | first -%}
+{%- if cat_key == 'race' -%}
+{%- assign res = p.result | default: '' -%}
+<a class="sq-card sq-race{% if res == 'P1' %} is-win{% elsif res == 'P2' or res == 'P3' %} is-podium{% elsif res contains 'D' or res == 'NC' %} is-out{% endif %}" href="{{ p.url | relative_url }}" data-category="race">
+  <div class="sq-top">
+    <span class="sq-label">R{{ p.round }} · {{ p.season }}</span>
+    <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%b %-d" }}</time>
+  </div>
+  <h3 class="sq-title">{{ p.gp | replace: 'Grand Prix', 'GP' }}</h3>
+  <div class="sq-bottom">
+    <span class="sq-result">{{ res }}</span>
+    <span class="sq-sub">Max Verstappen</span>
+  </div>
+</a>
+{%- else -%}
+{%- assign topic = cat.topics | where: "key", p.topic | first -%}
+<a class="sq-card cat-{{ cat_key }}{% if p.image %} has-image{% endif %}" href="{{ p.url | relative_url }}" data-category="{{ cat_key }}" data-topic="{{ p.topic }}"{% if p.image %} style="--bg: url('{{ p.image | relative_url }}')"{% endif %}>
+  <div class="sq-top">
+    <span class="sq-label">{% if topic %}{{ topic.label }}{% else %}{{ cat.label | default: cat_key }}{% endif %}</span>
     <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
   </div>
-  <h3>{{ p.title }}</h3>
-  <p>{{ p.description | default: p.excerpt | strip_html | truncate: 110 }}</p>
-  {%- if p.gp %}<div class="post-card-race">{{ p.gp }}{% if p.round %} · R{{ p.round }}{% endif %}</div>{% endif %}
+  <h3 class="sq-title">{{ p.title }}</h3>
+  <p class="sq-desc">{{ p.description | default: p.excerpt | strip_html | truncate: 90 }}</p>
 </a>
+{%- endif -%}

@@ -3,15 +3,17 @@ layout: default
 ---
 {%- assign cat = site.data.categories | where: "key", page.category | first -%}
 {%- assign chars = content | strip_html | size -%}
-{%- assign minutes = chars | divided_by: 500 | plus: 1 -%}
+{%- if page.lang == "en" %}{% assign minutes = chars | divided_by: 1200 | plus: 1 %}{% else %}{% assign minutes = chars | divided_by: 500 | plus: 1 %}{% endif -%}
 <article>
   <header class="post-header">
     <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
     <div class="container">
       <div class="post-meta">
+        {%- assign topic = cat.topics | where: "key", page.topic | first %}
         <span class="post-cat cat-{{ page.category | default: 'study' }}">{{ cat.label | default: page.category }}</span>
+        {%- if topic %}<span class="post-topic">{{ topic.label }}</span>{% endif %}
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
-        <span>· {{ minutes }}분 읽기</span>
+        <span>· {% if page.lang == "en" %}{{ minutes }} min read{% else %}{{ minutes }}분 읽기{% endif %}</span>
       </div>
       <h1>{{ page.title }}</h1>
       {%- if page.description %}<p class="post-desc">{{ page.description }}</p>{% endif %}
@@ -20,7 +22,10 @@ layout: default
       <dl class="race-strip">
         <div><dt>Grand Prix</dt><dd>{{ page.gp }}</dd></div>
         {%- if page.round %}<div><dt>Round</dt><dd>{{ page.round }}</dd></div>{% endif %}
-        {%- if page.circuit %}<div><dt>Circuit</dt><dd>{{ page.circuit }}</dd></div>{% endif %}
+        {%- if page.circuit %}
+        {%- assign circuit_page = site.circuits | where: "circuit_id", page.circuit_id | first %}
+        <div><dt>Circuit</dt><dd>{% if circuit_page %}<a href="{{ circuit_page.url | relative_url }}">{{ page.circuit }}</a>{% else %}{{ page.circuit }}{% endif %}</dd></div>
+        {%- endif %}
         {%- if page.result %}<div><dt>Max Result</dt><dd>{{ page.result }}</dd></div>{% endif %}
       </dl>
       {%- endif %}

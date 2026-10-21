@@ -46,12 +46,81 @@
     }, 'selected');
   }
 
-  // Blog: filter post cards by category.
-  var blogTabs = document.querySelector('.blog-list .session-tabs');
+  // Blog: category panels, Race sub-sections, and Study topics.
+  // The URL hash keeps the view, e.g. #race, #race/circuits, #study/paper-review.
+  var blogTabs = document.getElementById('blog-tabs');
   if (blogTabs) {
-    setupFilter(blogTabs, document.querySelectorAll('.blog-list .post-card'), function (card, f) {
-      return f === 'all' || card.dataset.category === f;
-    }, (location.hash || '#all').slice(1));
+    var panels = document.querySelectorAll('.blog-panel');
+    var raceTabs = document.getElementById('race-tabs');
+
+    function activate(buttons, attr, value) {
+      buttons.forEach(function (b) {
+        var on = b.getAttribute(attr) === value;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    }
+    function showPanel(name) {
+      if (!document.querySelector('.blog-panel[data-panel="' + name + '"]')) name = 'all';
+      panels.forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== name; });
+      activate(blogTabs.querySelectorAll('[data-panel]'), 'data-panel', name);
+      return name;
+    }
+    function showRace(sub) {
+      if (!raceTabs) return;
+      if (!document.querySelector('.race-sub[data-sub="' + sub + '"]')) sub = 'seasons';
+      document.querySelectorAll('.race-sub').forEach(function (s) { s.hidden = s.getAttribute('data-sub') !== sub; });
+      activate(raceTabs.querySelectorAll('[data-sub]'), 'data-sub', sub);
+    }
+    function showTopic(panel, topic) {
+      var tabs = panel.querySelector('.topic-tabs');
+      if (!tabs) return;
+      var cards = panel.querySelectorAll('.sq-card');
+      var any = false;
+      cards.forEach(function (c) {
+        var show = topic === 'all' || c.getAttribute('data-topic') === topic;
+        c.hidden = !show;
+        if (show) any = true;
+      });
+      activate(tabs.querySelectorAll('[data-topic]'), 'data-topic', topic);
+      var empty = panel.querySelector('.topic-empty');
+      if (!empty) {
+        empty = document.createElement('p');
+        empty.className = 'empty topic-empty';
+        empty.textContent = '아직 글이 없습니다.';
+        panel.appendChild(empty);
+      }
+      empty.hidden = any || cards.length === 0;
+    }
+    function route(hash) {
+      var parts = (hash || '').replace(/^#/, '').split('/');
+      var panel = showPanel(parts[0] || 'all');
+      if (panel === 'race') showRace(parts[1] || 'seasons');
+      var p = document.querySelector('.blog-panel[data-panel="' + panel + '"]');
+      if (p) showTopic(p, parts[1] || 'all');
+    }
+    function go(hash) {
+      history.replaceState(null, '', hash);
+      route(hash);
+    }
+
+    blogTabs.querySelectorAll('[data-panel]').forEach(function (b) {
+      b.addEventListener('click', function () { go('#' + b.getAttribute('data-panel')); });
+    });
+    document.querySelectorAll('[data-goto]').forEach(function (b) {
+      b.addEventListener('click', function () { go('#' + b.getAttribute('data-goto')); window.scrollTo(0, blogTabs.offsetTop - 80); });
+    });
+    if (raceTabs) {
+      raceTabs.querySelectorAll('[data-sub]').forEach(function (b) {
+        b.addEventListener('click', function () { go('#race/' + b.getAttribute('data-sub')); });
+      });
+    }
+    document.querySelectorAll('.topic-tabs [data-topic]').forEach(function (b) {
+      var panel = b.closest('.blog-panel').getAttribute('data-panel');
+      b.addEventListener('click', function () { go('#' + panel + '/' + b.getAttribute('data-topic')); });
+    });
+    window.addEventListener('hashchange', function () { route(location.hash); });
+    route(location.hash);
   }
 
   // Lightbox for publication figures and certificates.

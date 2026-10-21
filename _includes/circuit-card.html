@@ -1,0 +1,11 @@
+{%- assign c = include.circuit -%}
+<a class="sq-card sq-circuit" href="{{ c.url | relative_url }}">
+  <div class="sq-top">
+    <span class="sq-label">{{ c.country }}</span>
+    {%- if c.races_held %}<span class="sq-meta">{{ c.races_held }} GPs</span>{% endif %}
+  </div>
+  {%- if c.track_path %}
+  <svg class="sq-track" viewBox="{{ c.track_viewbox | default: '0 0 400 400' }}" aria-hidden="true"><path d="{{ c.track_path }}"/></svg>
+  {%- endif %}
+  <h3 class="sq-title">{{ c.title }}</h3>
+</a>

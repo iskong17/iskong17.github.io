@@ -1,0 +1,14 @@
+{%- assign d = include.driver -%}
+{%- assign color = site.data.teams[d.team_id] | default: '#7f8bad' -%}
+<a class="sq-card sq-driver{% if d.driver_id == 'max_verstappen' %} is-max{% endif %}" href="{{ d.url | relative_url }}" style="--team: {{ color }}">
+  <span class="sq-number" aria-hidden="true">{{ d.number }}</span>
+  <div class="sq-top">
+    <span class="sq-label">{{ d.code }}</span>
+    {%- if d.current.position %}<span class="sq-meta">P{{ d.current.position }}</span>{% endif %}
+  </div>
+  <h3 class="sq-title">{{ d.title }}</h3>
+  <div class="sq-bottom">
+    <span class="sq-sub">{{ d.team }}</span>
+    {%- if d.current %}<span class="sq-meta">{{ d.current.points }} pts</span>{% endif %}
+  </div>
+</a>

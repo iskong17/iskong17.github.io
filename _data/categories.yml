@@ -1,7 +1,17 @@
 # Blog categories. Use the key in a post's `category:` front matter.
+# Study and Gallery posts also take a `topic:` key from their list below.
 - key: study
   label: "Study"
+  topics:
+    - { key: deep-learning, label: "Deep Learning" }
+    - { key: linear-algebra, label: "Linear Algebra" }
+    - { key: computer-vision, label: "Computer Vision" }
+    - { key: algorithm, label: "Algorithm" }
+    - { key: paper-review, label: "Paper Review" }
 - key: gallery
   label: "Gallery"
+  topics:
+    - { key: conference, label: "Conference" }
+    - { key: travel, label: "Travel" }
 - key: race
   label: "Race"

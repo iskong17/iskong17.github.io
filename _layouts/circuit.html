@@ -1,0 +1,68 @@
+---
+layout: default
+---
+{%- assign reports = site.posts | where: "circuit_id", page.circuit_id -%}
+<header class="post-header">
+  <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
+  <div class="container">
+    <div class="post-meta">
+      <a class="post-cat cat-race" href="{{ '/blog/' | relative_url }}#race/circuits">Circuit</a>
+      <span>{{ page.locality }}, {{ page.country }}</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    {%- if page.races_held %}<p class="post-desc">{{ page.races_held }} Grands Prix since {{ page.first_race }}</p>{% endif %}
+  </div>
+</header>
+
+<div class="post-body f1-page">
+  <div class="circuit-hero">
+    {%- if page.track_path %}
+    <figure class="track-map">
+      <svg viewBox="{{ page.track_viewbox | default: '0 0 400 400' }}" role="img" aria-label="Track layout of {{ page.title }}"><path d="{{ page.track_path }}"/></svg>
+      <figcaption>Drawn from car position data of the {{ page.track_source }} race (OpenF1).</figcaption>
+    </figure>
+    {%- endif %}
+    <div class="stat-cards">
+      {%- if page.lap_record %}
+      <div class="stat-card">
+        <span class="f1-label">Fastest race lap</span>
+        <b>{{ page.lap_record.time }}</b>
+        <small>{{ page.lap_record.driver }} · {{ page.lap_record.season }}</small>
+      </div>
+      {%- endif %}
+      {%- if page.most_wins %}
+      <div class="stat-card">
+        <span class="f1-label">Most wins</span>
+        <b>{{ page.most_wins.count }}</b>
+        <small>{{ page.most_wins.drivers | join: ", " }}</small>
+      </div>
+      {%- endif %}
+      <div class="stat-card">
+        <span class="f1-label">Last winner</span>
+        <b>{{ page.recent_winners[0].driver }}</b>
+        <small>{{ page.recent_winners[0].team }} · {{ page.recent_winners[0].season }}</small>
+      </div>
+    </div>
+  </div>
+
+  <h2>Winners, last five races</h2>
+  <table>
+    <thead><tr><th>Season</th><th>Winner</th><th>Team</th></tr></thead>
+    <tbody>
+      {%- for w in page.recent_winners %}
+      <tr><td>{{ w.season }}</td><td>{% if w.driver == 'Max Verstappen' %}<b>{{ w.driver }}</b>{% else %}{{ w.driver }}{% endif %}</td><td>{{ w.team }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+
+  {%- if reports.size > 0 %}
+  <h2>Race reports here</h2>
+  <ul>
+    {%- for r in reports %}
+    <li><a href="{{ r.url | relative_url }}">{{ r.title }}</a> · Max {{ r.result }}</li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  <p class="auto-note">Data from the <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a> and <a href="https://openf1.org" target="_blank" rel="noopener">OpenF1</a>. The fastest race lap is the quickest race lap in the timing data since 2004 and does not separate layout changes. <a href="{{ page.wiki }}" target="_blank" rel="noopener">Wikipedia</a></p>
+</div>
