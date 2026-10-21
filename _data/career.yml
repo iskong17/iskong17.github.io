@@ -41,6 +41,7 @@ projects:
     sub: "LLM Compression Track"
     period: "Jan. 2026 – Feb. 2026"
     text: "Applied model compression & optimization techniques (pruning, quantization) on EXAONE LLMs."
+    cert: /images/awards/lg-aimers-2026.jpg
 
   - name: "Optimal Autonomous Shuttle Route Planning"
     sub: "Capstone Design Project & Seoul Big Data Campus"
