@@ -1,0 +1,11 @@
+{%- assign p = include.post -%}
+{%- assign cat = site.data.categories | where: "key", p.category | first -%}
+<a class="post-card cat-{{ p.category | default: 'log' }}" href="{{ p.url | relative_url }}" data-category="{{ p.category | default: 'log' }}">
+  <div class="post-card-top">
+    <span class="post-cat">{{ cat.label | default: p.category }}</span>
+    <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
+  </div>
+  <h3>{{ p.title }}</h3>
+  <p>{{ p.description | default: p.excerpt | strip_html | truncate: 110 }}</p>
+  {%- if p.gp %}<div class="post-card-race">{{ p.gp }}{% if p.round %} · R{{ p.round }}{% endif %}</div>{% endif %}
+</a>

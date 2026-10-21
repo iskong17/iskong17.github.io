@@ -1,0 +1,21 @@
+{%- assign home = '/' | relative_url -%}
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="{{ home }}" aria-label="Home">
+      <span class="brand-num">33</span>
+      <span class="brand-name">Inseok <b>Kong</b></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="{{ home }}#about">About</a>
+      <a href="{{ home }}#news">News</a>
+      <a href="{{ home }}#publications">Research</a>
+      <a href="{{ home }}#career">Career</a>
+      <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} class="is-active"{% endif %}>Blog</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+      <span class="theme-icon theme-icon-sun">{% include icon.html name="sun" %}</span>
+      <span class="theme-icon theme-icon-moon">{% include icon.html name="moon" %}</span>
+    </button>
+  </div>
+  <div class="livery-stripe" aria-hidden="true"></div>
+</header>

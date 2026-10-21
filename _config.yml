@@ -1,0 +1,54 @@
+title: Inseok Kong
+description: >-
+  Undergraduate researcher at the University of Seoul working on trustworthy
+  computer vision. Also writes about Formula 1.
+url: https://iskong17.github.io
+baseurl: ""
+lang: en
+timezone: Asia/Seoul
+
+author:
+  name: Inseok Kong
+  email: kong7963@uos.ac.kr
+
+social:
+  email: kong7963@uos.ac.kr
+  cv: /files/Inseok_Kong_CV_10_20.pdf
+  scholar: https://scholar.google.com/citations?user=N1GcUZgAAAAJ&hl=ko
+  github: https://github.com/iskong17
+  linkedin: https://www.linkedin.com/in/iskong
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+permalink: /blog/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+feed:
+  path: blog/feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      lang: ko
+      math: true
+
+exclude:
+  - cv.tex
+  - "*.tex"
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

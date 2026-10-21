@@ -1,382 +1,220 @@
-<!DOCTYPE HTML>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+---
+layout: default
+title: Inseok Kong
+body_class: page-home
+---
+{%- assign pubs = site.data.publications -%}
+{%- assign published = pubs | where: "status", "published" -%}
+{%- assign first_author = pubs | where: "selected", true -%}
+{%- assign awards = site.data.career.awards -%}
 
-    <title>Inseok Kong | University of Seoul & KAIST</title>
-
-    <meta name="author" content="Inseok Kong">
-    <meta name="description" content="I am an Undergraduate Researcher interested in Trustworthy Artificial Intelligence, Computer Vision, Test-Time Adaptation, and Vision-Language Models.">
-    <meta name="keywords" content="Inseok Kong, Computer Vision, Test-Time Adaptation, TTA, 3D Point Cloud, Vision-Language Models, UOS, KAIST">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Inseok Kong | Undergrad Researcher">
-    <meta property="og:description" content="Undergraduate Researcher interested in Trustworthy Vision, 3D Point Cloud TTA, Adversarial Robustness, and Omni-Modal Models.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://iskong17.github.io/">
-    <meta property="og:image" content="https://iskong17.github.io/images/profile.png">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://iskong17.github.io/">
-
-    <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-
-  </head>
-
-  <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <!-- Bio Table -->
-          <table class="bio-table" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:30%;max-width:30%;vertical-align:top;padding-top:calc(2.5% + 20px)">
-                <a href="images/profile.png"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 12px;" alt="Inseok Kong profile photo" src="images/profile.png" class="hoverZoomLink"></a>
-              </td>
-              <td style="padding:2.5%;width:63%;vertical-align:top">
-                <p class="name" style="text-align: left;">
-                  Inseok Kong
-                </p>
-                <p>
-                  Hello! I am an Undergraduate Researcher in the <a href="https://sia.uos.ac.kr/home" target="_blank" rel="noopener noreferrer">Speech & Interactive AI Laboratory (SIA)</a> at <a href="https://www.uos.ac.kr/" target="_blank" rel="noopener noreferrer">University of Seoul (UOS)</a>, advised by Prof. Heeseung Kim. I am also a senior undergraduate student in the Department of GeoInformatics & AI at UOS. Previously, I worked as an Undergraduate Research Intern in the <a href="https://siit.kaist.ac.kr/" target="_blank" rel="noopener noreferrer">Statistical Inference and Information Theory Lab (SIIT)</a> at KAIST (advised by Prof. Junmo Kim) and the <a href="https://rcv.uos.ac.kr/" target="_blank" rel="noopener noreferrer">Robotics and Computer Vision Lab (RCV)</a> at UOS (advised by Prof. Jiyoung Jung).
-                </p>
-                <p>
-                  I am broadly interested in <strong>Trustworthy Computer Vision</strong>, aiming to ensure models operate reliably and safely in open, real-world environments. My research has primarily centered on <strong>3D point cloud Test-Time Adaptation (TTA)</strong> and <strong>adversarial defense</strong>, enabling models to dynamically adapt to severe distribution shifts and corruptions. Recently, I have expanded my focus toward <strong>omni-modal foundation models</strong>, with a particular emphasis on <strong>hallucination mitigation</strong> and calibration for robust real-world multimodal applications.
-                </p>
-                <p style="text-align:left">
-                  <a href="mailto:kong7963@uos.ac.kr">Email</a> &nbsp;/&nbsp;
-                  <a href="files/Inseok_Kong_CV_10_20.pdf" target="_blank">CV</a> &nbsp;/&nbsp;
-                  <a href="https://scholar.google.com/citations?user=N1GcUZgAAAAJ&hl=ko" target="_blank" rel="noopener noreferrer">Google Scholar</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/iskong17" target="_blank" rel="noopener noreferrer">GitHub</a> &nbsp;/&nbsp;
-                  <a href="https://www.linkedin.com/in/iskong" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-
-          <!-- News Section -->
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;"><tbody>
-            <tr>
-              <td>
-                <h2>News</h2>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <ul class="timeline news-timeline">
-                  <li class="timeline-item news-latest">
-                    <p><strong>[2026.10]</strong> Our work on backpropagation-free 3D test-time adaptation, <a href="https://arxiv.org/abs/2610.21367" target="_blank" rel="noopener noreferrer"><strong>SATOR</strong></a>, has been accepted to <strong>WACV 2027</strong>!</p>
-                  </li>
-                  <li class="timeline-item">
-                    <p><strong>[2026.07]</strong> Thrilled to announce that our paper, <a href="https://arxiv.org/abs/2606.12939" target="_blank" rel="noopener noreferrer"><strong>MAMVI</strong></a>, will be presented as an <strong style="color: #0284c7;">Oral Presentation</strong> at <strong>ICPR 2026</strong> in Lyon, France!</p>
-                  </li>
-                  <li class="timeline-item">
-                    <p><strong>[2026.04]</strong> Our work on 3D test-time adaptation via masked multi-view point clouds, <a href="https://arxiv.org/abs/2606.12939" target="_blank" rel="noopener noreferrer"><strong>MAMVI</strong></a>, has been accepted to <strong>ICPR 2026</strong>!</p>
-                  </li>
-                  <li class="timeline-item">
-                    <p><strong>[2026.03]</strong> Our work on transferable 3D point cloud adversarial defense, <a href="https://openaccess.thecvf.com/content/CVPR2026F/html/Jung_APC_Transferable_and_Efficient_Adversarial_Point_Counterattack_for_Robust_3D_CVPRF_2026_paper.html" target="_blank" rel="noopener noreferrer"><strong>APC</strong></a>, has been accepted to <strong>CVPR 2026 Findings</strong>!</p>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody></table>
-
-          <!-- Publications Section -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <div class="pub-header">
-                  <h2>Publications & Preprints</h2>
-                  <div class="pub-filter" role="group" aria-label="Filter publications">
-                    <button type="button" class="pub-filter-btn active" data-filter="selected">Selected</button>
-                    <button type="button" class="pub-filter-btn" data-filter="preprint">Preprint</button>
-                    <button type="button" class="pub-filter-btn" data-filter="full">Full</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody></table>
-          <div id="pub-list" style="padding:0 16px;">
-
-            <!-- SATOR Paper -->
-            <div class="pub-row" data-category="selected">
-              <div class="pub-img">
-                <img src="images/sator.png" alt="SATOR Framework Diagram">
-              </div>
-              <div class="pub-content">
-                <div class="pub-title">SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing</div>
-                <div class="pub-authors"><strong>Inseok Kong</strong>, Geunyoung Jung, Jiyoung Jung</div>
-                <div class="pub-venue"><em>IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</em><br><small style="color: #666;">Oct. 2026 (Accepted)</small></div>
-                <div class="pub-links">
-                  <a href="https://arxiv.org/abs/2610.21367" target="_blank" rel="noopener noreferrer">paper</a> &nbsp;/&nbsp;
-                  <a href="sator/">project page</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/iskong17/SATOR" target="_blank" rel="noopener noreferrer">code</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- MAMVI Paper -->
-            <div class="pub-row" data-category="selected">
-              <div class="pub-img">
-                <img src="images/mamvi.png" alt="MAMVI Framework Diagram">
-              </div>
-              <div class="pub-content">
-                <div class="pub-title">MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds</div>
-                <div class="pub-authors"><strong>Inseok Kong</strong>, Geunyoung Jung, Jiyoung Jung</div>
-                <div class="pub-venue"><em>IEEE/IAPR International Conference on Pattern Recognition (ICPR)</em><br><small style="color: #0284c7; font-weight: bold;">(Oral Presentation)</small> &nbsp;<small style="color: #666;">Apr. 2026 (Accepted), Jul. 2026 (Oral Selected)</small></div>
-                <div class="pub-links">
-                  <a href="https://arxiv.org/abs/2606.12939" target="_blank" rel="noopener noreferrer">paper</a> &nbsp;/&nbsp;
-                  <a href="mamvi/">project page</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/iskong17/MAMVI" target="_blank" rel="noopener noreferrer">code</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- APC Paper -->
-            <div class="pub-row" data-category="published">
-              <div class="pub-img">
-                <img src="images/apc.jpg" alt="APC Framework Diagram">
-              </div>
-              <div class="pub-content">
-                <div class="pub-title">APC: Transferable and Efficient Adversarial Point Counterattack for Robust 3D Point Cloud Recognition</div>
-                <div class="pub-authors">Geunyoung Jung, Soohong Kim, <strong>Inseok Kong</strong>, Jiyoung Jung</div>
-                <div class="pub-venue"><em>IEEE/CVF Conference on Computer Vision and Pattern Recognition Findings (CVPR Findings)</em><br><small style="color: #666;">Mar. 2026</small></div>
-                <div class="pub-links">
-                  <a href="https://arxiv.org/abs/2604.15708" target="_blank" rel="noopener noreferrer">paper</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/gyjung975/APC" target="_blank" rel="noopener noreferrer">code</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3D VLM TTA Preprint -->
-            <div class="pub-row" data-category="preprint">
-              <div class="pub-img">
-                <img src="images/under_review.svg" alt="Under Review">
-              </div>
-              <div class="pub-content">
-                <div class="pub-title">Mitigating Feature Collapse for Test-Time Adaptation of 3D VLMs via Distribution-Guided Regularization</div>
-                <div class="pub-authors">Geunyoung Jung, <strong>Inseok Kong</strong>, Jiyoung Jung</div>
-                <div class="pub-venue"><em>Under Review</em></div>
-              </div>
-            </div>
-
-            <!-- 3D Continual TTA Preprint -->
-            <div class="pub-row" data-category="preprint">
-              <div class="pub-img">
-                <img src="images/under_review.svg" alt="Under Review">
-              </div>
-              <div class="pub-content">
-                <div class="pub-title">Class Topology Survives Corruption: Prior, Monitor, and Repair for 3D Continual Test-Time Adaptation</div>
-                <div class="pub-authors">Geunyoung Jung, <strong>Inseok Kong</strong>, Jiyoung Jung</div>
-                <div class="pub-venue"><em>Under Review</em></div>
-              </div>
-            </div>
-
-          </div>
-          <script>
-            (function () {
-              var buttons = document.querySelectorAll('.pub-filter-btn');
-              var rows = document.querySelectorAll('#pub-list .pub-row');
-              function applyFilter(filter) {
-                var last = null;
-                rows.forEach(function (row) {
-                  var show = filter === 'full' || row.dataset.category === filter;
-                  row.style.display = show ? '' : 'none';
-                  row.classList.remove('pub-row-last');
-                  if (show) last = row;
-                });
-                if (last) last.classList.add('pub-row-last');
-                buttons.forEach(function (btn) {
-                  btn.classList.toggle('active', btn.dataset.filter === filter);
-                });
-              }
-              buttons.forEach(function (btn) {
-                btn.addEventListener('click', function () { applyFilter(btn.dataset.filter); });
-              });
-              applyFilter('selected');
-            })();
-          </script>
-
-          <!-- Research Experience Section -->
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;"><tbody>
-            <tr>
-              <td>
-                <h2>Research Experience</h2>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <ul class="timeline">
-                  <li class="timeline-item">
-                    <p><strong><a href="https://sia.uos.ac.kr/home" target="_blank" rel="noopener noreferrer">Speech & Interactive AI Laboratory (SIA)</a>, University of Seoul</strong> - Seoul, S. Korea<br>
-                    Undergraduate Research Student<br>
-                    <span style="color: #666; font-size: 14px;">Aug. 2026 – Present</span><br>
-                    • Advisor: Prof. Heeseung Kim<br>
-                    • Research on Audio-Vision-Language Models (AVLLMs) and hallucination mitigation.</p>
-                  </li>
-
-                  <li class="timeline-item">
-                    <p><strong><a href="https://siit.kaist.ac.kr/" target="_blank" rel="noopener noreferrer">Statistical Inference and Information Theory Lab (SIIT)</a>, KAIST</strong> - Daejeon, S. Korea<br>
-                    Undergraduate Research Student<br>
-                    <span style="color: #666; font-size: 14px;">Jul. 2026 – Aug. 2026</span><br>
-                    • Advisor: Prof. Junmo Kim<br>
-                    • Research on Large Vision-Language Models (LVLMs), object hallucination mitigation, and uncertainty calibration.</p>
-                  </li>
-
-                  <li class="timeline-item">
-                    <p><strong><a href="https://rcv.uos.ac.kr/" target="_blank" rel="noopener noreferrer">Robotics and Computer Vision Lab (RCV)</a>, University of Seoul</strong> - Seoul, S. Korea<br>
-                    Undergraduate Research Student<br>
-                    <span style="color: #666; font-size: 14px;">Jul. 2025 – Jun. 2026</span><br>
-                    • Advisor: Prof. Jiyoung Jung<br>
-                    • Researched 3D Test-Time Adaptation (TTA) under severe domain shifts, point cloud robustness & adversarial defense, and cross-modal alignment in 3D VLMs.</p>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody></table>
-
-          <!-- Education Section -->
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;"><tbody>
-            <tr>
-              <td>
-                <h2>Education</h2>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <ul class="timeline">
-                  <li class="timeline-item">
-                    <p><strong>University of Seoul (UOS)</strong> - Seoul, S. Korea<br>
-                    B.S. in GeoInformatics and Artificial Intelligence (Double Major)<br>
-                    <span style="color: #666; font-size: 14px;">Mar. 2022 – Present</span><br>
-                    • Cumulative GPA: 3.8 / 4.5<br>
-                    • Relevant Coursework: Machine Learning, Deep Learning, Pattern Recognition, Data Structures, Algorithms.</p>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody></table>
-
-          <!-- Projects Section -->
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;"><tbody>
-            <tr>
-              <td>
-                <h2>Projects</h2>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <ul class="timeline">
-                  <li class="timeline-item">
-                    <p><strong>LG Aimers 8th Cohort</strong> (LLM Compression Track)<br>
-                    <span style="color: #666; font-size: 14px;">Jan. 2026 – Feb. 2026</span><br>
-                    • Applied model compression & optimization techniques (pruning, quantization) on EXAONE LLMs.</p>
-                  </li>
-
-                  <li class="timeline-item">
-                    <p><strong>Optimal Autonomous Shuttle Route Planning</strong><br>
-                    Capstone Design Project & Seoul Big Data Campus<br>
-                    <span style="color: #666; font-size: 14px;">Oct. 2025 – Jan. 2026</span><br>
-                    • Developed route optimization algorithms using mobility big data to support autonomous shuttle services for elderly citizens in Seoul.</p>
-                  </li>
-
-                  <li class="timeline-item">
-                    <p><strong>Sportier (UOS Entrepreneurship Club)</strong><br>
-                    Lead Developer & President<br>
-                    <span style="color: #666; font-size: 14px;">Mar. 2025 – Jul. 2025</span><br>
-                    • Developed a sports matchmaking web application using React.js with location-based matching and competitive tier rankings.</p>
-                  </li>
-
-                  <li class="timeline-item">
-                    <p><strong>Football Big Data Analytics</strong><br>
-                    Football Big Data Camp<br>
-                    <span style="color: #666; font-size: 14px;">Feb. 2025</span><br>
-                    • Investigated practical applications of LLMs and RAG in football performance analytics.</p>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody></table>
-
-          <!-- Honors & Awards Section -->
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;"><tbody>
-            <tr>
-              <td>
-                <h2>Honors & Awards</h2>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <ul style="line-height: 2.0; padding-left: 20px;">
-                  <li><strong>Creativity Award</strong>, K-DATA Science Conference & Hackathon <span style="color:#777; font-size: 13px;">(Sep 2026)</span></li>
-                  <li><strong>Excellence Award</strong>, Seoul RISE AI Competition (Project: SATOR) <span style="color:#777; font-size: 13px;">(Jun 2026)</span></li>
-                  <li><strong>Excellence Award</strong>, UOS Capstone Design Project <span style="color:#777; font-size: 13px;">(Jan 2026)</span></li>
-                  <li><strong>Grand Prize (Seoul Mayor Award)</strong>, Seoul Metropolitan Big Data Campus Competition <span style="color:#777; font-size: 13px;">(Oct 2025)</span></li>
-                  <li><strong>Encouragement Award</strong>, AICOSS Industry-Academia Hackathon <span style="color:#777; font-size: 13px;">(Aug 2025)</span></li>
-                  <li><strong>Dean's Award of College of Engineering</strong>, AICOSS Deep Learning Bootcamp <span style="color:#777; font-size: 13px;">(Jan 2025)</span></li>
-                </ul>
-              </td>
-            </tr>
-          </tbody></table>
-
-          <!-- Footer -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px">
-                <br>
-                <p style="text-align:center;font-size:small;">
-                  Website template adapted from <a href="https://jonbarron.info/" target="_blank" rel="noopener noreferrer">Jon Barron</a>.
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-        </td>
-      </tr>
-    </table>
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox-modal">
-      <img id="lightbox-img" class="lightbox-content" src="" alt="Enlarged view">
+<!-- Hero -->
+<section class="hero" id="about">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <div class="hero-slash"></div>
+    <div class="hero-number">33</div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow"><span class="live-dot"></span>Undergraduate Researcher · University of Seoul</p>
+      <h1 class="hero-name">Inseok<br><span>Kong</span></h1>
+      <p class="hero-tagline">
+        Building vision models that stay reliable when the track conditions change:
+        <b>3D test-time adaptation</b>, <b>adversarial robustness</b>, and
+        <b>hallucination</b> in omni-modal models.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="{{ site.social.cv | relative_url }}" target="_blank" rel="noopener">{% include icon.html name="cv" %}CV</a>
+        <a class="btn" href="mailto:{{ site.social.email }}">{% include icon.html name="email" %}Email</a>
+        <a class="btn" href="{{ site.social.scholar }}" target="_blank" rel="noopener">{% include icon.html name="scholar" %}Scholar</a>
+        <a class="btn" href="{{ site.social.github }}" target="_blank" rel="noopener">{% include icon.html name="github" %}GitHub</a>
+        <a class="btn" href="{{ site.social.linkedin }}" target="_blank" rel="noopener">{% include icon.html name="linkedin" %}LinkedIn</a>
+      </div>
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+    <aside class="driver-card" aria-label="Driver card">
+      <div class="dc-top">
+        <span class="dc-num">33</span>
+        <span class="dc-meta"><span class="dc-flag">KOR</span><span class="dc-team">UOS · SIA Lab</span></span>
+      </div>
+      <div class="dc-photo">
+        <img src="{{ '/images/profile.png' | relative_url }}" alt="Inseok Kong">
+      </div>
+      <div class="dc-name">Inseok <b>Kong</b></div>
+      <dl class="dc-stats">
+        <div><dt>Papers</dt><dd>{{ published.size }}</dd></div>
+        <div><dt>1st Author</dt><dd>{{ first_author.size }}</dd></div>
+        <div><dt>Podiums</dt><dd>{{ awards.size }}</dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
 
-        document.querySelectorAll('.pub-img img').forEach(img => {
-          img.addEventListener('click', (e) => {
-            e.preventDefault();
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt || 'Enlarged view';
-            lightbox.classList.add('show');
-          });
-        });
+<!-- Driver Profile -->
+<section class="section">
+  <div class="container">
+    {% include section-head.html lap="01" kicker="Driver Profile" title="About" %}
+    <div class="about-grid">
+      <div class="prose">
+        <p>
+          Hello! I am an Undergraduate Researcher in the <a href="https://sia.uos.ac.kr/home" target="_blank" rel="noopener">Speech &amp; Interactive AI Laboratory (SIA)</a> at <a href="https://www.uos.ac.kr/" target="_blank" rel="noopener">University of Seoul (UOS)</a>, advised by Prof. Heeseung Kim. I am also a senior undergraduate student in the Department of GeoInformatics &amp; AI at UOS. Previously, I worked as an Undergraduate Research Intern in the <a href="https://siit.kaist.ac.kr/" target="_blank" rel="noopener">Statistical Inference and Information Theory Lab (SIIT)</a> at KAIST (advised by Prof. Junmo Kim) and the <a href="https://rcv.uos.ac.kr/" target="_blank" rel="noopener">Robotics and Computer Vision Lab (RCV)</a> at UOS (advised by Prof. Jiyoung Jung).
+        </p>
+        <p>
+          I am broadly interested in <b>Trustworthy Computer Vision</b>, aiming to ensure models operate reliably and safely in open, real-world environments. My research has primarily centered on <b>3D point cloud Test-Time Adaptation (TTA)</b> and <b>adversarial defense</b>, enabling models to dynamically adapt to severe distribution shifts and corruptions. Recently, I have expanded my focus toward <b>omni-modal foundation models</b>, with a particular emphasis on <b>hallucination mitigation</b> and calibration for robust real-world multimodal applications.
+        </p>
+      </div>
+      <div class="telemetry">
+        <div class="telemetry-title">Research Sectors</div>
+        <ul>
+          <li class="sector-now"><span>Omni-modal hallucination &amp; calibration</span><em>Now · SIA</em></li>
+          <li class="sector-now"><span>LVLM hallucination &amp; uncertainty</span><em>2026 · SIIT</em></li>
+          <li class="sector-done"><span>3D point cloud test-time adaptation</span><em>2025–26 · RCV</em></li>
+          <li class="sector-done"><span>Adversarial defense for 3D recognition</span><em>2025–26 · RCV</em></li>
+        </ul>
+        <div class="telemetry-foot">Off track: Formula 1 · <b>#33</b> · Oracle Red Bull Racing</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        lightbox.addEventListener('click', () => {
-          lightbox.classList.remove('show');
-        });
+<!-- Race Control -->
+<section class="section" id="news">
+  <div class="container">
+    {% include section-head.html lap="02" kicker="Race Control" title="News" %}
+    <ol class="race-control">
+      {%- for item in site.data.news %}
+      <li class="rc-item{% if forloop.first %} is-latest{% endif %}">
+        <time class="rc-time">{{ item.date }}</time>
+        <span class="rc-flag">{% if forloop.first %}Latest{% else %}Message{% endif %}</span>
+        <p class="rc-text">{{ item.text }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
 
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && lightbox.classList.contains('show')) {
-            lightbox.classList.remove('show');
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
+<!-- Timing Tower -->
+<section class="section" id="publications">
+  <div class="container">
+    <div class="section-head-row">
+      {% include section-head.html lap="03" kicker="Timing Tower" title="Publications" %}
+      <div class="session-tabs" role="tablist" aria-label="Filter publications">
+        <button type="button" class="session-tab is-active" data-filter="selected">Selected</button>
+        <button type="button" class="session-tab" data-filter="preprint">Preprint</button>
+        <button type="button" class="session-tab" data-filter="full">Full</button>
+      </div>
+    </div>
+
+    <ol class="timing-tower" id="pub-list">
+      {%- for p in pubs %}
+      <li class="tt-row" data-selected="{{ p.selected }}" data-status="{{ p.status }}">
+        <span class="tt-pos"></span>
+        <span class="tt-team{% if p.badges contains 'first-author' %} is-lead{% endif %}{% if p.status == 'preprint' %} is-pending{% endif %}"></span>
+        <div class="tt-thumb">
+          <img src="{{ p.image | relative_url }}" alt="{{ p.title | split: ':' | first }}" {% if p.status != 'preprint' %}data-zoom{% endif %}>
+        </div>
+        <div class="tt-body">
+          <div class="tt-badges">
+            <span class="badge badge-venue">{{ p.venue_short }}</span>
+            {%- if p.badges contains 'oral' %}<span class="badge badge-oral">Oral</span>{% endif %}
+            {%- if p.badges contains 'first-author' %}<span class="badge badge-lead">1st Author</span>{% endif %}
+          </div>
+          <h3 class="tt-title">{{ p.title }}</h3>
+          <p class="tt-authors">{{ p.authors }}</p>
+          <p class="tt-venue"><i>{{ p.venue }}</i>{% if p.date %}<span>{{ p.date }}</span>{% endif %}</p>
+          {%- if p.links.size > 0 %}
+          <div class="tt-links">
+            {%- for l in p.links %}
+            <a href="{{ l.url | relative_url }}"{% unless l.url contains '://' %}{% else %} target="_blank" rel="noopener"{% endunless %}>{{ l.label }}</a>
+            {%- endfor %}
+          </div>
+          {%- endif %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- Stints -->
+<section class="section" id="career">
+  <div class="container">
+    {% include section-head.html lap="04" kicker="Stints" title="Career" %}
+    <div class="career-grid">
+      <div>
+        <h3 class="sub-head">Research Experience</h3>
+        <ol class="stints">
+          {%- for e in site.data.career.experience %}
+          <li class="stint{% if e.current %} is-current{% endif %}">
+            <div class="stint-period">{{ e.period }}{% if e.current %}<span class="stint-live">On track</span>{% endif %}</div>
+            <div class="stint-org"><a href="{{ e.url }}" target="_blank" rel="noopener">{{ e.org }}</a></div>
+            <div class="stint-place">{{ e.role }} · {{ e.place }}</div>
+            <ul>{% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+      <div>
+        <h3 class="sub-head">Education</h3>
+        <ol class="stints">
+          {%- for e in site.data.career.education %}
+          <li class="stint is-current">
+            <div class="stint-period">{{ e.period }}</div>
+            <div class="stint-org">{{ e.org }}</div>
+            <div class="stint-place">{{ e.role }} · {{ e.place }}</div>
+            <ul>{% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+          </li>
+          {%- endfor %}
+        </ol>
+
+        <h3 class="sub-head">Podiums <small>Honors &amp; Awards</small></h3>
+        <ol class="podiums">
+          {%- for a in awards %}
+          <li>
+            <span class="podium-icon">{% include icon.html name="trophy" %}</span>
+            <div><b>{{ a.title }}</b><span>{{ a.event }}</span></div>
+            <time>{{ a.date }}</time>
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Garage -->
+<section class="section">
+  <div class="container">
+    {% include section-head.html lap="05" kicker="Garage" title="Projects" %}
+    <div class="garage">
+      {%- for pr in site.data.career.projects %}
+      <article class="garage-card">
+        <div class="garage-period">{{ pr.period }}</div>
+        <h3>{{ pr.name }}</h3>
+        <p class="garage-sub">{{ pr.sub }}</p>
+        <p>{{ pr.text }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Pit Wall -->
+<section class="section">
+  <div class="container">
+    <div class="section-head-row">
+      {% include section-head.html lap="06" kicker="Pit Wall" title="Latest from the Blog" %}
+      <a class="more-link" href="{{ '/blog/' | relative_url }}">All posts {% include icon.html name="arrow" %}</a>
+    </div>
+    {%- if site.posts.size > 0 %}
+    <div class="post-grid">
+      {%- for post in site.posts limit: 3 %}
+      {% include post-card.html post=post %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty">No posts yet. Lights out soon.</p>
+    {%- endif %}
+  </div>
+</section>

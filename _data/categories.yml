@@ -1,0 +1,10 @@
+# Blog categories. Use the key in a post's `category:` front matter.
+- key: study
+  label: "Study"
+  ko: "공부"
+- key: race-review
+  label: "Race Review"
+  ko: "레이스 리뷰"
+- key: log
+  label: "Pit Log"
+  ko: "기록"

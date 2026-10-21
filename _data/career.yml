@@ -1,0 +1,67 @@
+experience:
+  - org: "Speech & Interactive AI Laboratory (SIA)"
+    url: "https://sia.uos.ac.kr/home"
+    place: "University of Seoul · Seoul, S. Korea"
+    role: "Undergraduate Research Student"
+    period: "Aug. 2026 – Present"
+    current: true
+    points:
+      - "Advisor: Prof. Heeseung Kim"
+      - "Research on Audio-Vision-Language Models (AVLLMs) and hallucination mitigation."
+
+  - org: "Statistical Inference and Information Theory Lab (SIIT)"
+    url: "https://siit.kaist.ac.kr/"
+    place: "KAIST · Daejeon, S. Korea"
+    role: "Undergraduate Research Student"
+    period: "Jul. 2026 – Aug. 2026"
+    points:
+      - "Advisor: Prof. Junmo Kim"
+      - "Research on Large Vision-Language Models (LVLMs), object hallucination mitigation, and uncertainty calibration."
+
+  - org: "Robotics and Computer Vision Lab (RCV)"
+    url: "https://rcv.uos.ac.kr/"
+    place: "University of Seoul · Seoul, S. Korea"
+    role: "Undergraduate Research Student"
+    period: "Jul. 2025 – Jun. 2026"
+    points:
+      - "Advisor: Prof. Jiyoung Jung"
+      - "Researched 3D Test-Time Adaptation (TTA) under severe domain shifts, point cloud robustness & adversarial defense, and cross-modal alignment in 3D VLMs."
+
+education:
+  - org: "University of Seoul (UOS)"
+    place: "Seoul, S. Korea"
+    role: "B.S. in GeoInformatics and Artificial Intelligence (Double Major)"
+    period: "Mar. 2022 – Present"
+    points:
+      - "Cumulative GPA: 3.8 / 4.5"
+      - "Relevant Coursework: Machine Learning, Deep Learning, Pattern Recognition, Data Structures, Algorithms."
+
+projects:
+  - name: "LG Aimers 8th Cohort"
+    sub: "LLM Compression Track"
+    period: "Jan. 2026 – Feb. 2026"
+    text: "Applied model compression & optimization techniques (pruning, quantization) on EXAONE LLMs."
+
+  - name: "Optimal Autonomous Shuttle Route Planning"
+    sub: "Capstone Design Project & Seoul Big Data Campus"
+    period: "Oct. 2025 – Jan. 2026"
+    text: "Developed route optimization algorithms using mobility big data to support autonomous shuttle services for elderly citizens in Seoul."
+
+  - name: "Sportier"
+    sub: "UOS Entrepreneurship Club · Lead Developer & President"
+    period: "Mar. 2025 – Jul. 2025"
+    text: "Developed a sports matchmaking web application using React.js with location-based matching and competitive tier rankings."
+
+  - name: "Football Big Data Analytics"
+    sub: "Football Big Data Camp"
+    period: "Feb. 2025"
+    text: "Investigated practical applications of LLMs and RAG in football performance analytics."
+
+# Newest first.
+awards:
+  - { title: "Creativity Award", event: "K-DATA Science Conference & Hackathon", date: "Sep. 2026" }
+  - { title: "Excellence Award", event: "Seoul RISE AI Competition (Project: SATOR)", date: "Jun. 2026" }
+  - { title: "Excellence Award", event: "UOS Capstone Design Project", date: "Jan. 2026" }
+  - { title: "Grand Prize (Seoul Mayor Award)", event: "Seoul Metropolitan Big Data Campus Competition", date: "Oct. 2025" }
+  - { title: "Encouragement Award", event: "AICOSS Industry-Academia Hackathon", date: "Aug. 2025" }
+  - { title: "Dean's Award of College of Engineering", event: "AICOSS Deep Learning Bootcamp", date: "Jan. 2025" }

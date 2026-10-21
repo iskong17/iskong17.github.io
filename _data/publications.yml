@@ -1,0 +1,70 @@
+# Display order = list order. Keep under-review papers at the bottom.
+# status: published | preprint
+# selected: true shows the paper under the "Selected" tab (first-author papers).
+# badges: first-author, oral
+
+- id: sator
+  title: "SATOR: Backpropagation-Free 3D Test-Time Adaptation via Sample-Adaptive Token Routing"
+  authors: "<b>Inseok Kong</b>, Geunyoung Jung, Jiyoung Jung"
+  venue: "IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)"
+  venue_short: "WACV 2027"
+  date: "Oct. 2026 · Accepted"
+  image: /images/sator.png
+  status: published
+  selected: true
+  badges: [first-author]
+  links:
+    - { label: Paper, url: "https://arxiv.org/abs/2610.21367" }
+    - { label: Project, url: "/sator/" }
+    - { label: Code, url: "https://github.com/iskong17/SATOR" }
+
+- id: mamvi
+  title: "MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds"
+  authors: "<b>Inseok Kong</b>, Geunyoung Jung, Jiyoung Jung"
+  venue: "IEEE/IAPR International Conference on Pattern Recognition (ICPR)"
+  venue_short: "ICPR 2026"
+  date: "Apr. 2026 · Accepted, Jul. 2026 · Oral"
+  image: /images/mamvi.png
+  status: published
+  selected: true
+  badges: [first-author, oral]
+  links:
+    - { label: Paper, url: "https://arxiv.org/abs/2606.12939" }
+    - { label: Project, url: "/mamvi/" }
+    - { label: Code, url: "https://github.com/iskong17/MAMVI" }
+
+- id: apc
+  title: "APC: Transferable and Efficient Adversarial Point Counterattack for Robust 3D Point Cloud Recognition"
+  authors: "Geunyoung Jung, Soohong Kim, <b>Inseok Kong</b>, Jiyoung Jung"
+  venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition Findings (CVPR Findings)"
+  venue_short: "CVPR 2026 Findings"
+  date: "Mar. 2026"
+  image: /images/apc.jpg
+  status: published
+  selected: false
+  badges: []
+  links:
+    - { label: Paper, url: "https://arxiv.org/abs/2604.15708" }
+    - { label: Code, url: "https://github.com/gyjung975/APC" }
+
+- id: vlm-tta
+  title: "Mitigating Feature Collapse for Test-Time Adaptation of 3D VLMs via Distribution-Guided Regularization"
+  authors: "Geunyoung Jung, <b>Inseok Kong</b>, Jiyoung Jung"
+  venue: "Under Review"
+  venue_short: "Under Review"
+  image: /images/under_review.svg
+  status: preprint
+  selected: false
+  badges: []
+  links: []
+
+- id: continual-tta
+  title: "Class Topology Survives Corruption: Prior, Monitor, and Repair for 3D Continual Test-Time Adaptation"
+  authors: "Geunyoung Jung, <b>Inseok Kong</b>, Jiyoung Jung"
+  venue: "Under Review"
+  venue_short: "Under Review"
+  image: /images/under_review.svg
+  status: preprint
+  selected: false
+  badges: []
+  links: []

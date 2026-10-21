@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{%- assign cat = site.data.categories | where: "key", page.category | first -%}
+{%- assign chars = content | strip_html | size -%}
+{%- assign minutes = chars | divided_by: 500 | plus: 1 -%}
+<article>
+  <header class="post-header">
+    <div class="hero-bg" aria-hidden="true"><div class="hero-grid"></div><div class="hero-slash"></div></div>
+    <div class="container">
+      <div class="post-meta">
+        <span class="post-cat cat-{{ page.category | default: 'log' }}">{{ cat.label | default: page.category }}</span>
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+        <span>· {{ minutes }}분 읽기</span>
+      </div>
+      <h1>{{ page.title }}</h1>
+      {%- if page.description %}<p class="post-desc">{{ page.description }}</p>{% endif %}
+
+      {%- if page.gp %}
+      <dl class="race-strip">
+        <div><dt>Grand Prix</dt><dd>{{ page.gp }}</dd></div>
+        {%- if page.round %}<div><dt>Round</dt><dd>{{ page.round }}</dd></div>{% endif %}
+        {%- if page.circuit %}<div><dt>Circuit</dt><dd>{{ page.circuit }}</dd></div>{% endif %}
+        {%- if page.result %}<div><dt>#33 Result</dt><dd>{{ page.result }}</dd></div>{% endif %}
+      </dl>
+      {%- endif %}
+    </div>
+  </header>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav" aria-label="More posts">
+    {%- if page.previous %}
+    <a class="prev" href="{{ page.previous.url | relative_url }}"><small>Previous</small>{{ page.previous.title }}</a>
+    {%- endif %}
+    {%- if page.next %}
+    <a class="next" href="{{ page.next.url | relative_url }}"><small>Next</small>{{ page.next.title }}</a>
+    {%- endif %}
+  </nav>
+</article>

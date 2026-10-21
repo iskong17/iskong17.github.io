@@ -7,4 +7,6 @@
 *.fdb_latexmk
 *.synctex.gz
 *.tex
-cv.tex
+cv.tex_site/
+.jekyll-cache/
+.sass-cache/

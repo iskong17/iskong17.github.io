@@ -1,0 +1,13 @@
+# Newest first. `text` may contain HTML.
+
+- date: "2026.10"
+  text: 'Our work on backpropagation-free 3D test-time adaptation, <a href="/sator/"><b>SATOR</b></a>, has been accepted to <b>WACV 2027</b>!'
+
+- date: "2026.07"
+  text: 'Thrilled to announce that our paper, <a href="/mamvi/"><b>MAMVI</b></a>, will be presented as an <b class="hl">Oral Presentation</b> at <b>ICPR 2026</b> in Lyon, France!'
+
+- date: "2026.04"
+  text: 'Our work on 3D test-time adaptation via masked multi-view point clouds, <a href="/mamvi/"><b>MAMVI</b></a>, has been accepted to <b>ICPR 2026</b>!'
+
+- date: "2026.03"
+  text: 'Our work on transferable 3D point cloud adversarial defense, <a href="https://arxiv.org/abs/2604.15708"><b>APC</b></a>, has been accepted to <b>CVPR 2026 Findings</b>!'

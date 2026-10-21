@@ -1,483 +1,113 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds (ICPR 2026 Oral Presentation).">
-  <meta property="og:title" content="MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds"/>
-  <meta property="og:description" content="Official project page for MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds. Accepted as Oral Presentation at ICPR 2026."/>
-  <meta property="og:url" content="https://iskong17.github.io/mamvi/"/>
-  <meta property="og:image" content="https://iskong17.github.io/images/mamvi.png"/>
-  <meta name="keywords" content="MAMVI, 3D Test-Time Adaptation, Point Clouds, ICPR 2026, Oral, Inseok Kong, Computer Vision">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
-  <!-- Bulma & Icons CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-
-  <style>
-    body {
-      font-family: 'Noto Sans', sans-serif;
-      color: #363636;
-      line-height: 1.6;
-    }
-    .publication-title {
-      font-family: 'Google Sans', sans-serif;
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 1.5rem !important;
-    }
-    .publication-authors {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-    }
-    .publication-authors a {
-      color: #3273dc;
-    }
-    .publication-authors a:hover {
-      text-decoration: underline;
-    }
-    .author-block {
-      display: inline-block;
-      margin-right: 8px;
-    }
-    .publication-institution {
-      font-size: 1.05rem;
-      color: #555;
-      margin-bottom: 1.5rem;
-    }
-    .publication-links {
-      margin-top: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .link-block {
-      display: inline-block;
-      margin: 4px;
-    }
-    .teaser img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      border: 1px solid #e9ecef;
-    }
-    .teaser .subtitle {
-      font-size: 1rem;
-      color: #4a4a4a;
-      margin-top: 1rem;
-      line-height: 1.6;
-    }
-    .section-title {
-      font-family: 'Google Sans', sans-serif;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-    .stat-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.2s;
-    }
-    .stat-box:hover {
-      transform: translateY(-2px);
-    }
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0284c7;
-      line-height: 1.2;
-    }
-    .stat-desc {
-      font-size: 0.95rem;
-      color: #64748b;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-    .highlight-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-left: 4px solid #0284c7;
-      border-radius: 8px;
-      padding: 18px 20px;
-      margin-bottom: 14px;
-    }
-    .highlight-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 6px;
-    }
-    pre {
-      background-color: #f5f5f5;
-      color: #363636;
-      font-size: 0.9em;
-      border-radius: 8px;
-      position: relative;
-    }
-    .copy-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ffffff;
-      border: 1px solid #dbdbdb;
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      color: #363636;
-      transition: all 0.2s;
-    }
-    .copy-button:hover {
-      background: #f0f0f0;
-    }
-    .results-table {
-      width: 100%;
-      font-size: 0.95rem;
-    }
-    .results-table th, .results-table td {
-      text-align: center !important;
-      vertical-align: middle !important;
-    }
-    .results-table th:first-child, .results-table td:first-child {
-      text-align: left !important;
-    }
-    .results-table tr.is-ours td {
-      background: #f0f9ff;
-      font-weight: 700;
-    }
-    .results-table .best {
-      font-weight: 800;
-      color: #0284c7;
-    }
-    .results-table .second {
-      text-decoration: underline;
-    }
-    .results-caption {
-      font-size: 0.9rem;
-      color: #64748b;
-      margin-top: 0.5rem;
-      margin-bottom: 2rem;
-    }
-  </style>
-</head>
-<body>
-
-<!-- Header / Hero Section -->
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-
-          <!-- Conference & Award Badge -->
-          <div style="margin-bottom: 1rem;">
-            <span class="tag is-info is-light is-medium is-rounded" style="font-weight: 700; border: 1px solid #bce3fb;">
-              <i class="fas fa-award mr-2"></i> IEEE/IAPR ICPR 2026 &nbsp;
-              <span class="tag is-info is-rounded" style="font-weight: 700;">Oral Presentation</span>
-            </span>
-          </div>
-
-          <!-- Publication Title -->
-          <h1 class="title is-1 publication-title">
-            MAMVI: 3D Test-Time Adaptation via<br>Masked Multi-View Point Clouds
-          </h1>
-
-          <!-- Authors -->
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <strong><a href="https://iskong17.github.io/">Inseok Kong</a></strong><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              Geunyoung Jung<sup>2</sup>,
-            </span>
-            <span class="author-block">
-              Jiyoung Jung<sup>2,*</sup>
-            </span>
-          </div>
-
-          <!-- Institutions -->
-          <div class="publication-institution">
-            <span class="author-block"><sup>1</sup> Department of GeoInformatics, University of Seoul</span> &nbsp;•&nbsp;
-            <span class="author-block"><sup>2</sup> Department of Artificial Intelligence, University of Seoul</span>
-            <div style="font-size: 0.9rem; color: #7a7a7a; margin-top: 4px;">* Corresponding author</div>
-          </div>
-
-          <!-- Publication Links -->
-          <div class="publication-links">
-            <!-- Paper (PDF) link -->
-            <span class="link-block">
-              <a href="https://arxiv.org/pdf/2606.12939" target="_blank" rel="noopener noreferrer"
-                 class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fas fa-file-pdf"></i>
-                </span>
-                <span>Paper</span>
-              </a>
-            </span>
-
-            <!-- ArXiv link -->
-            <span class="link-block">
-              <a href="https://arxiv.org/abs/2606.12939" target="_blank" rel="noopener noreferrer"
-                 class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="ai ai-arxiv"></i>
-                </span>
-                <span>arXiv</span>
-              </a>
-            </span>
-
-            <!-- Code link -->
-            <span class="link-block">
-              <a href="https://github.com/iskong17/MAMVI" target="_blank" rel="noopener noreferrer"
-                 class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Code</span>
-              </a>
-            </span>
-
-            <!-- BibTeX Link -->
-            <span class="link-block">
-              <a href="#BibTeX" class="button is-normal is-rounded is-dark">
-                <span class="icon">
-                  <i class="fas fa-quote-right"></i>
-                </span>
-                <span>BibTeX</span>
-              </a>
-            </span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Teaser Image -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body pt-0">
-      <img src="../images/mamvi.png" alt="MAMVI Framework Architecture Overview"/>
-      <h2 class="subtitle has-text-centered">
-        <em><b>Overview of the proposed MAMVI framework.</b></em> MAMVI eliminates sequential optimization by unifying multi-view adaptation into a single backward pass driven by multi-view consensus, coupled with a hybrid masking strategy (fixed ratios + Beta-distributed sampling) and a confidence-based adaptive learning rate.
-      </h2>
-    </div>
-  </div>
-</section>
-
-<!-- Paper Abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 section-title">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            3D point cloud models suffer significant performance degradation under distribution shifts caused by sensor noise, occlusions, and environmental changes. Test-time adaptation (TTA) has emerged as a practical paradigm for mitigating this issue during inference. Recently, leveraging multi-view augmentation has shown promise in improving 3D TTA performance. However, existing multi-view approaches are often constrained by sequential optimization that treats each view independently. This sequential optimization leads to substantial inference latency due to repetitive optimization steps, making real-time adaptation impractical.
-          </p>
-          <p>
-            To address this, we propose <strong>Masked Multi-View Test-Time Adaptation (MAMVI)</strong>, which replaces sequential optimization with a unified single-step adaptation. Specifically, MAMVI utilizes a hybrid masking strategy that combines fixed ratios for stability with Beta-distributed sampling for diversity. By aggregating losses across multiple views, MAMVI performs adaptation through a single backward pass based on multi-view consensus. Additionally, a confidence-based adaptive learning rate is used to dynamically adjust the adaptation intensity for each sample. Extensive experiments on ModelNet-40C, ShapeNet-C, and ScanObjectNN-C demonstrate that MAMVI achieves state-of-the-art accuracy on ShapeNet-C and ScanObjectNN-C. Moreover, it remains competitive on ModelNet-40C while delivering <strong>4.9–8.9 times faster inference</strong>, making it highly suitable for real-time applications.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Key Insights & Method Details -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h2 class="title is-3 section-title has-text-centered">Key Highlights & Contributions</h2>
-
-        <!-- Stat Row -->
-        <div class="columns is-multiline mb-5">
-          <div class="column is-4">
-            <div class="stat-box">
-              <div class="stat-number">4.9× – 8.9×</div>
-              <div class="stat-desc">Faster Inference Speedup</div>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="stat-box">
-              <div class="stat-number">SOTA</div>
-              <div class="stat-desc">ShapeNet-C & ScanObjectNN-C</div>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="stat-box">
-              <div class="stat-number">1-Step</div>
-              <div class="stat-desc">Multi-View Consensus Backward Pass</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Highlight Cards -->
-        <div class="highlight-card">
-          <div class="highlight-title"><i class="fas fa-bolt mr-2 has-text-info"></i> Unified Single-Step Adaptation</div>
-          <p>Prior multi-view 3D TTA methods repeatedly optimize parameters view-by-view sequentially, causing severe latency. MAMVI unifies multi-view predictions and optimizes through a single backward pass based on consensus across views, drastically reducing adaptation overhead.</p>
-        </div>
-
-        <div class="highlight-card">
-          <div class="highlight-title"><i class="fas fa-theater-masks mr-2 has-text-info"></i> Hybrid Masking Strategy</div>
-          <p>MAMVI introduces a hybrid point masking scheme: fixed masking ratios preserve canonical geometric structures for stable consensus, while Beta-distributed stochastic sampling injects geometric diversity to prevent collapse under severe corruptions.</p>
-        </div>
-
-        <div class="highlight-card">
-          <div class="highlight-title"><i class="fas fa-sliders-h mr-2 has-text-info"></i> Confidence-Based Adaptive Learning Rate</div>
-          <p>Instead of using a uniform learning rate, MAMVI dynamically scales the step size on each sample conditioned on the model's prediction confidence, effectively preventing error accumulation on ambiguous and out-of-distribution point clouds.</p>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Main Results -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h2 class="title is-3 section-title has-text-centered">Main Results</h2>
-
-        <h3 class="title is-5">Mean accuracy under 15 corruption types</h3>
-        <div class="table-container">
-          <table class="table is-bordered is-hoverable results-table">
-            <thead>
-              <tr>
-                <th>Method</th>
-                <th>ModelNet-40C</th>
-                <th>ShapeNet-C</th>
-                <th>ScanObjectNN-C</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Source Only</td><td>54.13</td><td>61.35</td><td>36.96</td></tr>
-              <tr><td>TENT</td><td>63.65</td><td>61.01</td><td>45.97</td></tr>
-              <tr><td>SAR</td><td>64.12</td><td>61.46</td><td>47.26</td></tr>
-              <tr><td>MEMO</td><td>68.18</td><td>64.30</td><td>–</td></tr>
-              <tr><td>PG-SF</td><td>68.68</td><td>64.40</td><td class="second">47.54</td></tr>
-              <tr><td>SVWA</td><td class="best">75.04</td><td class="second">65.74</td><td>47.45</td></tr>
-              <tr class="is-ours"><td>MAMVI (Ours)</td><td class="second">74.80</td><td class="best">66.77</td><td class="best">49.76</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="results-caption">
-          Top-1 accuracy (%) averaged over 15 corruption types, compared with source-free TTA methods on a Point-MAE backbone. <span class="has-text-info has-text-weight-bold">Best</span> and <u>second best</u> are marked. Per-corruption results are in the paper.
-        </p>
-
-        <div class="columns">
-          <div class="column is-7">
-            <h3 class="title is-5">Inference throughput (FPS)</h3>
-            <div class="table-container">
-              <table class="table is-bordered is-hoverable results-table">
-                <thead>
-                  <tr>
-                    <th>Method</th>
-                    <th>ModelNet-40C</th>
-                    <th>ShapeNet-C</th>
-                    <th>ScanObjectNN-C</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>SVWA</td><td>8.99</td><td>8.63</td><td>9.03</td></tr>
-                  <tr class="is-ours"><td>MAMVI</td><td>77.10</td><td>76.64</td><td>44.50</td></tr>
-                  <tr><td>Speedup</td><td class="best">8.6×</td><td class="best">8.9×</td><td class="best">4.9×</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="results-caption">
-              Compared with the multi-view method SVWA, MAMVI gives similar or better accuracy at 4.9–8.9× the throughput.
-            </p>
-          </div>
-          <div class="column is-5">
-            <h3 class="title is-5">Adaptive learning rate</h3>
-            <div class="table-container">
-              <table class="table is-bordered is-hoverable results-table">
-                <thead>
-                  <tr>
-                    <th>Setting</th>
-                    <th>MN-40C</th>
-                    <th>SN-C</th>
-                    <th>SO-C</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>No ALR</td><td>73.86</td><td>65.63</td><td>49.33</td></tr>
-                  <tr class="is-ours"><td>With ALR</td><td>74.80</td><td>66.77</td><td>49.76</td></tr>
-                  <tr><td>Gain</td><td class="best">+0.94</td><td class="best">+1.14</td><td class="best">+0.43</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="results-caption">
-              Confidence-based ALR improves accuracy on all three benchmarks.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BibTeX citation -->
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title is-3 section-title">BibTeX</h2>
-    <div style="position: relative;">
-      <button class="copy-button" onclick="copyBibtex()">
-        <i class="far fa-copy mr-1"></i> <span id="copy-btn-text">Copy</span>
-      </button>
-      <pre><code id="bibtex-code">@inproceedings{kong2026mamvi,
-  title={MAMVI: 3D Test-Time Adaptation via Masked Multi-view Point Clouds},
-  author={Kong, Inseok and Jung, Geunyoung and Jung, Jiyoung},
-  booktitle={International Conference on Pattern Recognition},
-  pages={348--362},
-  year={2026},
-  organization={Springer}
-}</code></pre>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content has-text-centered">
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a> adapted from <a href="https://nerfies.github.io" target="_blank" rel="noopener noreferrer">Nerfies</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-  function copyBibtex() {
-    const code = document.getElementById('bibtex-code').innerText;
-    navigator.clipboard.writeText(code).then(() => {
-      const btnText = document.getElementById('copy-btn-text');
-      btnText.innerText = 'Copied!';
-      setTimeout(() => {
-        btnText.innerText = 'Copy';
-      }, 2000);
-    });
+---
+layout: project
+title: "MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds"
+short: MAMVI
+description: "MAMVI: 3D Test-Time Adaptation via Masked Multi-View Point Clouds (ICPR 2026 Oral)."
+image: /images/mamvi.png
+venue: "IEEE/IAPR ICPR 2026"
+oral: true
+authors:
+  - { name: "Inseok Kong", sup: "1", me: true }
+  - { name: "Geunyoung Jung", sup: "2" }
+  - { name: "Jiyoung Jung", sup: "2,*" }
+affiliations:
+  - "Department of GeoInformatics, University of Seoul"
+  - "Department of Artificial Intelligence, University of Seoul"
+links:
+  - { label: "Paper", url: "https://arxiv.org/pdf/2606.12939", icon: "cv" }
+  - { label: "arXiv", url: "https://arxiv.org/abs/2606.12939" }
+  - { label: "Code", url: "https://github.com/iskong17/MAMVI", icon: "github" }
+teaser: /images/mamvi.png
+teaser_caption: "MAMVI eliminates sequential optimization by unifying multi-view adaptation into a single backward pass driven by multi-view consensus, coupled with a hybrid masking strategy (fixed ratios + Beta-distributed sampling) and a confidence-based adaptive learning rate."
+bibtex: |
+  @inproceedings{kong2026mamvi,
+    title={MAMVI: 3D Test-Time Adaptation via Masked Multi-view Point Clouds},
+    author={Kong, Inseok and Jung, Geunyoung and Jung, Jiyoung},
+    booktitle={International Conference on Pattern Recognition},
+    pages={348--362},
+    year={2026},
+    organization={Springer}
   }
-</script>
+---
 
-</body>
-</html>
+<section class="proj-section">
+  <h2 class="proj-h2"><span>Abstract</span></h2>
+  <div class="proj-text">
+    <p>3D point cloud models suffer significant performance degradation under distribution shifts caused by sensor noise, occlusions, and environmental changes. Test-time adaptation (TTA) has emerged as a practical paradigm for mitigating this issue during inference. Recently, leveraging multi-view augmentation has shown promise in improving 3D TTA performance. However, existing multi-view approaches are often constrained by sequential optimization that treats each view independently. This sequential optimization leads to substantial inference latency due to repetitive optimization steps, making real-time adaptation impractical.</p>
+    <p>To address this, we propose <b>Masked Multi-View Test-Time Adaptation (MAMVI)</b>, which replaces sequential optimization with a unified single-step adaptation. Specifically, MAMVI utilizes a hybrid masking strategy that combines fixed ratios for stability with Beta-distributed sampling for diversity. By aggregating losses across multiple views, MAMVI performs adaptation through a single backward pass based on multi-view consensus. Additionally, a confidence-based adaptive learning rate is used to dynamically adjust the adaptation intensity for each sample. Extensive experiments on ModelNet-40C, ShapeNet-C, and ScanObjectNN-C demonstrate that MAMVI achieves state-of-the-art accuracy on ShapeNet-C and ScanObjectNN-C. Moreover, it remains competitive on ModelNet-40C while delivering <b>4.9–8.9 times faster inference</b>, making it highly suitable for real-time applications.</p>
+  </div>
+</section>
+
+<section class="proj-section">
+  <h2 class="proj-h2"><span>Key Highlights</span></h2>
+  <div class="stat-row">
+    <div class="stat"><b>4.9–8.9×</b><span>Faster inference than SVWA</span></div>
+    <div class="stat"><b>SOTA</b><span>ShapeNet-C &amp; ScanObjectNN-C</span></div>
+    <div class="stat"><b>1-Step</b><span>Multi-view consensus backward pass</span></div>
+  </div>
+  <div class="highlight-grid">
+    <div class="highlight">
+      <h3>Unified Single-Step Adaptation</h3>
+      <p>Prior multi-view 3D TTA methods repeatedly optimize parameters view-by-view, causing severe latency. MAMVI unifies multi-view predictions and optimizes through a single backward pass based on consensus across views.</p>
+    </div>
+    <div class="highlight">
+      <h3>Hybrid Masking Strategy</h3>
+      <p>Fixed masking ratios preserve canonical geometric structures for stable consensus, while Beta-distributed stochastic sampling injects geometric diversity to prevent collapse under severe corruptions.</p>
+    </div>
+    <div class="highlight">
+      <h3>Confidence-Based Adaptive Learning Rate</h3>
+      <p>MAMVI scales the step size for each sample according to the model's prediction confidence, preventing error accumulation on ambiguous and out-of-distribution point clouds.</p>
+    </div>
+  </div>
+</section>
+
+<section class="proj-section">
+  <h2 class="proj-h2"><span>Main Results</span></h2>
+  <h3 class="proj-h3">Mean accuracy under 15 corruption types</h3>
+  <div class="table-wrap">
+    <table class="results-table">
+      <thead><tr><th>Method</th><th>ModelNet-40C</th><th>ShapeNet-C</th><th>ScanObjectNN-C</th></tr></thead>
+      <tbody>
+        <tr><td>Source Only</td><td>54.13</td><td>61.35</td><td>36.96</td></tr>
+        <tr><td>TENT</td><td>63.65</td><td>61.01</td><td>45.97</td></tr>
+        <tr><td>SAR</td><td>64.12</td><td>61.46</td><td>47.26</td></tr>
+        <tr><td>MEMO</td><td>68.18</td><td>64.30</td><td>–</td></tr>
+        <tr><td>PG-SF</td><td>68.68</td><td>64.40</td><td class="second">47.54</td></tr>
+        <tr><td>SVWA</td><td class="best">75.04</td><td class="second">65.74</td><td>47.45</td></tr>
+        <tr class="is-ours"><td>MAMVI (Ours)</td><td class="second">74.80</td><td class="best">66.77</td><td class="best">49.76</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">Top-1 accuracy (%) averaged over 15 corruption types, compared with source-free TTA methods on a Point-MAE backbone. <span class="best">Best</span> and <span class="second">second best</span> are marked. Per-corruption results are in the paper.</p>
+
+  <div class="two-col">
+    <div>
+      <h3 class="proj-h3">Inference throughput (FPS)</h3>
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead><tr><th>Method</th><th>MN-40C</th><th>SN-C</th><th>SO-C</th></tr></thead>
+          <tbody>
+            <tr><td>SVWA</td><td>8.99</td><td>8.63</td><td>9.03</td></tr>
+            <tr class="is-ours"><td>MAMVI</td><td>77.10</td><td>76.64</td><td>44.50</td></tr>
+            <tr><td>Speedup</td><td class="best">8.6×</td><td class="best">8.9×</td><td class="best">4.9×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption">Compared with the multi-view method SVWA, MAMVI gives similar or better accuracy at 4.9–8.9× the throughput.</p>
+    </div>
+    <div>
+      <h3 class="proj-h3">Adaptive learning rate</h3>
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead><tr><th>Setting</th><th>MN-40C</th><th>SN-C</th><th>SO-C</th></tr></thead>
+          <tbody>
+            <tr><td>No ALR</td><td>73.86</td><td>65.63</td><td>49.33</td></tr>
+            <tr class="is-ours"><td>With ALR</td><td>74.80</td><td>66.77</td><td>49.76</td></tr>
+            <tr><td>Gain</td><td class="best">+0.94</td><td class="best">+1.14</td><td class="best">+0.43</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption">Confidence-based ALR improves accuracy on all three benchmarks.</p>
+    </div>
+  </div>
+</section>

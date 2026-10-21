@@ -1,0 +1,35 @@
+---
+layout: default
+title: Blog
+lang: ko
+description: 공부한 내용과 F1 레이스 리뷰를 기록하는 블로그
+---
+<section class="page-hero">
+  <div class="hero-bg" aria-hidden="true"><div class="hero-grid"></div><div class="hero-slash"></div></div>
+  <div class="container" style="position: relative;">
+    <span class="eyebrow"><span class="live-dot"></span>Pit Wall Radio</span>
+    <h1>The <span>Blog</span></h1>
+    <p>공부한 내용과 F1 레이스 리뷰를 기록합니다.</p>
+  </div>
+</section>
+
+<section class="blog-list">
+  <div class="container">
+    <div class="session-tabs" role="tablist" aria-label="Filter posts">
+      <button type="button" class="session-tab is-active" data-filter="all">All</button>
+      {%- for c in site.data.categories %}
+      <button type="button" class="session-tab" data-filter="{{ c.key }}">{{ c.label }}</button>
+      {%- endfor %}
+    </div>
+
+    {%- if site.posts.size > 0 %}
+    <div class="post-grid">
+      {%- for post in site.posts %}
+      {% include post-card.html post=post %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty">아직 글이 없습니다.</p>
+    {%- endif %}
+  </div>
+</section>
