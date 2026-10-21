@@ -1,5 +1,5 @@
 /* =========================================================
-   Inseok Kong — #33 theme
+   Inseok Kong — Max Verstappen #3 theme
    Team colors: navy / red / yellow. Dark is the default.
    ========================================================= */
 
@@ -469,9 +469,9 @@ img { max-width: 100%; display: block; }
   transition: transform 0.15s, border-color 0.15s;
 }
 .post-card:hover { text-decoration: none; transform: translateY(-3px); border-color: var(--line-strong); }
-.post-card.cat-race-review { border-top-color: var(--red); }
+.post-card.cat-race { border-top-color: var(--red); }
 .post-card.cat-study { border-top-color: var(--blue); }
-.post-card.cat-log { border-top-color: var(--yellow); }
+.post-card.cat-gallery { border-top-color: var(--yellow); }
 .post-card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .post-cat {
   font-family: "JetBrains Mono", monospace;
@@ -511,7 +511,7 @@ img { max-width: 100%; display: block; }
 .post-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; color: var(--muted); font-size: 14px; position: relative; }
 .post-meta .post-cat { padding: 2px 8px; border-radius: 4px; background: var(--red); color: #fff; }
 .post-meta .cat-study { background: var(--blue); }
-.post-meta .cat-log { background: var(--yellow); color: #0b1430; }
+.post-meta .cat-gallery { background: var(--yellow); color: #0b1430; }
 .post-header h1 { position: relative; margin: 14px 0 0; font-size: clamp(30px, 5vw, 44px); line-height: 1.25; font-weight: 700; }
 .post-header .post-desc { position: relative; margin: 10px 0 0; color: var(--text-2); font-size: 18px; }
 
@@ -626,4 +626,9 @@ img { max-width: 100%; display: block; }
   * { transition: none !important; }
 }
 
-.write-link { font-size: 14px; font-weight: 600; margin-left: 6px; }
+
+/* Gallery: cover image on cards, and consecutive images in a post form a grid */
+.post-card-img { margin: -20px -20px 8px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 8px 8px 0 0; background: var(--surface-2); }
+.post-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.post-body p:has(> img + img) { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.post-body p:has(> img + img) img { margin: 0; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }

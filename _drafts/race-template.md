@@ -4,7 +4,7 @@
 #   예) _posts/2026-11-02-mexico-gp-review.md
 # _drafts 폴더의 글은 사이트에 공개되지 않습니다.
 title: "그랑프리 이름 리뷰"
-category: race-review
+category: race
 description: 한 줄 요약
 gp: "Mexico City Grand Prix"
 round: 20
@@ -14,7 +14,7 @@ result: "P1"
 
 ## 레이스 요약
 
-## #33 레이스 분석
+## 막스 레이스 분석
 
 ### 스타트와 1랩
 

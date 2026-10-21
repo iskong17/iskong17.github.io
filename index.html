@@ -4,7 +4,7 @@ title: Inseok Kong
 body_class: page-home
 ---
 {%- assign pubs = site.data.publications -%}
-{%- assign reviews = site.posts | where: "category", "race-review" -%}
+{%- assign reviews = site.posts | where: "category", "race" -%}
 
 <!-- Hero -->
 <section class="hero" id="about">
@@ -185,15 +185,15 @@ body_class: page-home
 <section class="section" id="f1">
   <div class="container">
     <div class="paddock">
-      <div class="paddock-number" aria-hidden="true">33</div>
+      <div class="paddock-number" aria-hidden="true">3</div>
       <div class="paddock-text">
         <p class="paddock-kicker">Off the Track</p>
-        <h2>Max Verstappen <span>· Oracle Red Bull Racing</span></h2>
+        <h2>Max Verstappen <span>· #3 · Oracle Red Bull Racing</span></h2>
         <p>
-          The 33 on this site is a nod to the number Max carried to his first world championship in 2021.
-          I follow every race weekend and write reviews, in Korean, on the blog.
+          I follow every race weekend with Max and Oracle Red Bull Racing,
+          and write race reviews, in Korean, on the blog.
         </p>
-        <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}#race-review">Race reviews {% include icon.html name="arrow" %}</a>
+        <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}#race">Race reviews {% include icon.html name="arrow" %}</a>
       </div>
       {%- if reviews.size > 0 %}
       <ul class="paddock-list">
@@ -207,20 +207,18 @@ body_class: page-home
 </section>
 
 <!-- Blog -->
+{%- if site.posts.size > 0 %}
 <section class="section">
   <div class="container">
     <div class="section-head-row">
       {% include section-head.html title="Latest Posts" %}
       <a class="more-link" href="{{ '/blog/' | relative_url }}">All posts {% include icon.html name="arrow" %}</a>
     </div>
-    {%- if site.posts.size > 0 %}
     <div class="post-grid">
       {%- for post in site.posts limit: 3 %}
       {% include post-card.html post=post %}
       {%- endfor %}
     </div>
-    {%- else %}
-    <p class="empty">No posts yet.</p>
-    {%- endif %}
   </div>
 </section>
+{%- endif %}

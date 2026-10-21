@@ -9,7 +9,7 @@ layout: default
     <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
     <div class="container">
       <div class="post-meta">
-        <span class="post-cat cat-{{ page.category | default: 'log' }}">{{ cat.label | default: page.category }}</span>
+        <span class="post-cat cat-{{ page.category | default: 'study' }}">{{ cat.label | default: page.category }}</span>
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
         <span>· {{ minutes }}분 읽기</span>
       </div>
@@ -21,7 +21,7 @@ layout: default
         <div><dt>Grand Prix</dt><dd>{{ page.gp }}</dd></div>
         {%- if page.round %}<div><dt>Round</dt><dd>{{ page.round }}</dd></div>{% endif %}
         {%- if page.circuit %}<div><dt>Circuit</dt><dd>{{ page.circuit }}</dd></div>{% endif %}
-        {%- if page.result %}<div><dt>#33 Result</dt><dd>{{ page.result }}</dd></div>{% endif %}
+        {%- if page.result %}<div><dt>Max Result</dt><dd>{{ page.result }}</dd></div>{% endif %}
       </dl>
       {%- endif %}
     </div>
