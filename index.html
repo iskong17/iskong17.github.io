@@ -118,10 +118,10 @@ body_class: page-home
   </div>
 </section>
 
-<!-- Experience -->
+<!-- Background -->
 <section class="section" id="career">
   <div class="container">
-    {% include section-head.html title="Experience" %}
+    {% include section-head.html title="Background" %}
     <div class="career-grid">
       <div>
         <h3 class="sub-head">Research</h3>
@@ -135,8 +135,7 @@ body_class: page-home
           </li>
           {%- endfor %}
         </ol>
-      </div>
-      <div>
+
         <h3 class="sub-head">Education</h3>
         <ol class="timeline">
           {%- for e in site.data.career.education %}
@@ -148,19 +147,20 @@ body_class: page-home
           </li>
           {%- endfor %}
         </ol>
-
+      </div>
+      <div>
         <h3 class="sub-head">Honors &amp; Awards</h3>
         <ol class="awards">
           {%- for a in site.data.career.awards %}
           <li>
             {%- if a.cert %}
-            <button type="button" class="award-cert" data-lightbox="{{ a.cert | relative_url }}" aria-label="View certificate: {{ a.title }}">
+            <button type="button" class="award-cert" data-lightbox="{{ a.cert | relative_url }}" aria-label="View certificate: {{ a.title }} ({{ a.by }})">
               <img src="{{ a.cert | relative_url }}" alt="" loading="lazy">
             </button>
             {%- else %}
             <span class="award-icon">{% include icon.html name="trophy" %}</span>
             {%- endif %}
-            <div><b>{{ a.title }}</b><span>{{ a.event }}</span></div>
+            <div><b>{{ a.title }} <em>({{ a.by }})</em></b><span>{{ a.event }}</span></div>
             <time>{{ a.date }}</time>
           </li>
           {%- endfor %}
@@ -192,8 +192,15 @@ body_class: page-home
         <h3>{{ pr.name }}</h3>
         <p class="project-sub">{{ pr.sub }}</p>
         <p>{{ pr.text }}</p>
-        {%- if pr.cert %}
-        <button type="button" class="text-link" data-lightbox="{{ pr.cert | relative_url }}">Certificate</button>
+        {%- if pr.cert or pr.links %}
+        <div class="project-links">
+          {%- if pr.cert %}
+          <button type="button" class="text-link" data-lightbox="{{ pr.cert | relative_url }}">Certificate</button>
+          {%- endif %}
+          {%- for l in pr.links %}
+          <a class="text-link{% if l.note %} is-inactive{% endif %}" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}{% if l.note %} <small>({{ l.note }})</small>{% endif %}</a>
+          {%- endfor %}
+        </div>
         {%- endif %}
       </article>
       {%- endfor %}

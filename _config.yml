@@ -46,6 +46,7 @@ defaults:
       math: true
 
 exclude:
+  - scripts
   - cv.tex
   - "*.tex"
   - README.md

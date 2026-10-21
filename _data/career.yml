@@ -46,11 +46,15 @@ projects:
     sub: "Capstone Design Project & Seoul Big Data Campus"
     period: "Oct. 2025 – Jan. 2026"
     text: "Developed route optimization algorithms using mobility big data to support autonomous shuttle services for elderly citizens in Seoul."
+    links:
+      - { label: "News (Yonhap)", url: "https://www.yna.co.kr/view/AKR20251101037800004" }
 
   - name: "Sportier"
     sub: "UOS Entrepreneurship Club · Lead Developer & President"
     period: "Mar. 2025 – Jul. 2025"
     text: "Developed a sports matchmaking web application using React.js with location-based matching and competitive tier rankings."
+    links:
+      - { label: "Website", url: "https://sport-tier-app.web.app/", note: "no longer in service" }
 
   - name: "Football Big Data Analytics"
     sub: "Football Big Data Camp"
@@ -58,15 +62,44 @@ projects:
     text: "Investigated practical applications of LLMs and RAG in football performance analytics."
     cert: /images/awards/football-bigdata-camp-2025.jpg
 
-# Newest first. `cert` is an optional certificate image shown in a lightbox.
+# Newest first. `by` is the awarding body (title, not the person's name).
+# `cert` is an optional certificate image shown in a lightbox.
 awards:
-  - { title: "Creativity Award", event: "K-DATA Science Conference & Hackathon", date: "Sep. 2026", cert: /images/awards/kds-creativity-2026.jpg }
-  - { title: "Excellence Award", event: "Seoul RISE AI Competition (Project: SATOR)", date: "Jun. 2026", cert: /images/awards/rise-excellence-2026.jpg }
-  - { title: "Academic Award (University President's Award)", event: "University of Seoul · 2025 Seoul Big Data Campus Competition Grand Prize", date: "May 2026", cert: /images/awards/uos-academic-award-2026.jpg }
-  - { title: "Excellence Award", event: "UOS Capstone Design Project", date: "Jan. 2026", cert: /images/awards/capstone-excellence-2026.jpg }
-  - { title: "Grand Prize (Seoul Mayor Award)", event: "Seoul Metropolitan Big Data Campus Competition", date: "Oct. 2025", cert: /images/awards/seoul-bigdata-grand-prize-2025.jpg }
-  - { title: "Encouragement Award", event: "AICOSS Industry-Academia Hackathon", date: "Aug. 2025", cert: /images/awards/aicoss-hackathon-encouragement-2025.jpg }
-  - { title: "Dean's Award of College of Engineering", event: "AICOSS Deep Learning Bootcamp", date: "Jan. 2025", cert: /images/awards/aicoss-dean-award-2025.jpg }
+  - title: "Creativity Award"
+    by: "K-DS Conference Organizing Committee"
+    event: "2026 K-DATA Science Conference & Hackathon"
+    date: "Sep. 2026"
+    cert: /images/awards/kds-creativity-2026.jpg
+  - title: "Excellence Award"
+    by: "Dean of the College of Urban Science, UOS"
+    event: "Seoul RISE · 1st Urban Science AI Competition & Expo (Project: SATOR)"
+    date: "Jun. 2026"
+    cert: /images/awards/rise-excellence-2026.jpg
+  - title: "Academic Award"
+    by: "UOS President"
+    event: "2025 Seoul Big Data Campus Competition, Grand Prize"
+    date: "May 2026"
+    cert: /images/awards/uos-academic-award-2026.jpg
+  - title: "Excellence Award"
+    by: "Director of the Engineering Education Innovation Center, UOS"
+    event: "UOS Capstone Design Project (Team GeoPath)"
+    date: "Jan. 2026"
+    cert: /images/awards/capstone-excellence-2026.jpg
+  - title: "Grand Prize"
+    by: "Seoul City Mayor"
+    event: "2025 Seoul Metropolitan Big Data Campus Competition (Team GeoPath)"
+    date: "Oct. 2025"
+    cert: /images/awards/seoul-bigdata-grand-prize-2025.jpg
+  - title: "Encouragement Award"
+    by: "AI Innovation Convergence University Project Group"
+    event: "AICOSS AI Convergence Industry-Academia Hackathon"
+    date: "Aug. 2025"
+    cert: /images/awards/aicoss-hackathon-encouragement-2025.jpg
+  - title: "Dean's Award"
+    by: "Dean of the College of Engineering, UOS"
+    event: "AICOSS Deep Learning Winter Bootcamp"
+    date: "Jan. 2025"
+    cert: /images/awards/aicoss-dean-award-2025.jpg
 
 certifications:
   - { title: "ADsP (Advanced Data Analytics Semi-Professional)", issuer: "Korea Data Agency", date: "Nov. 2024" }

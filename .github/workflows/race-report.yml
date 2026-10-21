@@ -1,0 +1,64 @@
+name: Race report
+
+# Publishes a Korean race report to the blog's Race category after each Grand Prix.
+# Runs a few times after the usual Sunday race slot; the script skips races that
+# already have a post, so repeated runs are harmless.
+on:
+  schedule:
+    - cron: "0 22 * * 0"  # Sun 22:00 UTC (Mon 07:00 KST)
+    - cron: "0 10 * * 1"  # Mon 10:00 UTC
+    - cron: "0 22 * * 1"  # Mon 22:00 UTC, in case results were late
+  workflow_dispatch:
+    inputs:
+      round:
+        description: "Round number to (re)generate. Leave empty for the latest race."
+        required: false
+      force:
+        description: "Overwrite an existing report"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: race-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate report
+        env:
+          ROUND: ${{ inputs.round }}
+          FORCE: ${{ inputs.force && '--force' || '' }}
+        run: |
+          if [ -n "$ROUND" ]; then
+            python3 scripts/race_report.py --season current --round "$ROUND" $FORCE
+          else
+            python3 scripts/race_report.py --latest $FORCE
+          fi
+
+      - name: Commit and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain _posts)" ]; then
+            echo "No new report."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _posts
+          git commit -m "Blog: race report $(git diff --cached --name-only | head -1 | xargs basename)"
+          git push
+          # Pushes made with GITHUB_TOKEN may not start a Pages build, so request one.
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

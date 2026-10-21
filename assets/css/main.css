@@ -411,7 +411,7 @@ img { max-width: 100%; display: block; }
 .project-period { font-size: 13px; color: var(--muted); }
 .project-card h3 { margin: 2px 0 0; font-size: 17px; line-height: 1.3; }
 .project-sub { margin: 2px 0 8px; font-size: 14px; color: var(--text-2); font-weight: 600; }
-.project-card p:last-child { margin: 0; color: var(--text-2); font-size: 15px; }
+.project-card p:not(.project-sub) { margin: 0; color: var(--text-2); font-size: 15px; }
 
 /* Off the track (F1) */
 .paddock {
@@ -703,3 +703,17 @@ img { max-width: 100%; display: block; }
   .f1-cards { grid-template-columns: 1fr; }
 }
 
+
+/* Auto-generated race reports */
+.race-chart { margin: 1.5em 0; padding: 16px 12px 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.race-chart svg { display: block; width: 100%; height: auto; font-family: "JetBrains Mono", monospace; }
+.race-chart figcaption { margin-top: 6px; font-size: 13px; color: var(--muted); text-align: center; }
+.auto-note { margin-top: 2.5em !important; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+.awards b em { font-style: normal; font-weight: 400; color: var(--text-2); }
+.project-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; }
+.project-links .text-link { margin-top: 0; cursor: pointer; }
+a.text-link { text-decoration: none; }
+a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.text-link.is-inactive { color: var(--muted); }
+.text-link small { font-weight: 400; font-size: 12px; }

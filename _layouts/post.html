@@ -29,6 +29,9 @@ layout: default
 
   <div class="post-body">
     {{ content }}
+    {%- if page.auto %}
+    <p class="auto-note">이 글은 <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a> 데이터로 자동 생성된 레이스 리포트입니다.</p>
+    {%- endif %}
   </div>
 
   <nav class="post-nav" aria-label="More posts">
