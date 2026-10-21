@@ -50,7 +50,7 @@ jobs:
       - name: Refresh driver and circuit pages
         if: ${{ !inputs.round }}
         run: |
-          if [ -z "$(git status --porcelain _posts _circuits _drivers)" ]; then
+          if [ -z "$(git status --porcelain _posts)" ]; then
             echo "No new race, pages unchanged."
             exit 0
           fi
