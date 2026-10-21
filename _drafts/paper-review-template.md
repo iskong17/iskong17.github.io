@@ -5,6 +5,8 @@
 # 수식: 인라인은 $$ ... $$ (문장 안), 블록은 빈 줄로 감싼 $$ ... $$ 를 쓰면 됩니다.
 title: "Tent: Fully Test-Time Adaptation by Entropy Minimization"
 category: paper-review
+# topic: cv | mllm | ml
+topic: cv
 description: 한 줄 요약
 paper:
   title: "Tent: Fully Test-Time Adaptation by Entropy Minimization"
