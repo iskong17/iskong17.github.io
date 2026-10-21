@@ -180,6 +180,13 @@ def driver_page(d, current_season):
         lists += jolpica(f"{season}/drivers/{did}/driverStandings")["StandingsTable"]["StandingsLists"]
     lists = sorted(lists, key=lambda s: int(s["season"]))
     current = next((s for s in lists if s["season"] == current_season), None)
+    if not current:
+        # Reserve drivers who only ran in practice have no standings this season.
+        stale = DRIVERS / f"{did}.md"
+        if stale.exists():
+            stale.unlink()
+        print(f"skip {did}: not classified this season", flush=True)
+        return
     team = current["DriverStandings"][0]["Constructors"][-1] if current else None
 
     lines = [

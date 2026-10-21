@@ -190,6 +190,8 @@ def main():
         did = path.stem
         if only and did not in only:
             continue
+        if "\ncurrent:\n" not in path.read_text(encoding="utf-8"):
+            continue  # practice-only reserve drivers are not listed on the site
         fm = front_matter(path)
         wiki = fm.get("wiki", "")
         if "wikipedia.org/wiki/" not in wiki:
