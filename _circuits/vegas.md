@@ -20,4 +20,8 @@ recent_winners:
   - { season: 2025, driver: "Max Verstappen", team: "Red Bull" }
   - { season: 2024, driver: "George Russell", team: "Mercedes" }
   - { season: 2023, driver: "Max Verstappen", team: "Red Bull" }
+lat: 36.1147
+lng: -115.173
+calendar_round: 21
+track_viewbox: "68.3 -6.1 263.4 412.2"
 ---

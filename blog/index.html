@@ -36,13 +36,36 @@ description: Notes from study, photos from conferences and travel, and Formula 1
             <span class="cat-bar-count"><b>{{ posts.size }}</b> {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
             {% include icon.html name="arrow" %}
           </button>
-          {%- if posts.size > 0 %}
-          <div class="cat-bar-posts">
-            {%- for post in posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
+          <div class="cat-bar-subs">
+            {%- if c.key == 'race' %}
+            {%- assign seasons_list = race_posts | group_by: "season" -%}
+            <button type="button" class="sub-square" data-goto="race/seasons">
+              <span class="sub-square-kicker">{{ race_posts.size }} reports</span>
+              <b>Seasons</b>
+              <span class="sub-square-desc">{{ seasons_list.last.name }}–{{ seasons_list.first.name }} race reports</span>
+            </button>
+            <button type="button" class="sub-square" data-goto="race/circuits">
+              <span class="sub-square-kicker">{{ site.circuits.size }} circuits</span>
+              <b>Circuits</b>
+              <span class="sub-square-desc">World map and the {{ current_season }} calendar</span>
+            </button>
+            {%- assign racing = 0 -%}{%- for d in site.drivers %}{% if d.current.position %}{% assign racing = racing | plus: 1 %}{% endif %}{% endfor -%}
+            <button type="button" class="sub-square" data-goto="race/drivers">
+              <span class="sub-square-kicker">{{ racing }} drivers</span>
+              <b>Drivers</b>
+              <span class="sub-square-desc">Profiles, every season, teams</span>
+            </button>
+            {%- else %}
+            {%- for tp in c.topics %}
+            {%- assign tposts = posts | where: "topic", tp.key -%}
+            <button type="button" class="sub-square" data-goto="{{ c.key }}/{{ tp.key }}">
+              <span class="sub-square-kicker">{{ tposts.size }} {% if tposts.size == 1 %}post{% else %}posts{% endif %}</span>
+              <b>{{ tp.label }}</b>
+              {%- if tposts.size > 0 %}<span class="sub-square-desc">Latest: {{ tposts.first.title | truncate: 40 }}</span>{% endif %}
+            </button>
+            {%- endfor %}
+            {%- endif %}
           </div>
-          {%- else %}
-          <p class="cat-bar-empty">No posts yet.</p>
-          {%- endif %}
         </div>
         {%- endfor %}
       </div>

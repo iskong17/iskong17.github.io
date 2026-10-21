@@ -18,4 +18,8 @@ most_wins:
     - "Andrea Kimi Antonelli"
 recent_winners:
   - { season: 2026, driver: "Andrea Kimi Antonelli", team: "Mercedes" }
+lat: 40.46528
+lng: -3.61528
+calendar_round: 14
+track_viewbox: "64.4 -6.1 271.2 412.2"
 ---

@@ -23,4 +23,8 @@ recent_winners:
   - { season: 2024, driver: "Oscar Piastri", team: "McLaren" }
   - { season: 2023, driver: "Sergio Pérez", team: "Red Bull" }
   - { season: 2022, driver: "Max Verstappen", team: "Red Bull" }
+lat: 40.3725
+lng: 49.8533
+calendar_round: 15
+track_viewbox: "-6.1 45.7 412.2 308.6"
 ---

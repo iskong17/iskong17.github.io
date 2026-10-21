@@ -989,3 +989,33 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
   .driver-profile { grid-template-columns: 1fr; }
   .driver-photo { max-width: 240px; }
 }
+
+/* All tab: sub-section squares inside each category bar */
+.cat-bar-subs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 0 20px 20px; }
+.sub-square {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.sub-square::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--blue); }
+.cat-bar-gallery .sub-square::before { background: var(--yellow); }
+.cat-bar-race .sub-square::before { background: var(--red); }
+.sub-square:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+.sub-square b { margin-top: auto; font-size: 18px; line-height: 1.25; }
+.sub-square-kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.5px; color: var(--muted); }
+.sub-square-desc { font-size: 12px; color: var(--text-2); line-height: 1.4; }
+.sq-round-wrap { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.sq-round { padding: 1px 7px; border-radius: 4px; background: var(--red); color: #fff; font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; }
+

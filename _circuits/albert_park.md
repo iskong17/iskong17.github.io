@@ -25,4 +25,5 @@ recent_winners:
 lat: -37.8497
 lng: 144.968
 track_viewbox: "22.4 -6.1 355.2 412.2"
+calendar_round: 1
 ---

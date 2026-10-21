@@ -22,4 +22,8 @@ recent_winners:
   - { season: 2024, driver: "Lando Norris", team: "McLaren" }
   - { season: 2023, driver: "Max Verstappen", team: "Red Bull" }
   - { season: 2022, driver: "Max Verstappen", team: "Red Bull" }
+lat: 52.3888
+lng: 4.54092
+calendar_round: 12
+track_viewbox: "-6.1 20.6 412.2 358.8"
 ---

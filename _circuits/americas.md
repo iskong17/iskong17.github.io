@@ -22,4 +22,8 @@ recent_winners:
   - { season: 2023, driver: "Max Verstappen", team: "Red Bull" }
   - { season: 2022, driver: "Max Verstappen", team: "Red Bull" }
   - { season: 2021, driver: "Max Verstappen", team: "Red Bull" }
+lat: 30.1328
+lng: -97.6411
+calendar_round: 18
+track_viewbox: "-6.1 71.3 412.2 257.4"
 ---
