@@ -36,6 +36,130 @@ antonelli:
     source: "https://commons.wikimedia.org/wiki/File:Kimi_Antonelli_at_the_2025_US_Grand_Prix_in_Austin,_TX_(cropped).jpg"
   style_heading: "Summary"
   style: "Andrea Kimi Antonelli is an Italian racing driver who competes in Formula One for Mercedes. Antonelli has won eight Formula One Grands Prix since his debut in 2025."
+arvid_lindblad:
+  wiki_title: "Arvid Lindblad"
+  born: "2007-08-08"
+  birthplace: "London, Roman Empire"
+  photo:
+    src: "/images/drivers/arvid_lindblad.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Arvid_Lindblad_at_the_Red_Bull_Fan_Zone_%E2%80%93_Crown_Riverwalk,_Melbourne_(028A7869)_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Arvid Anand Olof Lindblad is a British and Swedish racing driver who competes in Formula One for Racing Bulls under a British flag."
+bearman:
+  wiki_title: "Oliver Bearman"
+  born: "2005-05-08"
+  birthplace: "Chelmsford, United Kingdom"
+  height_cm: 184
+  photo:
+    src: "/images/drivers/bearman.jpg"
+    author: "Liauzh"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:2025_Japan_GP_-_Haas_-_Oliver_Bearman_-_Thursday_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Oliver James Bearman is a British racing driver who competes in Formula One for Haas."
+bortoleto:
+  wiki_title: "Gabriel Bortoleto"
+  born: "2004-10-14"
+  height_cm: 184
+  photo:
+    src: "/images/drivers/bortoleto.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Gabriel_Bortoleto_at_the_Melbourne_Walk_during_the_2026_Australian_Grand_Prix_(028A8581)_cropped.jpg"
+  style_heading: "Summary"
+  style: "Gabriel Lourenzo \"Gabi\" Bortoleto Oliveira is a Brazilian racing driver who competes in Formula One for Audi."
+bottas:
+  wiki_title: "Valtteri Bottas"
+  born: "1989-08-28"
+  birthplace: "Nastola, Finland"
+  height_cm: 173
+  photo:
+    src: "/images/drivers/bottas.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Valtteri_Bottas_at_the_2026_Adelaide_Motorsport_Festival_(028A7556).jpg"
+  style_heading: "Summary"
+  style: "Valtteri Viktor Bottas is a Finnish racing driver who competes in Formula One for Cadillac. Bottas has twice finished runner-up in the World Drivers' Championship in 2019 and 2020 with Mercedes, and has won 10 Grands Prix across 13 seasons."
+colapinto:
+  wiki_title: "Franco Colapinto"
+  born: "2003-05-27"
+  birthplace: "Pilar, Argentina"
+  photo:
+    src: "/images/drivers/colapinto.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Franco_Colapinto_at_the_Melbourne_Walk_during_the_2026_Australian_Grand_Prix_(028A8698)_cropped.jpg"
+  style_heading: "Summary"
+  style: "Franco Alejandro Colapinto is an Argentine racing driver who competes in Formula One for Alpine."
+gasly:
+  wiki_title: "Pierre Gasly"
+  born: "1996-02-07"
+  birthplace: "Rouen, France"
+  height_cm: 177
+  photo:
+    src: "/images/drivers/gasly.jpg"
+    author: "Morio"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Pierre_Gasly_2017_Malaysia.jpg"
+  style_heading: "Summary"
+  style: "Pierre Jean-Jacques Gasly is a French racing driver who competes in Formula One for Alpine. Gasly won the 2020 Italian Grand Prix with AlphaTauri."
+hadjar:
+  wiki_title: "Isack Hadjar"
+  born: "2004-09-28"
+  birthplace: "Paris, France"
+  height_cm: 167
+  photo:
+    src: "/images/drivers/hadjar.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Isack_Hadjar_at_the_Melbourne_Walk_during_the_2026_Australian_Grand_Prix_(028A8753)_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Isack Alexandre Hadjar is a French and Algerian racing driver who competes under the French flag in Formula One for Red Bull Racing."
+hamilton:
+  wiki_title: "Lewis Hamilton"
+  born: "1985-01-07"
+  birthplace: "Stevenage, United Kingdom"
+  height_cm: 174
+  style_heading: "Driver profile"
+  style: "Hamilton is regarded as one of the most complete drivers on the grid, excelling across a wide range of areas. He has been described as having an aggressive driving style, with a natural aptitude for identifying the limits of the car. Mark Hughes, writing for the official Formula One website, described how Hamilton is \"super-hard on the brakes ... but has a fantastic ability to match how quickly the downforce is bleeding off with his modulation of the pressure so that there's no wasted grip but no locked wheels either.\" Paddy Lowe, previously the engineering director for McLaren, described how Hamilton is comfortable with levels of rear instability that most other drivers would find intolerable."
+hulkenberg:
+  wiki_title: "Nico Hülkenberg"
+  born: "1987-08-19"
+  birthplace: "Emmerich am Rhein, Germany"
+  height_cm: 184
+  photo:
+    src: "/images/drivers/hulkenberg.jpg"
+    author: "Marc Alvarado"
+    license: "CC BY-SA 2.0"
+    source: "https://commons.wikimedia.org/wiki/File:2019_Formula_One_tests_Barcelona,_Hulkenberg_(40287128313).jpg"
+  style_heading: "Summary"
+  style: "Nicolas Hülkenberg is a German racing driver who competes in Formula One for Audi. In endurance racing, Hülkenberg won the 24 Hours of Le Mans in 2015 with Porsche."
+lawson:
+  wiki_title: "Liam Lawson"
+  born: "2002-02-11"
+  birthplace: "Hastings, New Zealand"
+  height_cm: 174
+  photo:
+    src: "/images/drivers/lawson.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Liam_Lawson_at_the_Red_Bull_Fan_Zone_%E2%80%93_Crown_Riverwalk,_Melbourne_(028A7795).jpg"
+  style_heading: "Summary"
+  style: "Liam Jared Lawson is a New Zealand racing driver who competes in Formula One for Racing Bulls."
+leclerc:
+  wiki_title: "Charles Leclerc"
+  born: "1997-10-16"
+  birthplace: "Monte Carlo, Monaco"
+  height_cm: 179
+  photo:
+    src: "/images/drivers/leclerc.jpg"
+    author: "Gabriel Hutchinson"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Charles_Leclerc_at_the_2026_Cannes_Film_Festival_(cropped).jpg"
+  style_heading: "Driver profile"
+  style: "Leclerc has a strong qualifying history in Formula One, where he holds the record for most pole positions without a World Drivers' Championship (27) and the eleventh-most in history. He also holds the record in either FIA Formula 2 or its predecessor GP2 for the most pole positions in a season (8). His driving style tends to favour a car with oversteer, allowing for precise micro-corrections and high cornering speeds, which has aided his qualifying pace. He became the youngest recipient of the FIA Pole Trophy in 2019 for achieving the most pole positions, a feat he repeated in 2022. Critics have noted his ability to outperform his machinery in qualifying conditions, which has frequently led to his one-lap pace relatively surpassing his race pace and contributed to a pole–win conversion rate of 18.5%."
 max_verstappen:
   wiki_title: "Max Verstappen"
   born: "1997-09-30"
@@ -48,3 +172,51 @@ max_verstappen:
     source: "https://commons.wikimedia.org/wiki/File:2024-08-25_Motorsport,_Formel_1,_Gro%C3%9Fer_Preis_der_Niederlande_2024_STP_3973_by_Stepro_(medium_crop).jpg"
   style_heading: "Driver profile"
   style: "Following Verstappen's maiden pole position at the 2019 Hungarian Grand Prix, former Formula One World Champion Nico Rosberg described him as the fastest driver in Formula One. Rosberg elucidated that Verstappen did not have the fastest car during the qualifying session in Hungary, emphasising that it was Verstappen's raw speed that allowed him to secure pole position: \"Mercedes still had the fastest car, and it's just Verstappen with his driving that put it up there in pole.\""
+norris:
+  wiki_title: "Lando Norris"
+  born: "1999-11-13"
+  birthplace: "Bristol, United Kingdom"
+  height_cm: 170
+  photo:
+    src: "/images/drivers/norris.jpg"
+    author: "Original:  Steffen Prößdorf; Derivative work:  Mb2437"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:2024-08-25_Motorsport,_Formel_1,_Gro%C3%9Fer_Preis_der_Niederlande_2024_STP_3968_by_Stepro_(cropped2).jpg"
+  style_heading: "Summary"
+  style: "Lando Norris is a British racing driver who competes in Formula One for McLaren. Norris won the Formula One World Drivers' Championship in 2025 with McLaren, and has won 13 Grands Prix across eight seasons."
+ocon:
+  wiki_title: "Esteban Ocon"
+  born: "1996-09-17"
+  birthplace: "Évreux, France"
+  height_cm: 186
+  photo:
+    src: "/images/drivers/ocon.jpg"
+    author: "Rrtb505050"
+    license: "CC0"
+    source: "https://commons.wikimedia.org/wiki/File:Esteban_Ocon_2024_Suzuka_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Esteban José Jean-Pierre Ocon-Khelfane is a French racing driver who competes in Formula One for Haas. Ocon won the 2021 Hungarian Grand Prix with Alpine."
+perez:
+  wiki_title: "Sergio Pérez"
+  born: "1990-01-26"
+  birthplace: "Guadalajara, Mexico"
+  height_cm: 173
+  photo:
+    src: "/images/drivers/perez.jpg"
+    author: "XaviYuahanda"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Sergio_P%C3%A9rez_2019_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Sergio Michel \"Checo\" Pérez Mendoza is a Mexican racing driver who competes in Formula One for Cadillac. Pérez was runner-up in the Formula One World Drivers' Championship in 2023 with Red Bull, and has won six Grands Prix across 15 seasons."
+piastri:
+  wiki_title: "Oscar Piastri"
+  born: "2001-04-06"
+  birthplace: "Melbourne, Australia"
+  height_cm: 178
+  photo:
+    src: "/images/drivers/piastri.jpg"
+    author: "Liauzh"
+    license: "CC BY 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:2026_Chinese_GP_-_Oscar_Piastri_(cropped)_(cropped).jpg"
+  style_heading: "Driver profile"
+  style: "Piastri has been noted by drivers and critics for his composure under pressure. In 2023, Scott Mitchell-Malm of The Race compared his \"relaxed intensity\" to that of Max Verstappen. Upon winning the 2024 Azerbaijan Grand Prix, Luke Smith of The New York Times stated that \"stress isn't an emotion one would associate with Piastri. His calm, collected demeanor has been present right from his junior days.\" This quality prompted several journalists to list him as a favourite for the 2025 World Drivers' Championship after the Bahrain Grand Prix, with Martin Brundle comparing him to Alain Prost. Andrew Benson of BBC Sport stated \"combining consistent speed [with] mental solidity and racing decisiveness [makes him] a formidable rival\". After winning the Saudi Arabian Grand Prix, title rival Verstappen stated \"he's very calm in his approach, and I like that."
