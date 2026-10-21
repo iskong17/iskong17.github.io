@@ -225,3 +225,51 @@ piastri:
     source: "https://commons.wikimedia.org/wiki/File:2026_Chinese_GP_-_Oscar_Piastri_(cropped)_(cropped).jpg"
   style_heading: "Driver profile"
   style: "Piastri has been noted by drivers and critics for his composure under pressure. In 2023, Scott Mitchell-Malm of The Race compared his \"relaxed intensity\" to that of Max Verstappen. Upon winning the 2024 Azerbaijan Grand Prix, Luke Smith of The New York Times stated that \"stress isn't an emotion one would associate with Piastri. His calm, collected demeanor has been present right from his junior days.\" This quality prompted several journalists to list him as a favourite for the 2025 World Drivers' Championship after the Bahrain Grand Prix, with Martin Brundle comparing him to Alain Prost. Andrew Benson of BBC Sport stated \"combining consistent speed [with] mental solidity and racing decisiveness [makes him] a formidable rival\". After winning the Saudi Arabian Grand Prix, title rival Verstappen stated \"he's very calm in his approach, and I like that."
+russell:
+  wiki_title: "George Russell (racing driver)"
+  born: "1998-02-15"
+  birthplace: "King's Lynn, United Kingdom"
+  height_cm: 185
+  photo:
+    src: "/images/drivers/russell.jpg"
+    author: "Raph_PH"
+    license: "CC BY 2.0"
+    source: "https://commons.wikimedia.org/wiki/File:KingsLeonSilverstne040724_(28_of_112)_(53838006028)_(cropped).jpg"
+  style_heading: "Driver profile"
+  style: "In general, Russell favours smooth inputs, car control, and using the entire width of the track to exit a corner. He has specifically been noted for controlling cars that are unstable when entering corners. Jolyon Palmer notes that Russell takes particularly wide exits to generate as much speed as possible, and said that Russell's precise car control allows him to survive risky turns. Russell's style takes advantage of high-grip tracks and high-downforce cars."
+sainz:
+  wiki_title: "Carlos Sainz Jr."
+  born: "1994-09-01"
+  birthplace: "Madrid, Spain"
+  height_cm: 178
+  photo:
+    src: "/images/drivers/sainz.jpg"
+    author: "LucaFazPhoto"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Carlos_Sainz_at_the_83rd_Venice_FILM_festival-9_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Carlos Sainz Vázquez de Castro, commonly known as Carlos Sainz Jr., is a Spanish racing driver who competes in Formula One for Williams. Sainz has won four Formula One Grands Prix across 12 seasons."
+stroll:
+  wiki_title: "Lance Stroll"
+  born: "1998-10-29"
+  birthplace: "Montreal, Canada"
+  height_cm: 181
+  photo:
+    src: "/images/drivers/stroll.jpg"
+    author: "Liauzh"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:2025_Japan_GP_-_Aston_Martin_-_Lance_Stroll_-_Fanzone_Stage_(cropped).jpg"
+  style_heading: "Summary"
+  style: "Lance Jacob Strulovitch, commonly known as Lance Stroll, is a Canadian racing driver who competes in Formula One for Aston Martin."
+tsunoda:
+  wiki_title: "Yuki Tsunoda"
+  born: "2000-05-11"
+  birthplace: "Sagamihara, Japan"
+  height_cm: 161
+  photo:
+    src: "/images/drivers/tsunoda.jpg"
+    author: "Yu Chu Chin"
+    license: "CC BY-SA 4.0"
+    source: "https://commons.wikimedia.org/wiki/File:Yuki_Tsunoda_at_the_Melbourne_Walk_during_the_2026_Australian_Grand_Prix_(028A8096).jpg"
+  style_heading: "Summary"
+  style: "Yuki Tsunoda  is a Japanese racing driver who serves as a reserve driver in Formula One for Red Bull Racing and Racing Bulls. Tsunoda competed in Formula One full-time from 2021 to 2025, and served as an understudy in 2026."
