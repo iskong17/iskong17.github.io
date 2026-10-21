@@ -24,6 +24,6 @@ recent_winners:
   - { season: 2021, driver: "Max Verstappen", team: "Red Bull" }
 lat: 19.4042
 lng: -99.0907
-calendar_round: 19
 track_viewbox: "-6.1 46.4 412.2 307.2"
+calendar_round: 19
 ---

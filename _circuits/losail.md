@@ -23,6 +23,6 @@ recent_winners:
   - { season: 2021, driver: "Lewis Hamilton", team: "Mercedes" }
 lat: 25.49
 lng: 51.4542
-calendar_round: 22
 track_viewbox: "20.9 -6.1 358.2 412.2"
+calendar_round: 22
 ---
