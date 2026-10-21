@@ -4,25 +4,20 @@ title: Inseok Kong
 body_class: page-home
 ---
 {%- assign pubs = site.data.publications -%}
-{%- assign published = pubs | where: "status", "published" -%}
-{%- assign first_author = pubs | where: "selected", true -%}
-{%- assign awards = site.data.career.awards -%}
+{%- assign reviews = site.posts | where: "category", "race-review" -%}
 
 <!-- Hero -->
 <section class="hero" id="about">
   <div class="hero-bg" aria-hidden="true">
-    <div class="hero-grid"></div>
     <div class="hero-slash"></div>
-    <div class="hero-number">33</div>
   </div>
   <div class="container hero-inner">
     <div class="hero-text">
-      <p class="eyebrow"><span class="live-dot"></span>Undergraduate Researcher · University of Seoul</p>
-      <h1 class="hero-name">Inseok<br><span>Kong</span></h1>
+      <p class="eyebrow">Undergraduate Researcher · University of Seoul</p>
+      <h1 class="hero-name">Inseok <span>Kong</span></h1>
       <p class="hero-tagline">
-        Building vision models that stay reliable when the track conditions change:
-        <b>3D test-time adaptation</b>, <b>adversarial robustness</b>, and
-        <b>hallucination</b> in omni-modal models.
+        I work on <b>trustworthy computer vision</b>: 3D test-time adaptation,
+        adversarial robustness, and hallucination in omni-modal models.
       </p>
       <div class="hero-links">
         <a class="btn btn-primary" href="{{ site.social.cv | relative_url }}" target="_blank" rel="noopener">{% include icon.html name="cv" %}CV</a>
@@ -32,29 +27,16 @@ body_class: page-home
         <a class="btn" href="{{ site.social.linkedin }}" target="_blank" rel="noopener">{% include icon.html name="linkedin" %}LinkedIn</a>
       </div>
     </div>
-
-    <aside class="driver-card" aria-label="Driver card">
-      <div class="dc-top">
-        <span class="dc-num">33</span>
-        <span class="dc-meta"><span class="dc-flag">KOR</span><span class="dc-team">UOS · SIA Lab</span></span>
-      </div>
-      <div class="dc-photo">
-        <img src="{{ '/images/profile.png' | relative_url }}" alt="Inseok Kong">
-      </div>
-      <div class="dc-name">Inseok <b>Kong</b></div>
-      <dl class="dc-stats">
-        <div><dt>Papers</dt><dd>{{ published.size }}</dd></div>
-        <div><dt>1st Author</dt><dd>{{ first_author.size }}</dd></div>
-        <div><dt>Podiums</dt><dd>{{ awards.size }}</dd></div>
-      </dl>
-    </aside>
+    <div class="profile-photo">
+      <img src="{{ '/images/profile.png' | relative_url }}" alt="Inseok Kong">
+    </div>
   </div>
 </section>
 
-<!-- Driver Profile -->
+<!-- About -->
 <section class="section">
   <div class="container">
-    {% include section-head.html lap="01" kicker="Driver Profile" title="About" %}
+    {% include section-head.html title="About" %}
     <div class="about-grid">
       <div class="prose">
         <p>
@@ -63,42 +45,43 @@ body_class: page-home
         <p>
           I am broadly interested in <b>Trustworthy Computer Vision</b>, aiming to ensure models operate reliably and safely in open, real-world environments. My research has primarily centered on <b>3D point cloud Test-Time Adaptation (TTA)</b> and <b>adversarial defense</b>, enabling models to dynamically adapt to severe distribution shifts and corruptions. Recently, I have expanded my focus toward <b>omni-modal foundation models</b>, with a particular emphasis on <b>hallucination mitigation</b> and calibration for robust real-world multimodal applications.
         </p>
+        <p>
+          Outside the lab, I am a Formula 1 fan who follows <b>Max Verstappen</b> and <b>Oracle Red Bull Racing</b>, and I write race reviews on my <a href="{{ '/blog/' | relative_url }}">blog</a>.
+        </p>
       </div>
-      <div class="telemetry">
-        <div class="telemetry-title">Research Sectors</div>
+      <div class="focus">
+        <div class="focus-title">Research Focus</div>
         <ul>
-          <li class="sector-now"><span>Omni-modal hallucination &amp; calibration</span><em>Now · SIA</em></li>
-          <li class="sector-now"><span>LVLM hallucination &amp; uncertainty</span><em>2026 · SIIT</em></li>
-          <li class="sector-done"><span>3D point cloud test-time adaptation</span><em>2025–26 · RCV</em></li>
-          <li class="sector-done"><span>Adversarial defense for 3D recognition</span><em>2025–26 · RCV</em></li>
+          <li class="is-now"><span>Omni-modal hallucination &amp; calibration</span><em>Now · SIA</em></li>
+          <li class="is-now"><span>LVLM hallucination &amp; uncertainty</span><em>2026 · SIIT</em></li>
+          <li><span>3D point cloud test-time adaptation</span><em>2025–26 · RCV</em></li>
+          <li><span>Adversarial defense for 3D recognition</span><em>2025–26 · RCV</em></li>
         </ul>
-        <div class="telemetry-foot">Off track: Formula 1 · <b>#33</b> · Oracle Red Bull Racing</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Race Control -->
+<!-- News -->
 <section class="section" id="news">
   <div class="container">
-    {% include section-head.html lap="02" kicker="Race Control" title="News" %}
-    <ol class="race-control">
+    {% include section-head.html title="News" %}
+    <ol class="news">
       {%- for item in site.data.news %}
-      <li class="rc-item{% if forloop.first %} is-latest{% endif %}">
-        <time class="rc-time">{{ item.date }}</time>
-        <span class="rc-flag">{% if forloop.first %}Latest{% else %}Message{% endif %}</span>
-        <p class="rc-text">{{ item.text }}</p>
+      <li class="news-item{% if forloop.first %} is-latest{% endif %}">
+        <time>{{ item.date }}</time>
+        <p>{% if forloop.first %}<span class="badge badge-new">New</span> {% endif %}{{ item.text }}</p>
       </li>
       {%- endfor %}
     </ol>
   </div>
 </section>
 
-<!-- Timing Tower -->
+<!-- Publications -->
 <section class="section" id="publications">
   <div class="container">
     <div class="section-head-row">
-      {% include section-head.html lap="03" kicker="Timing Tower" title="Publications" %}
+      {% include section-head.html title="Publications" %}
       <div class="session-tabs" role="tablist" aria-label="Filter publications">
         <button type="button" class="session-tab is-active" data-filter="selected">Selected</button>
         <button type="button" class="session-tab" data-filter="preprint">Preprint</button>
@@ -106,27 +89,25 @@ body_class: page-home
       </div>
     </div>
 
-    <ol class="timing-tower" id="pub-list">
+    <ol class="pub-list" id="pub-list">
       {%- for p in pubs %}
-      <li class="tt-row" data-selected="{{ p.selected }}" data-status="{{ p.status }}">
-        <span class="tt-pos"></span>
-        <span class="tt-team{% if p.badges contains 'first-author' %} is-lead{% endif %}{% if p.status == 'preprint' %} is-pending{% endif %}"></span>
-        <div class="tt-thumb">
+      <li class="pub" data-selected="{{ p.selected }}" data-status="{{ p.status }}">
+        <div class="pub-thumb">
           <img src="{{ p.image | relative_url }}" alt="{{ p.title | split: ':' | first }}" {% if p.status != 'preprint' %}data-zoom{% endif %}>
         </div>
-        <div class="tt-body">
-          <div class="tt-badges">
+        <div class="pub-body">
+          <div class="pub-badges">
             <span class="badge badge-venue">{{ p.venue_short }}</span>
             {%- if p.badges contains 'oral' %}<span class="badge badge-oral">Oral</span>{% endif %}
             {%- if p.badges contains 'first-author' %}<span class="badge badge-lead">1st Author</span>{% endif %}
           </div>
-          <h3 class="tt-title">{{ p.title }}</h3>
-          <p class="tt-authors">{{ p.authors }}</p>
-          <p class="tt-venue"><i>{{ p.venue }}</i>{% if p.date %}<span>{{ p.date }}</span>{% endif %}</p>
+          <h3 class="pub-title">{{ p.title }}</h3>
+          <p class="pub-authors">{{ p.authors }}</p>
+          <p class="pub-venue"><i>{{ p.venue }}</i>{% if p.date %}<span>{{ p.date }}</span>{% endif %}</p>
           {%- if p.links.size > 0 %}
-          <div class="tt-links">
+          <div class="pub-links">
             {%- for l in p.links %}
-            <a href="{{ l.url | relative_url }}"{% unless l.url contains '://' %}{% else %} target="_blank" rel="noopener"{% endunless %}>{{ l.label }}</a>
+            <a href="{{ l.url | relative_url }}"{% if l.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}</a>
             {%- endfor %}
           </div>
           {%- endif %}
@@ -137,19 +118,19 @@ body_class: page-home
   </div>
 </section>
 
-<!-- Stints -->
+<!-- Experience -->
 <section class="section" id="career">
   <div class="container">
-    {% include section-head.html lap="04" kicker="Stints" title="Career" %}
+    {% include section-head.html title="Experience" %}
     <div class="career-grid">
       <div>
-        <h3 class="sub-head">Research Experience</h3>
-        <ol class="stints">
+        <h3 class="sub-head">Research</h3>
+        <ol class="timeline">
           {%- for e in site.data.career.experience %}
-          <li class="stint{% if e.current %} is-current{% endif %}">
-            <div class="stint-period">{{ e.period }}{% if e.current %}<span class="stint-live">On track</span>{% endif %}</div>
-            <div class="stint-org"><a href="{{ e.url }}" target="_blank" rel="noopener">{{ e.org }}</a></div>
-            <div class="stint-place">{{ e.role }} · {{ e.place }}</div>
+          <li class="tl-item{% if e.current %} is-current{% endif %}">
+            <div class="tl-period">{{ e.period }}{% if e.current %}<span class="tl-now">Current</span>{% endif %}</div>
+            <div class="tl-org"><a href="{{ e.url }}" target="_blank" rel="noopener">{{ e.org }}</a></div>
+            <div class="tl-place">{{ e.role }} · {{ e.place }}</div>
             <ul>{% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}</ul>
           </li>
           {%- endfor %}
@@ -157,22 +138,22 @@ body_class: page-home
       </div>
       <div>
         <h3 class="sub-head">Education</h3>
-        <ol class="stints">
+        <ol class="timeline">
           {%- for e in site.data.career.education %}
-          <li class="stint is-current">
-            <div class="stint-period">{{ e.period }}</div>
-            <div class="stint-org">{{ e.org }}</div>
-            <div class="stint-place">{{ e.role }} · {{ e.place }}</div>
+          <li class="tl-item is-current">
+            <div class="tl-period">{{ e.period }}</div>
+            <div class="tl-org">{{ e.org }}</div>
+            <div class="tl-place">{{ e.role }} · {{ e.place }}</div>
             <ul>{% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}</ul>
           </li>
           {%- endfor %}
         </ol>
 
-        <h3 class="sub-head">Podiums <small>Honors &amp; Awards</small></h3>
-        <ol class="podiums">
-          {%- for a in awards %}
+        <h3 class="sub-head">Honors &amp; Awards</h3>
+        <ol class="awards">
+          {%- for a in site.data.career.awards %}
           <li>
-            <span class="podium-icon">{% include icon.html name="trophy" %}</span>
+            <span class="award-icon">{% include icon.html name="trophy" %}</span>
             <div><b>{{ a.title }}</b><span>{{ a.event }}</span></div>
             <time>{{ a.date }}</time>
           </li>
@@ -183,16 +164,16 @@ body_class: page-home
   </div>
 </section>
 
-<!-- Garage -->
+<!-- Projects -->
 <section class="section">
   <div class="container">
-    {% include section-head.html lap="05" kicker="Garage" title="Projects" %}
-    <div class="garage">
+    {% include section-head.html title="Projects" %}
+    <div class="projects">
       {%- for pr in site.data.career.projects %}
-      <article class="garage-card">
-        <div class="garage-period">{{ pr.period }}</div>
+      <article class="project-card">
+        <div class="project-period">{{ pr.period }}</div>
         <h3>{{ pr.name }}</h3>
-        <p class="garage-sub">{{ pr.sub }}</p>
+        <p class="project-sub">{{ pr.sub }}</p>
         <p>{{ pr.text }}</p>
       </article>
       {%- endfor %}
@@ -200,11 +181,36 @@ body_class: page-home
   </div>
 </section>
 
-<!-- Pit Wall -->
+<!-- Off the track -->
+<section class="section" id="f1">
+  <div class="container">
+    <div class="paddock">
+      <div class="paddock-number" aria-hidden="true">33</div>
+      <div class="paddock-text">
+        <p class="paddock-kicker">Off the Track</p>
+        <h2>Max Verstappen <span>· Oracle Red Bull Racing</span></h2>
+        <p>
+          The 33 on this site is a nod to the number Max carried to his first world championship in 2021.
+          I follow every race weekend and write reviews, in Korean, on the blog.
+        </p>
+        <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}#race-review">Race reviews {% include icon.html name="arrow" %}</a>
+      </div>
+      {%- if reviews.size > 0 %}
+      <ul class="paddock-list">
+        {%- for r in reviews limit: 3 %}
+        <li><a href="{{ r.url | relative_url }}"><time>{{ r.date | date: "%Y.%m.%d" }}</time>{{ r.title }}</a></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Blog -->
 <section class="section">
   <div class="container">
     <div class="section-head-row">
-      {% include section-head.html lap="06" kicker="Pit Wall" title="Latest from the Blog" %}
+      {% include section-head.html title="Latest Posts" %}
       <a class="more-link" href="{{ '/blog/' | relative_url }}">All posts {% include icon.html name="arrow" %}</a>
     </div>
     {%- if site.posts.size > 0 %}
@@ -214,7 +220,7 @@ body_class: page-home
       {%- endfor %}
     </div>
     {%- else %}
-    <p class="empty">No posts yet. Lights out soon.</p>
+    <p class="empty">No posts yet.</p>
     {%- endif %}
   </div>
 </section>

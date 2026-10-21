@@ -6,7 +6,7 @@ layout: default
 {%- assign minutes = chars | divided_by: 500 | plus: 1 -%}
 <article>
   <header class="post-header">
-    <div class="hero-bg" aria-hidden="true"><div class="hero-grid"></div><div class="hero-slash"></div></div>
+    <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
     <div class="container">
       <div class="post-meta">
         <span class="post-cat cat-{{ page.category | default: 'log' }}">{{ cat.label | default: page.category }}</span>

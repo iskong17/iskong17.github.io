@@ -15,13 +15,14 @@
   function setupFilter(tabs, items, matches, initial) {
     var buttons = tabs.querySelectorAll('[data-filter]');
     function apply(filter) {
-      var first = true;
+      var last = null;
       items.forEach(function (item) {
         var show = matches(item, filter);
         item.classList.toggle('is-hidden', !show);
-        item.classList.toggle('is-first', show && first);
-        if (show) first = false;
+        item.classList.remove('is-last');
+        if (show) last = item;
       });
+      if (last) last.classList.add('is-last');
       buttons.forEach(function (b) {
         var on = b.getAttribute('data-filter') === filter;
         b.classList.toggle('is-active', on);
@@ -31,13 +32,14 @@
     buttons.forEach(function (b) {
       b.addEventListener('click', function () { apply(b.getAttribute('data-filter')); });
     });
-    apply(initial);
+    var known = Array.prototype.some.call(buttons, function (b) { return b.getAttribute('data-filter') === initial; });
+    apply(known ? initial : buttons[0].getAttribute('data-filter'));
   }
 
   // Publications: Selected = first-author, Preprint = under review, Full = all.
   var pubTabs = document.querySelector('#publications .session-tabs');
   if (pubTabs) {
-    setupFilter(pubTabs, document.querySelectorAll('#pub-list .tt-row'), function (row, f) {
+    setupFilter(pubTabs, document.querySelectorAll('#pub-list .pub'), function (row, f) {
       if (f === 'full') return true;
       if (f === 'preprint') return row.dataset.status === 'preprint';
       return row.dataset.selected === 'true';
@@ -49,7 +51,7 @@
   if (blogTabs) {
     setupFilter(blogTabs, document.querySelectorAll('.blog-list .post-card'), function (card, f) {
       return f === 'all' || card.dataset.category === f;
-    }, 'all');
+    }, (location.hash || '#all').slice(1));
   }
 
   // Lightbox for publication figures.

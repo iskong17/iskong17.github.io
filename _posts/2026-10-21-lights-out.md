@@ -1,5 +1,6 @@
 ---
 title: "Lights out — 블로그를 시작합니다"
+slug: lights-out
 category: log
 description: 이 블로그에서 다룰 내용과 글 구성을 소개합니다.
 ---
