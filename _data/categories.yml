@@ -1,16 +1,19 @@
-# Blog categories. Use the key in a post's `category:` front matter.
+# Blog categories, in tab order. Use the key in a post's `category:` front matter.
 # Study and Gallery posts also take a `topic:` key from their list below.
 # `short` is used on small labels; `blurb` appears on the All tab.
 - key: study
   label: "Study"
   short: "Study"
-  blurb: "Deep Learning · Linear Algebra · Computer Vision · Algorithm · Paper Review"
+  blurb: "Deep Learning · Linear Algebra · Computer Vision · Algorithm"
   topics:
     - { key: deep-learning, label: "Deep Learning" }
     - { key: linear-algebra, label: "Linear Algebra" }
     - { key: computer-vision, label: "Computer Vision" }
     - { key: algorithm, label: "Algorithm" }
-    - { key: paper-review, label: "Paper Review" }
+- key: paper-review
+  label: "Paper Review"
+  short: "Paper"
+  blurb: "Notes on papers I read"
 - key: gallery
   label: "Gallery"
   short: "Gallery"

@@ -1019,3 +1019,12 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .sq-round-wrap { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
 .sq-round { padding: 1px 7px; border-radius: 4px; background: var(--red); color: #fff; font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; }
 
+/* Paper Review category */
+.cat-bar-paper-review { border-left-color: var(--purple); }
+.sq-card.cat-paper-review::before { background: var(--purple); }
+.post-meta .cat-paper-review { background: var(--purple); color: #fff; }
+.paper-strip { grid-template-columns: 1fr 1fr; }
+.paper-strip .paper-title { grid-column: 1 / -1; border-bottom: 1px solid var(--line); }
+.paper-strip .paper-title + div { border-left: 0; }
+.cat-bar-subs > .sq-card { aspect-ratio: 1 / 1; }
+.cat-bar-subs .cat-bar-empty { grid-column: 1 / -1; padding: 0; }
