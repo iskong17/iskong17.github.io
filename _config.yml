@@ -35,6 +35,10 @@ collections:
   drivers:
     output: true
     permalink: /blog/race/drivers/:name/
+  # Korean versions of paper reviews; each sets `en:` to the slug of its English post.
+  paper_ko:
+    output: true
+    permalink: /blog/paper-review/ko/:name/
 
 plugins:
   - jekyll-sitemap
@@ -53,6 +57,14 @@ defaults:
     values:
       layout: driver
       lang: en
+  - scope:
+      path: ""
+      type: paper_ko
+    values:
+      layout: post
+      lang: ko
+      math: true
+      category: paper-review
   - scope:
       path: ""
       type: posts

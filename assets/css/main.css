@@ -512,6 +512,10 @@ img { max-width: 100%; display: block; }
 .post-meta .post-cat { padding: 2px 8px; border-radius: 4px; background: var(--red); color: #fff; }
 .post-meta .cat-study { background: var(--blue); }
 .post-meta .cat-gallery { background: var(--yellow); color: #0b1430; }
+.lang-toggle { position: relative; display: inline-flex; margin-top: 14px; padding: 3px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); }
+.lang-toggle a { padding: 4px 14px; border-radius: 999px; font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--text-2); }
+.lang-toggle a:hover { color: var(--text); text-decoration: none; }
+.lang-toggle a.is-active { background: var(--purple); color: #fff; }
 .post-header h1 { position: relative; margin: 14px 0 0; font-size: clamp(30px, 5vw, 44px); line-height: 1.25; font-weight: 700; }
 .post-header .post-desc { position: relative; margin: 10px 0 0; color: var(--text-2); font-size: 18px; }
 
@@ -861,6 +865,8 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .paper-row-side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 .paper-row-venue { font-size: 14px; font-weight: 700; color: var(--text); }
 .paper-row-tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.paper-row-kr { position: relative; z-index: 1; padding: 1px 8px; border: 1px solid var(--line-strong); border-radius: 999px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; color: var(--text-2); }
+.paper-row-kr:hover { border-color: var(--purple); color: var(--text); text-decoration: none; }
 .paper-row-review { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-2); }
 .paper-row-review .icon { width: 14px; height: 14px; }
 /* The whole bar opens the review; only the paper title goes to arXiv. */
