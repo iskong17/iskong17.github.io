@@ -164,7 +164,9 @@
     var currentSub = function () { return (location.hash.replace(/^#/, '').split('/')[1]) || 'all'; };
     document.querySelectorAll('.conf-chip').forEach(function (b) {
       b.addEventListener('click', function () {
-        paperConf = b.getAttribute('data-conf');
+        // Clicking the active venue again clears it.
+        var cf = b.getAttribute('data-conf');
+        paperConf = (cf === paperConf) ? 'all' : cf;
         showTopic(b.closest('.blog-panel'), currentSub());
       });
     });
@@ -188,7 +190,9 @@
     document.querySelectorAll('.subfield-chip').forEach(function (b) {
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () {
+        // Clicking the active topic again clears it.
         var sf = b.getAttribute('data-subfield');
+        if (b.classList.contains('is-active')) sf = 'all';
         go('#' + panel + (sf === 'all' ? '' : '/' + sf));
       });
     });
