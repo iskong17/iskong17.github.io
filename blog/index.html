@@ -174,10 +174,17 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             {%- endfor %}
           </div>
         </div>
+        <div class="paper-side-controls">
         <div class="paper-sort" role="group" aria-label="Sort papers">
           <span class="filter-label">Sort</span>
           <button type="button" class="sort-btn is-active" data-sort="year">Year</button>
           <button type="button" class="sort-btn" data-sort="title">Title A–Z</button>
+        </div>
+        <div class="paper-sort paper-lang" role="group" aria-label="Review language">
+          <span class="filter-label">Language</span>
+          <button type="button" class="lang-btn is-active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ko">KR</button>
+        </div>
         </div>
       </div>
       {%- endif %}
@@ -230,6 +237,10 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         </div>
       </section>
       {%- endif %}
+      {%- elsif posts.size > 0 and c.key == 'gallery' %}
+      <div class="gallery-list">
+        {%- for post in posts %}{% include gallery-row.html post=post %}{% endfor %}
+      </div>
       {%- elsif posts.size > 0 %}
       <div class="sq-grid">
         {%- for post in posts %}{% include post-card.html post=post %}{% endfor %}

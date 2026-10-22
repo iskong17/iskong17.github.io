@@ -1,0 +1,15 @@
+{%- assign p = include.post -%}
+{%- assign shots = p.content | split: '![' -%}
+<a class="gallery-row" href="{{ p.url | relative_url }}" data-category="gallery" data-topic="{{ p.topic }}">
+  {%- if p.image %}<span class="gallery-row-cover" style="background-image: url('{{ p.image | relative_url }}')"></span>{% endif %}
+  <span class="gallery-row-body">
+    <span class="gallery-row-meta">
+      <span class="gallery-row-topic">{{ p.topic | capitalize }}</span>
+      {%- if p.location %}<span>{{ p.location.name }}{% if p.location.country and p.location.country != p.location.name %}, {{ p.location.country }}{% endif %}</span>{% endif %}
+      <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%b %Y" }}</time>
+    </span>
+    <b class="gallery-row-title">{{ p.title }}</b>
+    <span class="gallery-row-desc">{{ p.description | default: p.excerpt | strip_html }}</span>
+    <span class="gallery-row-foot"><span>{{ shots.size | minus: 1 }} photos</span><span class="gallery-row-read">Read {% include icon.html name="arrow" %}</span></span>
+  </span>
+</a>

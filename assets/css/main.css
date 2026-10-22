@@ -795,8 +795,13 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .paper-filters { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .subfield-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .filter-label { width: 52px; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+.paper-side-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
 .paper-sort { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-.paper-sort .filter-label { width: auto; margin-right: 2px; }
+.paper-sort .filter-label { width: 72px; text-align: right; }
+.lang-btn { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: transparent; color: var(--text-2); cursor: pointer; }
+.lang-btn:hover { color: var(--text); border-color: var(--purple); }
+.lang-btn.is-active { background: var(--purple); border-color: var(--purple); color: #fff; }
+.paper-list.is-ko .paper-row-kr { display: none; }
 .conf-chip,
 .sort-btn {
   font-family: "JetBrains Mono", monospace;
@@ -1155,6 +1160,38 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
   .driver-row { grid-template-columns: 28px 36px minmax(0, 1fr) minmax(0, 0.8fr); gap: 10px; }
   .driver-row-wins { display: none; }
   .driver-row-avatar { width: 34px; height: 34px; }
+}
+
+/* ---------- Gallery list: blog-style entries ---------- */
+.gallery-list { display: flex; flex-direction: column; gap: 16px; }
+.gallery-row {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  min-height: 200px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  overflow: hidden;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.gallery-row:hover { text-decoration: none; transform: translateY(-2px); border-color: color-mix(in srgb, var(--yellow) 60%, transparent); box-shadow: 0 14px 30px -22px rgba(0, 0, 0, 0.6); }
+.gallery-row-cover { background: var(--surface-2) center / cover no-repeat; transition: transform 0.4s; }
+.gallery-row:hover .gallery-row-cover { transform: scale(1.03); }
+.gallery-row-body { display: flex; flex-direction: column; gap: 8px; padding: 22px 26px; min-width: 0; border-left: 4px solid var(--yellow); }
+.gallery-row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); }
+.gallery-row-topic { padding: 1px 8px; border-radius: 999px; background: color-mix(in srgb, var(--yellow) 22%, transparent); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text); }
+.gallery-row-title { font-size: 24px; line-height: 1.25; }
+.gallery-row-desc { font-size: 15px; line-height: 1.6; color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.gallery-row-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); }
+.gallery-row-read { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--text-2); }
+.gallery-row-read .icon { width: 14px; height: 14px; transition: transform 0.15s; }
+.gallery-row:hover .gallery-row-read { color: var(--text); }
+.gallery-row:hover .gallery-row-read .icon { transform: translateX(3px); }
+@media (max-width: 700px) {
+  .gallery-row { grid-template-columns: minmax(0, 1fr); }
+  .gallery-row-cover { aspect-ratio: 16 / 9; }
+  .gallery-row-body { border-left: 0; border-top: 4px solid var(--yellow); }
 }
 
 /* ---------- Circuit and driver pages ---------- */

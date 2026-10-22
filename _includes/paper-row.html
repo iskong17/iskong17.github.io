@@ -15,6 +15,6 @@
     {%- endif %}
     {%- assign p_ko = site.paper_ko | where: "en", p.slug | first %}
     {%- if p_ko %}<a class="paper-row-kr" href="{{ p_ko.url | relative_url }}" lang="ko">KR</a>{% endif %}
-    <a class="paper-row-review" href="{{ p.url | relative_url }}">Review {% include icon.html name="arrow" %}</a>
+    <a class="paper-row-review" href="{{ p.url | relative_url }}" data-en="{{ p.url | relative_url }}"{% if p_ko %} data-ko="{{ p_ko.url | relative_url }}"{% endif %}>Review {% include icon.html name="arrow" %}</a>
   </div>
 </article>

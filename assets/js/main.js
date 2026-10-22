@@ -84,7 +84,7 @@
       // Study's All view is a bar per topic; the flat grid shows only for one topic.
       var bars = panel.querySelector('.topic-bars');
       if (bars) bars.hidden = key !== 'all';
-      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row, .study-group .lecture-row');
+      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row, .study-group .lecture-row, .gallery-row');
       var any = !!bars && key === 'all';
       cards.forEach(function (c) {
         var show = key === 'all' || (bySub
@@ -187,6 +187,22 @@
       b.addEventListener('click', function () { sortPapers(b.getAttribute('data-sort')); });
     });
     sortPapers('year');
+    // Review language: KR sends every paper row to its Korean version (rows without one stay in English).
+    var setPaperLang = function (lang) {
+      if (!paperList) return;
+      paperList.querySelectorAll('.paper-row-review').forEach(function (a) {
+        a.href = (lang === 'ko' && a.getAttribute('data-ko')) || a.getAttribute('data-en');
+      });
+      paperList.classList.toggle('is-ko', lang === 'ko');
+      activate(document.querySelectorAll('.lang-btn'), 'data-lang', lang);
+      try { localStorage.setItem('paperLang', lang); } catch (e) {}
+    };
+    document.querySelectorAll('.lang-btn').forEach(function (b) {
+      b.addEventListener('click', function () { setPaperLang(b.getAttribute('data-lang')); });
+    });
+    var savedLang = 'en';
+    try { savedLang = localStorage.getItem('paperLang') || 'en'; } catch (e) {}
+    setPaperLang(savedLang);
     document.querySelectorAll('.subfield-chip').forEach(function (b) {
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () {
