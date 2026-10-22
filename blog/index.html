@@ -169,9 +169,6 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         </div>
       </div>
       {%- endif %}
-        {%- endfor %}
-      </div>
-      {%- endif %}
       {%- if posts.size > 0 and c.key == 'paper-review' %}
       <div class="paper-list">
         {%- for post in posts %}{% include paper-row.html post=post %}{% endfor %}
