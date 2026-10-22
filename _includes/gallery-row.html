@@ -1,5 +1,5 @@
 {%- assign p = include.post -%}
-{%- assign shots = p.content | split: '![' -%}
+{%- assign shots = p.content | split: '<img' -%}
 <a class="gallery-row" href="{{ p.url | relative_url }}" data-category="gallery" data-topic="{{ p.topic }}">
   {%- if p.image %}<span class="gallery-row-cover" style="background-image: url('{{ p.image | relative_url }}')"></span>{% endif %}
   <span class="gallery-row-body">
