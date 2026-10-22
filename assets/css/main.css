@@ -1449,6 +1449,16 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .sub-tile-top b { font-size: 17px; line-height: 1.3; letter-spacing: 0.1px; }
 .sub-tile-count { flex-shrink: 0; min-width: 32px; padding: 2px 9px; border-radius: 999px; background: color-mix(in srgb, var(--tile-accent) 18%, transparent); font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; text-align: center; color: var(--text); }
 .sub-tile-desc { padding-right: 18px; font-size: 13.5px; line-height: 1.5; color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sub-tile-list { display: flex; flex-direction: column; gap: 3px; padding-right: 18px; }
+.sub-tile-list span { position: relative; padding-left: 12px; font-size: 13px; line-height: 1.45; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sub-tile-list span::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--tile-accent); }
+/* Paper Review on the All tab: one pill per venue */
+.cat-bar-subs:has(.venue-pills) { display: block; grid-auto-rows: auto; }
+.venue-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.venue-pill { display: inline-flex; align-items: center; gap: 10px; padding: 9px 10px 9px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); font: inherit; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.15s; }
+.venue-pill b { font-size: 15px; letter-spacing: 0.3px; }
+.venue-pill span { min-width: 26px; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--purple) 16%, transparent); font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; text-align: center; }
+.venue-pill:hover { transform: translateY(-1px); border-color: var(--purple); background: color-mix(in srgb, var(--purple) 7%, var(--surface)); }
 .sub-tile.is-empty { opacity: 0.5; background: transparent; border-style: dashed; }
 .sub-tile.is-empty::before { background: var(--line-strong); }
 .cat-bar-subs > .sq-card { aspect-ratio: 1 / 1; }

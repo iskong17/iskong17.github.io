@@ -62,14 +62,12 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             </button>
             {%- elsif c.subfields %}
             {%- assign confs = posts | map: "conference" | uniq | sort -%}
-            {%- for cf in confs %}
-            {%- assign cposts = posts | where: "conference", cf -%}
-            {%- assign cyears = cposts | map: "year" | uniq | sort | reverse -%}
-            <button type="button" class="sub-tile" data-goto="{{ c.key }}" data-conf-goto="{{ cf }}">
-              <span class="sub-tile-top"><b>{{ cf }}</b><span class="sub-tile-count">{{ cposts.size }}</span></span>
-              <span class="sub-tile-desc">{{ cyears | join: " · " }}</span>
-            </button>
-            {%- endfor %}
+            <div class="venue-pills">
+              {%- for cf in confs %}
+              {%- assign cposts = posts | where: "conference", cf %}
+              <button type="button" class="venue-pill" data-goto="{{ c.key }}" data-conf-goto="{{ cf }}"><b>{{ cf }}</b><span>{{ cposts.size }}</span></button>
+              {%- endfor %}
+            </div>
             {%- elsif c.topics == nil %}
             {%- for post in posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
             {%- if posts.size == 0 %}<p class="cat-bar-empty">No posts yet.</p>{% endif %}
@@ -79,11 +77,17 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             {%- assign tseries = site.data.series | where: "topic", tp.key -%}
             <button type="button" class="sub-tile topic-{{ tp.key }}{% if tposts.size == 0 %} is-empty{% endif %}" data-goto="{{ c.key }}/{{ tp.key }}">
               <span class="sub-tile-top"><b>{{ tp.label }}</b><span class="sub-tile-count">{{ tposts.size }}</span></span>
+              {%- if tseries.size > 1 %}
+              <span class="sub-tile-list">
+                {%- for sr in tseries %}{% assign srp = tposts | where: "series", sr.key %}{% if srp.size > 0 %}<span>{{ sr.name }}</span>{% endif %}{% endfor -%}
+              </span>
+              {%- else %}
               <span class="sub-tile-desc">
-                {%- if tseries.size > 0 %}{% for sr in tseries %}{% unless forloop.first %} · {% endunless %}{% if sr.prefix == "Discussion" %}Discussions{% else %}{{ sr.course }}{% endif %}{% endfor %}
+                {%- if tseries.size > 0 %}{{ tseries.first.course }}
                 {%- elsif tposts.size > 0 %}{{ tposts.first.title }}
                 {%- else %}Coming soon{% endif -%}
               </span>
+              {%- endif %}
             </button>
             {%- endfor %}
             {%- endif %}
