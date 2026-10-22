@@ -156,6 +156,34 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         {%- endfor %}
       </div>
       {%- endfor %}
+      <!-- Course cards: the "All" view of a topic with several courses -->
+      {%- for t in c.topics %}
+      {%- assign tser = site.data.series | where: "topic", t.key -%}
+      {%- assign live = 0 %}{% for s in tser %}{% assign sp = posts | where: "series", s.key %}{% if sp.size > 0 %}{% assign live = live | plus: 1 %}{% endif %}{% endfor %}
+      {%- if live > 1 %}
+      {%- case t.key %}{% when 'deep-learning' %}{% assign ticon = 'network' %}{% when 'linear-algebra' %}{% assign ticon = 'matrix' %}{% when 'machine-learning' %}{% assign ticon = 'chart' %}{% when 'algorithm' %}{% assign ticon = 'tree' %}{% when 'pytorch' %}{% assign ticon = 'flame' %}{% else %}{% assign ticon = 'book' %}{% endcase %}
+      <div class="cat-cards topic-cards series-cards" data-topic="{{ t.key }}" hidden>
+        {%- for s in tser %}
+        {%- assign sp = posts | where: "series", s.key | sort: "lecture" -%}
+        {%- if sp.size > 0 %}
+        <button type="button" class="cat-card topic-card topic-{{ t.key }}" data-goto="{{ c.key }}/{{ t.key }}/{{ s.key }}">
+          <span class="cat-card-bg" aria-hidden="true">{% include icon.html name=ticon %}</span>
+          <span class="cat-card-top">
+            <span class="cat-bar-icon">{% include icon.html name=ticon %}</span>
+            <span class="cat-card-count"><b>{{ sp.size }}</b>{% if s.prefix == "Discussion" %}discussions{% elsif s.prefix == "Chapter" %}chapters{% else %}lectures{% endif %}</span>
+          </span>
+          <span class="cat-card-name">{{ s.name }}</span>
+          <span class="topic-card-courses">
+            <span><b>{{ s.course }}</b>{% if s.instructor %}<small>{{ s.instructor }}</small>{% endif %}</span>
+            <span><b>{{ s.prefix | default: "Lecture" }} {{ sp.first.lecture }}–{{ sp.last.lecture }}</b><small>{{ sp.first.card_title | split: ": " | last }} → {{ sp.last.card_title | split: ": " | last }}</small></span>
+          </span>
+          <span class="cat-card-open">Open course {% include icon.html name="arrow" %}</span>
+        </button>
+        {%- endif %}
+        {%- endfor %}
+      </div>
+      {%- endif %}
+      {%- endfor %}
       <!-- One block per lecture series, in lecture order -->
       {%- for s in site.data.series %}
       {%- assign sp = posts | where: "series", s.key | sort: "lecture" -%}

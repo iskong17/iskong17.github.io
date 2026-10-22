@@ -105,10 +105,17 @@
         }
       });
       studySeries = seriesKey;
+      // A topic with several courses shows course cards on its All tab instead of every lecture list.
+      var courseCards = null;
+      panel.querySelectorAll('.series-cards').forEach(function (sc) {
+        var on = sc.getAttribute('data-topic') === key && seriesKey === 'all';
+        sc.hidden = !on;
+        if (on) courseCards = sc;
+      });
       // Study groups (notes, Discussions) hide on All and when none of their cards match.
       panel.querySelectorAll('.study-group').forEach(function (g) {
         var other = seriesKey !== 'all' && g.getAttribute('data-series') !== seriesKey;
-        g.hidden = (!!bars && key === 'all') || other || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
+        g.hidden = (!!bars && key === 'all') || !!courseCards || other || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
       });
       activate(tabs, attr, key);
       if (bySub) activate(panel.querySelectorAll('.conf-chip'), 'data-conf', paperConf);
