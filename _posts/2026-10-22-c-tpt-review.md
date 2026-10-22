@@ -1,7 +1,7 @@
 ---
 title: "C-TPT: Spread the Text Features to Fix TPT's Overconfidence"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: C-TPT adds a label-free term to test-time prompt tuning that pushes CLIP's class text features apart, which roughly halves TPT's calibration error while keeping its accuracy gain.
 paper:

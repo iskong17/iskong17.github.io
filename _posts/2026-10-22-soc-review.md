@@ -1,7 +1,7 @@
 ---
 title: "SoC: Push Class Prompts Apart, but Not Too Hard"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: SoC replaces O-TPT's full orthogonality penalty on CLIP text prototypes with a Huber penalty that caps the repulsion between semantically close classes, which lowers calibration error in test-time prompt tuning.
 paper:

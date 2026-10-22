@@ -1,7 +1,7 @@
 ---
 title: "A-TPT: Calibrate Test-Time Prompts by Maximizing the Smallest Angle Between Classes"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: A-TPT regularizes test-time prompt tuning by maximizing, for each class, the angle to its nearest neighbouring class text feature, which spreads features evenly on the hypersphere and lowers calibration error more than C-TPT and O-TPT.
 paper:

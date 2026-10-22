@@ -1,7 +1,7 @@
 ---
 title: "SaLS: Squeeze Each Adapted Logit Vector Back into Its Zero-Shot Range"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: Adapted CLIP models (adapters, prompt learning, TPT) become miscalibrated under distribution shift because their logit range grows, and rescaling each sample's logits to the min-max range of its zero-shot logits fixes much of this without changing predictions.
 paper:

@@ -1,7 +1,7 @@
 ---
 title: "FPP: Start Test-Time Prompt Tuning from a Flat Spot"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: FPP argues that C-TPT and O-TPT calibrate TPT because they act like sharpness-aware minimisation, and replaces their regularisers with a data-free pretraining step that puts the initial prompt in a flat region of the loss landscape.
 paper:

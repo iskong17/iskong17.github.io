@@ -1,7 +1,7 @@
 ---
 title: "CoTS: Fit a Temperature So TPT Is as Confident as Zero-Shot CLIP"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: CoTS calibrates test-time prompt tuning after the fact by learning one temperature per test image that matches the adapted confidence to zero-shot CLIP's confidence, so accuracy is unchanged, and E-CoTS adds a weak-strong view ensemble to raise accuracy.
 paper:

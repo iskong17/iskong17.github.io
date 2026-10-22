@@ -1,7 +1,7 @@
 ---
 title: "D-TPT: Calibrate Prompt Tuning by Flattening the Text Feature"
 category: paper-review
-subfields: [calibration, tta]
+subfields: [calibration, tta, vlm]
 lang: en
 description: D-TPT adds one regularizer to test-time prompt tuning that pushes each class text feature toward a uniform distribution over its dimensions, which weakens a single dominant dimension and lowers calibration error.
 paper:
