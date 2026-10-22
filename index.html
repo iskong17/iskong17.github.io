@@ -147,6 +147,25 @@ body_class: page-home
           </li>
           {%- endfor %}
         </ol>
+
+        <h3 class="sub-head">Volunteer</h3>
+        <ol class="timeline">
+          {%- for e in site.data.career.volunteer %}
+          <li class="tl-item{% if e.cert %} has-cert{% endif %}">
+            <div class="tl-body">
+              <div class="tl-period">{{ e.period }}</div>
+              <div class="tl-org">{{ e.org }}</div>
+              <div class="tl-place">{{ e.role }} · {{ e.place }}</div>
+              <ul>{% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+            </div>
+            {%- if e.cert %}
+            <button type="button" class="award-cert tl-cert" data-lightbox="{{ e.cert | relative_url }}" aria-label="View certificate: {{ e.role }}, {{ e.org }}">
+              <img src="{{ e.cert | relative_url }}" alt="" loading="lazy">
+            </button>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ol>
       </div>
       <div>
         <h3 class="sub-head">Honors &amp; Awards</h3>

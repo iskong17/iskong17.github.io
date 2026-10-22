@@ -650,6 +650,9 @@ img { max-width: 100%; display: block; }
 }
 .award-cert:hover { transform: scale(1.08); border-color: var(--yellow); }
 .award-cert img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+/* Volunteer entries: timeline text with the certificate thumbnail on the right */
+.tl-item.has-cert { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start; }
+.tl-cert { width: 52px; height: 68px; margin-top: 2px; }
 .text-link {
   margin-top: 10px;
   padding: 0;
@@ -852,6 +855,7 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-deep-learning { --accent: var(--purple); }
 .topic-machine-learning { --accent: var(--green); }
 .topic-algorithm { --accent: var(--yellow-ink); }
+.topic-python { --accent: #ee4c2c; }
 
 /* Lecture rows: number, title and key concepts on one bar */
 .lecture-list { display: flex; flex-direction: column; gap: 8px; }

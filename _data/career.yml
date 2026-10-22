@@ -36,6 +36,23 @@ education:
       - "Cumulative GPA: 3.8 / 4.5"
       - "Relevant Coursework: Machine Learning, Deep Learning, Pattern Recognition, Data Structures, Algorithms."
 
+volunteer:
+  - org: "KB 라스쿨 중등 (KB Dream Wave 2030)"
+    role: "Learning Mentor, 3rd Cohort"
+    place: "Samsung Sorisaem Welfare Center · Children & Future Foundation"
+    period: "May 2025 – Feb. 2026"
+    points:
+      - "Mentored middle school students in their studies over 58 sessions."
+    cert: /images/awards/kb-lar-school-mentor-2026.jpg
+
+  - org: "Seoul Volunteer Center (Seoul Donghaeng)"
+    role: "Math Tutor"
+    place: "Community Child Center · Jungnang-gu, Seoul"
+    period: "Sep. 2024 – Dec. 2024"
+    points:
+      - "Taught math to children weekly; 31 recognized volunteer hours (10 sessions)."
+    cert: /images/awards/seoul-volunteer-2024.jpg
+
 projects:
   - name: "LG Aimers 8th Cohort"
     sub: "LLM Compression Track"
