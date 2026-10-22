@@ -13,7 +13,6 @@ description: "데이터셋 분할 원칙, 베이즈 정리 계산, 추정량의 
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 1 정리. 관련 강의: [Deep Learning 1]({% post_url 2026-10-22-dl-01-introduction %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 다음: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})
 
 첫 Discussion은 머신러닝의 기본 틀과 통계 복습을 다룬다. 문제 0은 강의 일정, 중간고사 날짜, slip day 등 수업 운영에 관한 질문이므로 생략한다.

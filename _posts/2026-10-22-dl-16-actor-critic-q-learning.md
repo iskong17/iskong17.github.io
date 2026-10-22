@@ -11,7 +11,6 @@ description: "가치 함수로 정책 경사의 분산을 줄이는 액터-크�
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 16강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %}) · 다음: [Deep Learning 17]({% post_url 2026-10-22-dl-17-generative-models %})
 > 관련 Discussion: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})
 

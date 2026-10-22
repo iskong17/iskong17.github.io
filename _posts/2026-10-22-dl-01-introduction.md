@@ -11,7 +11,6 @@ description: "다국어 번역 예제로 표현 학습의 의미를 살펴보고
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 1강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 다음: [Deep Learning 2]({% post_url 2026-10-22-dl-02-ml-basics %})
 > 관련 Discussion: [Discussion 1]({% post_url 2026-10-22-dl-dis-01-introduction %})
 

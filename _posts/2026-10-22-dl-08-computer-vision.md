@@ -11,7 +11,6 @@ description: "분류를 넘어 물체 위치 추정, 물체 검출, 의미론적
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 8강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 7]({% post_url 2026-10-22-dl-07-init-batchnorm %}) · 다음: [Deep Learning 9]({% post_url 2026-10-22-dl-09-visualization %})
 > 관련 Discussion: [Discussion 5]({% post_url 2026-10-22-dl-dis-05-vision %})
 

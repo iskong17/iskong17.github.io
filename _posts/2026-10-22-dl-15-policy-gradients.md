@@ -11,7 +11,6 @@ description: "마르코프 결정 과정과 강화학습의 목적 함수를 정
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 15강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 14]({% post_url 2026-10-22-dl-14-imitation-learning %}) · 다음: [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %})
 > 관련 Discussion: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})
 

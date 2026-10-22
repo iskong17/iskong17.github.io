@@ -11,7 +11,6 @@ description: "신경망을 계산 그래프로 그리고, 로지스틱 회귀의
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 5강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 4]({% post_url 2026-10-22-dl-04-optimization %}) · 다음: [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %})
 > 관련 Discussion: [Discussion 3]({% post_url 2026-10-22-dl-dis-03-backprop-cnn %})
 

@@ -11,7 +11,6 @@ description: "적은 데이터로 새 과제를 빠르게 배우도록 학습하
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 21강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 20]({% post_url 2026-10-22-dl-20-adversarial-examples %})
 > 관련 Discussion: [Discussion 12]({% post_url 2026-10-22-dl-dis-12-meta-learning %})
 

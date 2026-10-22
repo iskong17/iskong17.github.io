@@ -11,7 +11,6 @@ description: "신경망 손실 지형의 국소 최적점, 평탄 구간, 안장
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 4강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 3]({% post_url 2026-10-22-dl-03-error-analysis %}) · 다음: [Deep Learning 5]({% post_url 2026-10-22-dl-05-backpropagation %})
 > 관련 Discussion: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})
 

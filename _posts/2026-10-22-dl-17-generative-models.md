@@ -11,7 +11,6 @@ description: "언어 모델을 이미지로 확장한 자기회귀 생성 모델
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 17강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %}) · 다음: [Deep Learning 18]({% post_url 2026-10-22-dl-18-latent-variable-models %})
 > 관련 Discussion: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})
 

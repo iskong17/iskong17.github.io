@@ -13,7 +13,6 @@ description: "정책 경사를 일반적인 점수 함수 추정량으로 유도
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 9 정리. 관련 강의: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %}), [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %}) · 다음: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})
 
 이번 Discussion은 강화학습의 세 축인 정책 경사, 액터-크리틱, Q-learning을 다룬다. 워크시트의 문제는 상태 의존 기준선에 관한 하나이고, 나머지는 개념과 유도를 정리한 내용이다.

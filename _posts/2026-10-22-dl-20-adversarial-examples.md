@@ -11,7 +11,6 @@ description: "딥러닝 모델의 일반화가 어디서 어긋나는지(분포 
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 20강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 19]({% post_url 2026-10-22-dl-19-gans %}) · 다음: [Deep Learning 21]({% post_url 2026-10-22-dl-21-meta-learning %})
 > 관련 Discussion: [Discussion 11]({% post_url 2026-10-22-dl-dis-11-gans-adversarial %})
 

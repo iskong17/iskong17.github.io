@@ -13,7 +13,6 @@ description: "GAN의 최적 판별기와 Jensen-Shannon 발산, Lipschitz 함수
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 11 정리. 관련 강의: [Deep Learning 19]({% post_url 2026-10-22-dl-19-gans %}), [Deep Learning 20]({% post_url 2026-10-22-dl-20-adversarial-examples %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %}) · 다음: [Discussion 12]({% post_url 2026-10-22-dl-dis-12-meta-learning %})
 
 이번 Discussion은 생성적 적대 신경망(GAN)과 적대적 공격을 다룬다.

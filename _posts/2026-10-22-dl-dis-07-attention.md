@@ -13,7 +13,6 @@ description: "Luong 어텐션과 셀프 어텐션의 행렬 표기, 내적을 �
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 7 정리. 관련 강의: [Deep Learning 11]({% post_url 2026-10-22-dl-11-seq2seq %}), [Deep Learning 12]({% post_url 2026-10-22-dl-12-transformers %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Discussion 6]({% post_url 2026-10-22-dl-dis-06-rnn %}) · 다음: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %})
 
 ## 배경: 어텐션 메커니즘

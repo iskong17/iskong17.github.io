@@ -11,7 +11,6 @@ description: "순환 연결 없이 셀프 어텐션만으로 시퀀스를 처리
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 12강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 11]({% post_url 2026-10-22-dl-11-seq2seq %}) · 다음: [Deep Learning 13]({% post_url 2026-10-22-dl-13-nlp %})
 > 관련 Discussion: [Discussion 7]({% post_url 2026-10-22-dl-dis-07-attention %})
 

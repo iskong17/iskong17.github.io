@@ -13,7 +13,6 @@ description: "소프트맥스 교차 엔트로피 손실의 선형 층 그래디
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 3 정리. 관련 강의: [Deep Learning 5]({% post_url 2026-10-22-dl-05-backpropagation %}), [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %}) · 다음: [Discussion 4]({% post_url 2026-10-22-dl-dis-04-cnn-architectures %})
 
 전반부는 역전파 계산을 손으로 해 보고(문제 1~3), 후반부는 합성곱 연산을 소개한다(문제 4~6).

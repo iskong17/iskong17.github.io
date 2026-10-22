@@ -13,7 +13,6 @@ description: "대표적인 CNN 구조와 ResNet의 기울기 흐름, 배치 정�
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 4 정리. 관련 강의: [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %}), [Deep Learning 7]({% post_url 2026-10-22-dl-07-init-batchnorm %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Discussion 3]({% post_url 2026-10-22-dl-dis-03-backprop-cnn %}) · 다음: [Discussion 5]({% post_url 2026-10-22-dl-dis-05-vision %})
 
 이 디스커션은 CNN 구조, 배치 정규화, 가중치 초기화, 앙상블과 드롭아웃을 다룬다. 먼저 유명한 CNN 구조를 간단히 훑는다.

@@ -13,7 +13,6 @@ description: "지도 메타러닝의 형식화와 블랙박스·비모수적·MA
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 12 정리. 관련 강의: [Deep Learning 21]({% post_url 2026-10-22-dl-21-meta-learning %})
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Discussion 11]({% post_url 2026-10-22-dl-dis-11-gans-adversarial %})
 
 이번 Discussion은 메타러닝을 다룬다. 머신러닝 모델은 보통 많은 샘플이 필요하지만 실제로는 샘플이 매우 적은 경우가 많다. 메타러닝은 하나의 과제를 푸는 대신 **배우는 법을 배워(learn to learn)** 새 과제에 빠르게 적응하는 모델을 만든다. 새 게임을 빨리 익히는 게임 봇, 학습 때 보지 못한 클래스라도 예제 몇 개만 보고 판별하는 분류기가 그 예다.

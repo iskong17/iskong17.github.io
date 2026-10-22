@@ -11,7 +11,6 @@ description: "예측에서 제어로 넘어갈 때의 어려움, 상태·관측�
 ---
 
 > [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 14강 정리. 강의: Sergey Levine.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 딥러닝 강의다.
 > 이전: [Deep Learning 13]({% post_url 2026-10-22-dl-13-nlp %}) · 다음: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %})
 > 관련 Discussion: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %})
 
