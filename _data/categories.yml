@@ -1,10 +1,11 @@
 # Blog categories, in tab order. Use the key in a post's `category:` front matter.
 # Study and Gallery posts also take a `topic:` key from their list below.
-# `short` is used on small labels; `blurb` appears on the All tab.
+# `short` is used on small labels; `intro` describes the section on the All tab; `blurb` is a one-line summary.
 - key: study
   label: "Study"
   short: "Study"
   blurb: "Deep Learning · Linear Algebra · Machine Learning · Algorithm"
+  intro: "Lecture-by-lecture notes from the courses I study: linear algebra, machine learning, deep learning and algorithms. Written in Korean, with the slides and videos linked."
   topics:
     - { key: deep-learning, label: "Deep Learning" }
     - { key: linear-algebra, label: "Linear Algebra" }
@@ -14,6 +15,7 @@
   label: "Paper Review"
   short: "Paper"
   blurb: "TTA · Calibration · 3DPC · Hallucination · VLM · AVLLM"
+  intro: "Reviews of papers I read for research, mostly test-time adaptation and multimodal LLMs: the problem, the main figure, the key results and the limits."
   # Tags for paper reviews. A post lists the keys that apply in `subfields:`.
   subfields:
     - { key: tta, label: "TTA" }
@@ -26,6 +28,7 @@
   label: "Gallery"
   short: "Gallery"
   blurb: "Conference · Travel, on a world map"
+  intro: "Photos from conference trips and travel, each pinned on a world map."
   topics:
     - { key: conference, label: "Conference" }
     - { key: travel, label: "Travel" }
@@ -33,3 +36,4 @@
   label: "Formula 1 (F1)"
   short: "F1"
   blurb: "Race reports since 2021 · Circuits · Drivers"
+  intro: "A report for every Grand Prix since 2021, following Max Verstappen, with pages for each circuit and driver."

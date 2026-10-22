@@ -30,61 +30,63 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       {%- endfor %}
     </div>
 
-    <!-- All: a panel per category with its three latest posts -->
+    <!-- All: one section per category, with an intro and a tile per topic -->
     <div class="blog-panel" data-panel="all">
       <div class="cat-bars">
         {%- for c in site.data.categories %}
         {%- assign posts = site.posts | where: "category", c.key -%}
-        <div class="cat-bar cat-bar-{{ c.key }}">
+        <section class="cat-bar cat-bar-{{ c.key }}">
           <button type="button" class="cat-bar-head" data-goto="{{ c.key }}">
-            <span class="cat-bar-name">{{ c.label }}</span>
-            <span class="cat-bar-desc">{{ c.blurb }}</span>
+            <span class="cat-bar-title">
+              <span class="cat-bar-name">{{ c.label }}</span>
+              <span class="cat-bar-desc">{{ c.intro | default: c.blurb }}</span>
+            </span>
             <span class="cat-bar-count"><b>{{ posts.size }}</b> {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
-            {% include icon.html name="arrow" %}
+            <span class="cat-bar-open">Open {% include icon.html name="arrow" %}</span>
           </button>
           <div class="cat-bar-subs">
             {%- if c.key == 'race' %}
             {%- assign seasons_list = race_posts | group_by: "season" -%}
-            <button type="button" class="sub-square" data-goto="race/seasons">
-              <span class="sub-square-kicker">{{ race_posts.size }} reports</span>
-              <b>Seasons</b>
-              <span class="sub-square-desc">{{ seasons_list.last.name }}–{{ seasons_list.first.name }} race reports</span>
+            <button type="button" class="sub-tile" data-goto="race/seasons">
+              <span class="sub-tile-top"><b>Seasons</b><span class="sub-tile-count">{{ race_posts.size }}</span></span>
+              <span class="sub-tile-desc">{{ seasons_list.last.name }}–{{ seasons_list.first.name }} race reports, by season</span>
             </button>
-            <button type="button" class="sub-square" data-goto="race/circuits">
-              <span class="sub-square-kicker">{{ site.circuits.size }} circuits</span>
-              <b>Circuits</b>
-              <span class="sub-square-desc">World map and the {{ current_season }} calendar</span>
+            <button type="button" class="sub-tile" data-goto="race/circuits">
+              <span class="sub-tile-top"><b>Circuits</b><span class="sub-tile-count">{{ site.circuits.size }}</span></span>
+              <span class="sub-tile-desc">World map and the {{ current_season }} calendar</span>
             </button>
             {%- assign racing = 0 -%}{%- for d in site.drivers %}{% if d.current.position %}{% assign racing = racing | plus: 1 %}{% endif %}{% endfor -%}
-            <button type="button" class="sub-square" data-goto="race/drivers">
-              <span class="sub-square-kicker">{{ racing }} drivers</span>
-              <b>Drivers</b>
-              <span class="sub-square-desc">Profiles, every season, teams</span>
+            <button type="button" class="sub-tile" data-goto="race/drivers">
+              <span class="sub-tile-top"><b>Drivers</b><span class="sub-tile-count">{{ racing }}</span></span>
+              <span class="sub-tile-desc">Profiles, every season, teams</span>
             </button>
             {%- elsif c.subfields %}
             {%- for sf in c.subfields %}
             {%- assign sposts = posts | where_exp: "p", "p.subfields contains sf.key" -%}
-            <button type="button" class="sub-square" data-goto="{{ c.key }}/{{ sf.key }}">
-              <span class="sub-square-kicker">{{ sposts.size }} {% if sposts.size == 1 %}post{% else %}posts{% endif %}</span>
-              <b>{{ sf.label }}</b>
-              {%- if sposts.size > 0 %}<span class="sub-square-desc">Latest: {{ sposts.first.title | truncate: 40 }}</span>{% endif %}
+            <button type="button" class="sub-tile{% if sposts.size == 0 %} is-empty{% endif %}" data-goto="{{ c.key }}/{{ sf.key }}">
+              <span class="sub-tile-top"><b>{{ sf.label }}</b><span class="sub-tile-count">{{ sposts.size }}</span></span>
+              <span class="sub-tile-desc">{% if sposts.size > 0 %}{{ sposts.first.paper.title | default: sposts.first.title }}{% else %}Coming soon{% endif %}</span>
             </button>
             {%- endfor %}
             {%- elsif c.topics == nil %}
             {%- for post in posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
-            {%- if posts.size == 0 %}<p class="cat-bar-empty">No reviews yet.</p>{% endif %}
+            {%- if posts.size == 0 %}<p class="cat-bar-empty">No posts yet.</p>{% endif %}
             {%- else %}
             {%- for tp in c.topics %}
             {%- assign tposts = posts | where: "topic", tp.key -%}
-            <button type="button" class="sub-square" data-goto="{{ c.key }}/{{ tp.key }}">
-              <span class="sub-square-kicker">{{ tposts.size }} {% if tposts.size == 1 %}post{% else %}posts{% endif %}</span>
-              <b>{{ tp.label }}</b>
-              {%- if tposts.size > 0 %}<span class="sub-square-desc">Latest: {{ tposts.first.title | truncate: 40 }}</span>{% endif %}
+            {%- assign tseries = site.data.series | where: "topic", tp.key -%}
+            <button type="button" class="sub-tile topic-{{ tp.key }}{% if tposts.size == 0 %} is-empty{% endif %}" data-goto="{{ c.key }}/{{ tp.key }}">
+              <span class="sub-tile-top"><b>{{ tp.label }}</b><span class="sub-tile-count">{{ tposts.size }}</span></span>
+              <span class="sub-tile-desc">
+                {%- if tseries.size > 0 %}{% for sr in tseries %}{% unless forloop.first %} · {% endunless %}{% if sr.prefix == "Discussion" %}Discussions{% else %}{{ sr.course }}{% endif %}{% endfor %}
+                {%- elsif tposts.size > 0 %}{{ tposts.first.title }}
+                {%- else %}Coming soon{% endif -%}
+              </span>
             </button>
             {%- endfor %}
             {%- endif %}
           </div>
-        </div>
+        </section>
         {%- endfor %}
       </div>
     </div>
@@ -111,10 +113,12 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         {%- if tseries %}{% assign tfirst = tposts | where: "series", tseries.key | sort: "lecture" %}{% else %}{% assign tfirst = tposts %}{% endif -%}
         <div class="cat-bar cat-bar-{{ c.key }} topic-{{ t.key }}">
           <button type="button" class="cat-bar-head" data-goto="{{ c.key }}/{{ t.key }}">
-            <span class="cat-bar-name">{{ t.label }}</span>
-            <span class="cat-bar-desc">{% if tseries %}{{ tseries.course }}{% elsif tposts.size > 0 %}Latest: {{ tposts.first.title }}{% endif %}</span>
+            <span class="cat-bar-title">
+              <span class="cat-bar-name">{{ t.label }}</span>
+              <span class="cat-bar-desc">{% if tseries %}{{ tseries.course }}{% if tseries.instructor %} · {{ tseries.instructor }}{% endif %}{% elsif tposts.size > 0 %}Latest: {{ tposts.first.title }}{% else %}Coming soon{% endif %}</span>
+            </span>
             <span class="cat-bar-count"><b>{{ tposts.size }}</b> {% if tposts.size == 1 %}post{% else %}posts{% endif %}</span>
-            {% include icon.html name="arrow" %}
+            <span class="cat-bar-open">Open {% include icon.html name="arrow" %}</span>
           </button>
           {%- if tposts.size > 0 %}
           <div class="{% if tseries %}lecture-list lecture-list-compact{% else %}cat-bar-posts{% endif %}">
