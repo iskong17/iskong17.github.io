@@ -12,7 +12,6 @@ description: "데이터 수가 차원보다 적을 때 가우시안 공분산 �
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 14강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 13]({% post_url 2026-10-22-ml-13-gmm-em %}) · 다음: [Machine Learning 15]({% post_url 2026-10-22-ml-15-pca-ica %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=o2KzJdbOwMc) · 참고: CS229 인자 분석 노트(Factor analysis), CS229 lecture notes 12장 Principal components analysis

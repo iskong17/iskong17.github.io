@@ -12,7 +12,6 @@ description: "가우시안 잡음 가정 아래 최소제곱이 최대우도 추
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 3강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 2]({% post_url 2026-10-22-ml-02-lms %}) · 다음: [Machine Learning 4]({% post_url 2026-10-22-ml-04-glm %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=k_pDh_68K6c) · 참고: CS229 lecture notes Chapter 1 (1.3 Probabilistic interpretation, 1.4 Locally weighted linear regression), Chapter 2 (2.1 Logistic regression, 2.2 Perceptron, 2.4 Newton's method)

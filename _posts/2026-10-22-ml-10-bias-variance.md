@@ -12,7 +12,6 @@ description: "테스트 오차를 노이즈, 편향, 분산으로 분해해 과�
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 10강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 9]({% post_url 2026-10-22-ml-09-backprop %}) · 다음: [Machine Learning 11]({% post_url 2026-10-22-ml-11-model-selection %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=7AQYw5FOVcw) · 참고: CS229 lecture notes Ch. 8 Generalization, Ch. 9 Regularization and model selection(9.1–9.2)

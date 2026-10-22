@@ -12,7 +12,6 @@ description: "나이브 베이즈 분류기를 복습하고, 학습 집합에 �
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 6강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 5]({% post_url 2026-10-22-ml-05-gda %}) · 다음: [Machine Learning 7]({% post_url 2026-10-22-ml-07-kernels %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=ADj95edZc0w) · 참고: CS229 lecture notes Chapter 4.2 (Naive Bayes, 4.2.1 Laplace smoothing, 4.2.2 Event models for text classification)

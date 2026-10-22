@@ -12,7 +12,6 @@ description: "대규모 비라벨 데이터로 사전학습한 뒤 다운스트�
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 16강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 15]({% post_url 2026-10-22-ml-15-pca-ica %}) · 다음: [Machine Learning 17]({% post_url 2026-10-22-ml-17-rl-basics %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=6N3OAWIsUOU) · 참고: CS229 lecture notes 15장 Foundation models overview, 16장 Representation learning

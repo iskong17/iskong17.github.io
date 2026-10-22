@@ -12,7 +12,6 @@ description: "연속 상태 MDP를 다루기 위해 상태 공간 이산화와 �
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 20강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 17]({% post_url 2026-10-22-ml-17-rl-basics %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=gPCd0xx_OYI) · 참고: CS229 lecture notes 19장 Reinforcement learning (19.3–19.4)

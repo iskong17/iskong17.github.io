@@ -12,7 +12,6 @@ description: "매개변수와 입력 모두에 비선형인 모델의 손실과 
 ---
 
 > [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 8강 정리. 강의: Tengyu Ma, Christopher Ré.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 머신러닝 강의다.
 > 이전: [Machine Learning 7]({% post_url 2026-10-22-ml-07-kernels %}) · 다음: [Machine Learning 9]({% post_url 2026-10-22-ml-09-backprop %})
 >
 > [▶ 강의 영상](https://www.youtube.com/watch?v=ZMxfDWPXmjc) · 참고: CS229 lecture notes Ch. 7 Deep learning(7.1–7.3, 7.5)
