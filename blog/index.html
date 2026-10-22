@@ -37,8 +37,16 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         {%- assign posts = site.posts | where: "category", c.key -%}
         <section class="cat-bar cat-bar-{{ c.key }}">
           <button type="button" class="cat-bar-head" data-goto="{{ c.key }}">
+            {%- case c.key %}{% when 'study' %}{% assign cicon = 'book' %}{% when 'paper-review' %}{% assign cicon = 'paper' %}{% when 'gallery' %}{% assign cicon = 'camera' %}{% else %}{% assign cicon = 'flag' %}{% endcase %}
+            <span class="cat-bar-icon">{% include icon.html name=cicon %}</span>
             <span class="cat-bar-title">
               <span class="cat-bar-name">{{ c.label }}</span>
+              <span class="cat-bar-stats">
+                {%- if c.key == 'study' %}{% assign scount = 0 %}{% for sr in site.data.series %}{% assign sp = posts | where: "series", sr.key %}{% if sp.size > 0 %}{% assign scount = scount | plus: 1 %}{% endif %}{% endfor %}<span>{{ c.topics.size }} topics</span><span>{{ scount }} courses</span>
+                {%- elsif c.key == 'paper-review' %}{% assign vcount = posts | map: "conference" | uniq %}<span>{{ vcount.size }} venues</span><span>{{ c.subfields.size }} topics</span>
+                {%- elsif c.key == 'gallery' %}{% assign places = posts | map: "location" | map: "country" | uniq %}<span>{{ places.size }} {% if places.size == 1 %}country{% else %}countries{% endif %}</span>
+                {%- elsif c.key == 'race' %}{% assign seas = race_posts | group_by: "season" %}<span>{{ seas.size }} seasons</span><span>{{ site.circuits.size }} circuits</span>{% endif -%}
+              </span>
               <span class="cat-bar-desc">{{ c.intro | default: c.blurb }}</span>
             </span>
             <span class="cat-bar-count"><b>{{ posts.size }}</b> {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
@@ -76,7 +84,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             {%- assign tposts = posts | where: "topic", tp.key -%}
             {%- assign tseries = site.data.series | where: "topic", tp.key -%}
             <button type="button" class="sub-tile topic-{{ tp.key }}{% if tposts.size == 0 %} is-empty{% endif %}" data-goto="{{ c.key }}/{{ tp.key }}">
-              <span class="sub-tile-top"><b>{{ tp.label }}</b><span class="sub-tile-count">{{ tposts.size }}</span></span>
+              <span class="sub-tile-top"><b>{{ tp.label }}</b><span class="sub-tile-num">{{ tposts.size }}<small>{% if tposts.size == 1 %}post{% else %}posts{% endif %}</small></span></span>
               {%- if tseries.size > 1 %}
               <span class="sub-tile-list">
                 {%- for sr in tseries %}{% assign srp = tposts | where: "series", sr.key %}{% if srp.size > 0 %}<span>{{ sr.name }}</span>{% endif %}{% endfor -%}
