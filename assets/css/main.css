@@ -1201,6 +1201,17 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cat-card-open .icon { width: 15px; height: 15px; transition: transform 0.2s; }
 .cat-card:hover .cat-card-open { color: var(--text); }
 .cat-card:hover .cat-card-open .icon { transform: translateX(4px); }
+/* Study > All: topic cards reuse the category card look in each topic's color */
+.topic-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cat-card.topic-card { --cat-accent: var(--accent); min-height: 260px; padding: 24px 24px 22px; }
+.topic-card .cat-card-name { font-size: 24px; }
+.topic-card .cat-card-count b { font-size: 34px; }
+.topic-card-courses { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.topic-card-courses > span { display: flex; flex-direction: column; gap: 1px; padding-left: 12px; border-left: 2px solid color-mix(in srgb, var(--cat-accent) 55%, transparent); }
+.topic-card-courses b { font-size: 14.5px; line-height: 1.35; color: var(--text); }
+.topic-card-courses small { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+.topic-card-courses .is-empty { border-left-style: dashed; }
+@media (max-width: 1000px) { .topic-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .cat-cards { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- Gallery list: blog-style entries ---------- */

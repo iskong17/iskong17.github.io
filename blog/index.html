@@ -70,29 +70,28 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       </div>
       {%- endif %}
       {%- if c.key == 'study' %}
-      <!-- Study > All: a bar per topic with its course and first lectures, like the Blog All tab -->
-      <div class="cat-bars topic-bars">
+      <!-- Study > All: one card per topic, like the Blog All tab -->
+      <div class="cat-cards topic-cards topic-bars">
         {%- for t in c.topics %}
         {%- assign tposts = posts | where: "topic", t.key -%}
-        {%- assign tseries = site.data.series | where: "topic", t.key | first -%}
-        {%- if tseries %}{% assign tfirst = tposts | where: "series", tseries.key | sort: "lecture" %}{% else %}{% assign tfirst = tposts %}{% endif -%}
-        <div class="cat-bar cat-bar-{{ c.key }} topic-{{ t.key }}">
-          <button type="button" class="cat-bar-head" data-goto="{{ c.key }}/{{ t.key }}">
-            <span class="cat-bar-title">
-              <span class="cat-bar-name">{{ t.label }}</span>
-              <span class="cat-bar-desc">{% if tseries %}{{ tseries.course }}{% if tseries.instructor %} · {{ tseries.instructor }}{% endif %}{% elsif tposts.size > 0 %}Latest: {{ tposts.first.title }}{% else %}Coming soon{% endif %}</span>
-            </span>
-            <span class="cat-bar-count"><b>{{ tposts.size }}</b> {% if tposts.size == 1 %}post{% else %}posts{% endif %}</span>
-            <span class="cat-bar-open">Open {% include icon.html name="arrow" %}</span>
-          </button>
-          {%- if tposts.size > 0 %}
-          <div class="{% if tseries %}lecture-list lecture-list-compact{% else %}cat-bar-posts{% endif %}">
-            {%- for post in tfirst limit: 4 %}{% include post-card.html post=post %}{% endfor %}
-          </div>
-          {%- else %}
-          <p class="cat-bar-empty">No posts yet.</p>
-          {%- endif %}
-        </div>
+        {%- assign tseries = site.data.series | where: "topic", t.key -%}
+        {%- case t.key %}{% when 'deep-learning' %}{% assign ticon = 'network' %}{% when 'linear-algebra' %}{% assign ticon = 'matrix' %}{% when 'machine-learning' %}{% assign ticon = 'chart' %}{% when 'algorithm' %}{% assign ticon = 'tree' %}{% when 'pytorch' %}{% assign ticon = 'flame' %}{% else %}{% assign ticon = 'book' %}{% endcase %}
+        <button type="button" class="cat-card topic-card topic-{{ t.key }}" data-goto="{{ c.key }}/{{ t.key }}">
+          <span class="cat-card-bg" aria-hidden="true">{% include icon.html name=ticon %}</span>
+          <span class="cat-card-top">
+            <span class="cat-bar-icon">{% include icon.html name=ticon %}</span>
+            <span class="cat-card-count"><b>{{ tposts.size }}</b>{% if tposts.size == 1 %}post{% else %}posts{% endif %}</span>
+          </span>
+          <span class="cat-card-name">{{ t.label }}</span>
+          <span class="topic-card-courses">
+            {%- assign shown = 0 %}
+            {%- for sr in tseries %}{% assign srp = tposts | where: "series", sr.key %}{% if srp.size > 0 %}{% assign shown = shown | plus: 1 %}
+            <span><b>{{ sr.name }}</b><small>{{ sr.course }}{% if sr.instructor %} · {{ sr.instructor }}{% endif %}</small></span>
+            {%- endif %}{% endfor %}
+            {%- if shown == 0 %}<span class="is-empty"><small>Coming soon</small></span>{% endif %}
+          </span>
+          <span class="cat-card-open">Open {{ t.label }} {% include icon.html name="arrow" %}</span>
+        </button>
         {%- endfor %}
       </div>
       {%- endif %}
