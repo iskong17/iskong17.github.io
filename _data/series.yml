@@ -4,7 +4,7 @@
 - key: la
   topic: linear-algebra
   name: "Linear Algebra"
-  course: "선형대수 강의"
+  course: "Linear Algebra video lectures, YouTube"
   url: "https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1"
   prefix: "Lecture"
 - key: dl
