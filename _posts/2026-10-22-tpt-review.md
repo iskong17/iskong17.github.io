@@ -1,7 +1,7 @@
 ---
 title: "TPT: Tune the Prompt on Each Test Image"
 category: paper-review
-subfields: [calibration, tta, vlm]
+subfields: [tta, vlm]
 lang: en
 description: TPT tunes CLIP's text prompt on a single unlabeled test image by minimising the entropy of the averaged prediction over its most confident augmented views.
 paper:
