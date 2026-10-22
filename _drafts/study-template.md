@@ -5,7 +5,7 @@
 # 수식: 인라인은 $$ ... $$ (문장 안), 블록은 빈 줄로 감싼 $$ ... $$ 를 쓰면 됩니다.
 title: "공부 주제"
 category: study
-# topic: deep-learning | linear-algebra | machine-learning | algorithm
+# topic: deep-learning | linear-algebra | machine-learning | algorithm | python
 topic: deep-learning
 description: 한 줄 요약
 ---

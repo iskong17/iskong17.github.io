@@ -35,3 +35,10 @@
   instructor: "Erik Demaine, Jason Ku, Justin Solomon"
   url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
   prefix: "Lecture"
+- key: pytorch
+  topic: python
+  name: "PyTorch for Deep Learning"
+  course: "freeCodeCamp · Zero to Mastery PyTorch"
+  instructor: "Daniel Bourke"
+  url: "https://www.learnpytorch.io/"
+  prefix: "Lecture"
