@@ -1292,6 +1292,8 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .map-country.is-on { fill: color-mix(in srgb, var(--red) 55%, var(--surface-2)); }
 .map-country.is-on:hover { fill: var(--red); }
 .map-country.is-selected { fill: var(--red); stroke: var(--yellow); }
+.map-tiny-country { fill: color-mix(in srgb, var(--red) 55%, transparent); stroke: var(--red); stroke-width: 1.2; cursor: pointer; }
+.map-tiny-country:hover, .map-tiny-country.is-selected { fill: var(--red); }
 .map-marker { fill: var(--yellow); stroke: var(--bg); stroke-width: 1.5; cursor: pointer; }
 .map-reset { position: absolute; right: 10px; top: 10px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text-2); font: 600 12px/1.4 "Titillium Web", sans-serif; cursor: pointer; }
 .map-reset:hover { color: var(--text); border-color: var(--red); }

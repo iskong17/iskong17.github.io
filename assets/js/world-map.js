@@ -80,7 +80,7 @@
 
     function select(feature, name) {
       var inside = markersIn(name);
-      g.selectAll('.map-country').classed('is-selected', function (d) { return d === feature; });
+      g.selectAll('.map-country, .map-tiny-country').classed('is-selected', function (d) { return d === feature; });
       selected = name;
       if (inside.length) {
         // Zoom to the pins, so overseas territories do not shrink the view.
@@ -103,7 +103,7 @@
 
     function reset() {
       selected = null;
-      g.selectAll('.map-country').classed('is-selected', false);
+      g.selectAll('.map-country, .map-tiny-country').classed('is-selected', false);
       svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity);
       if (opts.onSelect) opts.onSelect(null, markers);
     }
@@ -124,6 +124,22 @@
         .join('path')
         .attr('class', function (d) { return 'map-country' + (highlight[norm(d.properties.name)] ? ' is-on' : ''); })
         .attr('d', path)
+        .on('click', function (e, d) {
+          e.stopPropagation();
+          var name = norm(d.properties.name);
+          if (selected === name) reset(); else select(d, name);
+        })
+        .append('title').text(function (d) { return d.properties.name; });
+
+      // Visited countries too small to see at world scale (e.g. Singapore) get a filled circle at their centre.
+      var tiny = countries.filter(function (d) { return highlight[norm(d.properties.name)] && path.area(d) < 12; });
+      g.selectAll('.map-tiny-country')
+        .data(tiny)
+        .join('circle')
+        .attr('class', 'map-tiny-country')
+        .attr('cx', function (d) { return path.centroid(d)[0]; })
+        .attr('cy', function (d) { return path.centroid(d)[1]; })
+        .attr('r', 9)
         .on('click', function (e, d) {
           e.stopPropagation();
           var name = norm(d.properties.name);
@@ -166,7 +182,7 @@
         ready.then(function () {
           var n = norm(m.country);
           var p = projection([m.lng, m.lat]);
-          g.selectAll('.map-country').classed('is-selected', function (d) { return norm(d.properties.name) === n; });
+          g.selectAll('.map-country, .map-tiny-country').classed('is-selected', function (d) { return norm(d.properties.name) === n; });
           selected = n;
           zoomToBounds([[p[0] - 14, p[1] - 7], [p[0] + 14, p[1] + 7]]);
           if (opts.onSelect) opts.onSelect(m.country, [m]);
