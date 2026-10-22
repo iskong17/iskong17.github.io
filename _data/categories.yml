@@ -13,10 +13,11 @@
 - key: paper-review
   label: "Paper Review"
   short: "Paper"
-  blurb: "TTA · 3DPC · Hallucination · VLM · AVLLM"
+  blurb: "TTA · Calibration · 3DPC · Hallucination · VLM · AVLLM"
   # Tags for paper reviews. A post lists the keys that apply in `subfields:`.
   subfields:
     - { key: tta, label: "TTA" }
+    - { key: calibration, label: "Calibration" }
     - { key: 3dpc, label: "3DPC" }
     - { key: hallucination, label: "Hallucination" }
     - { key: vlm, label: "VLM" }
