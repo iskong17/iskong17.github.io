@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 6: Orthogonal Projection, Gram-Schmidt, and QR"
-date: 2026-10-22 20:06:00 +0900
+date: 2026-10-22 10:06:00 +0900
 category: study
 topic: linear-algebra
 lang: ko

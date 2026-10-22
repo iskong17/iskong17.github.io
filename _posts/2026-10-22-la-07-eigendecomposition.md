@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 7: Eigenvalues and Diagonalization"
-date: 2026-10-22 20:07:00 +0900
+date: 2026-10-22 10:07:00 +0900
 category: study
 topic: linear-algebra
 lang: ko

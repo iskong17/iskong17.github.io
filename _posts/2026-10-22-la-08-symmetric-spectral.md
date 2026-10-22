@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 8: Symmetric Matrices and Spectral Decomposition"
-date: 2026-10-22 20:08:00 +0900
+date: 2026-10-22 10:08:00 +0900
 category: study
 topic: linear-algebra
 lang: ko

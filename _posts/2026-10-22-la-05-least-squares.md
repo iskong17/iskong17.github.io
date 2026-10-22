@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 5: Inner Products and Least Squares"
-date: 2026-10-22 20:05:00 +0900
+date: 2026-10-22 10:05:00 +0900
 category: study
 topic: linear-algebra
 lang: ko

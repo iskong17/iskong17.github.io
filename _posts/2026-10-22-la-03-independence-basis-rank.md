@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 3: Linear Independence, Basis, and Rank"
-date: 2026-10-22 20:03:00 +0900
+date: 2026-10-22 10:03:00 +0900
 category: study
 topic: linear-algebra
 lang: ko

@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 4: Linear Transformations"
-date: 2026-10-22 20:04:00 +0900
+date: 2026-10-22 10:04:00 +0900
 category: study
 topic: linear-algebra
 lang: ko

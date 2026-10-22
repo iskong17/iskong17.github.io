@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra 1: Vectors, Matrices, and Linear Systems"
-date: 2026-10-22 20:01:00 +0900
+date: 2026-10-22 10:01:00 +0900
 category: study
 topic: linear-algebra
 lang: ko
