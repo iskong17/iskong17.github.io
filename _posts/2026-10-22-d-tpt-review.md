@@ -19,6 +19,18 @@ Test-time prompt tuning (TPT) adapts CLIP's text prompt on each test image by mi
 
 The paper looks at the modality gap instead. In CLIP, the gap between image and text features is concentrated in one dominant dimension per modality, and that dimension has a large effect on the logits. Replacing the text-dominant dimension with its mean lowers ECE for both zero-shot CLIP and TPT. D-TPT turns this into a loss: it pushes each class text feature, seen as a distribution over its dimensions, toward uniform, so that no single dimension dominates.
 
+## Motivation
+
+C-TPT and O-TPT rest on an empirical link: the more the class text features are spread out (higher average text feature dispersion, ATFD), the lower the ECE. The paper's opening plot questions that link. Zero-shot CLIP and C-TPT sit at high ATFD, TPT sits at low ATFD with high ECE, but D-TPT reaches a low ECE while its ATFD is about as low as TPT's. So dispersion cannot be the whole story, and the authors look for another factor that controls confidence.
+
+![ATFD vs. ECE](/images/blog/papers/d-tpt-motivation-atfd.webp)
+*Text feature diversity (ATFD) against ECE for zero-shot CLIP, TPT, C-TPT and D-TPT. Along the blue line more diversity means lower ECE, but D-TPT ("Ours") is calibrated at roughly TPT's diversity, so diversity alone does not explain calibration. Figure from the paper.*
+
+Their candidate is the modality gap. Plotting the raw feature values per dimension shows that CLIP text features share one dimension (index 362) whose value is around 0.8 for every class, and image features have their own spike at a different index (442). Because these spikes are shared across classes, they carry the gap between the two modalities rather than class information, yet they dominate the dot product that forms the logits. Masking the text-dominant dimension changes predictions far more than any other dimension, and replacing it with its mean already lowers TPT's ECE (12.34% to 10.84%) at almost the same accuracy. That pilot result is the key insight: weakening the dominant text dimension calibrates TPT without having to spread classes apart.
+
+![Dominant dimensions](/images/blog/papers/d-tpt-dominant-dimension.webp)
+*Feature value per dimension for CLIP text features (left, all classes) and image features (right, all samples). Each modality has one dominant dimension that stands far above the rest and is shared by all classes or samples. Figure from the paper.*
+
 ## Method
 
 ![D-TPT overview](/images/blog/papers/d-tpt-main.png)
@@ -99,6 +111,16 @@ Setup: CLIP ViT-B/16 and RN50, single-sample TPT with 63 augmentations, AdamW wi
 (Zero-shot ECE is excluded from the bold marks; on fine-grained RN50 zero-shot ECE, 5.25, is lower than every tuned method.)
 
 With ViT-B/16, D-TPT has the lowest ECE among the tuned methods on both benchmarks, and on the fine-grained sets it also beats O-TPT in accuracy (64.72 vs. 63.98). On RN50 fine-grained it sits between C-TPT and O-TPT and is not the best, which the authors state. All calibration methods, including D-TPT, still give back part of TPT's accuracy gain.
+
+The reliability diagrams show where the ECE gain comes from. On DTD, TPT's confidence histogram piles up near 1.0 with large gaps in every bin, while D-TPT's bars track the diagonal. On Stanford Cars, the failure case, zero-shot CLIP is already nearly calibrated and all tuned methods are close, so D-TPT has no margin to win.
+
+![Reliability diagrams](/images/blog/papers/d-tpt-reliability.webp)
+*Confidence histograms and reliability diagrams for zero-shot CLIP, TPT, C-TPT, O-TPT and D-TPT on DTD (success case, top) and Stanford Cars (failure case, bottom). Red hatched areas are the accuracy-confidence gap; on DTD TPT's gap is large and D-TPT's is the smallest. Figure from the paper.*
+
+The Pareto plots sweep the weight $$\lambda$$ of each regularizer. On DTD, D-TPT reaches the lowest ECE of the three (about 5.4%) at an accuracy similar to O-TPT at its lowest ECE, and on Flowers102 it sits at clearly higher accuracy (about 72% vs. 69 to 70%) with ECE as low as O-TPT's.
+
+![Pareto fronts](/images/blog/papers/d-tpt-pareto.webp)
+*Accuracy-ECE trade-off as $$\lambda$$ increases (larger markers) for C-TPT, O-TPT and D-TPT on DTD (left) and Flowers102 (right); lower right is better. D-TPT reaches low ECE while losing less accuracy than the inter-feature methods. Figure from the paper.*
 
 ## Limitations
 

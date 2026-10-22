@@ -6,7 +6,8 @@
 # subfields: _data/categories.yml 의 paper-review subfields 키 (tta, calibration, 3dpc, hallucination, vlm, avllm)
 #   글 상단과 Paper Review 목록의 바에 태그로 표시되고, 목록에서 필터로 쓰입니다.
 # paper.url: arXiv 주소. 목록에서 논문 제목을 누르면 이 주소로 이동합니다.
-# Main figure 는 images/blog/papers/<슬러그>-main.png 에 넣으세요.
+# Main figure 는 images/blog/papers/<슬러그>-main.png, 추가 그림은 <슬러그>-<이름>.webp 에 넣으세요.
+# 한국어판은 _paper_ko/<슬러그>.md (en: <슬러그>), 문장은 한국어·용어는 영어, 섹션 제목은 영어 그대로.
 title: "Tent: Test-Time Adaptation by Entropy Minimization"
 category: paper-review
 subfields: [tta]
@@ -20,6 +21,11 @@ paper:
 ---
 
 ## Abstract
+
+## Motivation
+
+![Motivation figure](/images/blog/papers/tent-motivation.webp)
+*What the motivating observation shows. Figure from the paper.*
 
 ## Method
 

@@ -19,6 +19,15 @@ Point cloud classifiers break under corruptions such as sensor noise, LiDAR arti
 
 MATE is the first TTT method built for 3D point clouds. It uses masked autoencoding as the self-supervised task. For each test point cloud, it masks most of the tokens, asks the network to reconstruct the full shape, takes a gradient step on that reconstruction loss, and then classifies the sample with the updated encoder.
 
+## Motivation
+
+The paper starts from two facts. Small perturbations such as jitter or a little noise already hurt state-of-the-art 3D recognition models, and the shifts real sensors produce are too varied to cover in training. TTT is the natural answer, but at the time every TTT method came from 2D images: entropy minimization (TENT, SHOT), BN statistic updates (DUA), and self-supervised auxiliary tasks such as rotation prediction (TTT-Rot). The authors show these fail when applied naively to point clouds, and in the realistic online case of one sample at a time the entropy methods collapse to about half of Source-Only accuracy.
+
+![MATE teaser: test-time training by masked reconstruction, then online evaluation](/images/blog/papers/mate-teaser.webp)
+*Top: a single OOD test sample is masked, reconstructed, and the reconstruction error (drawn as $$l_2$$) updates the encoder. Bottom: the same sample is then classified with the updated encoder. Figure from the paper.*
+
+The key insight is that a self-supervised task that fits 3D data already exists. Masked autoencoding works well for pretraining 3D recognition networks (Point-MAE) and for adapting 2D networks to corruptions, and it needs no labels: remove most of the point cloud and ask the network to rebuild it. If the classifier and the reconstruction head share an encoder, then improving reconstruction on a corrupted test sample should also move the encoder toward features that classify that sample better. A side benefit is cost. The encoder only sees the visible tokens, so with 90-95% masking each update touches a small fraction of the input.
+
 ## Method
 
 ![MATE overview](/images/blog/papers/mate-main.png)
@@ -86,7 +95,20 @@ The 2D baselines get a fairer chance with a batch size of 128 on ModelNet-40C (T
 |---|---|---|---|---|
 | 53.9 | 65.6 | 63.8 | 55.9 | **74.5** |
 
+The per-corruption ModelNet-40C table shows that MATE-Online wins almost every column, with the exception of background, where TTT-Rot (34.5) and T3A (33.4) are ahead.
+
+![ModelNet-40C per-corruption accuracy table](/images/blog/papers/mate-results-table.webp)
+*Table 1 of the paper: top-1 accuracy (%) for every ModelNet-40C corruption with batch size 1. SHOT and TENT fall to about 26% on average, while MATE-Online reaches 71.3%. The background column (7.2 for Source-Only) is the one MATE does not fix. Figure from the paper.*
+
 Both MATE variants beat every baseline on all three benchmarks. Entropy-based methods (TENT, SHOT) fail badly with single samples and recover only partly with large batches. The gain on the real-world ScanObjectNN-C is much smaller (+2.8 points for MATE-Online over Source-Only) than on the synthetic benchmarks. Adapting only on every 5th sample keeps accuracy within about 3 points of adapting on every sample while running at 20 FPS on ShapeNet-C (RTX 3090).
+
+![Accuracy vs. frames per second for MATE-Online with different adaptation strides](/images/blog/papers/mate-fps.webp)
+*Mean ShapeNet-C accuracy against FPS when MATE-Online adapts only every $$k$$-th sample. Stride 1 gives about 69% at about 5 FPS, stride 5 about 65.6% at 20 FPS, and even stride 300 (about 61 FPS) stays above Source-Only (57.6%). Figure from the paper.*
+
+The supplement looks at why background is the weak spot by showing what the network reconstructs after 20 MATE-Standard steps.
+
+![Reconstructions for distortion, background, cutout, and density corruptions](/images/blog/papers/mate-reconstruction.webp)
+*Corrupted input (left), the 10% visible tokens (center), and the reconstruction (right) on ModelNet-40C. Distortion, cutout, and density come back as clean airplanes, but with background noise the reconstruction is a diffuse cloud. Figure from the paper (supplement).*
 
 ## Limitations
 

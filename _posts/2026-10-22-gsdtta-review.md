@@ -19,6 +19,20 @@ Point cloud classifiers trained on clean data lose a lot of accuracy on corrupte
 
 GSDTTA moves the adaptation to the graph spectral domain. Each test point cloud becomes a kNN graph, is transformed with the Graph Fourier Transform (GFT), and only the lowest $$M=100$$ frequency coefficients (about 10% of them) get a learnable offset. The inverse GFT turns this offset into a smooth, global point shift. Pseudo-labels for the optimisation mix the model's deep features with Laplacian eigenmap features, which the authors argue are less biased toward the source domain.
 
+## Motivation
+
+The starting point is how badly a standard classifier breaks. A DGCNN trained on clean ModelNet40 loses more than 35 points of accuracy on background, occlusion, and LiDAR corruptions, and most of that drop already happens at the lowest severity level.
+
+![Accuracy of DGCNN under background, occlusion, and LiDAR corruptions](/images/blog/papers/gsdtta-motivation.webp)
+*Left: a clean shape and its background, occlusion, and LiDAR versions. Right: DGCNN accuracy drops from about 92% to roughly 50%, 35%, and 15% as severity grows, with most of the loss at level 1. Figure from the paper.*
+
+The authors then point at what existing 3D TTA methods have in common: they all work in the spatial domain. MATE solves masked patch reconstruction, and CloudFixer and 3DD-TTA learn a per-point transformation $$\Delta P \in R^{N\times 3}$$ with $$N$$ often above 1024. CloudFixer and 3DD-TTA also need a diffusion model trained on source data. With only a few streaming test samples, such a high-dimensional problem is hard to optimise.
+
+![Graph spectrum of a chair point cloud and its low-frequency reconstruction](/images/blog/papers/gsdtta-spectrum.webp)
+*GFT coefficients of a chair (left) are almost all near zero after the first ~100. Keeping only those lowest 10% and applying the inverse GFT (right) gives back the same global shape. Figure from the paper.*
+
+Two observations about the graph spectral domain give the key insight. First, energy compaction: about 95% of a chair's spectral energy sits in roughly the lowest 100 coefficients, so editing only those controls the global shape with about 90% fewer parameters than editing points directly. Second, Laplacian eigenmaps are isometry-invariant shape descriptors that do not depend on any training domain. Deep features carry source bias, especially early in adaptation, so the eigenmaps can serve as a second, unbiased opinion when building pseudo-labels.
+
 ## Method
 
 ![GSDTTA overview](/images/blog/papers/gsdtta-main.png)
@@ -125,7 +139,17 @@ Backbones are DGCNN, CurveNet, and PointNeXt, trained on the clean dataset and a
 | 3DD-TTA | 57.08 | – | – |
 | **GSDTTA** | **61.83** | **62.59** | **60.84** |
 
+The full per-corruption table for ModelNet40-C shows where the mean gains come from. GSDTTA is strong on background and on the shape-level corruptions (shear, rotation, distortion), while CloudFixer leads most of the noise columns and SHOT leads occlusion.
+
+![ModelNet40-C per-corruption accuracy table](/images/blog/papers/gsdtta-results-table.webp)
+*Table 1 of the paper: accuracy (%) for each of the 15 ModelNet40-C corruptions with DGCNN, CurveNet, and PointNeXt. Note the background column (88.57 for GSDTTA vs. 49.71 source-only on DGCNN) and how low occlusion and LiDAR stay for every method. Figure from the paper.*
+
 GSDTTA has the best mean on both benchmarks and all three backbones. The biggest single gain is on the background corruption (for example 88.57 vs. 49.71 source-only with DGCNN on ModelNet40-C), which the ablation ties to the outlier-aware graph: with $$\gamma=0$$, background accuracy on ScanObjectNN-C drops from 69.54% to 18.24%. CloudFixer is still better on the simple noise corruptions (uniform, gaussian, impulse, upsampling) on ScanObjectNN-C, by 8.35% on average, since it uses a diffusion denoiser. In the DGCNN ablation on ScanObjectNN-C, removing the input shift costs 4.55 points, removing model adaptation costs 3.48, and replacing eigenmap-guided pseudo-labels with deep-feature-only ones costs 0.63.
+
+To check the eigenmap idea directly, the authors compare pseudo-labels obtained from deep descriptors only, spectral descriptors only, and the eigenmap-guided mix of Eq. 16 on four corruptions.
+
+![Accuracy of deep, spectral, and eigenmap-guided pseudo-labels](/images/blog/papers/gsdtta-logits.webp)
+*Pseudo-label accuracy from deep logits, spectral logits, and the eigenmap-guided mix on uniform, background, rotation, and cutout. Spectral logits alone are worse than deep logits except on background, but the mix is the best in all four. Figure from the paper.*
 
 ## Limitations
 

@@ -19,6 +19,17 @@ Test-time prompt tuning (TPT) adapts CLIP's text prompt to each test image by mi
 
 SoC (Semantic Orthogonal Calibration) keeps the idea of separating prototypes but uses a Huber penalty on pairwise cosine similarity. The penalty is quadratic for small similarities and linear for large ones, so the repulsion between very similar classes is capped. The paper backs this with a confidence lower bound in terms of the largest pairwise similarity and a one-step analysis showing that O-TPT shrinks that similarity faster than SoC.
 
+## Motivation
+
+The starting point is a failure case of the calibration fix rather than of TPT itself. Entropy minimization makes TPT overconfident, and C-TPT and O-TPT counter this by spreading the class text prototypes apart. O-TPT goes furthest and asks for every pair to be orthogonal. The authors argue that this ignores the fact that some classes really are semantically close. In EuroSAT, an "annual crop land" image is easily confused with "permanent crop land". Zero-shot CLIP gets such an image wrong but stays uncertain, splitting its softmax between the two classes. O-TPT pushes the two prototypes apart, so the same wrong prediction becomes confident (the teaser figure in the Method section shows this example).
+
+The paper backs the example with an analysis on EuroSAT. For every ordered class pair $$(i, j)$$ it takes the wrong predictions (predicted $$i$$, true label $$j$$), computes their ECE, and plots it against the zero-shot cosine similarity of the two class prototypes. For O-TPT, ECE grows with similarity (correlation $$r=+0.69$$), and the most similar pairs, which also hold the most samples, have ECE near 90. SoC removes this trend ($$r=-0.20$$).
+
+![ECE per class pair vs. zero-shot similarity on EuroSAT](/images/blog/papers/soc-review-motivation.webp)
+*ECE of the wrong predictions for each class pair on EuroSAT, against the zero-shot cosine similarity of the pair. Circle size is the number of samples. O-TPT (blue) is most overconfident on the most similar pairs; SoC (red) is not. Figure from the paper.*
+
+The key insight is that the repulsion between prototypes should depend on how similar they are: strong enough to undo the collapse caused by entropy minimization, but capped for pairs that are similar for a real semantic reason. A Huber penalty on the pairwise cosine similarity does exactly this, and the paper's confidence bound and one-step analysis make the argument formal.
+
 ## Method
 
 ![SoC overview](/images/blog/papers/soc-main.png)
@@ -96,6 +107,21 @@ Per-dataset ECE with ViT-L/14 (paper's Table 1), SoC vs. O-TPT:
 | SoC | 7.2 | 10.9 | 5.3 | 2.1 | 7.2 | 12.7 | 0.5 | 1.3 | 6.5 | 3.2 | 2.2 |
 
 SoC has the lowest average ECE among the adapted methods in every setting, and with ViT-L/14 its ECE (5.4) is close to zero-shot CLIP (5.1) while its accuracy is slightly higher. The largest single change is EuroSAT, where ECE drops from 17.7 to 3.2 and accuracy rises from 53.6 to 58.3. Under the ImageNet shifts, accuracy equals O-TPT and stays below TPT and C-TPT. With two gradient steps instead of one, SoC's ECE degrades by about 23% versus 39% for O-TPT, which matches the one-step analysis.
+
+The reliability diagrams on three datasets show where the ECE gain comes from. O-TPT's bars sit below the diagonal in the high-confidence bins, which is overconfidence. With SoC the bars move closer to the diagonal, most clearly on EuroSAT (ECE 17.7 to 3.2), while Aircraft remains overconfident (16.8 to 12.7).
+
+![Reliability diagrams of O-TPT and SoC](/images/blog/papers/soc-review-reliability.webp)
+*Reliability diagrams for O-TPT (top) and SoC (bottom) on Flowers102, EuroSAT, and FGVC Aircraft, with ECE and accuracy in each panel. SoC is closer to the diagonal on all three, with the biggest change on EuroSAT. Figure from the paper.*
+
+The two-step experiment tests the one-step analysis directly. Taking a second gradient step raises ECE for all three regularizers, but by +44.2% for C-TPT, +39.2% for O-TPT, and +22.8% for SoC, while accuracy changes by less than one point.
+
+![ECE and accuracy with one and two gradient steps](/images/blog/papers/soc-review-gradient-steps.webp)
+*Average ECE (left) and accuracy (right) over 11 datasets for C-TPT, O-TPT, and SoC with one (solid) and two (hatched) gradient steps. The relative ECE increase is smallest for SoC. Figure from the paper.*
+
+Calibration also depends on the initial prompt. Over 18 CLIP prompt templates, SoC has lower ECE than O-TPT for every template on DTD and for most templates on Aircraft, so the gain does not depend on the choice of "a photo of a".
+
+![ECE of O-TPT and SoC for 18 initial prompts](/images/blog/papers/soc-review-prompt-sensitivity.webp)
+*ECE on DTD (left) and Aircraft (right) for O-TPT (blue) and SoC (red) with 18 different initial prompt templates from CLIP. SoC is lower on almost every prompt, and O-TPT's worst cases (above 20) disappear. Figure from the paper.*
 
 ## Limitations
 

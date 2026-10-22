@@ -19,6 +19,15 @@ Test-time adaptation (TTA) for 3D point clouds usually updates the model with ba
 
 BFTT3D never updates the source model. It adds a second branch built from parameter-free parts: a non-parametric point cloud encoder, a small memory of source prototypes, and a closed-form subspace alignment. This branch produces a target-specific logit. It is mixed with the frozen source model's logit using a weight computed from the two prediction entropies.
 
+## Motivation
+
+The paper's motivation is a trade-off between the two main families of 3D TTA. Pseudo-label methods (often teacher-student schemes) are fast, but every update is supervised by labels the model produced itself. Wrong labels are fed back by backpropagation, errors build up across the stream, and source knowledge is overwritten. Self-supervised methods such as MATE avoid noisy labels and work better, but they need an auxiliary task and gradient updates at test time, which the authors consider too slow for something like a LiDAR detector that must adapt as the weather changes. The ScanObjectNN-C results later in the paper show how badly the first family can fail on small real-scanned data: SHOT raises CurveNet's error from 64.77 to 85.35.
+
+The authors' answer is to keep the source model completely frozen, so nothing can be forgotten, and to put all target-specific information into a branch that has no trainable parameters at all. The figure below contrasts the two pipelines: the baseline sends gradients from pseudo-labels back into the source model, while BFTT3D runs the frozen model next to a backpropagation-free module and only fuses their outputs.
+
+![Baseline TTA versus BFTT3D](/images/blog/papers/bftt3d-review-motivation.webp)
+*(a) Typical 3D TTA: the source model produces pseudo-labels and is trained on them by backpropagation. (b) BFTT3D: the source model stays frozen, a backpropagation-free adaptation module produces a second prediction, and adaptive fusion combines the two. Figure from the paper.*
+
 ## Method
 
 ![BFTT3D overview](/images/blog/papers/bftt3d-main.png)
@@ -96,6 +105,21 @@ Mean classification error (%, lower is better) over 15 corruptions at severity 5
 | **BFTT3D** | **54.46** | **43.91** | **57.80** |
 
 BFTT3D has the lowest mean error in all six settings. On ModelNet-40C the margin over the best baseline is small (for example 19.23 vs. 19.79 for SHOT on CurveNet). On the smaller, real-scanned ScanObjectNN-C it is larger, because backpropagation baselines often fail to improve or even get worse there (SHOT rises to 85.35 on CurveNet). Gains concentrate on large shifts such as background, occlusion and LiDAR. The paper does not report runtime or memory numbers.
+
+The full per-corruption tables show where the averages come from. On ModelNet-40C with PointNet, most columns move by less than one point, and the mean gain is carried by background (95.30 to 80.75), rotation (72.81 to 68.56) and LiDAR (59.00 to 55.88). Shear with DGCNN is one of the cells where BFTT3D is worse than the source model.
+
+![Per-corruption errors on ModelNet-40C](/images/blog/papers/bftt3d-review-modelnet40c-table.webp)
+*Table 1 of the paper: classification error (%) per corruption on ModelNet-40C for PointNet, DGCNN and CurveNet. BFTT3D rows are shaded; most gains are a few points, with the largest on background noise. Figure from the paper.*
+
+On ScanObjectNN-C the baselines are much less stable. SHOT is worse than the source model for all three backbones, while BFTT3D improves almost every column. With CurveNet the background error goes from 81.93 to 68.85 and density decrease from 35.46 to 30.29.
+
+![Per-corruption errors on ScanObjectNN-C](/images/blog/papers/bftt3d-review-scanobjectnn-c-table.webp)
+*Table 2 of the paper: classification error (%) per corruption on ScanObjectNN-C. Note SHOT's large increases (for example CurveNet impulse 93.98) next to BFTT3D's steady gains. Figure from the paper.*
+
+The ablation on the fusion weight checks whether the entropy-based $$p$$ is a reasonable substitute for tuning. For every corruption type, the error with the adaptive $$p$$ stays a few points above the error with the best fixed $$p$$ found by exhaustive search, and the two curves have the same shape.
+
+![Adaptive versus optimal fusion ratio](/images/blog/papers/bftt3d-review-adaptive-ratio.webp)
+*Error per corruption type with the optimal fixed $$p$$ from exhaustive search (blue) and the entropy-based adaptive $$p$$ (green), PointNet on ModelNet40-C. The adaptive ratio tracks the oracle closely without validation data. Figure from the paper.*
 
 ## Limitations
 

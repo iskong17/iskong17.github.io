@@ -19,6 +19,15 @@ Point clouds from real sensors come with noise, occlusion, density changes and m
 
 CloudFixer also adapts the input, one sample at a time, but it does not regenerate the point cloud. It optimizes a small geometric transformation (a rotation plus per-point displacements) of the input. The target for this optimization is the one-step denoised estimate from a frozen source diffusion model. The diffusion model only runs forward passes. An optional online variant, CloudFixer-O, also updates the classifier so that its prediction on the original input agrees with its prediction on the adapted input.
 
+## Motivation
+
+The authors first check how well standard model-update TTA transfers to point clouds. Figure 1 sweeps TENT's batch size on ModelNet40-C with Point2Vec. With a randomly ordered stream, TENT needs a batch of about 8 just to match the unadapted model (about 62%) and only reaches CloudFixer's level at batch size 64; at batch sizes 1 and 2 it collapses to a few percent. With a class-ordered stream it stays below about 13% at every batch size. The paper attributes this to the heavy reliance on the model's own unstable predictions, which become biased when a batch is tiny or contains one class.
+
+![TENT vs. batch size](/images/blog/papers/cloudfixer-motivation-tent.webp)
+*Accuracy of TENT on ModelNet40-C as the batch size grows, for a random-order and a class-order test stream, against the unadapted model and CloudFixer. TENT is useless at small batches and under class-ordered streams, while per-sample CloudFixer does not depend on either. Figure from the paper.*
+
+Input adaptation sidesteps this because it works on one sample and never trusts a pseudo-label. DDA showed this in 2D, but its recipe (add noise, then run the full reverse diffusion to regenerate the input) fits images, not point clouds. Many 3D corruptions are geometric, such as a rotated object or a few stray points, so regenerating every point is unnecessary and can erase shape detail, and the full reverse process with backpropagation through the diffusion model costs about 23.6 s per sample. The insight CloudFixer builds on is that a frozen diffusion model's one-step estimate is enough to say which way the input should move, and that the move itself can be a small, structured transform (a rotation plus regularized per-point offsets) instead of a new sample.
+
 ## Method
 
 ![CloudFixer overview](/images/blog/papers/cloudfixer-main.png)
@@ -124,6 +133,21 @@ Takeaways:
 - In the hard settings, the model-update methods either collapse (TENT and SHOT at about 4% with batch size 1) or fall below the unadapted model. CloudFixer stays about 16-18 points above the unadapted model. The biggest gains are on background noise (37.68 to 75.49) and rotation (47.04 to 81.04), where DDA barely helps.
 - In the standard mild setting (batch size 64, i.i.d., Table 4), CloudFixer-O reaches 81.49 on average. The best baseline, TENT, reaches 78.85.
 - On PointDA-10 the margins are small. Plain CloudFixer (64.92) is slightly below DDA (65.35), and only CloudFixer-O is the best on average. CloudFixer takes 0.93 s per sample on an RTX 3090. DDA takes about 23.6 s.
+
+The qualitative examples show what the transform does. Rotated and distorted shapes are turned back to a canonical pose and smoothed, scattered Gaussian-noise points are pulled onto the surface, and on the real-to-synthetic PointDA shift (ScanNet to ModelNet) sparse scans become denser and more regular. Cutout holes are not filled, which matches the occlusion limitation below.
+
+![CloudFixer examples](/images/blog/papers/cloudfixer-qualitative.webp)
+*Corrupted inputs (top) and the same point clouds after CloudFixer (bottom) for four ModelNet40-C corruptions and two PointDA-10 shifts. Rotation and noise are largely undone, while the missing region from cutout stays missing. Figure from the paper.*
+
+The cost plot puts the speed claim in one picture: averaged over all ModelNet40-C corruptions, CloudFixer adapts a sample in 0.93 s at 78.4% accuracy, while DDA needs 23.6 s and MEMO is fast but no better than the unadapted model.
+
+![Adaptation time vs. accuracy](/images/blog/papers/cloudfixer-efficiency.webp)
+*Average adaptation time per sample against accuracy on ModelNet40-C for the per-sample episodic methods. CloudFixer is about 25 times faster than DDA and more accurate. Figure from the paper.*
+
+Across backbones (Point2Vec, PointMAE, PointMLP, PointNeXt, mild setting), CloudFixer-O is the best or tied-best everywhere. Plain CloudFixer is a little below TENT with batch size 64 on three of the four backbones (it is above TENT on PointMAE), which is not surprising since TENT is strong in this easy setting.
+
+![Across architectures](/images/blog/papers/cloudfixer-architectures.webp)
+*Average ModelNet40-C accuracy for four classifier backbones. CloudFixer-O is at or near the top for all of them; MEMO falls well below the unadapted model on PointNeXt. Figure from the paper.*
 
 ## Limitations
 

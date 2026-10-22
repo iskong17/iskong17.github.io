@@ -19,6 +19,18 @@ AV-LLMs feed audio and video into the decoder together. Joint processing lets th
 
 Fork-Merge Decoding (FMD) is a training-free fix. It **forks** the input into a video-masked and an audio-masked copy, runs each through the first $$L_{\text{fork}}$$ decoder layers on its own, **merges** the hidden states, and runs the remaining layers once. Only the early layers run twice, so it is cheaper than contrastive decoding.
 
+## Motivation
+
+The paper's evidence for modality bias is an attention probe. On 100 AVHBench samples, the authors read the last decoder layer of VideoLLaMA2 and look at how much attention the final question token puts on video tokens versus audio tokens. With vanilla decoding, video gets about 0.23 of the attention and audio about 0.04, more than five times less. Earlier work on MLLMs links this kind of imbalance to hallucination and flawed reasoning, so the question is how to give the weaker modality a fair hearing without retraining the model.
+
+![Attention to video and audio](/images/blog/papers/fmd-motivation-attention.webp)
+*Last-layer attention of the final question token to video (left) and audio (right) tokens in VideoLLaMA2 on 100 AVHBench samples. Vanilla decoding favors video by a wide margin; FMD lowers video attention and raises audio attention. Note the different y-axis ranges. Figure from the paper.*
+
+The second observation decides where to split. Following prior work on LLM layer structure, the authors compute the cosine similarity between hidden states of all layer pairs in VideoLLaMA2 and find the same three blocks: a small early block (layers 1 to 5), a large middle block, and a late block. Early layers are where each modality's features are aligned and encoded on their own, and cross-modal fusion mostly happens in the middle. So letting audio and video pass the early block separately, then fusing before the middle block, should strengthen each modality's own representation without changing how the model fuses them.
+
+![Layer-wise hidden state similarity](/images/blog/papers/fmd-layer-similarity.webp)
+*Cosine similarity between hidden states of every pair of decoder layers in VideoLLaMA2. The layers group into early, middle and late blocks; FMD picks the fork depth inside the early block. Figure from the paper.*
+
 ## Method
 
 ![FMD overview](/images/blog/papers/fmd-main.png)
@@ -92,6 +104,16 @@ Compared with other training-free decoding methods on VideoLLaMA2 (AVHBench A→
 
 - The gains are large on video-SALMONN (AVQA +12.3, MUSIC-AVQA +6.1) but mostly under 1.5 points on VideoLLaMA2 and Qwen2.5-Omni.
 - The merge rule matters. Plain averaging collapses V→A accuracy to 55.31.
+
+In the qualitative example below, vanilla decoding describes only what it sees, while FMD also reports the sound of the stream and the splashes, which is the kind of audio detail the attention probe suggests is being ignored.
+
+![FMD qualitative example](/images/blog/papers/fmd-qualitative.webp)
+*An audio-visual description example with VideoLLaMA2. Vanilla decoding gives a video-only caption; FMD adds the audio content (the stream and the occasional splash). Figure from the paper.*
+
+The fork-depth sweep on 200 AVHBench samples per task shows the trade-off behind the chosen $$L_{	ext{fork}}$$. Merging early keeps A→V and AV-matching accuracy at or above vanilla, while forking deeper helps V→A (audio-targeted) questions but hurts the other two sharply after about layer 15.
+
+![Fork layer ablation](/images/blog/papers/fmd-fork-layer-ablation.webp)
+*Accuracy of VideoLLaMA2 with FMD as a function of $$L_{	ext{fork}}$$ for A→V, V→A and AV-matching questions (200 AVHBench samples each; dashed line = vanilla). No single depth is best for all three, and the paper picks an early one. Figure from the paper.*
 
 ## Limitations
 

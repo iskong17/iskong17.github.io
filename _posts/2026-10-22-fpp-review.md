@@ -19,6 +19,15 @@ Test-time prompt tuning (TPT) adapts CLIP's text prompt to each test image with 
 
 This paper gives one explanation. Because TPT resets the prompt for every test sample and takes a single step, the regulariser's gradient is a fixed offset. Regularised TPT then looks like sharpness-aware minimisation (SAM): the EM gradient is computed at a perturbed point and applied at another. The authors show that flatter minima go with lower calibration error. Their method, Flatness-aware Prompt Pretraining (FPP), drops the regulariser and instead pretrains the initial prompt, without any images, so that it already sits in a flat region. Existing TPT pipelines only need to swap their initial prompt.
 
+## Motivation
+
+C-TPT and O-TPT were designed as geometric constraints on the text features, and they work, but the papers do not say what the constraint does to the prompt itself. FPP looks at the prompt's loss landscape instead. Measuring the sharpness of the entropy loss around each adapted prompt, the authors find a clean ordering on the fine-grained average: TPT has the sharpest minima and the highest ECE (11.67%), C-TPT is flatter with lower ECE, and O-TPT is flatter still with lower ECE again. Sharpness and ECE fall together, which suggests the regularizers help calibration by pushing the prompt toward flat minima, the same property that sharpness-aware training targets for generalization.
+
+![Sharpness and ECE](/images/blog/papers/fpp-motivation-sharpness.webp)
+*Average sharpness of the adapted prompt (bars, left axis, broken at the bottom) and average ECE (line, right axis) on the fine-grained datasets. Adding C-TPT's or O-TPT's regularizer lowers both, and FPP ("Ours") is the flattest with the lowest ECE. Figure from the paper.*
+
+The authors then point out two problems with getting flatness through those regularizers. Constraining the output features directly often costs accuracy, and with a single TPT step the prompt cannot travel far enough to find a flatter region; taking more steps risks becoming overconfident on wrong predictions. The insight behind FPP is to move the search for flatness out of test time: if the starting prompt already sits in a flat region, the usual one-step entropy update will end in a flat minimum without any regularizer.
+
 ## Method
 
 ![FPP overview](/images/blog/papers/fpp-main.png)
@@ -84,6 +93,16 @@ With prompts initialised from released CoOp and MaPLe checkpoints (paper's Table
 | MaPLe+FPP | 67.01 | 4.07 |
 
 On the fine-grained average, FPP is the only method that beats TPT in accuracy while also having the lowest ECE and SCE. On the OOD sets it keeps most of TPT's accuracy (59.53 vs. 59.95) with lower ECE than O-TPT, though the shift experiments use a fixed $$\lambda = 1.25$$. The ablation shows both parts are needed: alignment alone gives 7.05 ECE, flatness alone collapses zero-shot accuracy to 4.65%, and the full loss gives 4.13. Applying SAM or ASAM directly inside TPT also lowers ECE, but SAM drops accuracy to 61.59.
+
+The sharpness-group analysis is the paper's direct check that flatness tracks calibration. For each test sample a prompt is adapted, the prompts are split into thirds by sharpness, and ECE is computed per group and averaged over the fine-grained datasets. For TPT, C-TPT, O-TPT and FPP alike, the flattest third has the lowest ECE. This is a correlation across groups, not a causal test.
+
+![Sharpness groups vs. ECE](/images/blog/papers/fpp-sharpness-groups.webp)
+*Prompts split into low, mid and high sharpness thirds (bars) with the average ECE of each group (line), for TPT, C-TPT, O-TPT and FPP on the fine-grained datasets. In every method, flatter groups are better calibrated. Figure from the paper.*
+
+The reliability diagrams compare O-TPT and FPP on three datasets. The largest change is on EuroSAT, where O-TPT's mid-confidence bins are badly overconfident (ECE 12.98) and FPP's bars follow the diagonal (5.19). On DTD the two are close (7.88 vs. 7.52), and on SUN397 FPP removes O-TPT's underconfidence in the low bins.
+
+![Reliability diagrams](/images/blog/papers/fpp-reliability.webp)
+*Reliability diagrams of O-TPT (top) and FPP (bottom) on DTD, EuroSAT and SUN397, with the ECE of each. FPP corrects both overconfidence (EuroSAT) and underconfidence (SUN397), while DTD barely changes. Figure from the paper.*
 
 ## Limitations
 

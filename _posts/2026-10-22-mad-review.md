@@ -19,6 +19,15 @@ Multimodal LLMs suffer from **cross-modal hallucination**: one modality interfer
 
 Existing contrastive decoding (CD) methods use a fixed contrastive strength for every question. MAD asks the model one extra question: does this question need audio, video, or both? It turns the answer into per-branch weights in a four-branch CD formula. It needs no training.
 
+## Motivation
+
+The paper opens with a concrete failure. Asked to describe a video and its sound, a base audio-visual LLM makes up visual content and, worse, makes up sounds that fit the scene: a man next to a boat becomes someone giving fishing tips, and the audio supposedly contains "the occasional splash of a fish jumping out of the water". The strong visual cues have leaked into the audio description.
+
+![Cross-modal hallucination example: base model vs. MAD](/images/blog/papers/mad-motivation.webp)
+*A video of a man in front of a boat with the prompt "describe the video and sound in detail". The base model adds visual hallucinations (blue) and video-driven audio hallucinations (red), such as fish splashes. MAD's description stays with what is actually there. Figure from the paper.*
+
+The authors argue this is not a weak encoder for one modality but a failure of modality-interaction control: the model has to judge which modality is reliable and relevant for the task, and keep the others from leaking in. Existing training-free fixes do not do that. VCD-style contrastive decoding assumes hallucination comes from the visual input, and AVCD extends CD to audio and video but applies the same distortion and strength to every modality, no matter what the question asks. The insight behind MAD is that the model itself can say which modality a question needs, and that this self-assessment can steer how strongly each contrastive branch is applied.
+
 ## Method
 
 ![MAD overview](/images/blog/papers/mad-main.png)
@@ -72,6 +81,21 @@ CMM reports accuracy on visual-dominant, audio-dominant, and language-dominant s
 - The biggest jump is on CMM visual-dominant questions: +10.5 for VideoLLaMA2-AV and +12.3 for Qwen2.5-Omni. AVCD barely moves that column.
 - Weighting by the full softmax (81.3) beats equal weights (79.4) and putting all weight on the argmax (78.7).
 - MAD does not hurt general audio-visual understanding on VideoLLaMA2-AV: OmniBench 36.3 → 36.8, WorldSense 23.3 → 25.6, MUSIC-AVQA 78.1 → 79.1.
+
+The weights themselves look sensible. On 300 hand-made questions over 100 VideoMME videos (100 visual, 100 audio, 100 audio-visual), the largest average weight always lands on the modality the question type needs.
+
+![Average modality weights for visual, audio, and audio-visual questions](/images/blog/papers/mad-weight-distribution.webp)
+*Average $$w_v$$, $$w_a$$, $$w_{av}$$ per question type. Visual questions put most weight on video (0.565), audio questions on audio (0.482), and audio-visual questions on both (0.464), with no supervision. Figure from the paper.*
+
+The supplement repeats this on CMM with VideoLLaMA2-AV. The pattern is the useful one for hallucination: when vision dominates and the risk is an audio hallucination, the model puts most weight on audio, and the reverse for audio-dominant cases.
+
+![Average modality weights on the three CMM categories](/images/blog/papers/mad-weights-cmm.webp)
+*Weights on CMM. Visual-dominant questions (audio hallucination) get $$w_a = 0.639$$, while audio-dominant and language-dominant questions (video hallucination) get $$w_v = 0.712$$ and $$0.821$$. Figure from the paper.*
+
+The global strength $$\gamma$$ is swept from 0.5 to 3.0. Accuracy rises steeply up to about 2.0 and then flattens, and $$\gamma = 2.5$$ is used everywhere.
+
+![Effect of gamma on AVHBench and CMM accuracy for VideoLLaMA2-AV](/images/blog/papers/mad-gamma.webp)
+*Accuracy on AVHBench, CMM, and their average as $$\gamma$$ varies, for VideoLLaMA2-AV. CMM benefits most from a larger $$\gamma$$, AVHBench peaks around 2.0, and the average is flat between 2.0 and 3.0. Figure from the paper (supplement).*
 
 ## Limitations
 

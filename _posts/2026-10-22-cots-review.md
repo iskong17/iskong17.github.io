@@ -19,6 +19,15 @@ Test-time prompt tuning (TPT) improves CLIP's accuracy on a single test image bu
 
 The paper starts from two facts: zero-shot CLIP is already well calibrated, and TPT changes accuracy only a little, so most of the extra error comes from inflated confidence. A pilot test that simply gives each TPT prediction its zero-shot confidence already lowers ECE a lot. CoTS (Confidence-based Temperature Scaling) makes this consistent: after TPT, it learns a temperature on the test image's own augmented views so that the adapted confidence matches the zero-shot confidence. E-CoTS then adds a weak-strong ensemble over views to raise accuracy while keeping calibration.
 
+## Motivation
+
+The paper begins by putting the existing fixes on one accuracy-ECE plot (its Figure 1, shown under Method). Two things stand out. First, the regularization methods (C-TPT, O-TPT, A-TPT, SoC) pull TPT's ECE down only to roughly zero-shot CLIP's level, not below it, and they give back accuracy on the way: with ViT-B/16 on the ImageNet variants, O-TPT ends at 57.51% against 60.74% for TPT and 57.22% for zero-shot, so almost the whole TPT gain is gone. Second, the post-hoc SaLS keeps TPT's accuracy exactly but its ECE stays near 10%. No method keeps TPT's accuracy and reaches zero-shot calibration at the same time.
+
+Because TPT changes accuracy only a little while its ECE more than doubles, the authors suspect the damage is mainly a confidence shift, not wrong predictions. Their pilot, Confidence Replacement (CoR), tests this directly: keep the class TPT predicts and report zero-shot CLIP's max probability as the confidence. This alone removes about 6 ECE points and beats SaLS and C-TPT. CoR is still worse than A-TPT and SoC, and it mixes a class from one distribution with a confidence from another. The insight CoTS builds on is that zero-shot confidence is a label-free target for calibrating the adapted model, so one can fit a temperature toward it instead of copying it.
+
+![CoR pilot study](/images/blog/papers/cots-pilot-cor.webp)
+*Average ECE of the confidence-replacement pilot (CoR, orange) against zero-shot CLIP, TPT and existing calibration methods with ViT-B/16. Only swapping in the zero-shot confidence cuts TPT's ECE by 6.0 (fine-grained) and 6.1 (ImageNet variants) points, more than SaLS and C-TPT, though A-TPT and SoC remain lower. Figure from the paper.*
+
 ## Method
 
 ![CoTS overview](/images/blog/papers/cots-main.png)
@@ -82,6 +91,16 @@ Backbone ViT-B/16 and ResNet-50, single-sample episodic TPT, mean of 3 seeds. Me
 | SoC | 63.95 / 4.31 | 65.01 / 4.20 | 58.12 / 4.87 | 61.84 / 4.58 |
 
 CoTS keeps TPT's accuracy by construction and brings ECE close to zero-shot level; on ViT-B/16 fine-grained it has the lowest ECE in the table. It is not the best ECE everywhere: A-TPT is lower on ImageNet variants (4.34 vs. 5.30) and on RN50 fine-grained, and O-TPT is lower on RN50 ImageNet variants. E-CoTS gives the largest accuracy gain on the ImageNet variants (62.95 vs. 60.74 for TPT with ViT-B/16) and lifts the accuracy of every regularization method it is added to, though on ImageNet variants it raises ECE for A-TPT (4.34 to 4.87).
+
+The ablation in Figure 3 checks which views the temperature is fitted on and which distance is used. Fitting on the weak view alone is no better than CoR, while the top 6 strong views give the lowest ECE; the choice of L1, L2 or L-infinity distance barely matters. These ablation numbers are from the paper's ablation runs and differ slightly from the main table.
+
+![CoTS ablation](/images/blog/papers/cots-ablation.webp)
+*Ablation of CoTS with ViT-B/16: (a) which views the temperature is fitted on, (b) the distance used in the confidence-matching loss. Fitting on strong views (orange, top 6) beats the weak view and CoR on both benchmarks; the loss choice changes ECE by less than 0.1 point. Figure from the paper.*
+
+The appendix reliability diagrams compare A-TPT with CoTS and E-CoTS on DTD, Flowers, Pets and ImageNet-V2. CoTS and E-CoTS stay close to the diagonal about as well as A-TPT while keeping TPT's predictions, and the largest remaining gaps sit in sparse low-confidence bins.
+
+![Reliability diagrams](/images/blog/papers/cots-reliability.webp)
+*Reliability diagrams of A-TPT (top), CoTS (middle) and E-CoTS (bottom) on DTD, Flowers, Pets and ImageNet-V2. Bars close to the diagonal mean calibrated confidence; the visible gaps are mostly in low-confidence bins with few samples, such as the first bin of E-CoTS on ImageNet-V2. Figure from the paper.*
 
 ## Limitations
 

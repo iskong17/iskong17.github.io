@@ -19,6 +19,18 @@ Hallucination is still a major issue in multimodal LLMs. Contrastive decoding (C
 
 AVCD is a training-free decoding method for this three-modality setting. It measures which modality dominates the current prediction, masks the less dominant ones, and combines the resulting branches in a CD formula derived for three modalities. An entropy gate skips the extra work when the model is already confident.
 
+## Motivation
+
+The paper opens with an example of how AV-LLM hallucinations differ from VLM ones. Asked to describe a clip of a man playing cello and drums, VideoLLaMA2 invents a piano in the frame (a visual error) and then claims that "the cello and piano are both sounding" (an error that only exists in the combination of audio and video). VLM-style CD perturbs one fixed modality, the image, and would not target the second kind of mistake.
+
+![Base decoding versus AVCD on an audio-visual captioning example](/images/blog/papers/avcd-review-motivation.webp)
+*A captioning example with VideoLLaMA2. Base decoding (right) produces a visual mismatch (red: a piano, a black shirt) and an audio-visual mismatch (blue: cello and piano sounding together). AVCD (left) describes the cello and drum sounds and the shirt with a bird on it. Figure from the paper.*
+
+The second piece of evidence is where the model's attention goes. Over 200 AVHBench samples, the last query token of audio-visual VideoLLaMA2 puts 70% of its attention on language tokens, 17% on video and only 13% on audio. Language is the dominant modality in every one of those samples. In the video-only variant on MSVD-QA the split is 56% language versus 44% video and the dominant modality changes from sample to sample. This is the basis for the method: find the dominant modality per sample from attention, then perturb the others, rather than always perturbing the image as VCD does.
+
+![Attention share of language, video and audio tokens](/images/blog/papers/avcd-review-modality-dominance.webp)
+*Average modality dominance in VideoLLaMA2. (a) Audio-visual model on AVHBench: language takes 70% of the final token's attention, audio only 13%. (b) Video-only model on MSVD-QA: a more balanced 56% vs. 44%. Figure from the paper (appendix).*
+
 ## Method
 
 ![AVCD overview](/images/blog/papers/avcd-main.png)
@@ -95,6 +107,16 @@ AVCD also helps video-only LLMs: VideoLLaMA2 on MSVD-QA goes from 74.43 to 75.20
 
 - Plain VCD often *hurts* AV-LLMs (70.52 → 65.18 on AVHBench for VideoLLaMA2). Perturbing a single modality the VLM way does not transfer.
 - In the ablation, two-branch CD on a single masked modality helps only a little, and naively subtracting all three masked branches gives 70.94. The derived trimodal formula reaches 72.15.
+
+The qualitative examples show what "ignored modality" errors look like. In the first, the video shows a man with an acoustic guitar but the audio is a violin; Base and VCD answer that one acoustic guitar is sounding, while AVCD answers zero. In the second (a video-only model), the question contains a misleading statement, and only AVCD answers from the snowy frames.
+
+![Qualitative comparison of Base, VCD and AVCD](/images/blog/papers/avcd-review-qualitative.webp)
+*Top: AV-LLM example where the audio is a violin, so no acoustic guitar is sounding; only AVCD says "Zero". Bottom: video-LLM example with a misleading prompt; Base and VCD follow the text, AVCD uses the snow in the video. Figure from the paper.*
+
+The entropy gate is evaluated on the AVHBench validation split. Lower $$\tau$$ means more tokens go through all branches, which raises accuracy but costs time. At $$\tau = 0.8$$ AVCD is faster than VCD and still improves on Base (78.05% to 80.98%), while VCD itself falls far below Base on this set.
+
+![Accuracy versus inference time for different entropy thresholds](/images/blog/papers/avcd-review-entropy-tradeoff.webp)
+*Accuracy vs. seconds per token for VideoLLaMA2 on the AVHBench validation set. Blue circles are AVCD with different thresholds $$\tau$$; $$\tau = 1.0$$ falls back to roughly Base speed and accuracy. VCD (green) is both slower and much less accurate. Figure from the paper.*
 
 ## Limitations
 

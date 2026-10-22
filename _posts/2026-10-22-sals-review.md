@@ -19,6 +19,15 @@ Zero-shot CLIP is fairly well calibrated. The usual ways to adapt it, few-shot a
 
 The paper argues that the cause is the growth of the logit range (max minus min logit), not the logit norm. It then constrains each sample's logits to stay within the range of its own zero-shot logits. Three versions are given: ZS-Norm and Penalty act during adaptation, and SaLS (Sample-adaptive Logit Scaling) is a post-hoc rescaling at inference that works on any adapted model, including TPT.
 
+## Motivation
+
+The starting observation is that adaptation buys accuracy at the cost of calibration, and that this holds for every family of CLIP adaptation, not only for one method. The authors show it with reliability diagrams on two ImageNet shifts. Zero-shot CLIP sits close to the diagonal (ECE 2.87 on ImageNet-V2, 3.14 on Sketch). After CoOp, CLIP-Adapter, or TPT, the bars fall below the diagonal, which means the model is more confident than it is accurate, and ECE rises to 9.40 (CLIP-Adapter) and 13.77 (TPT) on V2 and up to 15.28 (TPT) on Sketch.
+
+![Reliability diagrams of zero-shot CLIP and adapted models](/images/blog/papers/sals-review-motivation.webp)
+*Reliability diagrams on ImageNet-V2 (top) and ImageNet-Sketch (bottom) for zero-shot CLIP, CoOp, CLIP-Adapter, and TPT. Every adaptation family pushes the bars below the diagonal (overconfidence); TPT is the worst. Figure from the paper.*
+
+Two gaps in prior work make this hard to fix. Temperature scaling and similar post-hoc methods need labeled data from the test distribution, which is not available under shift or at test time. And the explanation that comes from supervised training, that overconfidence follows from a growing logit norm, does not match CLIP adaptation: as the norm-vs-range plot in the Method section shows, the norm often drops after adaptation while ECE rises. What does move together with ECE is the logit range. That gives the key insight the method builds on: zero-shot CLIP already provides a well-calibrated, label-free reference range for every sample, so the adapted logits can simply be held to it.
+
 ## Method
 
 ![SaLS overview](/images/blog/papers/sals-main.png)
@@ -81,6 +90,16 @@ Shrinking the range further is not better. Scaling the zero-shot range down to 1
 
 Note: in the paper's RN50 table, the C-TPT average ECE values do not match the mean of the listed per-dataset values (for C-TPT w/ Penalty, the per-dataset values average 5.93, which is the number printed in the ImageNet column; the TPT rows do match). The numbers above are copied as printed.
 
+The per-dataset version of this table (RN50) shows where the TPT gains come from. SaLS helps most on the datasets where TPT is worst calibrated, such as EuroSAT (21.00 to 12.31) and DTD (25.29 to 21.09), and changes little where TPT is already close to zero-shot (Caltech, Pets).
+
+![Per-dataset TPT calibration results, RN50](/images/blog/papers/sals-review-results-table.webp)
+*Table 3 of the paper: accuracy (top) and ECE (bottom) on ImageNet and 10 fine-grained datasets with RN50, for TPT and C-TPT with ZS-Norm, Penalty, and SaLS. The accuracy rows for SaLS are identical to their base method. Figure from the paper.*
+
+The reliability diagrams for TPT with ViT-B/16 make the same point visually. On StanfordCars the differences are small, while on EuroSAT TPT is badly overconfident (ECE 20.42) and SaLS pulls the bars back toward the diagonal (13.88), though Penalty does better (8.53).
+
+![Reliability diagrams for TPT variants with ViT-B/16](/images/blog/papers/sals-review-reliability.webp)
+*Reliability diagrams on StanfordCars (top) and EuroSAT (bottom) for zero-shot, TPT, TPT + ZS-Norm, TPT + Penalty, and TPT + SaLS (ViT-B/16). On EuroSAT the gap between confidence and accuracy shrinks a lot with Penalty and less with SaLS. Figure from the paper.*
+
 **Few-shot adaptation (16-shot ImageNet), ViT-B/16, average over ImageNet-V2/Sketch/A/R.** From Tables 1(b) and 2(d). Zero-shot is 57.15 / 4.78. Each cell is Acc / ECE.
 
 | Method | Base | w/ Penalty | w/ SaLS |
@@ -93,6 +112,11 @@ Note: in the paper's RN50 table, the C-TPT average ECE values do not match the m
 | MaPLe | 60.07 / 4.13 | 60.62 / 3.78 | 60.07 / 4.38 |
 
 For TPT, SaLS lowers ECE by about 1.5 to 2 points on fine-grained data with no accuracy change, but the result (9.26 and 9.88) stays far above zero-shot and above C-TPT. On top of C-TPT it gives the lowest ViT-B/16 ECE in the table (4.48). On the ImageNet shifts with TPT (appendix Table 8), the effect is smaller: 17.58 to 16.74 ECE with RN50 and 11.81 to 10.86 with ViT-B/16. In few-shot adaptation the gains are larger for adapters (for example CLIP-Adapter 7.82 to 4.38), while for strong prompt learners like CoCoOp and MaPLe it changes little or slightly worsens ECE, and Penalty is often as good or better.
+
+The authors also check that the fix acts on the quantity they blamed. After calibration with SaLS, the mean logit range goes down on all four ImageNet shifts for CLIP-Adapter, CoOp, and TPT, while the logit norm goes up for CLIP-Adapter and CoOp. This is consistent with the claim that range, not norm, is what matters.
+
+![Logit norm and range before and after calibration](/images/blog/papers/sals-review-logit-stats.webp)
+*Mean logit norm (top) and logit range (bottom) on ImageNet-V2/Sketch/A/R for CLIP-Adapter, CoOp, and TPT, without and with SaLS ("Ours"). Calibration lowers the range everywhere, while the norm often increases. Figure from the paper.*
 
 ## Limitations
 

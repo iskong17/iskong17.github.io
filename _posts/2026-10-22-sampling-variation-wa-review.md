@@ -19,6 +19,12 @@ Point-cloud classifiers lose accuracy under corruptions such as noise, density c
 
 The paper borrows the idea of weight averaging from SWA and SWAD, where averaging weights along training tends to land in flatter minima. Here the diversity does not come from training steps but from the input: the same point cloud is tokenized several times with different FPS/KNN samplings. TENT is run on each sampling, and the resulting normalization parameters are averaged. The paper does not name the method; this post calls it SVWA, after the authors' code repository.
 
+## Motivation
+
+The gap the paper points to is about the setting more than about accuracy. In 2D, fully test-time adaptation (a model trained normally, then adapted only on unlabeled test data) is well studied, with entropy minimization (TENT, SHOT) and BN-statistics updates as the standard tools. For 3D point-cloud classification the authors count only two TTA methods, and neither fits that setting: MATE changes source pretraining by adding a masked-autoencoder branch, which makes it test-time training, and BFTT3D carries a memory of source prototypes into adaptation. A method that works on an off-the-shelf pretrained classifier with no source data was missing.
+
+The second observation is about how such a method should adapt. TENT updates the normalization layers from a single view of each test batch, and an entropy objective on one view can settle in a sharp minimum that overfits the noise of that batch. SWA and SWAD showed that averaging weights from several points of an optimization trajectory lands in flatter, more robust minima. The key insight is that point clouds offer a cheap, label-free source of diversity for this: FPS and KNN tokenization is stochastic, so the same object can be re-sampled into several slightly different patch sets that keep its global shape. Adapting on each sampling and averaging the resulting weights gives SWAD-style averaging without a training trajectory. The paper has no pilot figure for this argument; the augmentation ablation in Main Experiments is the closest evidence that sampling variation, rather than generic augmentation, is the useful source of diversity.
+
 ## Method
 
 ![SVWA overview](/images/blog/papers/sampling-variation-wa-main.png)
@@ -90,6 +96,21 @@ Top-1 accuracy (%), mean over 15 corruptions, from Tables 1-3 (the paper also li
 | | **Ours** | **74.2** | 66.0 | 49.9 |
 
 The method beats TENT in 8 of 9 backbone-dataset pairs. The clearest gains are on ModelNet40-C (+2.9 with Point-MAE, +2.6 with DGCNN). Elsewhere the margins are often under one point, and on ShapeNet-C with DGCNN it is one point below TENT. BFTT3D is higher on PointNet and on DGCNN/ScanObjectNN-C, but it uses source prototypes. In the ablations, accuracy on ModelNet40-C with Point-MAE rises from about 74.0% to 76.0% as $$N^V$$ goes from 2 to 12, and replacing sampling variation with flips or rotations hurts, sometimes below Source-Only.
+
+The full per-corruption table for ModelNet40-C shows that the Point-MAE gain over TENT is spread across almost every corruption, with the largest jumps on upsampling (78.2 to 87.0), LiDAR (51.2 to 55.3), and background noise (26.7 to 33.0). For PointNet and DGCNN the wins are more mixed, and TENT is still better on several corruptions.
+
+![Per-corruption results on ModelNet40-C](/images/blog/papers/sampling-variation-wa-review-results-table.webp)
+*Table 1 of the paper: top-1 accuracy on each of the 15 ModelNet40-C corruptions for Point-MAE, PointNet, and DGCNN. "Ours" (highlighted) is best on most Point-MAE columns; with the other backbones the margin over TENT is smaller and not uniform. Figure from the paper.*
+
+Two ablations on ModelNet40-C with Point-MAE support the design. Accuracy grows steadily with the number of samplings $$N^V$$, and when the same weight-averaging pipeline is driven by standard augmentations instead of re-sampling, horizontal flips and rotations fall below Source-Only (53.95), jitter reaches 68.97, and sampling variation reaches 75.03.
+
+![Effect of the number of samplings and comparison with augmentations](/images/blog/papers/sampling-variation-wa-review-sampling-ablation.webp)
+*Left: accuracy vs. the number of samplings $$N^V$$ (about 74.1% at 2, 76.1% at 12). Right: the weight-averaging pipeline with different sources of variation; only jitter and sampling variation beat Source-Only by a wide margin. Batch size 128, one iteration. Figure from the paper.*
+
+The gap over TENT also holds across batch sizes and numbers of adaptation steps. At batch size 8 the method is at about 69% against about 66% for TENT, and with more iterations both improve while the gap stays around 3 points.
+
+![Batch size and iteration ablations](/images/blog/papers/sampling-variation-wa-review-batch-iteration.webp)
+*Accuracy of TENT and the method ("Ours") on ModelNet40-C with Point-MAE as the batch size (left, 8 to 128) and the number of iterations (right, 1 to 10) change. The method stays above TENT throughout. Figure from the paper.*
 
 ## Limitations
 

@@ -19,6 +19,20 @@ Test-time prompt tuning (TPT) improves CLIP's zero-shot accuracy by tuning the p
 
 The paper looks for a label-free signal inside CLIP itself. Across many hand-crafted prompts with similar accuracy, the prompts whose class text features are more spread out give lower calibration error. The authors measure this spread with the Average Text Feature Dispersion (ATFD) and add $$-\text{ATFD}$$ as a regulariser to TPT. The result, C-TPT, keeps most of TPT's accuracy gain and roughly halves its expected calibration error (ECE) on the fine-grained benchmarks.
 
+## Motivation
+
+The paper builds its case in three steps, all shown on StanfordCars with CLIP-ViT-B/16. First, the problem: with the hard prompt "an example of {class}", zero-shot CLIP reaches 64.6% accuracy with an ECE of 2.49. After TPT, accuracy rises to 67.3% but ECE jumps to 6.26, and the reliability diagram shows the bars falling below the diagonal in almost every confidence bin, which is overconfidence. Entropy minimisation rewards confident predictions, so this is the expected side effect.
+
+Second, a hint that the prompt controls calibration: across 80 hand-crafted templates, most prompts land between about 60% and 66% accuracy, but their ECE ranges from about 2 to 8. Third, a candidate explanation: among prompts with nearly identical accuracy (61.9 to 62.2), the ones with high ECE (8.55, 9.02) have text features packed into a small region of the t-SNE plot, while the low-ECE ones are spread out.
+
+![The three observations behind C-TPT](/images/blog/papers/c-tpt-review-observations.webp)
+*(a) Reliability diagrams for CLIP and CLIP + TPT on StanfordCars; the red hatched area is the overconfidence added by TPT. (b) Accuracy vs. ECE for 80 hard prompt templates: similar accuracy, very different ECE. (c) t-SNE of class text features for five prompts of about 62% accuracy; the two badly calibrated prompts (red, green) are clustered in the middle. Figure from the paper.*
+
+To turn the t-SNE impression into something measurable, the authors define ATFD and check it on many datasets. For prompts within 3% of each dataset's best accuracy, higher ATFD goes with lower ECE on almost every dataset, on both backbones. This correlation is the label-free signal the method needs: dispersion can be computed from the text features alone, at test time.
+
+![ATFD versus ECE across datasets](/images/blog/papers/c-tpt-review-atfd-ece.webp)
+*ATFD (y-axis, labelled AFTD in the plot) vs. ECE for hard prompts with near-best accuracy, for seven datasets with CLIP-RN50 (a) and CLIP-ViT-B/16 (b). Within each dataset, points slope downward: more dispersion, lower calibration error. Average Pearson correlation is -0.70 and -0.76. Figure from the paper.*
+
 ## Method
 
 ![C-TPT overview](/images/blog/papers/c-tpt-main.png)
@@ -91,6 +105,16 @@ Backbones are CLIP-RN50 and CLIP-ViT-B/16. Metrics are top-1 accuracy (%, higher
 | + TPT + C-TPT | 44.0 | **13.6** | 60.7 | **8.32** |
 
 TPT raises ECE by 1.7x to 2.6x in every setting. Adding C-TPT cuts the ECE of TPT by about half on the fine-grained datasets (47% to 56% lower) with almost no change in average accuracy. The gain is smaller under natural distribution shifts (14% to 52% lower ECE), and C-TPT costs up to 0.7 points of average accuracy there. In most settings the C-TPT ECE is still above that of the untuned CLIP prompt. In a separate comparison on ViT-B/16, C-TPT gives lower average ECE than TPT with a temperature learned on labeled ImageNet.
+
+That comparison is worth a closer look, because temperature scaling is the standard fix and here it gets labeled data that C-TPT never sees. The learned temperature does lower TPT's ECE on most datasets, but C-TPT is lower still on most of them, with the clearest gaps on Aircraft, SUN397, UCF101 and the ImageNet variants. Temperature scaling wins on Flower102 and Food101.
+
+![ECE of TPT, temperature-scaled TPT and TPT + C-TPT](/images/blog/papers/c-tpt-review-temperature-scaling.webp)
+*ECE per dataset with CLIP-ViT-B/16 for TPT (blue), TPT with a temperature learned on labeled ImageNet (green), and TPT + C-TPT (red). C-TPT has the lowest average without using any labels. Figure from the paper.*
+
+The t-SNE analysis (Section 7.2) checks that the regulariser changes the geometry in the intended way. With hard prompts on Caltech101, the badly calibrated templates form dense blobs regardless of class. Plain TPT produces a similar central blob (ATFD 0.423, ECE 5.04). With C-TPT and increasing $$\lambda$$ (45, 50, 55), ATFD rises to 0.567, ECE drops to 1.98, and the features group by class.
+
+![t-SNE of text features for hard prompts and tuned prompts](/images/blog/papers/c-tpt-review-tsne.webp)
+*t-SNE of class text features from CLIP-RN50 on Caltech101. (a) Hard prompts with similar accuracy; poorly calibrated prompts (red, green) cluster together. (b) TPT (purple) clusters in the center, while TPT + C-TPT spreads the features out as $$\lambda$$ grows. Figure from the paper.*
 
 ## Limitations
 

@@ -19,6 +19,15 @@ MATE showed that test-time training (TTT) for 3D point clouds works if the netwo
 
 SMART-PC swaps the reconstruction task for skeleton prediction. Each patch predicts a sphere (a skeletal point and a radius) that summarizes the local shape. This abstraction averages out high-frequency noise, so the encoder learns features that hold up better under corruption. With such features, online adaptation can skip backpropagation and only update the BatchNorm running mean and variance.
 
+## Motivation
+
+The paper starts from MATE, the main TTT method for 3D point clouds, and names two weaknesses. The first is what its self-supervised task teaches. MATE reconstructs masked surface points, so the encoder is trained to model exactly the surface details that corruptions such as noise, dropout, or LiDAR sparsity damage. Features built to reproduce the surface stay sensitive to it. The second is cost. MATE adapts by backpropagating through all network parameters for every test sample, which keeps it near 10 frames per second and far from real-time use.
+
+The key insight is to change the pretext task so that the features become robust enough that adaptation no longer needs gradients. A skeleton, a set of spheres whose centers lie inside the shape and whose radii reach its surface, is an abstraction of the geometry: it keeps the overall structure and averages out high-frequency noise and local distortions. If the encoder is trained to predict skeletons instead of surfaces, the authors argue, its features depend on the underlying shape, and a cheap update of the BatchNorm statistics is enough to follow the shift, as in 2D work on BN adaptation.
+
+![Skeletal spheres on a chair point cloud](/images/blog/papers/smart-pc-review-motivation.webp)
+*Chair point clouds seen from the front and the side: gray spheres are skeletal points drawn with their radii, blue dots are points sampled on the sphere surfaces. A few dozen spheres capture the seat, back, and legs. Figure from the paper.*
+
 ## Method
 
 ![SMART-PC overview](/images/blog/papers/smart-pc-main.png)
@@ -107,6 +116,21 @@ Adaptation speed on ModelNet40-C (Table 4, appendix):
 | FPS | 0.04 | 1.07 | 6.83 | 10.86 | 10.79 | 59.52 |
 
 The clearest gains come before any adaptation: skeleton pre-training alone lifts source-only accuracy by 7.3 points on ModelNet-40C and 8.0 points on ShapeNet-C over MATE-SO. In the standard mode SMART-PC and MATE are close (63.1 vs 63.0 on ModelNet-40C). The BatchNorm-only variant matches MATE-Online on ModelNet-40C and beats it by about 10 points on ScanObjectNN-C at roughly 5.5 times the frame rate, but it trails MATE-Online on ShapeNet-C (65.9 vs 69.1). CloudFixer-Online is still higher on ModelNet-40C (77.2), though it runs at about 1 FPS.
+
+The speed argument is shown directly in the online setting on ScanObjectNN-C. With the BatchNorm-only update, SMART-PC stays at about 46.6% accuracy whether each sample is expanded into 48 or 24 augmented copies, and with 24 copies it passes 30 frames per second. MATE stays near 37% at roughly 8 to 10 FPS, because its per-sample backpropagation dominates the cost.
+
+![Frames per second vs. accuracy for SMART-PC and MATE](/images/blog/papers/smart-pc-review-fps-accuracy.webp)
+*Online adaptation on ScanObjectNN-C with 48 or 24 augmented copies per sample (N-48, N-24). SMART-PC (BatchNorm-only) crosses the 30 FPS real-time line at N-24 with no loss in accuracy; MATE is about 10 points lower and about three times slower. Figure from the paper.*
+
+Two ablations look at the adaptation protocol. In online mode on ScanObjectNN-C, SMART-PC reaches 46.42% even without augmentation during adaptation, already well above MATE (36.93%), and rotations add about one point (47.36%). In standard mode on ModelNet40-C, accuracy grows with batch size from 67.94% at 8 to 73.42% at 128, although the main results use batch size 1 to match MATE.
+
+![Augmentation and batch-size ablations](/images/blog/papers/smart-pc-review-augmentation-batch.webp)
+*Left: online accuracy on ScanObjectNN-C for the source-only baselines, MATE, and SMART-PC with no augmentation, rotation, horizontal flip, or translation during adaptation. Right: effect of batch size on mean ModelNet40-C accuracy in standard mode. Figure from the paper.*
+
+The appendix also visualizes why updating the BatchNorm statistics is enough. On clean data the feature distributions of the first BN layers match the pretrained running statistics. On corrupted data they drift away from them, most visibly in the classifier's BN layer, and the adapted statistics move back onto the corrupted distributions without any change to the learned weights.
+
+![BatchNorm input distributions and running statistics](/images/blog/papers/smart-pc-review-bn-statistics.webp)
+*Per-channel input distributions (solid) and BatchNorm running statistics (dashed) for the first BN layer of the encoder (top) and of the classifier (bottom). Blue: clean source data with pretrained statistics. Red: corrupted data with pretrained statistics (black dashed, mismatched) and with adapted statistics (green dashed, matched). Figure from the paper.*
 
 ## Limitations
 

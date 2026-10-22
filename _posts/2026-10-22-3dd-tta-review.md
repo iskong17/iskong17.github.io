@@ -19,6 +19,18 @@ Point clouds at test time are often corrupted, for example by LiDAR sensor failu
 
 3DD-TTA brings this input-adaptation idea to 3D. It uses LION, a latent diffusion model for point clouds. The test point cloud is encoded into a shape latent and a set of latent points. The latent points get a small amount of noise and are then denoised for a few DDIM steps. During denoising, a Selective Chamfer Distance keeps them close to the original. The cleaned latents are decoded and passed to the unchanged classifier. No network weights are updated.
 
+## Motivation
+
+The authors start from a weakness shared by pseudo-label and self-supervised TTA on point clouds: every test sample changes the source weights. Early on this helps, but over a long stream the errors pile up and source knowledge is forgotten. Diffusion-based input adaptation (DDA and similar 2D work) avoids this by keeping the model fixed and moving the input instead. Nobody had made that work for point clouds, where there is no pixel grid and a denoiser can easily turn a corrupted chair into a clean but different chair.
+
+![Point clouds before and after 3DD-TTA](/images/blog/papers/3dd-tta-review-reconstruction.webp)
+*Corrupted test point clouds (top) and the same shapes after 3DD-TTA (bottom). Holes are filled and stray points are pulled back onto the surface, while the overall shape is kept. Figure from the paper.*
+
+The second observation is what makes one procedure work for many corruptions. Before perturbation, the Chamfer distance between a clean ShapeNet shape and its corrupted version has a very different distribution for uniform noise, Gaussian noise and RBF deformation. After a small amount of Gaussian noise is added to the latent points, the three distributions almost coincide. The noisy latent no longer carries a corruption-specific signature, so a single source denoiser can handle all of them without knowing which corruption it is seeing.
+
+![Chamfer distance distributions before and after noise perturbation](/images/blog/papers/3dd-tta-review-motivation.webp)
+*Distribution of the Chamfer distance between original and corrupted ShapeNet point clouds for three corruptions, before (left) and after (right) Gaussian perturbation of the latent points. After perturbation the curves overlap, which the authors read as corruption independence. Figure from the paper.*
+
 ## Method
 
 ![3DD-TTA overview](/images/blog/papers/3dd-tta-main.png)
@@ -113,6 +125,16 @@ Takeaways:
 - The gains come mostly from noise corruptions. Background noise on ShapeNet-c goes from 15.0 to 77.6. The best baseline there, TTT-Rot, reaches only 23.1.
 - Transformation corruptions are the weak spot. On ShapeNet-c, rotation (50.4) trails DUA and MATE-S. On ModelNet40-c, shear (63.7) and rotation (33.4) are close to or below the source model.
 - Adaptation is fast. Five denoising steps take 40 ms per sample on an A6000 (Table 4), and the time grows linearly to 290 ms at 40 steps.
+
+The qualitative examples show where the gains come from. Noise-type corruptions (uniform, background, impulse) and density changes (cut-out, density decrease) are turned back into clean, complete surfaces.
+
+![Qualitative adaptation results](/images/blog/papers/3dd-tta-review-qualitative.webp)
+*Corrupted inputs and their adapted versions for uniform, RBF, background, impulse, cut-out and density-decrease corruptions. Outliers are removed and missing parts are filled. Figure from the paper.*
+
+The step ablation explains the fixed setting of 5 denoising steps. Most corruptions peak at around 5 steps and slowly drop after that, while background noise keeps improving up to about 35 steps. Rotation stays near 0.5 regardless of the step count.
+
+![Accuracy versus denoising steps and total DDIM steps](/images/blog/papers/3dd-tta-review-denoising-steps.webp)
+*Left: accuracy per corruption as the number of denoising steps grows. Background noise (blue) is the only curve that needs many steps; rotation (cyan) barely moves. Right: with background noise, accuracy is stable down to about 100 total DDIM steps and collapses below that. Figure from the paper.*
 
 ## Limitations
 

@@ -19,6 +19,15 @@ Most test-time adaptation (TTA) recipes come from CNNs with Batch Normalization 
 
 The paper analyzes LN from the batch (domain) point of view. It shows that LN's pre-affine output is already close to zero mean and unit variance per feature across the batch when the feature dimension and batch size are large. So there is no need to re-standardize. The only thing worth adjusting is the post-affine mean and gain. LN-TTA does this with one forward pass, no gradients, and no source data, using a prototype read from the pretrained [cls] token.
 
+## Motivation
+
+The authors trace the weak results of existing point-cloud TTA to a mismatch in normalization. Recipes like BN re-estimation and TENT assume BN, which normalizes each feature across the batch, so every downstream weight sees steady per-feature statistics, and that is exactly the lever these methods pull. Point-MAE and other point Transformers use LN, which normalizes each token across its own features and never touches the batch axis. So it is not obvious what a BN-style fix should even change in an LN model.
+
+![BN normalizes along the batch axis, LN along the feature axis](/images/blog/papers/layernorm-pc-tta-motivation.webp)
+*BN works on one feature across the batch (horizontal box), while LN works on one sample across its features (vertical box). The two methods give different handles for test-time adaptation. Figure from the paper.*
+
+The practical gaps add to this. TENT underperforms on point clouds and needs backpropagation, MATE ties adaptation to a special MAE pretraining, multi-sampling methods need many extra passes, and BFTT3D needs class-level source prototypes at test time. The paper's answer is to look at LN from the batch side. LN already removes per-token shift and scale exactly, and as $$d$$ and $$B$$ grow the per-feature batch marginals of its pre-affine output approach $$(0, 1)$$. So LN already does the stabilizing that BN-style TTA tries to add, and re-standardizing is unnecessary or even harmful. What is left to fix is the post-affine mean and gain.
+
 ## Method
 
 ![LN-TTA overview](/images/blog/papers/layernorm-pc-tta-main.png)
@@ -106,7 +115,20 @@ Throughput in point clouds per second (PPS), same tables:
 | BFTT3D* | 1.67 | 2.20 | 1.90 |
 | LN-TTA | 64.24 | 93.03 | 73.12 |
 
+The full ScanObjectNN-C table shows that the gain is broad rather than driven by one corruption. LN-TTA is bold in 13 of the 15 columns among the backprop-free methods, and loses only occlusion and LiDAR, where AdaBN and DUA are slightly higher.
+
+![ScanObjectNN-C per-corruption accuracy table](/images/blog/papers/layernorm-pc-tta-results-table.webp)
+*Table 1 of the paper: top-1 accuracy (%) for every ScanObjectNN-C corruption, with TTT, TTA, backprop-free, and online groups. Since LN-TTA keeps no state, its standard and online rows are the same. Figure from the paper.*
+
 LN-TTA has the best mean on ScanObjectNN-C and ModelNet40-C, with gains over Source Only of +12.35 and +15.58 points, and it beats backprop-based TENT in both standard and online modes. On ShapeNet-C the gain is only +3.03, and SMART-PC, a TTT method that changes pretraining, is 0.02 points higher (64.40 vs 64.38); LN-TTA is best among the backprop-free methods there. It runs at a large fraction of Source Only speed, and peak GPU memory at batch size 32 is 1.468 GB versus 2.890 GB for TENT and 7.443 GB for BFTT3D.
+
+![Peak GPU memory of LN-TTA, BFTT3D, DUA, and TENT](/images/blog/papers/layernorm-pc-tta-memory.webp)
+*Total GPU memory (backbone plus data) at $$B = 32$$, on a log scale. LN-TTA stores no backward graph, optimizer state, or feature bank, so it stays near Source Only, while DUA reaches 76 GB. Figure from the paper.*
+
+The paper also checks the theory empirically. It sweeps batch size $$B$$ and feature dimension $$d$$, and measures the Jensen-Shannon distance between the averaged per-feature post-LN batch marginal and $$\mathcal{N}(0,1)$$.
+
+![JS distance of post-LN batch marginals to N(0,1) over batch size and feature dimension](/images/blog/papers/layernorm-pc-tta-js-distance.webp)
+*The distance shrinks as either $$B$$ or $$d$$ grows, and faster along $$d$$. The star marks the setting used in the TTA experiments, which is already in the near-zero region. Figure from the paper.*
 
 ## Limitations
 

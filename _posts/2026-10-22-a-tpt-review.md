@@ -19,6 +19,18 @@ Test-time prompt tuning (TPT) adapts CLIP's prompt to each unlabeled test image 
 
 A-TPT borrows the idea of the Tammes problem: place points on a sphere so that the minimum distance between any two is as large as possible. It adds a loss that maximizes, for each class, the angle to its closest other class feature. This spreads features uniformly in both the $$N > \lvert D \rvert$$ and $$N < \lvert D \rvert$$ regimes, and it lowers ECE further than C-TPT and O-TPT at a similar cost.
 
+## Motivation
+
+The paper's starting question is why prompts with almost the same accuracy can have very different calibration. Following C-TPT, the authors take 80 hard prompt templates for CLIP RN50 on Caltech101 and compare prompts within the same accuracy band. The ones with low ECE are also the ones whose class text features are spread out. In the t-SNE plot below, the poorly calibrated template "the nearest shape in this image is [class]" (ECE 10.84) collapses into a tight blob in the middle, regardless of class, while the well-calibrated templates sit next to their class clusters. Plain TPT produces the same kind of central blob. Adding A-TPT with growing $$\lambda$$ breaks it up, and AD rises to 0.659 while ECE drops from 6.18 to 2.12.
+
+![t-SNE of class text features for hard and tuned prompts](/images/blog/papers/a-tpt-review-tsne.webp)
+*t-SNE of class text features from CLIP RN50 on Caltech101. Top: hard prompts; bottom: TPT and TPT + A-TPT. Left panels color by prompt, right panels by class. Low-AD prompts (pink diamonds on top, orange squares for TPT below) bunch up in the center, and those are the ones with high ECE. Figure from the paper.*
+
+The second observation is about O-TPT. Pushing cosines to zero sounds like the same goal, but it is not. On ImageNet-V2 (1000 classes, more than CLIP ViT-B/16's 512 dimensions) the mean pairwise cosine under O-TPT jumps around from sample to sample, because exact orthogonality is impossible and the optimizer lands somewhere different each time. On EuroSAT (10 classes, fewer than 512) O-TPT settles at a mean cosine of about 0.77, while A-TPT reaches about 0.69, a wider spread than orthogonality alone produces in practice. This is why the authors switch from "make pairs orthogonal" to "make the closest pair as far apart as possible".
+
+![Mean pairwise cosine similarity per test sample, O-TPT versus A-TPT](/images/blog/papers/a-tpt-review-cosine.webp)
+*Mean cosine similarity between class text features for each test sample with CLIP ViT-B/16. Left: $$N > \lvert D \rvert$$ (ImageNet-V2), where O-TPT (blue) fluctuates widely and A-TPT (red) stays flat. Right: $$N < \lvert D \rvert$$ (EuroSAT), where A-TPT keeps features consistently further apart. Figure from the paper.*
+
 ## Method
 
 ![A-TPT overview](/images/blog/papers/a-tpt-main.png)
@@ -99,6 +111,16 @@ Backbones are CLIP ViT-B/16 (512-d) and CLIP RN50 (1024-d). Metrics are top-1 ac
 | **A-TPT** | 58.06 | **3.92** | 40.57 | **7.82** |
 
 A-TPT has the lowest average ECE of the test-time methods in all four settings, and with ViT-B/16 on fine-grained data it keeps almost all of TPT's accuracy (64.92 vs. 65.00). Its ECE is lower than O-TPT on every one of the 11 fine-grained datasets with both backbones, but a large part of the average gain comes from two datasets: EuroSAT, where ECE drops from 12.98 (O-TPT) to 3.92 with ViT-B/16 and from 14.71 to 2.51 with RN50, and DTD, where it drops from 7.88 to 4.76 and from 16.53 to 6.41. The paper's text quotes 2.92 (ViT-B/16) and 2.79 (RN50) for the fine-grained average ECE, while Table 2 gives 2.61 and 2.92; the table values are used here. On ImageNet-V2 the extra cost over C-TPT is small: 1.058 s per batch and 21840 MiB, versus 1.055 s and 21838 MiB for C-TPT and 1.064 s and 23740 MiB for O-TPT.
+
+The per-dataset bars make the concentration of the gain visible. A-TPT's bar is the lowest almost everywhere, but the big gaps are at DTD and EuroSAT. On most other datasets the three methods are within one or two points.
+
+![Per-dataset ECE of C-TPT, O-TPT and A-TPT](/images/blog/papers/a-tpt-review-ece-bars.webp)
+*ECE per dataset with CLIP ViT-B/16 for fine-grained datasets (left) and natural distribution shifts (right). A-TPT (red) is lowest on nearly every dataset; the largest margins are on DTD, EuroSAT and ImageNet-K. Figure from the paper.*
+
+The reliability diagrams show the same thing at the level of individual bins. On DTD, C-TPT and O-TPT leave large gaps above the bars at medium and high confidence, meaning the model is more confident than it is accurate. A-TPT closes most of that gap, although some overconfidence remains around confidence 0.7 to 0.8.
+
+![Reliability diagrams for C-TPT, O-TPT and A-TPT](/images/blog/papers/a-tpt-review-reliability.webp)
+*Reliability diagrams on Food101, DTD and Flowers102 with CLIP ViT-B/16. Rows: C-TPT, O-TPT, A-TPT. Hatched red areas are the gap to perfect calibration; they shrink most visibly for A-TPT on DTD and Flowers102. Figure from the paper (assembled from its panels).*
 
 ## Limitations
 
