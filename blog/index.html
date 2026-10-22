@@ -264,18 +264,22 @@ description: Study notes, paper reviews, photos from conferences and travel, and
           <div class="world-map" id="circuit-map"></div>
           <aside class="map-panel" id="circuit-panel" aria-live="polite"></aside>
         </div>
-        <div class="blog-group-head"><h2>{{ current_season }} calendar</h2></div>
-        <div class="sq-grid">
+        {%- assign season_info = site.data.f1_seasons[current_season] %}
+        <div class="blog-group-head"><h2>{{ current_season }} calendar</h2>{% if season_info %}<span class="group-head-meta">{% if season_info.final %}Season complete{% else %}{{ season_info.round }} of {{ site.circuits.size }} rounds raced{% endif %}</span>{% endif %}</div>
+        <div class="circuit-list">
           {%- assign circuits = site.circuits | sort: "calendar_round" -%}
-          {%- for c in circuits %}{% include circuit-card.html circuit=c %}{% endfor %}
+          {%- for c in circuits %}{% include circuit-row.html circuit=c season=current_season %}{% endfor %}
         </div>
       </div>
 
       <div class="race-sub" data-sub="drivers" hidden>
-        <p class="race-sub-intro">Drivers racing this season, in championship order.</p>
-        <div class="sq-grid">
+        <p class="race-sub-intro">Drivers racing this season, in championship order.{% if season_info %} Standings after round {{ season_info.round }}.{% endif %}</p>
+        {%- assign leader_pts = 1 -%}
+        {%- for d in site.drivers %}{% if d.current.position == 1 %}{% assign leader_pts = d.current.points %}{% endif %}{% endfor %}
+        <div class="driver-list">
+          <div class="driver-list-head" aria-hidden="true"><span>Pos</span><span></span><span>Driver</span><span>Team</span><span>Wins</span><span>Points</span></div>
           {%- for i in (1..40) %}
-          {%- for d in site.drivers %}{% if d.current.position == i %}{% include driver-card.html driver=d %}{% endif %}{% endfor %}
+          {%- for d in site.drivers %}{% if d.current.position == i %}{% include driver-row.html driver=d leader=leader_pts %}{% endif %}{% endfor %}
           {%- endfor %}
         </div>
       </div>

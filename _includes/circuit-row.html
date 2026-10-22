@@ -1,0 +1,23 @@
+{%- assign c = include.circuit -%}
+{%- assign last = c.recent_winners | first -%}
+{%- assign season_now = include.season | plus: 0 -%}
+{%- assign done = false -%}{%- if last and last.season == season_now %}{% assign done = true %}{% endif -%}
+<a class="circuit-row{% if done %} is-done{% else %} is-upcoming{% endif %}" href="{{ c.url | relative_url }}">
+  <span class="circuit-row-round">{% if c.calendar_round %}R{% if c.calendar_round < 10 %}0{% endif %}{{ c.calendar_round }}{% else %}–{% endif %}</span>
+  {%- if c.track_path %}
+  <svg class="circuit-row-track" viewBox="{{ c.track_viewbox | default: '0 0 400 400' }}" aria-hidden="true"><path d="{{ c.track_path }}"/></svg>
+  {%- else %}<span class="circuit-row-track"></span>{% endif %}
+  <span class="circuit-row-main">
+    <b>{{ c.title }}</b>
+    <small>{{ c.locality }}, {{ c.country }}{% if c.first_race %} · since {{ c.first_race }}{% endif %}</small>
+  </span>
+  <span class="circuit-row-stat">
+    <em>{% if done %}{{ season_now }} winner{% else %}{{ season_now }}{% endif %}</em>
+    {%- if done %}<b{% if last.driver == 'Max Verstappen' %} class="is-max"{% endif %}>{{ last.driver }}</b><small>{{ last.team }}</small>
+    {%- else %}<b class="is-upcoming">Upcoming</b>{% if last %}<small>Last: {{ last.driver }} ({{ last.season }})</small>{% endif %}{% endif %}
+  </span>
+  <span class="circuit-row-stat circuit-row-record">
+    <em>Lap record</em>
+    {%- if c.lap_record.time %}<b>{{ c.lap_record.time }}</b><small>{{ c.lap_record.driver }}, {{ c.lap_record.season }}</small>{% else %}<b>–</b>{% endif %}
+  </span>
+</a>

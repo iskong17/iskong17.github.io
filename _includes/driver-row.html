@@ -1,0 +1,22 @@
+{%- assign d = include.driver -%}
+{%- assign color = site.data.teams[d.team_id] | default: '#7f8bad' -%}
+{%- assign profile = site.data.driver_profiles[d.driver_id] -%}
+{%- assign leader = include.leader | default: 1 -%}
+{%- assign pts = d.current.points | default: 0 -%}
+{%- assign bar = pts | times: 100.0 | divided_by: leader | round -%}
+<a class="driver-row{% if d.driver_id == 'max_verstappen' %} is-max{% endif %}" href="{{ d.url | relative_url }}" style="--team: {{ color }}">
+  <span class="driver-row-pos">{{ d.current.position }}</span>
+  <span class="driver-row-avatar">
+    {%- if profile.photo %}<img src="{{ profile.photo.src | relative_url }}" alt="" loading="lazy">{% else %}<span>{{ d.code }}</span>{% endif -%}
+  </span>
+  <span class="driver-row-main">
+    <b>{{ d.title }}</b>
+    <small><span class="driver-row-num">#{{ d.number }}</span> {{ d.code }} · {{ d.nationality }}</small>
+  </span>
+  <span class="driver-row-team"><i aria-hidden="true"></i>{{ d.team }}</span>
+  <span class="driver-row-wins"><b>{{ d.current.wins | default: 0 }}</b><small>{% if d.current.wins == 1 %}win{% else %}wins{% endif %}</small></span>
+  <span class="driver-row-points">
+    <span class="driver-row-pts"><b>{{ pts }}</b> pts</span>
+    <span class="driver-row-bar" aria-hidden="true"><span style="width: {{ bar }}%"></span></span>
+  </span>
+</a>
