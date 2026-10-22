@@ -79,8 +79,15 @@
       var tabs = panel.querySelectorAll(bySub ? '.subfield-chip' : '.topic-tabs [data-topic]');
       if (!tabs.length) return;
       if (!panel.querySelector('[' + attr + '="' + key + '"]')) key = 'all';
-      var cards = panel.querySelectorAll('.sq-card, .paper-row');
-      var any = false;
+      // Study's All view is a bar per topic; the flat grid shows only for one topic.
+      var bars = panel.querySelector('.topic-bars');
+      var grid = panel.querySelector('.sq-grid');
+      if (bars) {
+        bars.hidden = key !== 'all';
+        if (grid) grid.hidden = key === 'all';
+      }
+      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row');
+      var any = !!bars && key === 'all';
       cards.forEach(function (c) {
         var show = key === 'all' || (bySub
           ? (' ' + (c.getAttribute('data-subfields') || '') + ' ').indexOf(' ' + key + ' ') !== -1

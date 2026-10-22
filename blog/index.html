@@ -96,6 +96,29 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         {%- endfor %}
       </div>
       {%- endif %}
+      {%- if c.key == 'study' %}
+      <!-- Study > All: a bar per topic with its three latest posts, like the Blog All tab -->
+      <div class="cat-bars topic-bars">
+        {%- for t in c.topics %}
+        {%- assign tposts = posts | where: "topic", t.key -%}
+        <div class="cat-bar cat-bar-{{ c.key }}">
+          <button type="button" class="cat-bar-head" data-goto="{{ c.key }}/{{ t.key }}">
+            <span class="cat-bar-name">{{ t.label }}</span>
+            <span class="cat-bar-desc">{% if tposts.size > 0 %}Latest: {{ tposts.first.card_title | default: tposts.first.title }}{% endif %}</span>
+            <span class="cat-bar-count"><b>{{ tposts.size }}</b> {% if tposts.size == 1 %}post{% else %}posts{% endif %}</span>
+            {% include icon.html name="arrow" %}
+          </button>
+          {%- if tposts.size > 0 %}
+          <div class="cat-bar-posts">
+            {%- for post in tposts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
+          </div>
+          {%- else %}
+          <p class="cat-bar-empty">No posts yet.</p>
+          {%- endif %}
+        </div>
+        {%- endfor %}
+      </div>
+      {%- endif %}
       {%- if c.key == 'gallery' %}
       <div class="map-block">
         <div class="world-map" id="gallery-map"></div>

@@ -3,6 +3,8 @@ title: "Linear Algebra 6: Orthogonal Projection, Gram-Schmidt, and QR"
 date: 2026-10-22 10:06:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 6: Gram-Schmidt and QR"
+card_desc: "Orthonormal basis · Orthogonal projection · Gram-Schmidt · QR factorization"
 lang: ko
 description: 선형변환으로서의 정사영, 직교기저와 정규직교기저가 최소제곱을 단순하게 만드는 이유, 그람-슈미트 과정, 그리고 최소제곱을 더 빠르고 정확하게 푸는 QR 분해를 다룬다.
 ---

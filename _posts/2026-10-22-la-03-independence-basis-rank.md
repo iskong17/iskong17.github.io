@@ -3,6 +3,8 @@ title: "Linear Algebra 3: Linear Independence, Basis, and Rank"
 date: 2026-10-22 10:03:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 3: Basis and Rank"
+card_desc: "Linear independence · Subspace · Basis · Dimension · Rank"
 lang: ko
 description: 선형 독립과 그것이 해의 유일성을 결정하는 이유, 부분 공간과 기저, 그리고 부분 공간의 차원, 열 공간, 행렬의 랭크를 정리한다.
 ---

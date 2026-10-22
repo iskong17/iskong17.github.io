@@ -21,7 +21,7 @@
     <span class="sq-label">{% if topic %}{{ topic.label }}{% else %}{{ cat.short | default: cat.label | default: cat_key }}{% endif %}</span>
     <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
   </div>
-  <h3 class="sq-title">{{ p.title }}</h3>
-  <p class="sq-desc">{{ p.description | default: p.excerpt | strip_html | truncate: 90 }}</p>
+  <h3 class="sq-title">{{ p.card_title | default: p.title }}</h3>
+  <p class="sq-desc">{% if p.card_desc %}{{ p.card_desc }}{% else %}{{ p.description | default: p.excerpt | strip_html | truncate: 90 }}{% endif %}</p>
 </a>
 {%- endif -%}

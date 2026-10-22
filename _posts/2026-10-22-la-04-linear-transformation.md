@@ -3,6 +3,8 @@ title: "Linear Algebra 4: Linear Transformations"
 date: 2026-10-22 10:04:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 4: Linear Transformations"
+card_desc: "Linearity · Standard matrix · Neural network layers · Onto and one-to-one"
 lang: ko
 description: 벡터에서 벡터로 가는 함수와 선형성 조건, 선형변환의 표준행렬, 신경망의 선형 레이어, 전사와 일대일 변환을 다룬다.
 ---

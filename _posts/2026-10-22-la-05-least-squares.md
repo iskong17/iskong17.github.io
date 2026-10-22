@@ -3,6 +3,8 @@ title: "Linear Algebra 5: Inner Products and Least Squares"
 date: 2026-10-22 10:05:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 5: Least Squares"
+card_desc: "Inner product · Norm · Orthogonality · Least squares · Normal equation"
 lang: ko
 description: 내적, 노름, 직교를 정의한 뒤, 과결정 연립방정식의 최소제곱 문제와 그 기하학적 의미(수선의 발), 그리고 기하와 미분 두 방식으로 정규방정식을 유도한다.
 ---

@@ -3,6 +3,8 @@ title: "Linear Algebra 8: Symmetric Matrices and Spectral Decomposition"
 date: 2026-10-22 10:08:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 8: Spectral Decomposition"
+card_desc: "Symmetric matrices · Orthogonal diagonalization · Algebraic and geometric multiplicity · Spectral decomposition"
 lang: ko
 description: "대칭행렬과 AᵀA·AAᵀ, 대칭행렬 고유벡터의 직교성, 닮음과 직교대각화, 대수적·기하적 중복도, 스펙트럼 정리와 랭크 1 분해를 다룬다."
 ---

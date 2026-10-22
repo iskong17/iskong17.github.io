@@ -3,6 +3,8 @@ title: "Linear Algebra 1: Vectors, Matrices, and Linear Systems"
 date: 2026-10-22 10:01:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 1: Linear Systems"
+card_desc: "Vector and matrix notation · Ax = b · Identity and inverse · Rectangular systems"
 lang: ko
 description: 벡터와 행렬의 표기, 행렬 곱셈, 선형 방정식과 선형 시스템, 항등 행렬과 역행렬, 그리고 행렬이 역행렬을 갖지 않거나 직사각 행렬일 때 해가 어떻게 되는지를 정리한다.
 ---

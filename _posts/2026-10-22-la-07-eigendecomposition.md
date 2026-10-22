@@ -3,6 +3,8 @@ title: "Linear Algebra 7: Eigenvalues and Diagonalization"
 date: 2026-10-22 10:07:00 +0900
 category: study
 topic: linear-algebra
+card_title: "Lecture 7: Eigendecomposition"
+card_desc: "Eigenvalues and eigenvectors · Characteristic equation · Eigenspace · Diagonalization"
 lang: ko
 description: "고유값과 고유벡터, 특성방정식, 영공간과 고유공간, 대수적·기하적 중복도, 대각화, 그리고 고유값 분해 A = VDV⁻¹을 다룬다."
 ---
