@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: Keep the source model frozen, add a non-parametric branch that matches test features to source prototypes in a shared subspace, and mix the two logits by entropy.
+conference: CVPR
+year: 2024
 paper:
   title: "Backpropagation-free Network for 3D Test-time Adaptation"
   authors: "Yanshuo Wang, Ali Cheraghian, Zeeshan Hayder, Jie Hong, Sameera Ramasinghe, Shafin Rahman, David Ahmedt-Aristizabal, Xuesong Li, Lars Petersson, Mehrtash Harandi"

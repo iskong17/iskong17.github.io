@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: SMART-PC replaces MATE's point reconstruction with skeleton prediction, which gives features robust enough that online adaptation only needs BatchNorm statistic updates and no backpropagation.
+conference: ICML
+year: 2025
 paper:
   title: "SMART-PC: Skeletal Model Adaptation for Robust Test-Time Training in Point Clouds"
   authors: "Ali Bahri, Moslem Yazdanpanah, Sahar Dastani, Mehrdad Noori, Gustavo Adolfo Vargas Hakim, David Osowiechi, Farzad Beizaee, Ismail Ben Ayed, Christian Desrosiers"

@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: Run TENT on several FPS/KNN re-samplings of the same test batch and average the adapted normalization parameters to get a more robust point-cloud classifier.
+conference: WACV
+year: 2025
 paper:
   title: "Test-Time Adaptation in Point Clouds: Leveraging Sampling Variation with Weight Averaging"
   authors: "Ali Bahri, Moslem Yazdanpanah, Mehrdad Noori, Sahar Dastani Oghani, Milad Cheraghalikhani, David Osowiechi, Farzad Beizaee, Gustavo A. Vargas Hakim, Ismail Ben Ayed, Christian Desrosiers"

@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: A-TPT regularizes test-time prompt tuning by maximizing, for each class, the angle to its nearest neighbouring class text feature, which spreads features evenly on the hypersphere and lowers calibration error more than C-TPT and O-TPT.
+conference: ICLR
+year: 2026
 paper:
   title: "A-TPT: Angular Diversity Calibration Properties for Test-Time Prompt Tuning of Vision-Language Models"
   authors: "Shihab Aaqil Ahamed, Udaya S. K. P. Miriya Thanthrige, Ranga Rodrigo, Muhammad Haris Khan"

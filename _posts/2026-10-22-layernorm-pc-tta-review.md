@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: A forward-only, source-free test-time adaptation for point-cloud Transformers that keeps LayerNorm's normalization intact and only rescales and shifts its post-affine output using a prototype taken from the [cls] token.
+conference: WACV
+year: 2026
 paper:
   title: "Revisiting Layer Normalization for Point Cloud Test Time Adaptation"
   authors: "Moslem Yazdanpanah, Ali Bahri, Mehrdad Noori, Sahar Dastani, Samuel Barbeau, David Osowiechi, Gustavo Adolfo Vargas Hakim, Ismail Ben Ayed, Christian Desrosiers"

@@ -1,6 +1,6 @@
 {%- assign p = include.post -%}
 {%- assign cat = site.data.categories | where: "key", "paper-review" | first -%}
-<article class="paper-row" data-subfields="{{ p.subfields | join: ' ' }}">
+<article class="paper-row" data-subfields="{{ p.subfields | join: ' ' }}" data-conf="{{ p.conference }}" data-year="{{ p.year }}" data-title="{{ p.paper.title | default: p.title | escape }}">
   <div class="paper-row-main">
     {%- if p.paper.venue %}<span class="paper-row-venue">{{ p.paper.venue }}</span>{% endif %}
     <h3 class="paper-row-title">{% if p.paper.url %}<a href="{{ p.paper.url }}" target="_blank" rel="noopener">{{ p.paper.title | default: p.title }}</a>{% else %}{{ p.paper.title | default: p.title }}{% endif %}</h3>

@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: O-TPT adds one regularizer to test-time prompt tuning that pushes the Gram matrix of CLIP's class text features toward the identity, which spreads the classes apart in angle and lowers calibration error.
+conference: CVPR
+year: 2025
 paper:
   title: "O-TPT: Orthogonality Constraints for Calibrating Test-time Prompt Tuning in Vision-Language Models"
   authors: "Ashshak Sharifdeen, Muhammad Akhtar Munir, Sanoojan Baliah, Salman Khan, Muhammad Haris Khan"

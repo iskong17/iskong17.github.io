@@ -787,7 +787,30 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .sq-driver.is-max { border-color: color-mix(in srgb, var(--team) 60%, transparent); }
 
 /* ---------- Paper review list ---------- */
-.subfield-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 16px; }
+.paper-controls { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px 28px; margin: -4px 0 18px; }
+.paper-filters { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.subfield-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.filter-label { width: 52px; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+.paper-sort { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.paper-sort .filter-label { width: auto; margin-right: 2px; }
+.conf-chip,
+.sort-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+.conf-chip small { font-weight: 400; opacity: 0.7; }
+.conf-chip:hover, .sort-btn:hover { color: var(--text); border-color: var(--purple); }
+.conf-chip.is-active { background: var(--purple); border-color: var(--purple); color: #fff; }
+.sort-btn { border-radius: 8px; }
+.sort-btn.is-active { background: var(--surface-2); border-color: var(--text-2); color: var(--text); }
 .subfield-chip {
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;

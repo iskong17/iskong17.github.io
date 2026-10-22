@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: SoC replaces O-TPT's full orthogonality penalty on CLIP text prototypes with a Huber penalty that caps the repulsion between semantically close classes, which lowers calibration error in test-time prompt tuning.
+conference: CVPR
+year: 2026
 paper:
   title: "SoC: Semantic Orthogonal Calibration for Test-Time Prompt Tuning"
   authors: "Leo Fillioux, Omprakash Chakraborty, Ismail Ben Ayed, Paul-Henry Cournède, Stergios Christodoulidis, Maria Vakalopoulou, Jose Dolz"

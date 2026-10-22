@@ -4,6 +4,8 @@ category: paper-review
 subfields: [hallucination, avllm]
 lang: en
 description: Ask the model whether a question needs audio, video, or both, and use the answer to weight each contrastive decoding branch.
+conference: CVPR
+year: 2026
 paper:
   title: "MAD: Modality-Adaptive Decoding for Mitigating Cross-Modal Hallucinations in Multimodal Large Language Models"
   authors: "Sangyun Chung, Se Yeon Kim, Youngchae Chee, Yong Man Ro"

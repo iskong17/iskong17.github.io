@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: D-TPT adds one regularizer to test-time prompt tuning that pushes each class text feature toward a uniform distribution over its dimensions, which weakens a single dominant dimension and lowers calibration error.
+conference: arXiv
+year: 2025
 paper:
   title: "D-TPT: Dimensional Entropy Maximization for Calibrating Test-Time Prompt Tuning in Vision-Language Models"
   authors: "Jisu Han, Wonjun Hwang"

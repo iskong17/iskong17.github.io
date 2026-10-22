@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: FPP argues that C-TPT and O-TPT calibrate TPT because they act like sharpness-aware minimisation, and replaces their regularisers with a data-free pretraining step that puts the initial prompt in a flat region of the loss landscape.
+conference: CVPR
+year: 2026
 paper:
   title: "Improving Calibration in Test-Time Prompt Tuning for Vision-Language Models via Data-Free Flatness-Aware Prompt Pretraining"
   authors: "Hyeonseo Jang, Jaebyeong Jeon, Joong-Won Hwang, Kibok Lee"

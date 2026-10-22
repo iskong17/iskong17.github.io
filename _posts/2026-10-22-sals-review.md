@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: Adapted CLIP models (adapters, prompt learning, TPT) become miscalibrated under distribution shift because their logit range grows, and rescaling each sample's logits to the min-max range of its zero-shot logits fixes much of this without changing predictions.
+conference: ECCV
+year: 2024
 paper:
   title: "Robust Calibration of Large Vision-Language Adapters"
   authors: "Balamurali Murugesan, Julio Silva-Rodriguez, Ismail Ben Ayed, Jose Dolz"

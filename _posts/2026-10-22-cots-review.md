@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: CoTS calibrates test-time prompt tuning after the fact by learning one temperature per test image that matches the adapted confidence to zero-shot CLIP's confidence, so accuracy is unchanged, and E-CoTS adds a weak-strong view ensemble to raise accuracy.
+conference: arXiv
+year: 2026
 paper:
   title: "Bridging the Confidence Gap: Temperature Scaling for Calibrating Test-Time Prompt Tuning"
   authors: "Yuwei Liang, Jian Liang, Dapeng Hu, Yinuo Xu, Ran He"

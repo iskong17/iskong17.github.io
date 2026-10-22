@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: CloudFixer adapts each test point cloud by optimizing a rotation and per-point displacements so that a frozen source diffusion model sees it as clean, without backpropagating through the diffusion model.
+conference: ECCV
+year: 2024
 paper:
   title: "CloudFixer: Test-Time Adaptation for 3D Point Clouds via Diffusion-Guided Geometric Transformation"
   authors: "Hajin Shim, Changhun Kim, Eunho Yang"

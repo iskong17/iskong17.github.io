@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: 3DD-TTA encodes a corrupted point cloud with LION's VAE, adds a little noise to its latent points, and denoises them with a source diffusion model under Chamfer guidance, leaving the classifier untouched.
+conference: WACV
+year: 2025
 paper:
   title: "Test-Time Adaptation of 3D Point Clouds via Denoising Diffusion Models"
   authors: "Hamidreza Dastmalchi, Aijun An, Ali Cheraghian, Shafin Rahman, Sameera Ramasinghe"

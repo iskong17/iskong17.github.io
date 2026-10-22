@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, vlm]
 lang: en
 description: TPT tunes CLIP's text prompt on a single unlabeled test image by minimising the entropy of the averaged prediction over its most confident augmented views.
+conference: NeurIPS
+year: 2022
 paper:
   title: "Test-Time Prompt Tuning for Zero-Shot Generalization in Vision-Language Models"
   authors: "Manli Shu, Weili Nie, De-An Huang, Zhiding Yu, Tom Goldstein, Anima Anandkumar, Chaowei Xiao"

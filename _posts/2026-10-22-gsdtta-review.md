@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: Instead of moving every point, GSDTTA shifts a test point cloud by learning offsets for only its 100 lowest graph Fourier coefficients, and labels it with help from Laplacian eigenmaps.
+conference: ICCV
+year: 2025
 paper:
   title: "3D Test-time Adaptation via Graph Spectral Driven Point Shift"
   authors: "Xin Wei, Qin Yang, Yijie Fang, Mingrui Zhu, Nannan Wang"

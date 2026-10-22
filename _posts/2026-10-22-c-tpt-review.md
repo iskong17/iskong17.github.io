@@ -4,6 +4,8 @@ category: paper-review
 subfields: [calibration, tta, vlm]
 lang: en
 description: C-TPT adds a label-free term to test-time prompt tuning that pushes CLIP's class text features apart, which roughly halves TPT's calibration error while keeping its accuracy gain.
+conference: ICLR
+year: 2024
 paper:
   title: "C-TPT: Calibrated Test-Time Prompt Tuning for Vision-Language Models via Text Feature Dispersion"
   authors: "Hee Suk Yoon, Eunseop Yoon, Joshua Tian Jin Tee, Mark Hasegawa-Johnson, Yingzhen Li, Chang D. Yoo"

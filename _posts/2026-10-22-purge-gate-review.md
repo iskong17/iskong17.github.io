@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: A backpropagation-free TTA method for point cloud transformers that scores each token's distance to a source prototype and removes the most divergent ones before they reach attention.
+conference: ICCV
+year: 2025
 paper:
   title: "Purge-Gate: Backpropagation-Free Test-Time Adaptation for Point Clouds Classification via Token Purging"
   authors: "Moslem Yazdanpanah, Ali Bahri, Mehrdad Noori, Sahar Dastani, Gustavo Adolfo Vargas Hakim, David Osowiechi, Ismail Ben Ayed, Christian Desrosiers"

@@ -4,6 +4,8 @@ category: paper-review
 subfields: [avllm]
 lang: en
 description: Run audio-only and video-only branches through the early decoder layers, merge their hidden states, and decode jointly from there.
+conference: EMNLP
+year: 2026
 paper:
   title: "Fork-Merge Decoding: Enhancing Multimodal Understanding in Audio-Visual Large Language Models"
   authors: "Chaeyoung Jung, Youngjoon Jang, Jongmin Choi, Joon Son Chung"

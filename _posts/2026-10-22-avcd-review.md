@@ -4,6 +4,8 @@ category: paper-review
 subfields: [hallucination, avllm]
 lang: en
 description: Find the dominant modality from attention, mask the others, and extend contrastive decoding to audio, video, and text.
+conference: NeurIPS
+year: 2025
 paper:
   title: "AVCD: Mitigating Hallucinations in Audio-Visual Large Language Models through Contrastive Decoding"
   authors: "Chaeyoung Jung, Youngjoon Jang, Joon Son Chung"

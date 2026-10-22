@@ -4,6 +4,8 @@ category: paper-review
 subfields: [tta, 3dpc]
 lang: en
 description: MATE trains a Point-MAE classifier jointly with masked reconstruction, then updates the encoder on each corrupted test point cloud by reconstructing it before classifying.
+conference: ICCV
+year: 2023
 paper:
   title: "MATE: Masked Autoencoders are Online 3D Test-Time Learners"
   authors: "M. Jehanzeb Mirza, Inkyu Shin, Wei Lin, Andreas Schriebl, Kunyang Sun, Jaesung Choe, Mateusz Kozinski, Horst Possegger, In So Kweon, Kuk-Jin Yoon, Horst Bischof"

@@ -61,11 +61,13 @@ description: Study notes, paper reviews, photos from conferences and travel, and
               <span class="sub-tile-desc">Profiles, every season, teams</span>
             </button>
             {%- elsif c.subfields %}
-            {%- for sf in c.subfields %}
-            {%- assign sposts = posts | where_exp: "p", "p.subfields contains sf.key" -%}
-            <button type="button" class="sub-tile{% if sposts.size == 0 %} is-empty{% endif %}" data-goto="{{ c.key }}/{{ sf.key }}">
-              <span class="sub-tile-top"><b>{{ sf.label }}</b><span class="sub-tile-count">{{ sposts.size }}</span></span>
-              <span class="sub-tile-desc">{% if sposts.size > 0 %}{{ sposts.first.paper.title | default: sposts.first.title }}{% else %}Coming soon{% endif %}</span>
+            {%- assign confs = posts | map: "conference" | uniq | sort -%}
+            {%- for cf in confs %}
+            {%- assign cposts = posts | where: "conference", cf -%}
+            {%- assign cyears = cposts | map: "year" | uniq | sort | reverse -%}
+            <button type="button" class="sub-tile" data-goto="{{ c.key }}" data-conf-goto="{{ cf }}">
+              <span class="sub-tile-top"><b>{{ cf }}</b><span class="sub-tile-count">{{ cposts.size }}</span></span>
+              <span class="sub-tile-desc">{{ cyears | join: " · " }}</span>
             </button>
             {%- endfor %}
             {%- elsif c.topics == nil %}
@@ -138,13 +140,35 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       </div>
       {%- endif %}
       {%- if c.subfields and posts.size > 0 %}
-      <div class="subfield-filter" role="group" aria-label="{{ c.label }} subfields">
-        <button type="button" class="subfield-chip is-active" data-subfield="all">All</button>
-        {%- for sf in c.subfields %}
-        {%- assign sposts = posts | where_exp: "p", "p.subfields contains sf.key" -%}
-        {%- if sposts.size > 0 %}
-        <button type="button" class="subfield-chip" data-subfield="{{ sf.key }}">{{ sf.label }} <small>{{ sposts.size }}</small></button>
-        {%- endif %}
+      {%- assign confs = posts | map: "conference" | uniq | sort -%}
+      <div class="paper-controls">
+        <div class="paper-filters">
+          <div class="subfield-filter" role="group" aria-label="Topic">
+            <span class="filter-label">Topic</span>
+            <button type="button" class="subfield-chip is-active" data-subfield="all">All</button>
+            {%- for sf in c.subfields %}
+            {%- assign sposts = posts | where_exp: "p", "p.subfields contains sf.key" -%}
+            {%- if sposts.size > 0 %}
+            <button type="button" class="subfield-chip" data-subfield="{{ sf.key }}">{{ sf.label }} <small>{{ sposts.size }}</small></button>
+            {%- endif %}
+            {%- endfor %}
+          </div>
+          <div class="subfield-filter conf-filter" role="group" aria-label="Conference">
+            <span class="filter-label">Venue</span>
+            <button type="button" class="conf-chip is-active" data-conf="all">All</button>
+            {%- for cf in confs %}
+            {%- assign cposts = posts | where: "conference", cf -%}
+            <button type="button" class="conf-chip" data-conf="{{ cf }}">{{ cf }} <small>{{ cposts.size }}</small></button>
+            {%- endfor %}
+          </div>
+        </div>
+        <div class="paper-sort" role="group" aria-label="Sort papers">
+          <span class="filter-label">Sort</span>
+          <button type="button" class="sort-btn is-active" data-sort="year">Year</button>
+          <button type="button" class="sort-btn" data-sort="title">Title A–Z</button>
+        </div>
+      </div>
+      {%- endif %}
         {%- endfor %}
       </div>
       {%- endif %}

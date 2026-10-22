@@ -72,7 +72,8 @@
       document.querySelectorAll('.race-sub').forEach(function (s) { s.hidden = s.getAttribute('data-sub') !== sub; });
       activate(raceTabs.querySelectorAll('[data-sub]'), 'data-sub', sub);
     }
-    // Study and Gallery filter by topic tab; Paper Review filters by subfield chip.
+    // Study and Gallery filter by topic tab; Paper Review filters by subfield chip and venue chip.
+    var paperConf = 'all';
     function showTopic(panel, key) {
       var bySub = !!panel.querySelector('.subfield-chip');
       var attr = bySub ? 'data-subfield' : 'data-topic';
@@ -88,6 +89,7 @@
         var show = key === 'all' || (bySub
           ? (' ' + (c.getAttribute('data-subfields') || '') + ' ').indexOf(' ' + key + ' ') !== -1
           : c.getAttribute('data-topic') === key);
+        if (bySub && paperConf !== 'all' && c.getAttribute('data-conf') !== paperConf) show = false;
         c.hidden = !show;
         if (show) any = true;
       });
@@ -96,6 +98,7 @@
         g.hidden = (!!bars && key === 'all') || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
       });
       activate(tabs, attr, key);
+      if (bySub) activate(panel.querySelectorAll('.conf-chip'), 'data-conf', paperConf);
       var empty = panel.querySelector('.topic-empty');
       if (!empty) {
         empty = document.createElement('p');
@@ -121,7 +124,12 @@
       b.addEventListener('click', function () { go('#' + b.getAttribute('data-panel')); });
     });
     document.querySelectorAll('[data-goto]').forEach(function (b) {
-      b.addEventListener('click', function () { go('#' + b.getAttribute('data-goto')); window.scrollTo(0, blogTabs.offsetTop - 80); });
+      b.addEventListener('click', function () {
+        if (b.hasAttribute('data-conf-goto')) paperConf = b.getAttribute('data-conf-goto');
+        else if (b.getAttribute('data-goto').indexOf('paper-review') === 0) paperConf = 'all';
+        go('#' + b.getAttribute('data-goto'));
+        window.scrollTo(0, blogTabs.offsetTop - 80);
+      });
     });
     if (raceTabs) {
       raceTabs.querySelectorAll('[data-sub]').forEach(function (b) {
@@ -132,6 +140,31 @@
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () { go('#' + panel + '/' + b.getAttribute('data-topic')); });
     });
+    // Venue chips and sort buttons on the Paper Review panel. The venue filter combines with the topic chip in the URL.
+    var currentSub = function () { return (location.hash.replace(/^#/, '').split('/')[1]) || 'all'; };
+    document.querySelectorAll('.conf-chip').forEach(function (b) {
+      b.addEventListener('click', function () {
+        paperConf = b.getAttribute('data-conf');
+        showTopic(b.closest('.blog-panel'), currentSub());
+      });
+    });
+    var paperList = document.querySelector('.paper-list');
+    var sortPapers = function (by) {
+      if (!paperList) return;
+      var rows = Array.prototype.slice.call(paperList.querySelectorAll('.paper-row'));
+      var title = function (r) { return (r.getAttribute('data-title') || '').toLowerCase(); };
+      rows.sort(function (a, b) {
+        if (by === 'title') return title(a).localeCompare(title(b));
+        var dy = (+b.getAttribute('data-year') || 0) - (+a.getAttribute('data-year') || 0);
+        return dy || (a.getAttribute('data-conf') || '').localeCompare(b.getAttribute('data-conf') || '') || title(a).localeCompare(title(b));
+      });
+      rows.forEach(function (r) { paperList.appendChild(r); });
+      activate(document.querySelectorAll('.sort-btn'), 'data-sort', by);
+    };
+    document.querySelectorAll('.sort-btn').forEach(function (b) {
+      b.addEventListener('click', function () { sortPapers(b.getAttribute('data-sort')); });
+    });
+    sortPapers('year');
     document.querySelectorAll('.subfield-chip').forEach(function (b) {
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () {
