@@ -45,6 +45,13 @@ description: "가중 그래프에서 최단 경로 가중치와 음수 가중치
 
 여기에 $$G_1$$은 간선 $$(c, b)$$를, $$G_2$$는 간선 $$(b, c)$$를 가중치 $$-1$$로 더 가진다. 이 한 간선의 방향 차이로 $$G_1$$에는 사이클이 생기고 $$G_2$$는 DAG가 된다.
 
+![Example weighted graphs G1 and G2](/images/study/algo/algo-11-weighted-shortest-paths-1.webp)
+*강의의 예제 가중 그래프 $$G_1$$(왼쪽)과 $$G_2$$(오른쪽). 두 그래프는 $$b$$와 $$c$$ 사이 가중치 $$-1$$ 간선의 방향만 다르다. 출처: MIT 6.006 Lecture 11 notes (CC BY-NC-SA 4.0).*
+
+그림을 읽을 때는 화살표 방향과 간선 옆의 숫자를 함께 본다. 위쪽 줄은 $$a, b, c, d$$, 아래쪽 줄은 $$e, f, g, h$$이고, 숫자가 그 간선의 가중치다. 음수 가중치 간선은 $$(a,b)$$의 $$-5$$, $$(b,f)$$의 $$-4$$, $$(g,h)$$의 $$-2$$, 그리고 $$b$$와 $$c$$ 사이의 $$-1$$ 네 개다.
+
+$$G_1$$에서는 $$c \to b$$ 간선 때문에 $$b \to f \to g \to c \to b$$로 되돌아오는 사이클이 생긴다. $$G_2$$에서는 같은 간선이 $$b \to c$$로 뒤집혀 있어 어떤 정점에서 출발해도 자기 자신으로 돌아올 수 없고, 모든 경로가 결국 싱크인 $$c$$로 흘러든다. 같은 정점과 거의 같은 간선으로 "사이클이 있는 경우"와 "DAG인 경우"를 나란히 비교하려는 구성이다.
+
 ## 가중 경로와 최단 경로
 
 - 가중 그래프에서 경로 $$\pi$$의 **가중치** $$w(\pi)$$는 경로에 있는 간선 가중치의 합이다.
@@ -73,6 +80,13 @@ $$s$$에서 $$t$$로 가는 경로가 음수 가중치 사이클 위의 정점�
 | DAG | 임의 | DAG Relaxation | $$\lvert V \rvert + \lvert E \rvert$$ | 11강 |
 | 일반 | 임의 | Bellman-Ford | $$\lvert V \rvert \cdot \lvert E \rvert$$ | 12강 |
 | 일반 | 음이 아님 | Dijkstra | $$\lvert V \rvert \log \lvert V \rvert + \lvert E \rvert$$ | 13강 |
+
+![SSSP algorithms by graph restriction and running time](/images/study/algo/algo-11-weighted-shortest-paths-2.webp)
+*강의 노트의 SSSP 알고리즘 표. 왼쪽 두 열은 그래프와 가중치에 대한 제한, 오른쪽은 알고리즘과 실행 시간이다. 출처: MIT 6.006 Lecture 11 notes (CC BY-NC-SA 4.0).*
+
+표는 "입력에 대한 가정이 강할수록 더 빠른 알고리즘을 쓸 수 있다"는 교환 관계를 색으로 보여 준다. 왼쪽 열에서 파란 칸(General, Any)은 제한이 없다는 뜻이고, 붉은 칸(Unweighted, DAG)은 강한 제한이다. 오른쪽 실행 시간 열에서는 진한 파랑인 $$\lvert V \rvert + \lvert E \rvert$$이 가장 빠르고, 분홍색인 $$\lvert V \rvert \cdot \lvert E \rvert$$이 가장 느리다.
+
+BFS는 가중치가 없다는 가장 강한 제한을 대가로 선형 시간을 얻는다. DAG Relaxation은 가중치 제한은 없지만 그래프가 비순환이어야 하고, 역시 선형 시간이다. Bellman-Ford는 아무 제한이 없는 대신 가장 느리며, Dijkstra는 가중치가 음수가 아니라는 중간 정도의 제한으로 선형에 가까운 시간을 얻는다. 문제를 풀 때는 입력이 만족하는 제한을 확인하고, 그 제한을 허용하는 행 가운데 가장 빠른 알고리즘을 고르면 된다.
 
 이미 아는 알고리즘인 BFS도 다음과 같은 경우에는 $$O(\lvert V \rvert + \lvert E \rvert)$$에 가중 최단 경로를 푼다.
 
@@ -119,6 +133,13 @@ def try_to_relax(Adj, w, d, parent, u, v):
 Recitation은 반대 방향의 보조정리도 제시한다. **더 이상 완화할 간선이 없으면** 모든 $$v$$에 대해 $$d(s, v) \le \delta(s, v)$$다. $$\delta(s, v) < d(s, v)$$라면 더 짧은 경로 $$\pi$$가 있고, $$\pi$$에서 $$d(s, b) > \delta(s, b)$$인 첫 간선 $$(a, b)$$는 완화 가능하므로 모순이다. 따라서 "완화 가능한 간선이 없을 때까지 아무 간선이나 완화"하는 일반적인 틀은 끝나기만 하면 올바르다.
 
 문제는 완화 순서다. 도달 가능한 음수 가중치 사이클이 있으면 영원히 끝나지 않는다. 비순환 그래프에서도 나쁜 순서로 완화하면 지수 번의 갱신이 일어날 수 있다. Recitation의 예는 $$2n + 1$$개 정점과 $$3n$$개 간선으로 된 구간 $$n$$개짜리 그래프로, 각 구간 $$i$$의 세 간선 가중치가 $$2^{n-i}$$다. 나쁜 순서에서는 갱신 횟수가 $$T(n) = 3 + 2T(n - 2)$$, 곧 $$T(n) = \Theta(2^{n/2})$$이 된다.
+
+![Graph on which a bad relaxation order performs exponentially many updates](/images/study/algo/algo-11-weighted-shortest-paths-3.webp)
+*Recitation의 지수 완화 예. 구간 $$i$$는 $$v_{2i}$$에서 $$v_{2i+2}$$로 바로 가는 top 간선과, $$v_{2i+1}$$을 거쳐 가는 left, right 간선으로 이루어진다. 출처: MIT 6.006 Recitation 11 notes (CC BY-NC-SA 4.0).*
+
+그림에서 각 구간은 두 갈래 길이다. $$v_{2i}$$에서 $$v_{2i+2}$$로 가는 방법은 top 간선 하나를 타는 것과 left, right 두 간선을 차례로 타는 것뿐이다. 세 간선의 가중치가 모두 $$2^{n-i}$$이므로 top 경로의 가중치는 $$2^{n-i}$$, 아래 경로는 $$2 \cdot 2^{n-i}$$다. 따라서 최단 경로는 언제나 top 간선만 이어 타는 경로이고, 위상 순서로 완화하면 각 간선을 한 번씩만 보면 된다.
+
+나쁜 순서는 각 구간에서 left, right 간선을 먼저 완화해 $$v_{2i+2}$$에 일부러 더 큰 값을 넣은 뒤, 그 틀린 값으로 오른쪽 구간 전체를 끝까지 완화한다. 그다음에야 top 간선을 완화해 $$v_{2i+2}$$의 값을 고치고, 오른쪽 구간 전체를 처음부터 다시 완화한다. 오른쪽 부분을 두 번씩 다시 푸는 일이 구간마다 반복되므로 점화식 $$T(n) = 3 + 2T(n-2)$$가 나오고, 갱신 횟수가 그래프 크기에 대해 지수적으로 늘어난다.
 
 ## DAG Relaxation
 

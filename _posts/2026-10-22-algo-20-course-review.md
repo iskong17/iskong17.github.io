@@ -36,6 +36,11 @@ description: "6.006의 목표와 문제 해결 전략(아는 문제로 환원하
 - **NP-hard**: NP의 어떤 문제든 다항 시간에 푸는 데 쓸 수 있는 문제들의 집합이다.
 - **NP-complete**: NP-hard와 NP의 교집합이다.
 
+![Informal problem difficulty line from Lecture 19](/images/study/algo/algo-20-course-review-1.webp)
+*19강의 문제 난이도 그림. 왼쪽이 쉬운 문제, 오른쪽이 어려운 문제이며, 초록은 클래스, 빨강은 hard, 파랑은 complete를 나타낸다. 출처: MIT 6.006 Lecture 19 notes (CC BY-NC-SA 4.0).*
+
+이 과목에서 다룬 알고리즘은 거의 모두 맨 왼쪽의 P 구간에 있다. 정렬, 그래프 탐색, 최단 경로, 대부분의 동적 계획법이 다항 시간 알고리즘이다. 18강의 부분집합 합은 의사 다항 시간 알고리즘이 있지만 NP-complete이므로 NP-complete 점 위에 놓이고, 19강의 체스는 EXP-complete 점에 놓인다. 위의 정의들을 이 그림의 위치로 기억해 두면, 새 문제를 만났을 때 "이 문제는 어느 점 근처에 있는가"를 먼저 묻는 습관이 생긴다. 문제가 NP-hard임을 알면 다항 시간 알고리즘을 찾는 대신 의사 다항 알고리즘이나 근사 알고리즘(아래 "다음 단계")을 찾는 쪽으로 방향을 바꿀 수 있다.
+
 ## 알고리즘 문제를 푸는 법
 
 ### 1. 풀 줄 아는 문제로 환원한다
@@ -50,12 +55,22 @@ description: "6.006의 목표와 문제 해결 전략(아는 문제로 환원하
 - 도달 가능성(reachability), 연결 요소(connected components), 사이클 탐지(cycle detection), 위상 정렬(topological sort): BFS([9강]({% post_url 2026-10-22-algo-09-bfs %})), DFS([10강]({% post_url 2026-10-22-algo-10-dfs %})).
 - 단일 출발점 / 전체 쌍 최단 경로: DAG 완화([11강]({% post_url 2026-10-22-algo-11-weighted-shortest-paths %})), Bellman-Ford([12강]({% post_url 2026-10-22-algo-12-bellman-ford %})), Dijkstra([13강]({% post_url 2026-10-22-algo-13-dijkstra %})), Johnson([14강]({% post_url 2026-10-22-algo-14-apsp-johnson %})).
 
+![Toolbox of data structures, sorting algorithms and graph algorithms](/images/study/algo/algo-20-course-review-2.webp)
+*15강 노트에 정리된 도구 상자. 퀴즈 1 범위의 탐색 자료구조와 정렬 알고리즘, 퀴즈 2 범위의 그래프 알고리즘이 한 표에 모여 있다. 출처: MIT 6.006 Lecture 15 notes (CC BY-NC-SA 4.0).*
+
+환원으로 문제를 풀 때는 이 표가 후보 목록이다. 먼저 문제가 어느 열에 속하는지 정한다. 원소를 저장하고 찾는 문제는 첫 열, 순서를 매기는 문제는 둘째 열, 관계와 경로에 관한 문제는 셋째 열이다. 그다음 필요한 연산이나 입력 조건에 맞춰 열 안에서 하나를 고른다. 예를 들어 키 범위가 작은 정수 정렬이면 계수 정렬이나 기수 정렬을, 최솟값을 반복해서 꺼내야 하면 이진 힙을, 음수 가중치가 있는 그래프면 Bellman-Ford를 고른다. 표의 각 항목은 앞선 강의에서 연산별 시간까지 정리했으므로, 고른 도구의 시간을 그대로 가져와 전체 시간을 계산하면 된다.
+
 ### 2. 새로운 재귀 알고리즘을 설계한다
 
 - 무차별 대입(brute force)
 - 분할 정복(divide & conquer)
 - 동적 계획법(dynamic programming, 퀴즈 3 범위): SRTBOT([15강]({% post_url 2026-10-22-algo-15-dp-1 %})~[18강]({% post_url 2026-10-22-algo-18-dp-4 %}))
 - 탐욕/점진(greedy/incremental)
+
+![Classes of recursive algorithms and the shapes of their dependency graphs](/images/study/algo/algo-20-course-review-3.webp)
+*15강의 재귀 알고리즘 분류. 각 설계 기법을 호출 의존 그래프의 모양으로 구분한다. 출처: MIT 6.006 Lecture 15 notes (CC BY-NC-SA 4.0).*
+
+위 네 가지 설계 기법은 이 표의 행과 그대로 대응한다. 무차별 대입은 모든 후보를 한 번씩 시도하는 별 모양, 분할 정복은 겹치지 않는 부분 문제로 나누는 트리 모양, 동적 계획법은 부분 문제를 공유하는 DAG 모양이다. 탐욕 알고리즘은 그 DAG에서 매 단계 하나의 선택만 따라가는 부분 그래프에 해당한다. 새 재귀 알고리즘을 설계할 때는 SRTBOT으로 부분 문제와 관계를 먼저 세우고, 그 관계가 만드는 의존 그래프가 어떤 모양인지 보면 어느 기법에 해당하는지, 그리고 메모이제이션이 효과가 있을지 판단할 수 있다.
 
 ## 다음 단계
 

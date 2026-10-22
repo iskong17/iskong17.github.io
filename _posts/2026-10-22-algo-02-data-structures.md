@@ -44,6 +44,13 @@ description: "시퀀스와 집합 인터페이스를 정의하고, 배열, 연�
 | | `insert_last(x)` | $$x$$를 마지막 항목으로 추가한다 |
 | | `delete_last()` | 마지막 항목을 제거하고 반환한다 |
 
+![Sequence interface operations grouped as container, static and dynamic](/images/study/algo/algo-02-data-structures-1.webp)
+*강의 노트의 시퀀스 인터페이스 표. 연산이 컨테이너, 정적, 동적의 세 묶음으로 나뉘어 있다. 출처: MIT 6.006 Lecture 2 notes (CC BY-NC-SA 4.0).*
+
+표의 세 묶음은 연산이 자료구조에 무엇을 요구하는지에 따라 나뉜다. **컨테이너** 연산 `build`와 `len`은 자료구조를 만들고 크기를 묻는다. **정적** 연산은 항목의 개수와 위치를 바꾸지 않고 읽거나 덮어쓰기만 한다. **동적** 연산은 항목을 넣거나 빼서 시퀀스의 길이를 바꾼다. 동적 연산을 하면 바뀐 위치 뒤의 모든 항목의 순위(index)가 하나씩 밀리거나 당겨진다는 점이 중요하다. 배열에서 이것이 곧 항목 이동 비용으로 이어진다.
+
+동적 연산은 다시 위치에 따라 `_at(i)`(임의 위치), `_first`(맨 앞), `_last`(맨 뒤)로 나뉜다. 이 구분은 이후 비교표의 열과 그대로 대응한다. 어떤 자료구조는 맨 앞에서만, 어떤 자료구조는 맨 뒤에서만 빠르기 때문이다.
+
 특수한 경우로, **스택(stack)** 은 `insert_last(x)`와 `delete_last()`만, **큐(queue)** 는 `insert_last(x)`와 `delete_first()`만 지원한다.
 
 ### 집합 인터페이스
@@ -62,6 +69,13 @@ description: "시퀀스와 집합 인터페이스를 정의하고, 배열, 연�
 | | `find_max()` | 키가 가장 큰 항목을 반환한다 |
 | | `find_next(k)` | 키가 $$k$$보다 큰 것 중 가장 작은 항목을 반환한다 |
 | | `find_prev(k)` | 키가 $$k$$보다 작은 것 중 가장 큰 항목을 반환한다 |
+
+![Set interface operations grouped as container, static, dynamic and order](/images/study/algo/algo-02-data-structures-2.webp)
+*강의 노트의 집합 인터페이스 표. 시퀀스 표의 컨테이너, 정적, 동적 묶음에 키 순서를 다루는 순서(Order) 묶음이 더해져 있다. 출처: MIT 6.006 Lecture 2 notes (CC BY-NC-SA 4.0).*
+
+시퀀스 표와 나란히 놓고 보면 차이가 분명하다. 시퀀스의 연산은 위치 $$i$$를 인자로 받지만, 집합의 연산은 키 $$k$$를 받는다. 집합의 `insert(x)`에는 위치 인자가 없다. 항목이 어디에 놓일지는 키가 정하기 때문이다. 정적 묶음에는 `find(k)` 하나만 있고, 동적 묶음은 `insert`와 `delete` 두 개뿐이다.
+
+마지막 **순서** 묶음은 키들 사이의 대소 관계를 묻는다. `find_next(k)`와 `find_prev(k)`는 $$k$$ 자체가 집합에 없어도 동작한다는 점에 주의한다. 예를 들어 키가 $$\{3, 7, 10\}$$일 때 `find_next(5)`는 7을 반환한다. 해시 테이블(4강)처럼 순서 묶음을 효율적으로 지원하지 못하는 자료구조가 있기 때문에, 이 묶음을 뺀 인터페이스를 따로 사전이라 부른다.
 
 순서 연산을 뺀 집합을 **사전(dictionary)** 이라 한다. 해당하는 항목이 없으면 find 계열 연산은 None을 반환한다.
 
@@ -185,6 +199,13 @@ def delete_last(self):                       # O(1) amortized
 | 배열 | $$n$$ | $$1$$ | $$n$$ | $$n$$ | $$n$$ |
 | 연결 리스트 | $$n$$ | $$n$$ | $$1$$ | $$n$$ | $$n$$ |
 | 동적 배열 | $$n$$ | $$1$$ | $$n$$ | $$1$$ (a) | $$n$$ |
+
+![Worst-case cost table for array, linked list and dynamic array](/images/study/algo/algo-02-data-structures-3.webp)
+*강의 노트의 시퀀스 자료구조 비교표. 파란 칸은 상수 시간, 붉은 칸은 선형 시간이며 $$1_{(a)}$$는 분할상환 상수 시간이다. 출처: MIT 6.006 Lecture 2 notes (CC BY-NC-SA 4.0).*
+
+색으로 읽으면 각 자료구조의 성격이 한눈에 보인다. 배열은 정적 열(`get_at`/`set_at`)만 파랗다. 메모리에서 연속된 위치라 주소 계산으로 바로 접근하지만, 길이를 바꾸려면 통째로 다시 만들어야 하기 때문이다. 연결 리스트는 반대로 `insert_first`/`delete_first` 열만 파랗다. 헤드 포인터만 다시 이으면 되지만, $$i$$번째 노드에 가려면 포인터를 $$i$$번 따라가야 한다.
+
+동적 배열은 배열의 파란 칸을 그대로 유지하면서 `insert_last`/`delete_last` 열을 분할상환 상수로 바꾼다. 아래첨자 (a)가 붙은 이유는, 대부분의 호출은 $$O(1)$$이지만 가끔 재할당이 일어나는 호출은 $$\Theta(n)$$이 걸리기 때문이다. 맨 오른쪽 `insert_at`/`delete_at` 열은 세 자료구조 모두 붉다.
 
 어느 자료구조도 임의 위치의 동적 연산을 선형보다 빠르게 지원하지 못한다. 이는 7강(Sequence AVL)에서 개선한다.
 

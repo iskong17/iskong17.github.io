@@ -40,6 +40,11 @@ $$
 r: \mathcal{S} \times \mathcal{A} \to \mathbb{R}
 $$
 
+![MDP definition and graphical model](/images/study/dl/dl-15-policy-gradients-1.webp)
+*MDP의 네 구성 요소와 그래프 모형. 상태 $$s_t$$와 행동 $$a_t$$가 함께 다음 상태 $$s_{t+1}$$을 정하며, 그 화살표에 붙은 $$p(s_{t+1} \mid s_t, a_t)$$가 전이 연산자다. 출처: CS 182 Lecture 15 slides.*
+
+그림의 그래프 모형은 왼쪽에서 오른쪽으로 시간 순서대로 읽는다. 원 하나가 확률 변수 하나이고, 화살표는 "무엇이 무엇에 의존하는가"를 나타낸다. $$s_2$$로 들어오는 화살표가 $$s_1$$과 $$a_1$$ 두 개뿐이므로, $$s_2$$의 분포는 바로 이전 상태와 행동만으로 정해지고 그 이전의 역사와는 무관하다. 이것이 마르코프 성질이다. 아래쪽 주석은 이 전이 확률을 전이 연산자, 전이 확률, 동역학이라고 모두 같은 의미로 부르며 $$\mathcal{T}(s_{t+1} \mid s_t, a_t)$$로도 쓴다는 점을 강조한다.
+
 **부분 관측 MDP(partially observed MDP, POMDP)** 는 관측 공간 $$\mathcal{O}$$와 방출 확률(emission probability) $$\mathcal{E}: p(o_t \mid s_t)$$를 추가한 $$\mathcal{M} = \{\mathcal{S}, \mathcal{A}, \mathcal{O}, \mathcal{T}, \mathcal{E}, r\}$$이다. 에이전트는 상태를 직접 보지 못하고 관측만 본다. 슬라이드는 당분간 완전 관측 MDP만 다루되, POMDP가 존재한다는 것은 알아 두라고 한다.
 
 ### 강화학습의 목표
@@ -51,6 +56,13 @@ p_\theta(\tau) = p_\theta(s_1, a_1, \dots, s_T, a_T) = p(s_1) \prod_{t=1}^{T} \p
 $$
 
 강화학습의 목표는 이 분포 아래 기대 총보상을 최대화하는 정책 파라미터를 찾는 것이다.
+
+![Policy and environment loop with trajectory distribution](/images/study/dl/dl-15-policy-gradients-2.webp)
+*정책 $$\pi_\theta(a \mid s)$$(신경망)와 환경 $$p(s' \mid s, a)$$가 고리를 이루어 궤적을 만든다. 아래의 그래프 모형은 정책 화살표 $$\pi_\theta(a_t \mid s_t)$$가 추가된 $$(s, a)$$ 위의 마르코프 연쇄다. 출처: CS 182 Lecture 15 slides.*
+
+그림 위쪽은 상호작용 고리다. 상태 $$s$$가 파라미터 $$\theta$$를 가진 합성곱 신경망에 들어가 행동 $$a$$의 분포 $$\pi_\theta(a \mid s)$$를 내고, 뽑힌 행동이 환경(지구 그림)에 들어가면 환경은 $$p(s' \mid s, a)$$에 따라 다음 상태를 돌려준다. 그 상태가 다시 정책의 입력이 되며 고리가 이어진다. $$\theta$$에서 나온 화살표가 신경망의 각 층으로만 들어간다는 점에 주목할 만하다. 학습으로 바꿀 수 있는 것은 정책뿐이고 환경은 바꿀 수 없다.
+
+아래쪽 그래프 모형은 앞의 MDP 그림에 $$s_t \to a_t$$ 화살표(정책)를 추가한 것이다. 이렇게 하면 $$(s_t, a_t)$$ 쌍 전체가 하나의 마르코프 연쇄를 이루고, 궤적의 확률은 초기 상태 확률에 정책 확률과 전이 확률을 시각마다 번갈아 곱한 값이 된다. 바로 위의 $$p_\theta(\tau)$$ 분해식이 이 그림을 그대로 옮긴 것이다.
 
 $$
 \theta^\star = \arg\max_\theta \; \mathbb{E}_{\tau \sim p_\theta(\tau)} \left[ \sum_{t} r(s_t, a_t) \right]
@@ -126,6 +138,11 @@ $$
 2. 수익 추정: 각 궤적의 보상 합을 계산한다(이 경우 그냥 더하기만 하면 된다).
 3. 정책 개선: $$\theta \leftarrow \theta + \alpha \nabla_\theta J(\theta)$$.
 
+![REINFORCE and the generic RL loop](/images/study/dl/dl-15-policy-gradients-3.webp)
+*REINFORCE의 각 식이 강화학습의 세 단계 루프 중 어디에 해당하는지를 색 밑줄로 대응시킨 그림. 주황은 샘플 생성, 초록은 수익 추정, 파랑은 정책 개선이다. 출처: CS 182 Lecture 15 slides.*
+
+그림의 밑줄 색을 따라 읽으면 구조가 분명해진다. 주황 밑줄의 $$\frac{1}{N}\sum_{i}$$는 정책을 $$N$$번 실행해 얻은 샘플에 대한 평균이므로 주황 상자(샘플 생성)에 해당한다. 초록 밑줄의 $$\sum_t r(s_{i,t}, a_{i,t})$$는 각 궤적의 수익을 구하는 부분으로, 초록 상자(수익 추정 모델 적합)에 해당하지만 REINFORCE에서는 모델을 따로 맞추지 않고 보상을 더하기만 한다. 파랑 밑줄의 경사 상승 갱신이 파랑 상자(정책 개선)다. 왼쪽 아래의 초록 화살표는 1-3단계가 반복된다는 뜻이다. 갱신된 정책으로 다시 샘플을 모아야 하므로 루프 전체를 돌아야 한다.
+
 ### 최대우도와의 비교
 
 행동 복제처럼 최대우도로 정책을 학습할 때의 기울기는 다음과 같다.
@@ -135,6 +152,11 @@ $$
 $$
 
 정책 경사는 이 최대우도 기울기를 각 궤적의 보상 $$r(\tau_i)$$로 **가중**한 것이다. 보상이 높은 궤적은 로그 확률이 올라가고, 보상이 낮은 궤적은 로그 확률이 내려간다. 즉 좋은 것은 더 일어나게, 나쁜 것은 덜 일어나게 한다. 정책 경사는 "시행착오(trial and error)"라는 개념을 수식으로 정식화한 것이다.
+
+![Policy gradient as weighted maximum likelihood](/images/study/dl/dl-15-policy-gradients-4.webp)
+*정책 경사와 최대우도 기울기를 나란히 놓은 슬라이드. 오른쪽 곡면은 궤적 공간 위의 확률 분포이고, 체크 표시가 붙은 궤적(좋은 결과)의 확률은 올라가고 X 표시가 붙은 궤적(나쁜 결과)의 확률은 내려간다. 출처: CS 182 Lecture 15 slides.*
+
+그림 둘째 줄에서 시각별 로그 확률의 합 $$\sum_t \nabla_\theta \log \pi_\theta(a_{i,t} \mid s_{i,t})$$를 $$\nabla_\theta \log \pi_\theta(\tau_i)$$로 묶어 쓰면 비교가 쉬워진다. 최대우도는 모든 샘플 궤적의 로그 확률을 똑같이 올리지만, 정책 경사는 같은 기울기에 $$r(\tau_i)$$를 곱한다. 오른쪽 곡면 그림에서 높이는 정책이 각 궤적에 부여하는 확률이다. 경사 단계를 한 번 밟을 때마다 보상이 큰 궤적 주변으로 확률 질량이 옮겨 가고, 보상이 작은 궤적 주변의 질량은 줄어든다. 여러 번 시도해 본 뒤 잘된 시도를 더 자주 하게 만드는 것이 곧 시행착오다.
 
 ### 부분 관측
 

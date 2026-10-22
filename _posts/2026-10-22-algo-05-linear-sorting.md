@@ -74,6 +74,13 @@ def direct_access_sort(A):
             i += 1
 ```
 
+![direct_access_sort code with per-line costs](/images/study/algo/algo-05-linear-sorting-1.webp)
+*강의 노트의 직접 접근 배열 정렬 코드. 오른쪽 주석이 네 단계(최대 키 찾기, 배열 할당, 삽입, 순서대로 읽기)의 비용을 표시한다. 출처: MIT 6.006 Lecture 5 notes (CC BY-NC-SA 4.0).*
+
+예 $$[5, 2, 7, 0, 4]$$를 코드에 따라가 보면 다음과 같다. 최대 키가 7이므로 $$u = 8$$이고, 길이 8의 배열 `D`를 `None`으로 채운다. 각 항목을 자기 키 위치에 넣으면 `D`는 인덱스 0, 2, 4, 5, 7만 채워지고 1, 3, 6은 비어 있다. 마지막 반복은 인덱스 0부터 7까지 훑으며 비어 있지 않은 칸만 `A`의 앞에서부터 채우므로 $$[0, 2, 4, 5, 7]$$이 된다.
+
+주석의 비용을 더하면 $$O(n) + O(u) + O(n) + O(u) = O(n + u)$$다. 비교 연산은 한 번도 쓰지 않는다는 점이 핵심이다. 대신 `D[x.key] = x`라는 인덱싱 한 번이 $$u$$갈래 분기 역할을 하므로 비교 정렬의 $$\Omega(n \log n)$$ 하한이 적용되지 않는다. 같은 키가 두 번 나오면 `D[x.key]`에 나중 항목이 앞 항목을 덮어써 버린다는 것도 코드에서 바로 보인다.
+
 이 방법에는 두 가지 약점이 있다. 중복 키를 다룰 수 없고, 키 범위가 크면 쓸 수 없다.
 
 ## 큰 키를 두 자리로 나누기
@@ -128,6 +135,13 @@ def counting_sort(A):
             A[i] = x
             i += 1
 ```
+
+![counting_sort code using a direct access array of chains](/images/study/algo/algo-05-linear-sorting-2.webp)
+*강의 노트의 계수 정렬 코드. 직접 접근 배열 정렬과 구조가 같고, 각 칸에 항목 하나 대신 리스트(체인)를 두어 `append`로 추가한다는 점만 다르다. 출처: MIT 6.006 Lecture 5 notes (CC BY-NC-SA 4.0).*
+
+앞의 `direct_access_sort` 그림과 줄 단위로 비교하면 바뀐 곳은 두 군데다. `D = [None] * u`가 `D = [[] for i in range(u)]`로, `D[x.key] = x`가 `D[x.key].append(x)`로 바뀌었다. 읽는 부분은 각 칸의 체인을 다시 앞에서부터 순회하는 이중 반복이 된다.
+
+안정성은 `append`와 순회 순서에서 나온다. 예를 들어 키가 $$(3, a), (1, b), (3, c)$$인 세 항목을 넣으면 `D[3]`에는 입력 순서대로 $$[a, c]$$가 쌓인다. 읽을 때도 체인을 앞에서부터 읽으므로 출력은 $$b, a, c$$가 되어, 같은 키 3을 가진 $$a$$와 $$c$$가 입력 순서를 유지한다. 기수 정렬이 이 성질에 의존한다.
 
 실행 시간은 체인 초기화 $$O(u)$$, 삽입 $$O(n)$$, 읽기 $$O(u + n)$$이므로 $$O(n + u)$$다. $$u = O(n)$$이면 중복 키를 허용하면서 선형 시간이다.
 
@@ -188,6 +202,13 @@ def radix_sort(A):
         A[i] = D[i].item
 ```
 
+![radix_sort code with digit tuple construction and per-digit counting sort](/images/study/algo/algo-05-linear-sorting-3.webp)
+*강의 노트의 기수 정렬 코드. 위쪽 반복이 각 키를 $$n$$진수 자릿수 튜플로 바꾸고, 아래쪽 반복이 자리마다 계수 정렬을 한 번씩 한다. 출처: MIT 6.006 Lecture 5 notes (CC BY-NC-SA 4.0).*
+
+코드는 세 부분으로 읽는다. 첫째, `c = 1 + (u.bit_length() // n.bit_length())`는 키를 $$n$$진수로 썼을 때 필요한 자릿수 $$c \approx \log_n u$$를 비트 길이로 근사한 것이다. 둘째, `divmod(high, n)`을 $$c$$번 반복해 낮은 자리부터 `digits`에 붙인다. 예를 들어 $$n = 5$$, 키가 17이면 `divmod(17, 5) = (3, 2)`에서 2가, 이어서 `divmod(3, 5) = (0, 3)`에서 3이 들어가 `digits = [2, 3]`이 된다. 셋째, 자리 $$i$$마다 `D[j].key`를 그 자리 숫자로 바꾸고 `counting_sort(D)`를 부른다. 각 자리 숫자는 $$n$$보다 작으므로 계수 정렬 한 번이 $$O(n)$$이다.
+
+원래 항목은 `D[i].item`에 보관되어 있다가 마지막 반복에서 `A`로 옮겨진다. 별도의 래퍼 객체 `Obj`를 만드는 이유는, 계수 정렬이 `.key`만 보고 정렬하도록 라운드마다 키를 바꿔 끼우면서도 원래 항목의 키는 건드리지 않기 위해서다.
+
 `digits`에는 낮은 자리부터 들어가므로, `i = 0`부터 차례로 정렬하면 가장 덜 중요한 자리부터 정렬하게 된다.
 
 ### Recitation 예제
@@ -207,6 +228,13 @@ def radix_sort(A):
 | 기수 정렬 | $$n + n \log_n u$$ | N | Y | $$u = O(n^c)$$이면 $$O(n)$$ |
 
 $$k$$-근접(k-proximate) 배열은 각 원소가 정렬된 위치에서 $$k$$칸 이내에 있는 배열이다.
+
+![Comparison of sorting algorithms by time, in-place and stability](/images/study/algo/algo-05-linear-sorting-4.webp)
+*강의 노트의 정렬 알고리즘 비교표. 시간 열의 색은 빠를수록 파랗고 느릴수록 붉으며, 제자리와 안정성 열은 Y가 파란색, N이 붉은색이다. 출처: MIT 6.006 Lecture 5 notes (CC BY-NC-SA 4.0).*
+
+표를 열 방향으로 읽으면 어느 알고리즘도 모든 열에서 파랗지 않다는 점이 보인다. 시간 열에서 가장 파란 것은 계수 정렬과 기수 정렬이지만, 둘 다 제자리 열이 N이다. 보조 배열(체인)을 쓰기 때문이다. 반대로 삽입 정렬과 선택 정렬은 제자리 정렬이지만 이차 시간이다.
+
+기수 정렬의 시간 $$n + n \log_n u$$는 "자릿수 $$c = \log_n u$$번의 계수 정렬, 각각 $$O(n)$$"을 그대로 쓴 것이다. $$u = n^c$$이면 $$\log_n u = c$$가 상수가 되어 선형이다. 반면 $$u$$가 $$2^n$$처럼 $$n$$에 대해 지수적으로 크면 $$\log_n u = n / \log n$$이 되어 기수 정렬은 $$n^2 / \log n$$으로 오히려 병합 정렬보다 느려진다. 비교표의 "비고" 열이 각 알고리즘이 빛나는 조건을 적어 둔 이유다.
 
 ## 정리
 

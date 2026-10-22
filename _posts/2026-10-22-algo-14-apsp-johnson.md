@@ -26,6 +26,11 @@ description: "모든 쌍 최단 경로 문제를 정의하고, 포텐셜 함수�
 | 일반 | 음이 아님 | Dijkstra | $$\lvert V \rvert \log \lvert V \rvert + \lvert E \rvert$$ |
 | 일반 | 임의 | Bellman-Ford | $$\lvert V \rvert \cdot \lvert E \rvert$$ |
 
+![Summary table of SSSP algorithms](/images/study/algo/algo-14-apsp-johnson-1.webp)
+*지금까지 배운 네 SSSP 알고리즘. 왼쪽은 그래프와 가중치에 대한 제한, 오른쪽은 실행 시간이며, 파란색이 "제한 없음" 또는 "빠름", 붉은색이 "강한 제한" 또는 "느림"을 뜻한다. 출처: MIT 6.006 Lecture 14 notes (CC BY-NC-SA 4.0).*
+
+이 강의의 관점에서 표를 다시 보면, 가중치 열이 "Any"인 행은 DAG Relaxation과 Bellman-Ford 두 개뿐이다. 그래프에 사이클이 있고 가중치가 음수일 수도 있다면 남는 것은 맨 아래의 분홍색 칸, 곧 $$\lvert V \rvert \cdot \lvert E \rvert$$짜리 Bellman-Ford다. 반면 바로 위 행의 Dijkstra는 가중치가 음이 아니라는 제한만 받아들이면 훨씬 빠르다. Johnson 알고리즘의 발상은 Bellman-Ford를 한 번만 써서 그래프를 Dijkstra의 행으로 옮겨 놓고, 나머지 $$\lvert V \rvert - 1$$번은 Dijkstra로 푸는 것이다.
+
 최단 경로 문제를 풀려면 먼저 문제에 맞는 그래프를 정의하거나 만들고, 그 그래프에서 SSSP 알고리즘을 실행한다. 일반적으로 적용 가능한 것 중 가장 빠른 알고리즘을 쓴다. Bellman-Ford는 모든 가중 그래프에 쓸 수 있지만 가장 느리므로, 다른 알고리즘을 쓸 수 있으면 그쪽을 택한다. 이 알고리즘들은 SSSP 외에도 Full-DFS/Full-BFS로 연결 요소 세기, DFS로 DAG 위상 정렬, Bellman-Ford로 음수 가중치 사이클 탐지 같은 문제를 푼다.
 
 ## 모든 쌍 최단 경로 (APSP)
@@ -139,6 +144,13 @@ $$
 
 마지막 식은 포텐셜 함수의 주장에서 $$\delta'(u, v) = \delta(u, v) + h(u) - h(v)$$이고 $$h = \delta_x(x, \cdot)$$이기 때문이다.
 
+![Johnson's algorithm as written in the lecture notes](/images/study/algo/algo-14-apsp-johnson-2.webp)
+*강의 노트의 Johnson 알고리즘. Bellman-Ford는 위쪽에서 한 번, Dijkstra는 아래쪽 반복문에서 정점마다 한 번 쓰인다. 출처: MIT 6.006 Lecture 14 notes (CC BY-NC-SA 4.0).*
+
+노트의 구성은 세 단계로 나누어 읽으면 쉽다. 첫째, $$G_x$$를 만들고 Bellman-Ford로 $$\delta_x(x, v)$$를 구해 포텐셜 $$h$$를 얻는다. 이 단계는 동시에 음수 가중치 사이클 검사 역할도 해서, $$-\infty$$가 하나라도 나오면 바로 중단한다. 둘째, $$h$$로 모든 간선을 재가중해 음이 아닌 그래프 $$G'$$를 만든다. 셋째, $$G'$$의 각 정점에서 Dijkstra를 실행하고, 결과에서 $$h(u)$$를 빼고 $$h(v)$$를 더해 원래 거리로 되돌린다.
+
+작은 예로 감을 잡을 수 있다. 정점 $$u, v, t$$와 간선 $$(u, v)$$ $$-2$$, $$(v, t)$$ $$3$$, $$(u, t)$$ $$2$$가 있다고 하자. $$x$$에서 모든 정점으로 가중치 0인 간선을 두면 $$h(u) = 0$$, $$h(v) = -2$$, $$h(t) = 0$$이다($$v$$까지는 $$x \to u \to v$$의 $$-2$$가 가장 작고, $$t$$까지는 $$x \to t$$의 0, $$x \to u \to t$$의 2, $$x \to u \to v \to t$$의 1 가운데 0이 가장 작다). 재가중한 값은 $$w'(u, v) = -2 + 0 - (-2) = 0$$, $$w'(v, t) = 3 + (-2) - 0 = 1$$, $$w'(u, t) = 2 + 0 - 0 = 2$$로 모두 음이 아니다. $$G'$$에서 $$\delta'(u, t) = \min(0 + 1, 2) = 1$$이고, 되돌리면 $$\delta(u, t) = 1 - h(u) + h(t) = 1$$로 원래 그래프의 $$u \to v \to t$$ 경로 가중치 $$-2 + 3 = 1$$과 같다.
+
 12강의 `bellman_ford`와 13강의 `dijkstra`를 쓰면 다음처럼 쓸 수 있다. 정점은 $$0, \dots, \lvert V \rvert - 1$$이고 새 정점 $$x$$는 $$\lvert V \rvert$$로 둔다.
 
 ```python
@@ -172,6 +184,11 @@ def johnson(Adj, w):
 - $$G'$$ 구성: $$O(\lvert V \rvert + \lvert E \rvert)$$
 - Dijkstra $$\lvert V \rvert$$번: $$O(\lvert V \rvert \cdot (\lvert V \rvert \log \lvert V \rvert + \lvert E \rvert))$$
 - $$G'$$의 거리로부터 $$G$$의 거리 계산: $$O(\lvert V \rvert^2)$$
+
+![Running time breakdown of Johnson's algorithm](/images/study/algo/algo-14-apsp-johnson-3.webp)
+*Johnson 알고리즘의 단계별 실행 시간. 마지막 줄이 전체 시간이다. 출처: MIT 6.006 Lecture 14 notes (CC BY-NC-SA 4.0).*
+
+여섯 줄 가운데 실제로 전체 시간을 결정하는 것은 넷째 줄, Dijkstra를 $$\lvert V \rvert$$번 실행하는 비용 $$\lvert V \rvert^2 \log \lvert V \rvert + \lvert V \rvert\lvert E \rvert$$다. 둘째 줄의 Bellman-Ford $$\lvert V \rvert\lvert E \rvert$$는 이 식의 둘째 항과 같은 크기이므로 흡수되고, 첫째, 셋째 줄의 그래프 구성과 다섯째 줄의 $$\lvert V \rvert^2$$ 거리 변환은 더 작다. 비싼 알고리즘을 한 번만 쓰고 싼 알고리즘을 여러 번 쓰는 구성이 이 표에서 그대로 드러난다.
 
 전체는 다음과 같다.
 

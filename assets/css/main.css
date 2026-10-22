@@ -538,6 +538,9 @@ img { max-width: 100%; display: block; }
 .post-body p { margin: 0 0 1.2em; }
 .post-body a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
 .post-body img { border-radius: 10px; margin: 1.5em auto; }
+/* Study figures: a light card so slide and note crops sit well on the dark theme; the italic line after is the caption */
+.post-body img[src*="/images/study/"] { display: block; max-width: 100%; margin: 1.6em auto 0.5em; padding: 10px; background: #fff; border: 1px solid var(--line); }
+.post-body p > img[src*="/images/study/"] + em { display: block; margin: 0 auto 0.4em; max-width: 680px; font-size: 13.5px; line-height: 1.6; font-style: normal; text-align: center; color: var(--muted); }
 .post-body blockquote { margin: 1.5em 0; padding: 12px 20px; border-left: 4px solid var(--yellow); background: var(--surface); border-radius: 0 8px 8px 0; color: var(--text); }
 .post-body blockquote p:last-child { margin-bottom: 0; }
 .post-body code { font-family: "JetBrains Mono", monospace; font-size: 0.88em; padding: 1px 6px; border-radius: 4px; background: var(--surface-2); color: var(--text); }

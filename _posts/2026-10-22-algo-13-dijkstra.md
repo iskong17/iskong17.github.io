@@ -99,7 +99,14 @@ def dijkstra(Adj, w, s):
 
 ### 예제
 
-정점 $$s, a, b, c, d$$와 간선 $$(s, a)$$ 10, $$(s, c)$$ 3, $$(a, c)$$ 1, $$(c, a)$$ 4, $$(a, b)$$ 2, $$(c, b)$$ 8, $$(c, d)$$ 2, $$(b, d)$$ 7, $$(d, b)$$ 5를 가진 그래프에서 $$s$$부터 Dijkstra를 실행한다. 각 행은 해당 정점을 $$Q$$에서 삭제하는 시점에 $$Q$$에 남아 있는 정점들의 추정값 $$d(s, v)$$다.
+정점 $$s, a, b, c, d$$와 간선 $$(s, a)$$ 10, $$(s, c)$$ 3, $$(a, c)$$ 1, $$(c, a)$$ 4, $$(a, b)$$ 2, $$(c, b)$$ 8, $$(c, d)$$ 2, $$(b, d)$$ 7, $$(d, b)$$ 5를 가진 그래프에서 $$s$$부터 Dijkstra를 실행한다.
+
+![Example graph for Dijkstra with non-negative weights](/images/study/algo/algo-13-dijkstra-1.webp)
+*Dijkstra 예제 그래프 $$G$$. 모든 간선 가중치가 음이 아니며, $$a$$와 $$c$$ 사이, $$b$$와 $$d$$ 사이에는 양방향 간선이 있다. 출처: MIT 6.006 Lecture 13 notes (CC BY-NC-SA 4.0).*
+
+그림에서 $$s$$의 나가는 간선은 $$a$$로 가는 10과 $$c$$로 가는 3 두 개다. 겉보기에는 $$s \to a$$가 $$a$$로 가는 직행로지만, $$s \to c \to a$$로 돌아가면 $$3 + 4 = 7$$로 더 가볍다. $$b$$도 마찬가지로 $$c \to b$$의 8보다 $$c \to a \to b$$의 $$4 + 2$$가 가볍다. 이처럼 간선 수가 적은 경로가 꼭 최단 경로는 아니라는 점이 BFS를 그대로 쓸 수 없는 이유이고, Dijkstra가 "현재 가장 가까운 정점"을 하나씩 확정해 나가는 이유다.
+
+아래 표의 각 행은 해당 정점을 $$Q$$에서 삭제하는 시점에 $$Q$$에 남아 있는 정점들의 추정값 $$d(s, v)$$다.
 
 | 삭제하는 정점 | $$s$$ | $$a$$ | $$b$$ | $$c$$ | $$d$$ |
 |---|---|---|---|---|---|
@@ -111,6 +118,13 @@ def dijkstra(Adj, w, s):
 | $$\delta(s, v)$$ | $$0$$ | $$7$$ | $$9$$ | $$3$$ | $$5$$ |
 
 $$c$$를 처리하면 $$a$$가 $$3 + 4 = 7$$, $$b$$가 $$3 + 8 = 11$$, $$d$$가 $$3 + 2 = 5$$가 된다. $$d$$를 처리하면 $$b$$가 $$5 + 5 = 10$$이 되고, $$a$$를 처리하면 $$b$$가 $$7 + 2 = 9$$가 된다.
+
+![Table of distance estimates as Dijkstra deletes vertices from Q](/images/study/algo/algo-13-dijkstra-2.webp)
+*강의 노트의 실행 표. 행은 $$Q$$에서 삭제하는 정점, 열은 각 정점의 추정값 $$d(s, v)$$이며, 굵은 숫자는 그 행에서 삭제되어 값이 확정되는 정점이다. 출처: MIT 6.006 Lecture 13 notes (CC BY-NC-SA 4.0).*
+
+표는 대각선 방향으로 읽는다. 각 행에서 굵은 숫자는 그 순간 $$Q$$에 남은 값 가운데 최솟값이고, 그 정점을 꺼낸 뒤에는 열이 비워진다. 꺼낸 정점의 나가는 간선을 완화한 결과는 다음 행에 나타난다. 예를 들어 $$c$$ 행에서 3이 확정된 뒤 $$d$$ 행을 보면 $$a$$가 10에서 7로, $$b$$가 $$\infty$$에서 11로, $$d$$가 $$\infty$$에서 5로 내려가 있다.
+
+같은 열을 위에서 아래로 따라가면 값이 줄어들기만 한다는 것도 보인다. $$b$$ 열은 $$\infty \to 11 \to 10 \to 9$$로 세 번 갱신된다. 완화는 추정값을 낮추기만 하고, 정점이 굵게 확정되는 순간 그 값이 맨 아래 행의 $$\delta(s, v)$$와 일치한다. 정확성 증명이 보이는 내용이 바로 이 "꺼내는 순간 정확하다"는 성질이다. 또 굵은 숫자를 위에서부터 읽으면 $$0, 3, 5, 7, 9$$로 증가하는데, 관찰 1이 말한 거리 순서대로 정점을 처리한다는 뜻이다.
 
 ## 정확성
 
@@ -158,6 +172,13 @@ $$
 | 배열 | $$n$$ | $$n$$ | $$1$$ | $$\lvert V \rvert^2$$ |
 | 이진 힙 | $$n$$ | $$\log n$$ (a) | $$\log n$$ | $$\lvert E \rvert \log \lvert V \rvert$$ |
 | 피보나치 힙 | $$n$$ | $$\log n$$ (a) | $$1$$ (a) | $$\lvert E \rvert + \lvert V \rvert \log \lvert V \rvert$$ |
+
+![Priority queue choices and resulting Dijkstra running times](/images/study/algo/algo-13-dijkstra-3.webp)
+*우선순위 큐 구현별 연산 시간과 Dijkstra 실행 시간. 진한 파랑이 가장 빠르고 분홍이 가장 느린 연산이며, 아래 첨자 (a)는 분할 상환 시간이다. 출처: MIT 6.006 Lecture 13 notes (CC BY-NC-SA 4.0).*
+
+표의 각 행에 $$B_n$$, $$M_n$$, $$D_n$$을 대입하면 오른쪽 열이 나온다. 배열은 $$n + \lvert V \rvert \cdot n + \lvert E \rvert \cdot 1 = O(\lvert V \rvert^2)$$이고, 이진 힙은 $$n + \lvert V \rvert \log n + \lvert E \rvert \log n = O(\lvert E \rvert \log \lvert V \rvert)$$, 피보나치 힙은 $$n + \lvert V \rvert \log n + \lvert E \rvert \cdot 1 = O(\lvert E \rvert + \lvert V \rvert \log \lvert V \rvert)$$다.
+
+색을 보면 교환 관계가 드러난다. 배열은 `decrease_key`가 가장 빠른 대신 `delete_min`이 느리고, 이진 힙은 두 연산을 모두 $$\log n$$으로 맞춘다. Dijkstra에서 `delete_min`은 $$\lvert V \rvert$$번, `decrease_key`는 $$\lvert E \rvert$$번 호출되므로, 간선이 많을수록 `decrease_key`가 싼 구조가 유리하다. 피보나치 힙은 두 연산 모두에서 좋은 쪽을 취해 모든 밀도에서 최선의 점근 시간을 낸다.
 
 - 그래프가 밀집(dense)해서 $$\lvert E \rvert = \Theta(\lvert V \rvert^2)$$이면, $$Q'$$로 배열을 쓰면 $$O(\lvert V \rvert^2)$$, 곧 입력 크기에 선형이다.
 - 그래프가 희소(sparse)해서 $$\lvert E \rvert = \Theta(\lvert V \rvert)$$이면, 이진 힙을 쓰면 $$O(\lvert V \rvert \log \lvert V \rvert)$$다.
