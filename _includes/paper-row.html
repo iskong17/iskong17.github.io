@@ -2,12 +2,12 @@
 {%- assign cat = site.data.categories | where: "key", "paper-review" | first -%}
 <article class="paper-row" data-subfields="{{ p.subfields | join: ' ' }}">
   <div class="paper-row-main">
-    <span class="paper-row-kicker"><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time></span>
+    {%- if p.paper.venue %}<span class="paper-row-venue">{{ p.paper.venue }}</span>{% endif %}
     <h3 class="paper-row-title">{% if p.paper.url %}<a href="{{ p.paper.url }}" target="_blank" rel="noopener">{{ p.paper.title | default: p.title }}</a>{% else %}{{ p.paper.title | default: p.title }}{% endif %}</h3>
     {%- if p.paper.authors %}<p class="paper-row-authors">{{ p.paper.authors }}</p>{% endif %}
   </div>
   <div class="paper-row-side">
-    {%- if p.paper.venue %}<span class="paper-row-venue">{{ p.paper.venue }}</span>{% endif %}
+    <time class="paper-row-date" datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
     {%- if p.subfields %}
     <span class="paper-row-tags">
       {%- for key in p.subfields %}{% assign sf = cat.subfields | where: "key", key | first %}<span class="subfield-tag">{{ sf.label | default: key }}</span>{% endfor -%}

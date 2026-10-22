@@ -824,13 +824,13 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .paper-row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--blue); }
 .paper-row:hover { border-color: var(--line-strong); }
-.paper-row-kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.paper-row-date { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
 .paper-row-title { margin: 4px 0 0; font-size: 18px; line-height: 1.35; }
 .paper-row-title a { position: relative; z-index: 1; color: var(--text); }
 .paper-row-title a:hover { color: var(--blue); }
 .paper-row-authors { margin: 4px 0 0; font-size: 14px; color: var(--text-2); line-height: 1.5; }
 .paper-row-side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-.paper-row-venue { font-size: 14px; font-weight: 700; color: var(--text); white-space: nowrap; }
+.paper-row-venue { font-size: 14px; font-weight: 700; color: var(--text); }
 .paper-row-tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
 .paper-row-review { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-2); }
 .paper-row-review .icon { width: 14px; height: 14px; }
