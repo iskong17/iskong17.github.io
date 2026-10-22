@@ -2,7 +2,7 @@
 title: "PyTorch 5: Neural Network Classification"
 date: 2026-10-22 15:05:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 5
 card_title: "Lecture 5: Neural Network Classification"

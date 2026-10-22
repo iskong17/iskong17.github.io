@@ -36,9 +36,23 @@
   url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
   prefix: "Lecture"
 - key: pytorch
-  topic: python
+  topic: pytorch
   name: "PyTorch for Deep Learning"
   course: "freeCodeCamp · Zero to Mastery PyTorch"
   instructor: "Daniel Bourke"
   url: "https://www.learnpytorch.io/"
   prefix: "Lecture"
+- key: suan
+  topic: pytorch
+  name: "파이토치 한번에 끝내기"
+  course: "이수안컴퓨터연구소 (SuanLab), YouTube"
+  instructor: "이수안"
+  url: "https://www.youtube.com/playlist?list=PL7ZVZgsnLwEEIC4-KQIchiPda_EjxX61r"
+  prefix: "Lecture"
+- key: dlbook
+  topic: pytorch
+  name: "Deep Learning & PyTorch"
+  course: "딥러닝 파이토치 교과서 (길벗, thebook.io)"
+  instructor: "서지영"
+  url: "https://thebook.io/080289/"
+  prefix: "Chapter"

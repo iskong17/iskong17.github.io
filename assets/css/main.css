@@ -878,7 +878,7 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-deep-learning { --accent: var(--purple); }
 .topic-machine-learning { --accent: var(--green); }
 .topic-algorithm { --accent: var(--yellow-ink); }
-.topic-python { --accent: #ee4c2c; }
+.topic-pytorch { --accent: #ee4c2c; }
 
 /* Lecture rows: number, title and key concepts on one bar */
 .lecture-list { display: flex; flex-direction: column; gap: 8px; }

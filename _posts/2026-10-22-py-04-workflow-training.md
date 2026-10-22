@@ -2,7 +2,7 @@
 title: "PyTorch 4: PyTorch Workflow: Training, Testing, Saving"
 date: 2026-10-22 15:04:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 4
 card_title: "Lecture 4: PyTorch Workflow: Training, Testing, Saving"

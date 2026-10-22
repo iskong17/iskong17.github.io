@@ -2,7 +2,7 @@
 title: "PyTorch 6: Non-linearity and Multi-class Classification"
 date: 2026-10-22 15:06:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 6
 card_title: "Lecture 6: Non-linearity and Multi-class Classification"

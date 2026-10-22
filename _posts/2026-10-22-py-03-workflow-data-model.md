@@ -2,7 +2,7 @@
 title: "PyTorch 3: PyTorch Workflow: Data and First Model"
 date: 2026-10-22 15:03:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 3
 card_title: "Lecture 3: PyTorch Workflow: Data and First Model"

@@ -2,7 +2,7 @@
 title: "PyTorch 1: What Is Deep Learning and Why PyTorch"
 date: 2026-10-22 15:01:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 1
 card_title: "Lecture 1: What Is Deep Learning and Why PyTorch"

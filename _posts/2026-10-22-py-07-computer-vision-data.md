@@ -2,7 +2,7 @@
 title: "PyTorch 7: Computer Vision: Data, Batches and Baselines"
 date: 2026-10-22 15:07:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 7
 card_title: "Lecture 7: Computer Vision: Data, Batches and Baselines"

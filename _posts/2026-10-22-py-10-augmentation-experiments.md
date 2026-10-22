@@ -2,7 +2,7 @@
 title: "PyTorch 10: Data Augmentation and Model Experiments"
 date: 2026-10-22 15:10:00 +0900
 category: study
-topic: python
+topic: pytorch
 series: pytorch
 lecture: 10
 card_title: "Lecture 10: Data Augmentation and Model Experiments"
