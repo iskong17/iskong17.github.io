@@ -74,7 +74,8 @@
     }
     // Study and Gallery filter by topic tab; Paper Review filters by subfield chip and venue chip.
     var paperConf = 'all';
-    function showTopic(panel, key) {
+    var studySeries = 'all';
+    function showTopic(panel, key, series) {
       var bySub = !!panel.querySelector('.subfield-chip');
       var attr = bySub ? 'data-subfield' : 'data-topic';
       var tabs = panel.querySelectorAll(bySub ? '.subfield-chip' : '.topic-tabs [data-topic]');
@@ -93,9 +94,21 @@
         c.hidden = !show;
         if (show) any = true;
       });
+      // Course tabs: shown for the open topic when it has two or more courses; they narrow the blocks below.
+      var seriesKey = 'all';
+      panel.querySelectorAll('.series-tabs').forEach(function (st) {
+        var mine = st.getAttribute('data-topic') === key && st.querySelectorAll('[data-series]:not([data-series="all"])').length > 1;
+        st.hidden = !mine;
+        if (mine) {
+          seriesKey = st.querySelector('[data-series="' + (series || 'all') + '"]') ? (series || 'all') : 'all';
+          activate(st.querySelectorAll('.series-tab'), 'data-series', seriesKey);
+        }
+      });
+      studySeries = seriesKey;
       // Study groups (notes, Discussions) hide on All and when none of their cards match.
       panel.querySelectorAll('.study-group').forEach(function (g) {
-        g.hidden = (!!bars && key === 'all') || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
+        var other = seriesKey !== 'all' && g.getAttribute('data-series') !== seriesKey;
+        g.hidden = (!!bars && key === 'all') || other || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
       });
       activate(tabs, attr, key);
       if (bySub) activate(panel.querySelectorAll('.conf-chip'), 'data-conf', paperConf);
@@ -113,7 +126,7 @@
       var panel = showPanel(parts[0] || 'all');
       if (panel === 'race') showRace(parts[1] || 'seasons');
       var p = document.querySelector('.blog-panel[data-panel="' + panel + '"]');
-      if (p) showTopic(p, parts[1] || 'all');
+      if (p) showTopic(p, parts[1] || 'all', parts[2]);
     }
     function go(hash) {
       history.replaceState(null, '', hash);
@@ -136,6 +149,13 @@
         b.addEventListener('click', function () { go('#race/' + b.getAttribute('data-sub')); });
       });
     }
+    document.querySelectorAll('.series-tab').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var topic = b.closest('.series-tabs').getAttribute('data-topic');
+        var sr = b.getAttribute('data-series');
+        go('#study/' + topic + (sr === 'all' ? '' : '/' + sr));
+      });
+    });
     document.querySelectorAll('.topic-tabs [data-topic]').forEach(function (b) {
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () { go('#' + panel + '/' + b.getAttribute('data-topic')); });

@@ -174,12 +174,25 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         {%- for post in posts %}{% include paper-row.html post=post %}{% endfor %}
       </div>
       {%- elsif posts.size > 0 and c.key == 'study' %}
+      <!-- Course tabs for topics with more than one series; the script shows the ones for the open topic -->
+      {%- for t in c.topics %}
+      {%- assign tser = site.data.series | where: "topic", t.key %}
+      <div class="series-tabs" data-topic="{{ t.key }}" role="tablist" aria-label="{{ t.label }} courses" hidden>
+        <button type="button" class="series-tab is-active" data-series="all">All</button>
+        {%- for s in tser %}
+        {%- assign sp = posts | where: "series", s.key -%}
+        {%- if sp.size > 0 %}
+        <button type="button" class="series-tab" data-series="{{ s.key }}">{{ s.name }} <small>{{ sp.size }}</small></button>
+        {%- endif %}
+        {%- endfor %}
+      </div>
+      {%- endfor %}
       <!-- One block per lecture series, in lecture order -->
       {%- for s in site.data.series %}
       {%- assign sp = posts | where: "series", s.key | sort: "lecture" -%}
       {%- if sp.size > 0 %}
       {%- assign st = c.topics | where: "key", s.topic | first %}
-      <section class="study-group series-block topic-{{ s.topic }}">
+      <section class="study-group series-block topic-{{ s.topic }}" data-series="{{ s.key }}">
         <header class="series-head">
           <div class="series-head-text">
             <span class="series-kicker">{{ st.label }}</span>
