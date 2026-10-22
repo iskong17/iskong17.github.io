@@ -108,6 +108,11 @@ $$
 
 **예.** $$\mathbf{y} = (7, 6)$$, $$\mathbf{u} = (4, 2)$$. $$\mathbf{y}^T \mathbf{u} = 40$$, $$\mathbf{u}^T \mathbf{u} = 20$$이므로 $$\hat{\mathbf{y}} = 2\mathbf{u} = (8, 4)$$다. 남은 부분 $$\mathbf{y} - \hat{\mathbf{y}} = (-1, 2)$$는 $$\mathbf{u}$$와 직교한다: $$-4 + 4 = 0$$.
 
+![Projection of y = (7, 6) onto the line spanned by u = (4, 2)](/images/study/la/la-06-gram-schmidt-qr-1.svg)
+*$$\mathbf{y} = (7, 6)$$을 $$\mathbf{u} = (4, 2)$$가 생성하는 직선에 정사영한 모습. 수선의 발은 $$\hat{\mathbf{y}} = 2\mathbf{u} = (8, 4)$$이고, 잔차 $$(-1, 2)$$가 직선과 직교한다.*
+
+점선은 $$\mathbf{u}$$가 생성하는 직선 전체이고, $$\hat{\mathbf{y}}$$는 그 위에서 $$\mathbf{y}$$에 가장 가까운 점이다. $$\mathbf{u}$$를 정확히 두 배 늘린 위치이므로 계수 $$\mathbf{y}^T \mathbf{u} / \mathbf{u}^T \mathbf{u} = 40/20 = 2$$가 그림에서 그대로 보인다. 빨간 점선 화살표가 잔차 $$\mathbf{y} - \hat{\mathbf{y}}$$이고, 직각 표시가 $$\mathbf{y}$$, $$\hat{\mathbf{y}}$$, $$\mathbf{y} - \hat{\mathbf{y}}$$가 이루는 직각삼각형의 직각을 나타낸다.
+
 $$\mathbf{u}$$가 단위벡터이면 분모가 1이 되어
 
 $$
@@ -141,6 +146,11 @@ $$
 
 잔차가 두 기저 벡터와 모두 직교하므로($$2.8 - 2.8 = 0$$, $$-2.8 + 2.8 = 0$$) $$\hat{\mathbf{y}}$$는 실제로 수선의 발이다.
 
+![Projection of y = (1, 2, 3) onto the plane W as the sum of two line projections](/images/study/la/la-06-gram-schmidt-qr-2.svg)
+*직교기저 $$\mathbf{u}_1, \mathbf{u}_2$$를 가진 평면 $$W$$ 위로의 정사영. 두 직선 정사영 $$\frac{9}{30}\mathbf{u}_1$$과 $$\frac{3}{6}\mathbf{u}_2$$가 직사각형의 두 변을 이루고, 그 꼭짓점 $$\hat{\mathbf{y}} = (-0.4, 2, 0.2)$$가 수선의 발이다.*
+
+음영 평면이 $$W$$다. 초록 화살표와 노란 화살표는 각각 $$\mathbf{y}$$를 $$\mathbf{u}_1$$, $$\mathbf{u}_2$$의 직선에 따로 정사영한 결과이고, 회색 점선이 두 변을 직사각형으로 완성한다. 직사각형의 맞은편 꼭짓점이 파란 화살표 $$\hat{\mathbf{y}}$$이며, 거기서 $$\mathbf{y}$$로 올라가는 빨간 점선 $$\mathbf{y} - \hat{\mathbf{y}} = (1.4, 0, 2.8)$$은 평면에 수직이다. $$\mathbf{u}_1$$과 $$\mathbf{u}_2$$가 직교하지 않으면 두 변이 직사각형을 이루지 않으므로, 직선 정사영의 합이 수선의 발과 어긋난다.
+
 ## 그람-슈미트 직교화
 
 ### 아이디어
@@ -152,6 +162,13 @@ $$\mathbb{R}^3$$의 독립 벡터 $$\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3$$�
 3. **세 번째 벡터.** $$\mathbf{x}_3$$를 $$\mathbf{u}_1, \mathbf{u}_2$$의 평면 위로 정사영해 빼고, 나머지를 정규화해 $$\mathbf{u}_3$$를 얻는다.
 
 각 단계는 새 벡터에서 이미 만든 방향들의 성분을 모두 제거하고, 수직인 부분만 남겨 길이를 1로 맞춘다. 이를 직교화(orthogonalization), 정규화까지 하면 정규직교화(orthonormalization)라 한다.
+
+![Gram-Schmidt step 2 in the plane and step 3 in space](/images/study/la/la-06-gram-schmidt-qr-3.svg)
+*그람-슈미트의 2단계와 3단계. 왼쪽은 $$\mathbf{x}_1 = (3, 1)$$, $$\mathbf{x}_2 = (1, 2)$$에서 $$\mathbf{x}_2$$의 $$\mathbf{u}_1$$ 방향 성분을 빼는 모습이고, 오른쪽은 $$\mathbf{x}_3 = (1, 1.5, 2)$$에서 평면 성분을 빼는 모습이다(설명용으로 고른 벡터).*
+
+왼쪽에서 $$\mathbf{x}_2$$를 $$\mathbf{x}_1$$의 직선에 정사영하면 초록 화살표 $$(1.5, 0.5)$$가 된다. 빨간 점선은 그 끝에서 $$\mathbf{x}_2$$까지의 나머지이고, 이를 원점으로 옮긴 것이 $$\mathbf{v}_2 = (-0.5, 1.5)$$다. $$\mathbf{v}_2$$는 $$\mathbf{x}_1$$에 수직이며, $$\mathbf{x}_1$$과 $$\mathbf{v}_2$$는 여전히 같은 평면을 생성한다.
+
+오른쪽에서는 $$\mathbf{u}_1$$, $$\mathbf{u}_2$$가 바닥 평면($$x_3 = 0$$)을 생성한다. $$\mathbf{x}_3$$를 그 평면에 정사영한 초록 화살표 $$(1, 1.5, 0)$$을 빼면 수직 성분 $$\mathbf{v}_3 = (0, 0, 2)$$만 남고, 이를 정규화한 것이 $$\mathbf{u}_3$$다. 단계가 늘어나도 하는 일은 같다. 이미 만든 방향들이 생성하는 공간에 정사영하고, 그 나머지를 취한다.
 
 ### 알고리즘
 
@@ -240,6 +257,11 @@ $$
 $$
 
 이다. 예컨대 2열은 $$\frac{3}{2}\mathbf{u}_1 + \frac{\sqrt{3}}{2}\mathbf{u}_2 = \frac{3}{4}(1,1,1,1) + \frac{1}{4}(-3,1,1,1) = (0, 1, 1, 1) = \mathbf{x}_2$$이다.
+
+![Columns of R as coordinates of x1 and x2 in the u1, u2 frame](/images/study/la/la-06-gram-schmidt-qr-4.svg)
+*계산 예의 $$\mathbf{x}_1$$, $$\mathbf{x}_2$$를 $$\mathbf{u}_1$$, $$\mathbf{u}_2$$를 축으로 하는 평면에서 본 모습. $$R$$의 1열 $$(2, 0)$$과 2열의 위 두 성분 $$(3/2, \sqrt{3}/2)$$가 그대로 이 좌표다.*
+
+$$\mathbf{x}_1$$, $$\mathbf{x}_2$$는 $$\mathbb{R}^4$$의 벡터이지만 둘 다 $$\operatorname{Span}\{\mathbf{u}_1, \mathbf{u}_2\}$$라는 평면 위에 있으므로, 정규직교 축 $$\mathbf{u}_1, \mathbf{u}_2$$를 그리면 평면 그림으로 볼 수 있다. $$\mathbf{x}_1$$은 $$\mathbf{u}_1$$ 축 위에 놓여 길이 $$2$$만큼 뻗고 $$\mathbf{u}_2$$ 성분이 없다. 이것이 $$R$$의 $$(2, 1)$$ 성분이 0인 이유다. $$\mathbf{x}_2$$를 $$\mathbf{u}_1$$ 축에 정사영한 길이(초록 선분)가 $$r_{12} = \frac{3}{2}$$이고, 축에서 수직으로 올라간 높이(빨간 점선)가 $$r_{22} = \lVert \mathbf{v}_2 \rVert = \frac{\sqrt{3}}{2}$$이다. $$\mathbf{x}_3$$까지 넣으면 세 번째 축 $$\mathbf{u}_3$$가 필요해지고, 각 $$\mathbf{x}_k$$가 처음 $$k$$개의 축만 쓴다는 사실이 $$R$$을 상삼각으로 만든다.
 
 ### QR을 배우는 이유: 최소제곱 풀기
 

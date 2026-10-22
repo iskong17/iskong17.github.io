@@ -44,6 +44,13 @@ description: 선형 독립과 그것이 해의 유일성을 결정하는 이유,
 
 종속은 더 일찍 나타날 수도 있다. $$\mathbf{v}_2$$가 이미 $$\mathbf{v}_1$$의 스칼라배이면(예: $$\mathbf{v}_2 = 2\mathbf{v}_1$$), 세 번째 벡터를 볼 필요도 없이 집합은 종속이다.
 
+![v3 leaves the plane of v1 and v2, while w lies in it](/images/study/la/la-03-independence-basis-rank-1.svg)
+*노란 평면은 $$\operatorname{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$$이다. 왼쪽의 $$\mathbf{v}_3$$는 평면 밖으로 나가고, 오른쪽의 $$\mathbf{w}$$는 평면 안에 머문다.*
+
+두 그림의 파란 $$\mathbf{v}_1 = (1, 1, 0)$$, 빨간 $$\mathbf{v}_2 = (1, 0, 1)$$과 노란 평면은 같다. 이 평면은 $$x_1 - x_2 - x_3 = 0$$을 만족하는 점들이다. 왼쪽의 $$\mathbf{v}_3 = (0, 1, 1)$$을 대입하면 $$0 - 1 - 1 = -2 \neq 0$$이므로 평면 위에 없다. 점선은 $$\mathbf{v}_3$$에서 평면에 내린 수선으로, 평면에서 떨어져 있음을 보여 준다. 그래서 $$\mathbf{v}_3$$를 추가하면 span이 평면에서 $$\mathbb{R}^3$$ 전체로 커진다.
+
+오른쪽의 $$\mathbf{w} = (2, 1, 1)$$은 $$2 - 1 - 1 = 0$$으로 평면 위에 있다. $$\mathbf{v}_1$$과 $$\mathbf{v}_2$$로 만든 평행사변형(점선)의 맞은편 꼭짓점이 바로 $$\mathbf{w}$$이다. $$\mathbf{w}$$를 추가해도 span은 같은 평면 그대로이고, 이것이 선형 종속이다.
+
 4차원이나 100차원에서도 같은 절차가 적용된다. 그림으로 그릴 수는 없지만, 어떤 벡터가 span 안에 있는지는 **가우스 소거법(Gaussian elimination)**으로 기계적으로 확인할 수 있다.
 
 ### 형식적인 정의
@@ -97,6 +104,13 @@ $$
 - 일반적으로 모든 $$t \in \mathbb{R}$$에 대해 $$(3 - t)\mathbf{v}_1 + (2 - t)\mathbf{v}_2 + t\mathbf{v}_3 = (3, 2)$$
 
 해 $$\mathbf{x} = (3 - t, 2 - t, t)$$가 무수히 많다. $$\mathbf{x} = (3, 2, 0) + t(-1, -1, 1)$$이고, $$(-1, -1, 1)$$은 바로 $$x_1\mathbf{v}_1 + x_2\mathbf{v}_2 + x_3\mathbf{v}_3 = \mathbf{0}$$의 비자명해다. 해 하나에 이것의 스칼라배를 더하면 또 다른 해가 된다.
+
+![Reaching b = (3, 2): one way with v1, v2; many ways after adding v3 = (1, 1)](/images/study/la/la-03-independence-basis-rank-2.svg)
+*왼쪽: $$\mathbf{v}_1, \mathbf{v}_2$$만으로는 $$\mathbf{b} = (3, 2)$$에 가는 길이 하나다. 오른쪽: $$\mathbf{v}_3$$를 추가하면 $$t$$마다 다른 길이 생긴다.*
+
+화살표를 이어 붙인 경로가 곧 선형 결합이다. 왼쪽에서는 가로로 $$3$$, 세로로 $$2$$만큼 가는 수밖에 없고, 점선까지 포함한 직사각형이 $$\mathbf{b}$$에 도달하는 유일한 평행사변형이다.
+
+오른쪽은 해 $$(3 - t, 2 - t, t)$$에서 $$t = 0, 2, 3$$을 고른 세 경로다. 초록 경로는 $$\mathbf{v}_1$$로 한 칸 간 뒤 대각선 $$\mathbf{v}_3$$로 두 번 가고, 보라 경로는 $$\mathbf{v}_3$$로 세 번 가서 $$(3, 3)$$에 도착한 뒤 $$-\mathbf{v}_2$$로 한 칸 내려온다. 세 경로의 도착점은 모두 같지만 가중치는 다르다. $$t$$는 어떤 실수든 될 수 있으므로 이런 경로는 무수히 많다.
 
 ### 결론
 
@@ -189,6 +203,13 @@ A = \begin{bmatrix} 1 & 4 & 5 \\ 2 & 5 & 7 \\ 3 & 6 & 9 \end{bmatrix}
 $$
 
 처음 두 열은 독립이고, 세 번째 열은 두 열의 합이다. 따라서 $$\operatorname{Col} A = \operatorname{Span}\{\mathbf{a}_1, \mathbf{a}_2\}$$는 평면이고, 열이 세 개인데도 $$\operatorname{rank} A = 2$$이다.
+
+![Three columns of A lying in one plane through the origin](/images/study/la/la-03-independence-basis-rank-3.svg)
+*$$A$$의 세 열은 모두 한 평면 위에 있다. $$\mathbf{a}_3$$는 $$\mathbf{a}_1$$, $$\mathbf{a}_2$$로 만든 평행사변형의 맞은편 꼭짓점이다.*
+
+파란 $$\mathbf{a}_1$$과 빨간 $$\mathbf{a}_2$$가 노란 평면을 span하고, 보라색 $$\mathbf{a}_3$$는 두 벡터의 평행사변형(점선)을 따라 같은 평면 안에 놓인다. 세 열을 모두 써도 평면 밖의 점에는 닿을 수 없으므로 $$\operatorname{Col} A$$는 이 평면이고, 그 차원 2가 랭크다. 이 평면은 $$x_1 - 2x_2 + x_3 = 0$$이며 세 열 모두 이 식을 만족한다.
+
+$$\mathbf{a}_3$$를 지워도 노란 평면은 그대로다. 사실 세 열 중 어느 하나를 지워도 남은 두 열이 같은 평면을 span한다. 하지만 하나만 남기면 평면이 직선으로 줄어든다. 그래서 이 평면의 기저에는 정확히 두 개의 벡터가 필요하다.
 
 일반적으로 열이 10개인 행렬에서 4개의 열이 나머지 (서로 독립인) 6개 열의 선형 결합이면 랭크는 6이다.
 
