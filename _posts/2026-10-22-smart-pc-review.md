@@ -1,7 +1,6 @@
 ---
 title: "SMART-PC: Predict Skeletons, Then Adapt with BatchNorm Statistics Alone"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: SMART-PC replaces MATE's point reconstruction with skeleton prediction, which gives features robust enough that online adaptation only needs BatchNorm statistic updates and no backpropagation.

@@ -1,7 +1,6 @@
 ---
 title: "AVCD: Contrastive Decoding for Three Modalities"
 category: paper-review
-topic: mllm
 subfields: [hallucination, avllm]
 lang: en
 description: Find the dominant modality from attention, mask the others, and extend contrastive decoding to audio, video, and text.

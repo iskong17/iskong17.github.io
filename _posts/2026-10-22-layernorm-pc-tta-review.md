@@ -1,7 +1,6 @@
 ---
 title: "LN-TTA: Leave LayerNorm Alone, Nudge Only Its Affine"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: A forward-only, source-free test-time adaptation for point-cloud Transformers that keeps LayerNorm's normalization intact and only rescales and shifts its post-affine output using a prototype taken from the [cls] token.

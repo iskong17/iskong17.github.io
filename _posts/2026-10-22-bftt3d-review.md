@@ -1,7 +1,6 @@
 ---
 title: "BFTT3D: Adapt a 3D Classifier with a Second, Training-Free Branch"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: Keep the source model frozen, add a non-parametric branch that matches test features to source prototypes in a shared subspace, and mix the two logits by entropy.

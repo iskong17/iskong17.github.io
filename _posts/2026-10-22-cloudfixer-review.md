@@ -1,7 +1,6 @@
 ---
 title: "CloudFixer: Rotate and Nudge the Points Back to the Source Domain"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: CloudFixer adapts each test point cloud by optimizing a rotation and per-point displacements so that a frozen source diffusion model sees it as clean, without backpropagating through the diffusion model.

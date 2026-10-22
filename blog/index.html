@@ -55,6 +55,15 @@ description: Study notes, paper reviews, photos from conferences and travel, and
               <b>Drivers</b>
               <span class="sub-square-desc">Profiles, every season, teams</span>
             </button>
+            {%- elsif c.subfields %}
+            {%- for sf in c.subfields %}
+            {%- assign sposts = posts | where_exp: "p", "p.subfields contains sf.key" -%}
+            <button type="button" class="sub-square" data-goto="{{ c.key }}/{{ sf.key }}">
+              <span class="sub-square-kicker">{{ sposts.size }} {% if sposts.size == 1 %}post{% else %}posts{% endif %}</span>
+              <b>{{ sf.label }}</b>
+              {%- if sposts.size > 0 %}<span class="sub-square-desc">Latest: {{ sposts.first.title | truncate: 40 }}</span>{% endif %}
+            </button>
+            {%- endfor %}
             {%- elsif c.topics == nil %}
             {%- for post in posts limit: 3 %}{% include post-card.html post=post %}{% endfor %}
             {%- if posts.size == 0 %}<p class="cat-bar-empty">No reviews yet.</p>{% endif %}
@@ -97,7 +106,10 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       <div class="subfield-filter" role="group" aria-label="{{ c.label }} subfields">
         <button type="button" class="subfield-chip is-active" data-subfield="all">All</button>
         {%- for sf in c.subfields %}
-        <button type="button" class="subfield-chip" data-subfield="{{ sf.key }}">{{ sf.label }}</button>
+        {%- assign sposts = posts | where_exp: "p", "p.subfields contains sf.key" -%}
+        {%- if sposts.size > 0 %}
+        <button type="button" class="subfield-chip" data-subfield="{{ sf.key }}">{{ sf.label }} <small>{{ sposts.size }}</small></button>
+        {%- endif %}
         {%- endfor %}
       </div>
       {%- endif %}

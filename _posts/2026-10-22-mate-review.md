@@ -1,7 +1,6 @@
 ---
 title: "MATE: Adapt a 3D Classifier by Reconstructing Each Test Point Cloud"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: MATE trains a Point-MAE classifier jointly with masked reconstruction, then updates the encoder on each corrupted test point cloud by reconstructing it before classifying.

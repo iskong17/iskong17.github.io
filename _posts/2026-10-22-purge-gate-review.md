@@ -1,7 +1,6 @@
 ---
 title: "Purge-Gate: Drop the Most Shifted Tokens Before Attention"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: A backpropagation-free TTA method for point cloud transformers that scores each token's distance to a source prototype and removes the most divergent ones before they reach attention.

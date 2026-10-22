@@ -1,7 +1,6 @@
 ---
 title: "SVWA: Adapt on Several Samplings, Then Average the Weights"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: Run TENT on several FPS/KNN re-samplings of the same test batch and average the adapted normalization parameters to get a more robust point-cloud classifier.

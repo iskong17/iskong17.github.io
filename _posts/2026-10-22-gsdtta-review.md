@@ -1,7 +1,6 @@
 ---
 title: "GSDTTA: Adapt the Point Cloud by Editing Its Lowest Graph Frequencies"
 category: paper-review
-topic: cv
 subfields: [tta, 3dpc]
 lang: en
 description: Instead of moving every point, GSDTTA shifts a test point cloud by learning offsets for only its 100 lowest graph Fourier coefficients, and labels it with help from Laplacian eigenmaps.

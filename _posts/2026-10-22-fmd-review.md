@@ -1,7 +1,6 @@
 ---
 title: "Fork-Merge Decoding: Let Audio and Video Think Separately First"
 category: paper-review
-topic: mllm
 subfields: [avllm]
 lang: en
 description: Run audio-only and video-only branches through the early decoder layers, merge their hidden states, and decode jointly from there.

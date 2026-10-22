@@ -1,7 +1,6 @@
 ---
 title: "MAD: Ask the Model Which Modality the Question Needs"
 category: paper-review
-topic: mllm
 subfields: [hallucination, avllm]
 lang: en
 description: Ask the model whether a question needs audio, video, or both, and use the answer to weight each contrastive decoding branch.

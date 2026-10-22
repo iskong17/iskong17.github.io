@@ -1,5 +1,5 @@
 # Blog categories, in tab order. Use the key in a post's `category:` front matter.
-# Study, Paper Review, and Gallery posts also take a `topic:` key from their list below.
+# Study and Gallery posts also take a `topic:` key from their list below.
 # `short` is used on small labels; `blurb` appears on the All tab.
 - key: study
   label: "Study"
@@ -13,12 +13,8 @@
 - key: paper-review
   label: "Paper Review"
   short: "Paper"
-  blurb: "CV · MLLM · ML"
-  topics:
-    - { key: cv, label: "CV" }
-    - { key: mllm, label: "MLLM" }
-    - { key: ml, label: "ML" }
-  # Finer tags for paper reviews. A post lists the keys that apply in `subfields:`.
+  blurb: "TTA · 3DPC · Hallucination · VLM · AVLLM"
+  # Tags for paper reviews. A post lists the keys that apply in `subfields:`.
   subfields:
     - { key: tta, label: "TTA" }
     - { key: 3dpc, label: "3DPC" }
