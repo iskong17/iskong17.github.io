@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis8-sol.pdf"
 description: "NLP의 비지도 사전학습(Word2Vec, 네거티브 샘플링, ELMo, BERT)을 복습하고, MDP에서 궤적의 확률을 분해하여 행동 복제가 전문가 궤적의 우도를 최대화함을 보인 뒤 DAgger를 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 8 정리. 관련 강의: [Deep Learning 13]({% post_url 2026-10-22-dl-13-nlp %}), [Deep Learning 14]({% post_url 2026-10-22-dl-14-imitation-learning %})
-> 이전: [Discussion 7]({% post_url 2026-10-22-dl-dis-07-attention %}) · 다음: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 8 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 13]({% post_url 2026-10-22-dl-13-nlp %}), [Deep Learning 14]({% post_url 2026-10-22-dl-14-imitation-learning %})</li>
+</ul>
 
 이번 Discussion은 두 부분으로 이루어진다. 1절은 NLP의 비지도 사전학습 방법을 개념 위주로 복습하고, 2절은 모방 학습을 다루며 두 개의 문제를 푼다.
 

@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "이진 트리의 순회 순서를 정의하고, 탐색, 삽입, 삭제를 트리 높이 h에 대해 O(h)에 수행하는 법을 익힌 뒤, 순회 순서에 의미를 부여해 집합(이진 탐색 트리)과 시퀀스를 구현한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 6강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 5]({% post_url 2026-10-22-algo-05-linear-sorting %}) · 다음: [Algorithms 7]({% post_url 2026-10-22-algo-07-avl %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=76dhtgZt38A) · [Recitation 6 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/e215840fd7b0e8cb07916a65c17252b2_MIT6_006S20_r06.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 6강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=76dhtgZt38A)</li>
+<li markdown="span">[Recitation 6 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/e215840fd7b0e8cb07916a65c17252b2_MIT6_006S20_r06.pdf)</li>
+</ul>
 
 ## 지금까지와 새 목표
 

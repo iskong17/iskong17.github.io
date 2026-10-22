@@ -11,9 +11,10 @@ lang: ko
 description: "대칭행렬과 AᵀA·AAᵀ, 대칭행렬 고유벡터의 직교성, 닮음과 직교대각화, 대수적·기하적 중복도, 스펙트럼 정리와 랭크 1 분해를 다룬다."
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 33–42강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 이전: [Linear Algebra 7]({% post_url 2026-10-22-la-07-eigendecomposition %}) · 다음: [Linear Algebra 9]({% post_url 2026-10-22-la-09-svd %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 33–42강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 ## 대칭행렬과 $$A^TA$$, $$AA^T$$
 

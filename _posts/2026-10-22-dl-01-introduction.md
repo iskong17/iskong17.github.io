@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-1.pdf"
 description: "다국어 번역 예제로 표현 학습의 의미를 살펴보고, 머신러닝과 딥러닝의 정의, 딥러닝이 성공한 이유, 그리고 강의 전체를 관통하는 주제를 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 1강 정리. 강의: Sergey Levine.
-> 다음: [Deep Learning 2]({% post_url 2026-10-22-dl-02-ml-basics %})
-> 관련 Discussion: [Discussion 1]({% post_url 2026-10-22-dl-dis-01-introduction %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 1강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 1]({% post_url 2026-10-22-dl-dis-01-introduction %})</li>
+</ul>
 
 ## 표현 학습의 예: 다국어 번역과 강의 개요
 

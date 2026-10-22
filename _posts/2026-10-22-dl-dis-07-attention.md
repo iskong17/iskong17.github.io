@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis7-sol.pdf"
 description: "Luong 어텐션과 셀프 어텐션의 행렬 표기, 내적을 스케일링하는 이유의 확률적 유도, Transformer 인코더·디코더의 구조와 계산 복잡도를 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 7 정리. 관련 강의: [Deep Learning 11]({% post_url 2026-10-22-dl-11-seq2seq %}), [Deep Learning 12]({% post_url 2026-10-22-dl-12-transformers %})
-> 이전: [Discussion 6]({% post_url 2026-10-22-dl-dis-06-rnn %}) · 다음: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 7 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 11]({% post_url 2026-10-22-dl-11-seq2seq %}), [Deep Learning 12]({% post_url 2026-10-22-dl-12-transformers %})</li>
+</ul>
 
 ## 배경: 어텐션 메커니즘
 

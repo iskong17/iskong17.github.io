@@ -986,6 +986,22 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 
 /* In-post series box and series-aware previous / next */
+.series-steps { display: flex; gap: 8px; margin-top: 12px; }
+.series-step { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--bg-2); color: var(--text); font-size: 13px; font-weight: 700; }
+.series-step span { font-size: 15px; color: var(--accent); }
+.series-step small { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--text-2); }
+.series-step:hover { text-decoration: none; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--bg-2)); }
+.series-step.next { margin-left: auto; }
+.series-step.is-disabled { opacity: 0.4; }
+.series-step.is-disabled span { color: var(--muted); }
+
+/* Source notes at the top of study posts: one card per item */
+.post-body .post-sources { list-style: none; margin: 0 0 2em; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.post-body .post-sources li { margin: 0; padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 14px; line-height: 1.5; color: var(--text-2); }
+.post-body .post-sources li::marker { content: none; }
+.post-body .post-sources li:first-child { flex-basis: 100%; border-left: 3px solid var(--accent, var(--red)); color: var(--text); font-weight: 600; }
+.post-body .post-sources a { text-decoration: none; color: var(--link); }
+.post-body .post-sources a:hover { text-decoration: underline; }
 .series-wrap { max-width: 760px; margin: 0 auto; padding: 28px 24px 0; }
 .series-box { position: relative; padding: 14px 18px 12px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
 .series-box::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }

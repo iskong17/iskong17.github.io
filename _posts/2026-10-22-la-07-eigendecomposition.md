@@ -11,9 +11,10 @@ lang: ko
 description: "고유값과 고유벡터, 특성방정식, 영공간과 고유공간, 대수적·기하적 중복도, 대각화, 그리고 고유값 분해 A = VDV⁻¹을 다룬다."
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 27–32강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 이전: [Linear Algebra 6]({% post_url 2026-10-22-la-06-gram-schmidt-qr %}) · 다음: [Linear Algebra 8]({% post_url 2026-10-22-la-08-symmetric-spectral %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 27–32강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 ## 고유값과 고유벡터
 

@@ -11,9 +11,10 @@ lang: ko
 description: 선형변환으로서의 정사영, 직교기저와 정규직교기저가 최소제곱을 단순하게 만드는 이유, 그람-슈미트 과정, 그리고 최소제곱을 더 빠르고 정확하게 푸는 QR 분해를 다룬다.
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 26강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 이전: [Linear Algebra 5]({% post_url 2026-10-22-la-05-least-squares %}) · 다음: [Linear Algebra 7]({% post_url 2026-10-22-la-07-eigendecomposition %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 26강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 이 섹션은 마지막의 질의응답을 포함해 약 1시간 30분 길이의 강의 하나를 다룬다. 여기서는 주제별로 나누어 정리한다.
 

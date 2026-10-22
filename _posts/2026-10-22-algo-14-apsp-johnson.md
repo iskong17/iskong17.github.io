@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "모든 쌍 최단 경로 문제를 정의하고, 포텐셜 함수로 간선 가중치를 다시 매겨 최단 경로를 보존하면서 음수 가중치를 없앤 뒤 Bellman-Ford 한 번과 Dijkstra |V|번으로 푸는 Johnson 알고리즘을 정리한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 14강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 13]({% post_url 2026-10-22-algo-13-dijkstra %}) · 다음: [Algorithms 15]({% post_url 2026-10-22-algo-15-dp-1 %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=EmSmaW-ud6A) · [Recitation 14 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/6027e2a155c948937fdfb93981f7070c_MIT6_006S20_r14.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 14강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=EmSmaW-ud6A)</li>
+<li markdown="span">[Recitation 14 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/6027e2a155c948937fdfb93981f7070c_MIT6_006S20_r14.pdf)</li>
+</ul>
 
 ## 복습: SSSP 알고리즘
 

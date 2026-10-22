@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis2-sol.pdf"
 description: "MSE의 편향-분산-잡음 분해를 유도하고, 최소제곱과 L2 정규화 추정량의 편향과 분산을 비교한 뒤, 벡터·행렬 미분 표기와 연쇄 법칙, 최적화 방법을 복습한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 2 정리. 관련 강의: [Deep Learning 2]({% post_url 2026-10-22-dl-02-ml-basics %}), [Deep Learning 3]({% post_url 2026-10-22-dl-03-error-analysis %}), [Deep Learning 4]({% post_url 2026-10-22-dl-04-optimization %})
-> 이전: [Discussion 1]({% post_url 2026-10-22-dl-dis-01-introduction %}) · 다음: [Discussion 3]({% post_url 2026-10-22-dl-dis-03-backprop-cnn %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 2 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 2]({% post_url 2026-10-22-dl-02-ml-basics %}), [Deep Learning 3]({% post_url 2026-10-22-dl-03-error-analysis %}), [Deep Learning 4]({% post_url 2026-10-22-dl-04-optimization %})</li>
+</ul>
 
 이번 Discussion은 세 부분이다. 편향-분산 트레이드오프를 유도하고 정규화가 둘을 어떻게 바꾸는지 예제로 보고(문제 1~3), 역전파에 필요한 벡터/행렬 미분 표기를 정리하고(문제 4~7), 강의에서 다룬 최적화 방법을 복습한다.
 

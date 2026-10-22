@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "데이터 수가 차원보다 적을 때 가우시안 공분산 추정이 실패하는 문제에서 출발해 인자 분석 모델과 그 EM 알고리즘을 유도하고, 분산을 최대로 보존하는 방향을 고유벡터로 찾는 PCA를 소개한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 14강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 13]({% post_url 2026-10-22-ml-13-gmm-em %}) · 다음: [Machine Learning 15]({% post_url 2026-10-22-ml-15-pca-ica %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=o2KzJdbOwMc) · 참고: CS229 인자 분석 노트(Factor analysis), CS229 lecture notes 12장 Principal components analysis
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 14강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=o2KzJdbOwMc)</li>
+<li markdown="span">참고: CS229 인자 분석 노트(Factor analysis), CS229 lecture notes 12장 Principal components analysis</li>
+</ul>
 
 인자 분석(factor analysis)은 현재 판의 main notes에는 실려 있지 않아, 같은 강의의 기존 인자 분석 노트의 전개와 표기를 따른다.
 

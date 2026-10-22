@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "PyTorch 워크플로의 전체 흐름을 살펴보고, 가중치 0.7과 편향 0.3으로 직선 데이터를 만들어 학습/테스트 세트로 나눈 뒤, nn.Module을 상속한 첫 선형 회귀 모델을 만들고 학습 전 예측을 확인한다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 1 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 2]({% post_url 2026-10-22-py-02-tensors %}) · 다음: [PyTorch 4]({% post_url 2026-10-22-py-04-workflow-training %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 1 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 이 글은 노트북 `01_pytorch_workflow`의 앞부분, 데이터를 준비하고 첫 모델을 만들어 (학습 전) 예측해 보는 데까지를 정리한다.
 

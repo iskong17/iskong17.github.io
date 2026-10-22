@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis11-sol.pdf"
 description: "GAN의 최적 판별기와 Jensen-Shannon 발산, Lipschitz 함수의 합성과 스펙트럼 정규화, FGSM 최적 섭동의 유도, 적대적 학습의 강건성이 어떤 섭동 집합까지 일반화되는지를 문제로 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 11 정리. 관련 강의: [Deep Learning 19]({% post_url 2026-10-22-dl-19-gans %}), [Deep Learning 20]({% post_url 2026-10-22-dl-20-adversarial-examples %})
-> 이전: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %}) · 다음: [Discussion 12]({% post_url 2026-10-22-dl-dis-12-meta-learning %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 11 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 19]({% post_url 2026-10-22-dl-19-gans %}), [Deep Learning 20]({% post_url 2026-10-22-dl-20-adversarial-examples %})</li>
+</ul>
 
 이번 Discussion은 생성적 적대 신경망(GAN)과 적대적 공격을 다룬다.
 

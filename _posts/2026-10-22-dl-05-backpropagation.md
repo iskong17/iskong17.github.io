@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-5.pdf"
 description: "신경망을 계산 그래프로 그리고, 로지스틱 회귀의 특징을 학습하는 것에서 다층 신경망을 얻은 뒤, 연쇄 법칙을 뒤에서부터 계산하는 역전파 알고리즘과 층별 역전파 공식을 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 5강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 4]({% post_url 2026-10-22-dl-04-optimization %}) · 다음: [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %})
-> 관련 Discussion: [Discussion 3]({% post_url 2026-10-22-dl-dis-03-backprop-cnn %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 5강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 3]({% post_url 2026-10-22-dl-dis-03-backprop-cnn %})</li>
+</ul>
 
 ## 신경망: 계산 그래프에서 다층 신경망으로
 

@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis5-sol.pdf"
 description: "주요 컴퓨터 비전 문제를 복습하고, mAP 계산, 전치 합성곱의 손계산, U-Net 구조 문제를 풀며 DeepDream과 스타일 전이를 간단히 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 5 정리. 관련 강의: [Deep Learning 8]({% post_url 2026-10-22-dl-08-computer-vision %})
-> 이전: [Discussion 4]({% post_url 2026-10-22-dl-dis-04-cnn-architectures %}) · 다음: [Discussion 6]({% post_url 2026-10-22-dl-dis-06-rnn %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 5 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 8]({% post_url 2026-10-22-dl-08-computer-vision %})</li>
+</ul>
 
 이 디스커션은 비전 응용과 신경망 시각화 입문(스타일 전이, DeepDream)을 다룬다. 먼저 네 가지 주요 컴퓨터 비전 문제를 복습한다.
 

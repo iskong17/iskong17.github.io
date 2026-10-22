@@ -12,10 +12,12 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "6.006의 목표와 문제 해결 전략(아는 문제로 환원하거나 재귀 알고리즘을 설계)을 되돌아보고, 6.046을 비롯한 후속 과목에서 다루는 주제들을 정리한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 20강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 19]({% post_url 2026-10-22-algo-19-complexity %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=2NMtS1ecb3o)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 20강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=2NMtS1ecb3o)</li>
+</ul>
 
 ## 6.006의 목표
 

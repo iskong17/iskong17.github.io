@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-3.pdf"
 description: "오차를 편향과 분산으로 분해해 과적합과 과소적합을 설명하고, 정규화를 사전분포 관점에서 이해한 뒤, 학습·검증·테스트 집합으로 하이퍼파라미터를 고르는 방법을 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 3강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 2]({% post_url 2026-10-22-dl-02-ml-basics %}) · 다음: [Deep Learning 4]({% post_url 2026-10-22-dl-04-optimization %})
-> 관련 Discussion: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 3강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})</li>
+</ul>
 
 ## 편향-분산 트레이드오프
 

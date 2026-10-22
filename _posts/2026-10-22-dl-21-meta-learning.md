@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-21.pdf"
 description: "적은 데이터로 새 과제를 빠르게 배우도록 학습하는 메타러닝의 문제 설정과 세 가지 방법(블랙박스, 비모수적, 기울기 기반 MAML), 그리고 순환 정책과 MAML을 이용한 메타 강화학습을 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 21강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 20]({% post_url 2026-10-22-dl-20-adversarial-examples %})
-> 관련 Discussion: [Discussion 12]({% post_url 2026-10-22-dl-dis-12-meta-learning %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 21강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 12]({% post_url 2026-10-22-dl-dis-12-meta-learning %})</li>
+</ul>
 
 ## 메타러닝이란 (What Is Meta-Learning)
 

@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-12.pdf"
 description: "순환 연결 없이 셀프 어텐션만으로 시퀀스를 처리하기 위해 위치 인코딩, 멀티헤드 어텐션, 위치별 비선형 네트워크, 마스킹을 더하고, 이를 조합한 Transformer 구조를 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 12강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 11]({% post_url 2026-10-22-dl-11-seq2seq %}) · 다음: [Deep Learning 13]({% post_url 2026-10-22-dl-13-nlp %})
-> 관련 Discussion: [Discussion 7]({% post_url 2026-10-22-dl-dis-07-attention %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 12강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 7]({% post_url 2026-10-22-dl-dis-07-attention %})</li>
+</ul>
 
 ## 어텐션만으로 충분한가: 셀프 어텐션 (Self-Attention)
 

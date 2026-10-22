@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "음수 가중치가 있는 일반 그래프의 SSSP를 위해 k-간선 거리와 음수 사이클 증인을 정의하고, 그래프를 |V|+1개 층으로 복제한 DAG에서 DAG Relaxation을 실행하는 Bellman-Ford로 O(|V||E|)에 모든 거리와 음수 사이클을 구하는 방법을 정리한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 12강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 11]({% post_url 2026-10-22-algo-11-weighted-shortest-paths %}) · 다음: [Algorithms 13]({% post_url 2026-10-22-algo-13-dijkstra %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=f9cVS_URPc0) · [Recitation 12 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/1a34924a2ee4e08c580c2268f8e854ee_MIT6_006S20_r12.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 12강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=f9cVS_URPc0)</li>
+<li markdown="span">[Recitation 12 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/1a34924a2ee4e08c580c2268f8e854ee_MIT6_006S20_r12.pdf)</li>
+</ul>
 
 ## 복습과 목표
 

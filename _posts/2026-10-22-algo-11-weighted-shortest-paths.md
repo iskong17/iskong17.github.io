@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "가중 그래프에서 최단 경로 가중치와 음수 가중치 사이클을 정의하고, 거리로부터 최단 경로 트리를 복원하는 방법과 간선 완화의 안전성을 정리한 뒤, 위상 순서로 간선을 완화하는 DAG Relaxation으로 DAG의 SSSP를 선형 시간에 푼다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 11강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 10]({% post_url 2026-10-22-algo-10-dfs %}) · 다음: [Algorithms 12]({% post_url 2026-10-22-algo-12-bellman-ford %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=5cF5Bgv59Sc) · [Recitation 11 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/77ff36ad54779575d9ba8d8687f91b5b_MIT6_006S20_r11.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 11강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=5cF5Bgv59Sc)</li>
+<li markdown="span">[Recitation 11 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/77ff36ad54779575d9ba8d8687f91b5b_MIT6_006S20_r11.pdf)</li>
+</ul>
 
 ## 복습
 

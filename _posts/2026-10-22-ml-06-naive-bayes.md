@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "나이브 베이즈 분류기를 복습하고, 학습 집합에 없던 단어 때문에 확률이 0으로 추정되는 문제를 라플라스 스무딩으로 해결한 뒤, 텍스트 분류를 위한 베르누이 사건 모델과 다항 사건 모델을 비교한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 6강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 5]({% post_url 2026-10-22-ml-05-gda %}) · 다음: [Machine Learning 7]({% post_url 2026-10-22-ml-07-kernels %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=ADj95edZc0w) · 참고: CS229 lecture notes Chapter 4.2 (Naive Bayes, 4.2.1 Laplace smoothing, 4.2.2 Event models for text classification)
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 6강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=ADj95edZc0w)</li>
+<li markdown="span">참고: CS229 lecture notes Chapter 4.2 (Naive Bayes, 4.2.1 Laplace smoothing, 4.2.2 Event models for text classification)</li>
+</ul>
 
 ## 나이브 베이즈 복습
 

@@ -11,9 +11,10 @@ lang: ko
 description: 선형 독립과 그것이 해의 유일성을 결정하는 이유, 부분 공간과 기저, 그리고 부분 공간의 차원, 열 공간, 행렬의 랭크를 정리한다.
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 11–14강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 이전: [Linear Algebra 2]({% post_url 2026-10-22-la-02-span %}) · 다음: [Linear Algebra 4]({% post_url 2026-10-22-la-04-linear-transformation %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 11–14강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 ## 선형 독립
 

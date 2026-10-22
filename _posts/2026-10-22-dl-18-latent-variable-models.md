@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-18.pdf"
 description: "잠재변수 모델의 변분 하한(ELBO), 상각 변분 추론과 재매개변수화 기법, 변분 오토인코더(VAE), 그리고 정확한 우도를 주는 normalizing flow(NICE, Real-NVP)를 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 18강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 17]({% post_url 2026-10-22-dl-17-generative-models %}) · 다음: [Deep Learning 19]({% post_url 2026-10-22-dl-19-gans %})
-> 관련 Discussion: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 18강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})</li>
+</ul>
 
 ## 잠재변수 모델과 변분 근사 (Variational Approximation)
 

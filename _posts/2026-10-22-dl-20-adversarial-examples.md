@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-20.pdf"
 description: "딥러닝 모델의 일반화가 어디서 어긋나는지(분포 이동, 보정), 적대적 예제가 왜 생기는지(선형 모델 가설), 그리고 FGSM·블랙박스 공격·적대적 학습 같은 공격과 방어 방법을 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 20강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 19]({% post_url 2026-10-22-dl-19-gans %}) · 다음: [Deep Learning 21]({% post_url 2026-10-22-dl-21-meta-learning %})
-> 관련 Discussion: [Discussion 11]({% post_url 2026-10-22-dl-dis-11-gans-adversarial %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 20강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 11]({% post_url 2026-10-22-dl-dis-11-gans-adversarial %})</li>
+</ul>
 
 ## 딥넷은 일반화하는가 (Generalization, Distribution Shift, Calibration)
 

@@ -11,9 +11,10 @@ lang: ko
 description: 벡터에서 벡터로 가는 함수와 선형성 조건, 선형변환의 표준행렬, 신경망의 선형 레이어, 전사와 일대일 변환을 다룬다.
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 15–18강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 이전: [Linear Algebra 3]({% post_url 2026-10-22-la-03-independence-basis-rank %}) · 다음: [Linear Algebra 5]({% post_url 2026-10-22-la-05-least-squares %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 15–18강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 ## 선형변환
 

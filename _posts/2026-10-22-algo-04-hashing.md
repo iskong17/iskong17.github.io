@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "비교 모델에서 탐색이 Ω(log n)임을 결정 트리로 보이고, 이 한계를 직접 접근 배열과 해싱으로 넘어서며, 체이닝과 범용 해시 함수족으로 기대 O(1) 연산을 얻는다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 4강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 3]({% post_url 2026-10-22-algo-03-sorting %}) · 다음: [Algorithms 5]({% post_url 2026-10-22-algo-05-linear-sorting %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=Nu8YGneFCWE) · [Recitation 4 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/bd220fb629aefdf30f416b5abf45d38d_MIT6_006S20_r04.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 4강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=Nu8YGneFCWE)</li>
+<li markdown="span">[Recitation 4 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/bd220fb629aefdf30f416b5abf45d38d_MIT6_006S20_r04.pdf)</li>
+</ul>
 
 ## 복습
 

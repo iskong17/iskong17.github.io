@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "연속 상태 MDP를 다루기 위해 상태 공간 이산화와 그 한계를 살펴보고, 물리 시뮬레이션이나 데이터로 학습한 모델을 이용해 가치 함수를 회귀로 근사하는 적합 가치 반복을 정리한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 20강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 17]({% post_url 2026-10-22-ml-17-rl-basics %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=gPCd0xx_OYI) · 참고: CS229 lecture notes 19장 Reinforcement learning (19.3–19.4)
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 20강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=gPCd0xx_OYI)</li>
+<li markdown="span">참고: CS229 lecture notes 19장 Reinforcement learning (19.3–19.4)</li>
+</ul>
 
 ## 연속 상태 MDP
 

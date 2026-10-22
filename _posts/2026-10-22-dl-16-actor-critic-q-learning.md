@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-16.pdf"
 description: "가치 함수로 정책 경사의 분산을 줄이는 액터-크리틱, 정책 없이 가치만으로 학습하는 정책 반복·가치 반복·fitted Q-iteration, 그리고 리플레이 버퍼와 타깃 네트워크를 쓰는 심층 Q-learning(DQN)을 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 16강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %}) · 다음: [Deep Learning 17]({% post_url 2026-10-22-dl-17-generative-models %})
-> 관련 Discussion: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 16강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})</li>
+</ul>
 
 ## 액터-크리틱 (Actor-Critic)
 

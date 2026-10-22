@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "대규모 비라벨 데이터로 사전학습한 뒤 다운스트림 과제에 적응시키는 파운데이션 모델의 틀을 정식화하고, 선형 탐사와 미세조정, LoRA, 그리고 표현 학습 방법인 지도 사전학습과 대조 학습(SimCLR)을 정리한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 16강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 15]({% post_url 2026-10-22-ml-15-pca-ica %}) · 다음: [Machine Learning 17]({% post_url 2026-10-22-ml-17-rl-basics %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=6N3OAWIsUOU) · 참고: CS229 lecture notes 15장 Foundation models overview, 16장 Representation learning
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 16강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=6N3OAWIsUOU)</li>
+<li markdown="span">참고: CS229 lecture notes 15장 Foundation models overview, 16장 Representation learning</li>
+</ul>
 
 ## 파운데이션 모델
 

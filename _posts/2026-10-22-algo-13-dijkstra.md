@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "간선 가중치가 음이 아닌 그래프에서 출발점으로부터 가까운 순서로 정점의 간선을 완화하는 Dijkstra 알고리즘을 변경 가능한 우선순위 큐로 구현하고, 정확성을 증명한 뒤 배열, 이진 힙, 피보나치 힙에 따른 실행 시간을 비교한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 13강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 12]({% post_url 2026-10-22-algo-12-bellman-ford %}) · 다음: [Algorithms 14]({% post_url 2026-10-22-algo-14-apsp-johnson %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=NSHizBK9JD8) · [Recitation 13 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/ec187276db0faaa047d655979a44de7f_MIT6_006S20_r13.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 13강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=NSHizBK9JD8)</li>
+<li markdown="span">[Recitation 13 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/ec187276db0faaa047d655979a44de7f_MIT6_006S20_r13.pdf)</li>
+</ul>
 
 ## 복습
 

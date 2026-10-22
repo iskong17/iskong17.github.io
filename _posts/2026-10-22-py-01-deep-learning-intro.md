@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "딥러닝이 무엇이고 언제 써야 하는지, 신경망의 구조와 학습 패러다임을 정리하고, PyTorch를 쓰는 이유와 텐서의 개념, 강의 구성과 실습 환경 준비를 살펴본다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 0 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 다음: [PyTorch 2]({% post_url 2026-10-22-py-02-tensors %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 0 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 이 글은 강의 Chapter 0(PyTorch Fundamentals)의 도입부, 즉 텐서를 직접 다루기 전까지의 내용을 정리한다. 노트북 `00_pytorch_fundamentals`의 앞부분과 영상의 개념 설명 구간에 해당한다.
 

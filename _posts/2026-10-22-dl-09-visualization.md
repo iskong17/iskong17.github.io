@@ -12,8 +12,10 @@ slides: "https://cs182sp21.github.io/static/slides/lec-9.pdf"
 description: "합성곱 신경망이 무엇을 보는지 필터·활성화·기울기로 시각화하고, 이미지를 최적화해 유닛을 최대로 활성화하는 방법에서 DeepDream과 신경망 스타일 전이로 이어진다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 9강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 8]({% post_url 2026-10-22-dl-08-computer-vision %}) · 다음: [Deep Learning 10]({% post_url 2026-10-22-dl-10-rnn %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 9강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+</ul>
 
 ## 합성곱 신경망은 무엇을 보는가
 

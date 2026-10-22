@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "직선만 그리는 분류 모델을 직선 회귀 데이터로 점검하고, ReLU 비선형성을 넣어 원 데이터를 분리한 뒤, softmax와 CrossEntropyLoss로 4개 클래스 다중 분류 모델을 만들고 평가한다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 2 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 5]({% post_url 2026-10-22-py-05-classification %}) · 다음: [PyTorch 7]({% post_url 2026-10-22-py-07-computer-vision-data %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 2 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 [지난 글]({% post_url 2026-10-22-py-05-classification %})에서는 `make_circles`로 만든 빨강/파랑 원 데이터를 이진 분류(binary classification)하는 모델을 만들었다. 층을 하나 더 쌓고(`CircleModelV1`, 은닉 유닛 10개, 선형 층 3개) 1000 에폭을 학습해도 정확도는 50% 근처에 머물렀고, 결정 경계(decision boundary)를 그려 보면 모델은 여전히 두 원 사이에 **직선**만 긋고 있었다. 이 글은 그 원인을 찾는 데서 출발한다.
 

@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-4.pdf"
 description: "신경망 손실 지형의 국소 최적점, 평탄 구간, 안장점을 살펴보고, 뉴턴법을 이상으로 삼아 모멘텀, RMSProp, AdaGrad, Adam을 유도한 뒤, 미니배치 확률적 경사하강법과 학습률 조정을 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 4강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 3]({% post_url 2026-10-22-dl-03-error-analysis %}) · 다음: [Deep Learning 5]({% post_url 2026-10-22-dl-05-backpropagation %})
-> 관련 Discussion: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 4강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})</li>
+</ul>
 
 ## 경사하강법과 손실 지형
 

@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis10-sol.pdf"
 description: "자기회귀 모델(PixelCNN, PixelRNN), 오토인코더, VAE의 변분 하한 유도와 재매개변수화, normalizing flow의 목적함수와 Real-NVP 야코비안 행렬식을 문제로 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 10 정리. 관련 강의: [Deep Learning 17]({% post_url 2026-10-22-dl-17-generative-models %}), [Deep Learning 18]({% post_url 2026-10-22-dl-18-latent-variable-models %})
-> 이전: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %}) · 다음: [Discussion 11]({% post_url 2026-10-22-dl-dis-11-gans-adversarial %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 10 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 17]({% post_url 2026-10-22-dl-17-generative-models %}), [Deep Learning 18]({% post_url 2026-10-22-dl-18-latent-variable-models %})</li>
+</ul>
 
 이번 Discussion은 자기회귀 모델, 오토인코더, 잠재변수 모델을 다룬다. 생성 모델은 데이터셋의 분포를 표현해 새 샘플을 만드는 것이 목표이며, 레이블 없는 데이터로도 학습할 수 있다.
 

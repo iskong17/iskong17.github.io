@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "홀드아웃, k겹, LOOCV 교차 검증으로 모델을 고르는 법, 래퍼와 필터 방식의 피처 선택, 사전 분포를 두는 베이즈 관점과 MAP 추정이 정규화가 되는 이유, 그리고 편향과 분산을 진단해 학습 알고리즘을 개선하는 실전 지침을 정리한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 11강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 10]({% post_url 2026-10-22-ml-10-bias-variance %}) · 다음: [Machine Learning 12]({% post_url 2026-10-22-ml-12-kmeans-em %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=NirZnqwYfYU) · 참고: CS229 lecture notes Ch. 9 Regularization and model selection(9.3–9.4)
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 11강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=NirZnqwYfYU)</li>
+<li markdown="span">참고: CS229 lecture notes Ch. 9 Regularization and model selection(9.3–9.4)</li>
+</ul>
 
 ## 모델 선택 문제
 

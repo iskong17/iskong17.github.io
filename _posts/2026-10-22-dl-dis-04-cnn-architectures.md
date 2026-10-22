@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis4-sol.pdf"
 description: "대표적인 CNN 구조와 ResNet의 기울기 흐름, 배치 정규화의 역전파, 앙상블과 드롭아웃, Xavier 초기화 유도, ReLU의 순전파·역전파와 그 한계를 문제로 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 4 정리. 관련 강의: [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %}), [Deep Learning 7]({% post_url 2026-10-22-dl-07-init-batchnorm %})
-> 이전: [Discussion 3]({% post_url 2026-10-22-dl-dis-03-backprop-cnn %}) · 다음: [Discussion 5]({% post_url 2026-10-22-dl-dis-05-vision %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 4 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %}), [Deep Learning 7]({% post_url 2026-10-22-dl-07-init-batchnorm %})</li>
+</ul>
 
 이 디스커션은 CNN 구조, 배치 정규화, 가중치 초기화, 앙상블과 드롭아웃을 다룬다. 먼저 유명한 CNN 구조를 간단히 훑는다.
 

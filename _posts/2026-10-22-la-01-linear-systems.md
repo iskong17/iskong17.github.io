@@ -11,9 +11,10 @@ lang: ko
 description: 벡터와 행렬의 표기, 행렬 곱셈, 선형 방정식과 선형 시스템, 항등 행렬과 역행렬, 그리고 행렬이 역행렬을 갖지 않거나 직사각 행렬일 때 해가 어떻게 되는지를 정리한다.
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 01–07강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 다음: [Linear Algebra 2]({% post_url 2026-10-22-la-02-span %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 01–07강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 ## 스칼라, 벡터, 행렬
 

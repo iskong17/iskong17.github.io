@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "분류 문제의 종류와 분류 신경망의 구조를 정리하고, make_circles 데이터로 이진 분류 모델을 만들어 BCEWithLogitsLoss로 학습시키며, 로짓에서 확률과 레이블로 가는 과정과 결정 경계를 확인한 뒤, 층과 에폭을 늘려도 개선되지 않는 이유를 살핀다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 2 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 4]({% post_url 2026-10-22-py-04-workflow-training %}) · 다음: [PyTorch 6]({% post_url 2026-10-22-py-06-nonlinearity-multiclass %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 2 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 이 글은 노트북 `02_pytorch_classification`의 앞부분, 이진 분류 모델을 만들고 학습시킨 뒤 개선을 시도하는 데까지를 정리한다.
 

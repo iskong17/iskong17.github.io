@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "머신러닝이 무엇인지, 지도 학습(회귀와 분류), 비지도 학습, 강화 학습의 기본 틀을 소개하고 CS229 강의 전체의 흐름을 정리한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 1강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 다음: [Machine Learning 2]({% post_url 2026-10-22-ml-02-lms %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=Bl4Feh_Mjvo) · 참고: CS229 lecture notes, Part I 도입부와 목차
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 1강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=Bl4Feh_Mjvo)</li>
+<li markdown="span">참고: CS229 lecture notes, Part I 도입부와 목차</li>
+</ul>
 
 ## 머신러닝이란
 

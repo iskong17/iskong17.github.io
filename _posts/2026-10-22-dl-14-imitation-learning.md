@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-14.pdf"
 description: "예측에서 제어로 넘어갈 때의 어려움, 상태·관측·행동·정책의 용어, 행동 복제와 분포 이동 문제, 그 완화책, 그리고 DAgger를 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 14강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 13]({% post_url 2026-10-22-dl-13-nlp %}) · 다음: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %})
-> 관련 Discussion: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 14강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %})</li>
+</ul>
 
 ## 예측에서 제어로 (From Prediction to Control)
 

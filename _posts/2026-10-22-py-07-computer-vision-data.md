@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "torchvision으로 FashionMNIST를 불러와 이미지 텐서의 모양을 살피고, DataLoader로 미니배치를 만든 뒤, 선형 기준 모델과 ReLU 모델을 배치 단위 학습 루프와 함수화한 train_step/test_step으로 학습하고 비교한다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 3 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 6]({% post_url 2026-10-22-py-06-nonlinearity-multiclass %}) · 다음: [PyTorch 8]({% post_url 2026-10-22-py-08-cnn %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 3 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 ## 컴퓨터 비전이란
 

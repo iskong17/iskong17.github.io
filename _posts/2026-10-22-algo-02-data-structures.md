@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "시퀀스와 집합 인터페이스를 정의하고, 배열, 연결 리스트, 동적 배열로 시퀀스를 구현하며, 동적 배열의 끝 삽입이 분할상환 O(1)임을 보인다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 2강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 1]({% post_url 2026-10-22-algo-01-introduction %}) · 다음: [Algorithms 3]({% post_url 2026-10-22-algo-03-sorting %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=CHhwJjR0mZA) · [Recitation 2 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/c08a3b63dfe5f6f6b32257d35f86ae63_MIT6_006S20_r02.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 2강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=CHhwJjR0mZA)</li>
+<li markdown="span">[Recitation 2 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/c08a3b63dfe5f6f6b32257d35f86ae63_MIT6_006S20_r02.pdf)</li>
+</ul>
 
 ## 자료구조 인터페이스
 

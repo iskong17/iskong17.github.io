@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "비교 정렬이 Ω(n log n)임을 결정 트리로 보이고, 직접 접근 배열 정렬, 튜플 정렬, 안정적인 계수 정렬을 거쳐 키가 n^c 이하일 때 선형 시간에 정렬하는 기수 정렬을 만든다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 5강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 4]({% post_url 2026-10-22-algo-04-hashing %}) · 다음: [Algorithms 6]({% post_url 2026-10-22-algo-06-binary-trees %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=yndgIDO0zQQ) · [Recitation 5 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/cda4cc0c0e626bfbd30bc15fb78c3994_MIT6_006S20_r05.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 5강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=yndgIDO0zQQ)</li>
+<li markdown="span">[Recitation 5 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/cda4cc0c0e626bfbd30bc15fb78c3994_MIT6_006S20_r05.pdf)</li>
+</ul>
 
 ## 복습
 

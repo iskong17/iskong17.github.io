@@ -66,6 +66,16 @@ layout: default
         <span class="series-pos">{{ series_pos }} <small>/ {{ series_posts.size }}</small></span>
       </div>
       <div class="series-progress" aria-hidden="true"><span style="width: {{ series_pos | times: 100 | divided_by: series_posts.size }}%"></span></div>
+      {%- assign top_prev_idx = series_idx | minus: 1 -%}
+      {%- assign top_next_idx = series_idx | plus: 1 %}
+      <div class="series-steps">
+        {%- if series_idx > 0 %}{% assign tp = series_posts[top_prev_idx] %}
+        <a class="series-step prev" href="{{ tp.url | relative_url }}"><span>←</span><small>{{ series_kind }} {{ tp.lecture }}</small></a>
+        {%- else %}<span class="series-step prev is-disabled"><span>←</span><small>First</small></span>{% endif %}
+        {%- if top_next_idx < series_posts.size %}{% assign tn = series_posts[top_next_idx] %}
+        <a class="series-step next" href="{{ tn.url | relative_url }}"><small>{{ series_kind }} {{ tn.lecture }}</small><span>→</span></a>
+        {%- else %}<span class="series-step next is-disabled"><small>Last</small><span>→</span></span>{% endif %}
+      </div>
       <details class="series-toc">
         <summary>All {% if series_kind == "Discussion" %}discussions{% else %}lectures{% endif %}</summary>
         <ol>
@@ -79,7 +89,7 @@ layout: default
   </div>
   {%- endif %}
 
-  <div class="post-body">
+  <div class="post-body{% if page.topic %} topic-{{ page.topic }}{% endif %}">
     {{ content | replace: '<img src=', '<img loading="lazy" decoding="async" src=' }}
     {%- if page.auto %}
     <p class="auto-note">This report was generated automatically from <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a> data.</p>

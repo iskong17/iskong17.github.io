@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis1-sol.pdf"
 description: "데이터셋 분할 원칙, 베이즈 정리 계산, 추정량의 편향과 분산, 시그모이드와 소프트맥스의 미분, 위험과 경험적 위험을 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 1 정리. 관련 강의: [Deep Learning 1]({% post_url 2026-10-22-dl-01-introduction %})
-> 다음: [Discussion 2]({% post_url 2026-10-22-dl-dis-02-matrix-calculus %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 1 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 1]({% post_url 2026-10-22-dl-01-introduction %})</li>
+</ul>
 
 첫 Discussion은 머신러닝의 기본 틀과 통계 복습을 다룬다. 문제 0은 강의 일정, 중간고사 날짜, slip day 등 수업 운영에 관한 질문이므로 생략한다.
 

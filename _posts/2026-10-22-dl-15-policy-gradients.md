@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-15.pdf"
 description: "마르코프 결정 과정과 강화학습의 목적 함수를 정의하고, 로그 미분 트릭으로 정책 경사를 유도한 뒤, 보상-투-고·기준선·중요도 샘플링 등 정책 경사를 실제로 작동시키는 방법을 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 15강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 14]({% post_url 2026-10-22-dl-14-imitation-learning %}) · 다음: [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %})
-> 관련 Discussion: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 15강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 9]({% post_url 2026-10-22-dl-dis-09-pg-q-learning %})</li>
+</ul>
 
 ## 강화학습 문제의 정의 (The Reinforcement Learning Problem)
 

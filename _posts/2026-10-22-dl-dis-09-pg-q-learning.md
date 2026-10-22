@@ -14,8 +14,10 @@ solutions: "https://cs182sp21.github.io/static/discussions/dis9-sol.pdf"
 description: "정책 경사를 일반적인 점수 함수 추정량으로 유도하고 보상-투-고와 기준선으로 분산을 줄이며, 상태 의존 기준선이 불편임을 보인 뒤, 벨만 방정식에 기반한 가치 함수 학습, 액터-크리틱, Q-learning과 탐험을 정리한다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 9 정리. 관련 강의: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %}), [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %})
-> 이전: [Discussion 8]({% post_url 2026-10-22-dl-dis-08-pretraining-imitation %}) · 다음: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) Discussion 9 정리</li>
+<li markdown="span">관련 강의: [Deep Learning 15]({% post_url 2026-10-22-dl-15-policy-gradients %}), [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %})</li>
+</ul>
 
 이번 Discussion은 강화학습의 세 축인 정책 경사, 액터-크리틱, Q-learning을 다룬다. 워크시트의 문제는 상태 의존 기준선에 관한 하나이고, 나머지는 개념과 유도를 정리한 내용이다.
 

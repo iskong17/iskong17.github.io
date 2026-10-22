@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "MAE 손실과 SGD 옵티마이저를 정하고 다섯 단계의 학습 루프와 테스트 루프로 선형 회귀 모델을 학습시킨 뒤, state_dict로 모델을 저장하고 불러오며, nn.Linear와 장치 독립 코드로 전체 워크플로를 다시 구성한다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 1 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 3]({% post_url 2026-10-22-py-03-workflow-data-model %}) · 다음: [PyTorch 5]({% post_url 2026-10-22-py-05-classification %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 1 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 이 글은 노트북 `01_pytorch_workflow`의 뒷부분을 정리한다. [이전 글]({% post_url 2026-10-22-py-03-workflow-data-model %})에서 만든 직선 데이터(`X_train`, `y_train`, `X_test`, `y_test`), `plot_predictions()` 함수, `LinearRegressionModel` 클래스와 그 인스턴스 `model_0`(시드 42, `weights` 0.3367, `bias` 0.1288)을 그대로 이어서 쓴다.
 

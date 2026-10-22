@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "매개변수와 입력 모두에 비선형인 모델의 손실과 미니배치 SGD를 정의하고, 단일 뉴런에서 다층 완전연결 신경망까지 쌓아 올린 뒤, 행렬 표기로 벡터화하고 신경망을 학습되는 피처 맵으로 해석한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 8강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 7]({% post_url 2026-10-22-ml-07-kernels %}) · 다음: [Machine Learning 9]({% post_url 2026-10-22-ml-09-backprop %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=ZMxfDWPXmjc) · 참고: CS229 lecture notes Ch. 7 Deep learning(7.1–7.3, 7.5)
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 8강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=ZMxfDWPXmjc)</li>
+<li markdown="span">참고: CS229 lecture notes Ch. 7 Deep learning(7.1–7.3, 7.5)</li>
+</ul>
 
 ## 비선형 모델을 쓰는 지도 학습
 

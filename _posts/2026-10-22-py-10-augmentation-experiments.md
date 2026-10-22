@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "TrivialAugmentWide로 데이터 증강을 하고, 피자/스테이크/초밥 이미지에 TinyVGG를 증강 없이와 증강 있이 학습해 손실 곡선으로 과적합과 과소적합을 진단한 뒤, 직접 내려받은 이미지를 자료형, 장치, 모양을 맞춰 예측한다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 4 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 9]({% post_url 2026-10-22-py-09-custom-datasets %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 4 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 [지난 글]({% post_url 2026-10-22-py-09-custom-datasets %})에서 피자, 스테이크, 초밥 이미지 폴더를 `ImageFolder`와 직접 만든 `Dataset`으로 불러왔다. 이 글은 지난 글의 `data_path`, `image_path`, `image_path_list`, `train_dir`, `test_dir`, `plot_transformed_images()`, `device`를 그대로 쓴다.
 

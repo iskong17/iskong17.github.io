@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "정렬된 배열로 집합 인터페이스를 구현하기 위해 정렬 문제를 정의하고, 순열 정렬, 선택 정렬, 삽입 정렬, 병합 정렬의 정확성과 실행 시간을 귀납법과 점화식으로 분석한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 3강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 2]({% post_url 2026-10-22-algo-02-data-structures %}) · 다음: [Algorithms 4]({% post_url 2026-10-22-algo-04-hashing %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=oS9aPzUNG-s) · [Recitation 3 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/1869dbf640ded6b31f1bd369d2001ef5_MIT6_006S20_r03.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 3강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=oS9aPzUNG-s)</li>
+<li markdown="span">[Recitation 3 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/1869dbf640ded6b31f1bd369d2001ef5_MIT6_006S20_r03.pdf)</li>
+</ul>
 
 ## 집합 인터페이스와 정렬된 배열
 

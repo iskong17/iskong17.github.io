@@ -13,8 +13,11 @@ notes_label: "learnpytorch.io notebook"
 description: "Food101에서 뽑은 피자, 스테이크, 초밥 이미지를 내려받아 폴더 구조를 살피고, transforms로 텐서로 바꾼 뒤, ImageFolder와 직접 만든 Dataset 서브클래스 두 가지 방법으로 불러와 DataLoader로 만든다."
 ---
 
-> [PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 4 정리. 교재: [learnpytorch.io](https://www.learnpytorch.io/), 코드: MIT License.
-> 이전: [PyTorch 8]({% post_url 2026-10-22-py-08-cnn %}) · 다음: [PyTorch 10]({% post_url 2026-10-22-py-10-augmentation-experiments %})
+<ul class="post-sources">
+<li markdown="span">[PyTorch for Deep Learning (Daniel Bourke, freeCodeCamp)](https://www.youtube.com/watch?v=V_xro1bcAuA) Chapter 4 정리</li>
+<li markdown="span">교재: [learnpytorch.io](https://www.learnpytorch.io/)</li>
+<li markdown="span">코드: MIT License</li>
+</ul>
 
 ## 사용자 데이터셋이란
 

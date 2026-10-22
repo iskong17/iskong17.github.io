@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "테스트 오차를 노이즈, 편향, 분산으로 분해해 과소적합과 과적합을 설명하고, 이중 하강 현상과 유한 가설 집합의 표본 복잡도 상한을 살펴본 뒤, L2와 L1 정규화 및 옵티마이저의 암묵적 정규화를 정리한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 10강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 9]({% post_url 2026-10-22-ml-09-backprop %}) · 다음: [Machine Learning 11]({% post_url 2026-10-22-ml-11-model-selection %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=7AQYw5FOVcw) · 참고: CS229 lecture notes Ch. 8 Generalization, Ch. 9 Regularization and model selection(9.1–9.2)
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 10강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=7AQYw5FOVcw)</li>
+<li markdown="span">참고: CS229 lecture notes Ch. 8 Generalization, Ch. 9 Regularization and model selection(9.1–9.2)</li>
+</ul>
 
 ## 학습 오차와 테스트 오차
 

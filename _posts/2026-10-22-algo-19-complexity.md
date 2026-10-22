@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "결정 문제와 결정 가능성, 복잡도 클래스 P, NP, EXP, R을 정의하고, 환원으로 문제의 난이도를 비교해 NP-hard와 NP-complete를 설명한 뒤 대표적인 NP-complete 문제들을 살펴본다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 19강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 이전: [Algorithms 18]({% post_url 2026-10-22-algo-18-dp-4 %}) · 다음: [Algorithms 20]({% post_url 2026-10-22-algo-20-course-review %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=JbafQJx1CIA) · [Recitation 19 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/7232b0ff982f501556118a8552654762_MIT6_006S20_r19.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 19강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=JbafQJx1CIA)</li>
+<li markdown="span">[Recitation 19 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/7232b0ff982f501556118a8552654762_MIT6_006S20_r19.pdf)</li>
+</ul>
 
 ## 결정 문제
 

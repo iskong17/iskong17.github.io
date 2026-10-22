@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-8.pdf"
 description: "분류를 넘어 물체 위치 추정, 물체 검출, 의미론적 분할을 다루며, 슬라이딩 윈도우를 합성곱으로 구현하는 아이디어에서 YOLO, Faster R-CNN, 완전 합성곱 신경망과 U-Net까지 이어진다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 8강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 7]({% post_url 2026-10-22-dl-07-init-batchnorm %}) · 다음: [Deep Learning 9]({% post_url 2026-10-22-dl-09-visualization %})
-> 관련 Discussion: [Discussion 5]({% post_url 2026-10-22-dl-dis-05-vision %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 8강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 5]({% post_url 2026-10-22-dl-dis-05-vision %})</li>
+</ul>
 
 ## 컴퓨터 비전 문제와 물체 위치 추정
 

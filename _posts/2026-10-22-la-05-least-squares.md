@@ -11,9 +11,10 @@ lang: ko
 description: 내적, 노름, 직교를 정의한 뒤, 과결정 연립방정식의 최소제곱 문제와 그 기하학적 의미(수선의 발), 그리고 기하와 미분 두 방식으로 정규방정식을 유도한다.
 ---
 
-> [선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 19–25강 정리.
-> [KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다.
-> 이전: [Linear Algebra 4]({% post_url 2026-10-22-la-04-linear-transformation %}) · 다음: [Linear Algebra 6]({% post_url 2026-10-22-la-06-gram-schmidt-qr %})
+<ul class="post-sources">
+<li markdown="span">[선형대수 강의](https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1) 19–25강 정리</li>
+<li markdown="span">[KAIST DAVIAN Lab 기초 과목 스터디](https://davian.kaist.ac.kr/joinus)의 선형대수 강의다</li>
+</ul>
 
 ## 내적
 

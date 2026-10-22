@@ -12,10 +12,13 @@ notes: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020
 description: "문제와 알고리즘의 정의, 귀납법을 이용한 정확성 증명, 점근 표기법으로 본 효율, Word-RAM 계산 모델과 자료구조 인터페이스를 생일 짝 찾기 예제로 정리한다."
 ---
 
-> [MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 1강 정리. 강의: Erik Demaine, Jason Ku, Justin Solomon. MIT OpenCourseWare, CC BY-NC-SA.
-> 다음: [Algorithms 2]({% post_url 2026-10-22-algo-02-data-structures %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=ZA-tUyM_y7s) · [Recitation 1 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/c6d8f06c6f11e3342633dec85498f551_MIT6_006S20_r01.pdf)
+<ul class="post-sources">
+<li markdown="span">[MIT 6.006 Introduction to Algorithms (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 1강 정리</li>
+<li markdown="span">강의: Erik Demaine, Jason Ku, Justin Solomon</li>
+<li markdown="span">MIT OpenCourseWare, CC BY-NC-SA</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=ZA-tUyM_y7s)</li>
+<li markdown="span">[Recitation 1 notes (PDF)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/c6d8f06c6f11e3342633dec85498f551_MIT6_006S20_r01.pdf)</li>
+</ul>
 
 이 과목의 목표는 계산 문제를 푸는 법, 그리고 그 풀이가 **정확하고(correct)** **효율적(efficient)** 이라는 것을 다른 사람에게 설명하는 법을 배우는 것이다.
 

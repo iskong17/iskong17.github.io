@@ -13,10 +13,12 @@ notes_label: "CS229 lecture notes (PDF)"
 description: "가우시안 잡음 가정 아래 최소제곱이 최대우도 추정임을 보이고, 국소 가중 선형 회귀, 로지스틱 회귀와 그 경사상승 규칙, 퍼셉트론, 그리고 로그우도를 최대화하는 뉴턴법을 정리한다."
 ---
 
-> [Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 3강 정리. 강의: Tengyu Ma, Christopher Ré.
-> 이전: [Machine Learning 2]({% post_url 2026-10-22-ml-02-lms %}) · 다음: [Machine Learning 4]({% post_url 2026-10-22-ml-04-glm %})
->
-> [▶ 강의 영상](https://www.youtube.com/watch?v=k_pDh_68K6c) · 참고: CS229 lecture notes Chapter 1 (1.3 Probabilistic interpretation, 1.4 Locally weighted linear regression), Chapter 2 (2.1 Logistic regression, 2.2 Perceptron, 2.4 Newton's method)
+<ul class="post-sources">
+<li markdown="span">[Stanford CS229 Machine Learning (Spring 2022)](https://cs229.stanford.edu/syllabus-spring2022.html) 3강 정리</li>
+<li markdown="span">강의: Tengyu Ma, Christopher Ré</li>
+<li markdown="span">[▶ 강의 영상](https://www.youtube.com/watch?v=k_pDh_68K6c)</li>
+<li markdown="span">참고: CS229 lecture notes Chapter 1 (1.3 Probabilistic interpretation, 1.4 Locally weighted linear regression), Chapter 2 (2.1 Logistic regression, 2.2 Perceptron, 2.4 Newton's method)</li>
+</ul>
 
 ## 최소제곱의 확률적 해석
 

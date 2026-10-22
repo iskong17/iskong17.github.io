@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-7.pdf"
 description: "신경망이 잘 학습되도록 하는 기법들, 즉 입력 표준화와 배치 정규화, 가중치 초기화, 기울기 클리핑, 앙상블과 드롭아웃, 하이퍼파라미터 탐색을 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 7강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 6]({% post_url 2026-10-22-dl-06-cnn %}) · 다음: [Deep Learning 8]({% post_url 2026-10-22-dl-08-computer-vision %})
-> 관련 Discussion: [Discussion 4]({% post_url 2026-10-22-dl-dis-04-cnn-architectures %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 7강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 4]({% post_url 2026-10-22-dl-dis-04-cnn-architectures %})</li>
+</ul>
 
 지금까지 배운 것을 모두 따르고, 올바르게 구현하고, 오래 학습시켜도 신경망은 여전히 잘 학습되지 않을 수 있다. 신경망은 지저분하고, 잘 학습시키려면 여러 "요령(trick)"이 필요하다. 이 강의는 그 요령들을 다룬다.
 

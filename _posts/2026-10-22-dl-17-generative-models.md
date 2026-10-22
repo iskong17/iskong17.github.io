@@ -12,9 +12,11 @@ slides: "https://cs182sp21.github.io/static/slides/lec-17.pdf"
 description: "언어 모델을 이미지로 확장한 자기회귀 생성 모델(PixelRNN, PixelCNN, Image Transformer), 구조를 강제해 표현을 배우는 오토인코더, 그리고 잠재 변수 모델의 표현과 학습의 어려움을 다룬다."
 ---
 
-> [UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 17강 정리. 강의: Sergey Levine.
-> 이전: [Deep Learning 16]({% post_url 2026-10-22-dl-16-actor-critic-q-learning %}) · 다음: [Deep Learning 18]({% post_url 2026-10-22-dl-18-latent-variable-models %})
-> 관련 Discussion: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})
+<ul class="post-sources">
+<li markdown="span">[UC Berkeley CS 182 (Spring 2021)](https://cs182sp21.github.io/) 17강 정리</li>
+<li markdown="span">강의: Sergey Levine</li>
+<li markdown="span">관련 Discussion: [Discussion 10]({% post_url 2026-10-22-dl-dis-10-generative %})</li>
+</ul>
 
 ## 자기회귀 생성 모델 (Autoregressive Generative Models)
 
