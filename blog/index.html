@@ -206,26 +206,52 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       <div class="race-sub" data-sub="seasons">
         {%- assign seasons = race_posts | group_by: "season" -%}
         {%- for s in seasons %}
-        {%- assign items = s.items | sort: "round" | reverse -%}
-        {%- assign wins = items | where: "result", "P1" -%}
+        {%- assign items = s.items | sort: "round" -%}
+        {%- assign info = site.data.f1_seasons[s.name] -%}
+        {%- assign n_win = 0 -%}{%- assign n_podium = 0 -%}{%- assign n_out = 0 -%}
+        {%- for post in items -%}
+          {%- assign res = post.result | default: '' -%}
+          {%- if res == 'P1' or res == 'P2' or res == 'P3' %}{% assign n_podium = n_podium | plus: 1 %}{% endif -%}
+          {%- if res == 'P1' %}{% assign n_win = n_win | plus: 1 %}{% endif -%}
+          {%- if res contains 'D' or res == 'NC' %}{% assign n_out = n_out | plus: 1 %}{% endif -%}
+        {%- endfor %}
         <details class="season-group"{% if forloop.first %} open{% endif %}>
-          {%- assign info = site.data.f1_seasons[s.name] -%}
           <summary>
-            <span class="season-year">{{ s.name }}</span>
-            <span class="season-facts">
-              {%- if info %}
-              <span class="season-fact"><em>{% if info.final %}Drivers' champion{% else %}Leader after R{{ info.round }}{% endif %}</em>{{ info.driver_champion }} <small>{{ info.driver_team }}</small></span>
-              <span class="season-fact"><em>{% if info.final %}Constructors' champion{% else %}Constructors' leader{% endif %}</em>{{ info.constructor_champion }}</span>
-              <span class="season-fact is-max"><em>Max Verstappen</em>P{{ info.max_position }} · {{ info.max_points }} pts · {{ info.max_wins }} {% if info.max_wins == 1 %}win{% else %}wins{% endif %}</span>
-              <span class="season-fact is-rb"><em>Red Bull</em>P{{ info.red_bull_position }} · {{ info.red_bull_points }} pts</span>
-              {%- else %}
-              <span class="season-meta">{{ s.items.size }} races · Max won {{ wins.size }}</span>
-              {%- endif %}
-            </span>
+            <div class="season-main">
+              <div class="season-title">
+                <span class="season-year">{{ s.name }}</span>
+                {%- if info %}<span class="season-status{% unless info.final %} is-live{% endunless %}">{% if info.final %}Final{% else %}After R{{ info.round }}{% endif %}</span>{% endif %}
+              </div>
+              <div class="season-strip" aria-label="Max Verstappen's result in each race">
+                {%- for post in items -%}
+                {%- assign res = post.result | default: '' -%}
+                {%- assign rnum = res | remove: 'P' | plus: 0 -%}
+                <span class="strip-cell{% if res == 'P1' %} is-win{% elsif res == 'P2' or res == 'P3' %} is-podium{% elsif rnum >= 4 and rnum <= 10 %} is-points{% elsif res contains 'D' or res == 'NC' %} is-out{% endif %}" title="R{{ post.round }} {{ post.gp | replace: 'Grand Prix', 'GP' }} · {{ res }}"></span>
+                {%- endfor -%}
+              </div>
+              <div class="season-tally"><b>{{ n_win }}</b> {% if n_win == 1 %}win{% else %}wins{% endif %} · <b>{{ n_podium }}</b> {% if n_podium == 1 %}podium{% else %}podiums{% endif %}{% if n_out > 0 %} · <b>{{ n_out }}</b> DNF{% endif %} <span>in {{ items.size }} {% if items.size == 1 %}race{% else %}races{% endif %}</span></div>
+            </div>
+            {%- if info %}
+            <div class="season-facts">
+              <div class="season-fact is-max"><em>Max Verstappen</em><b>P{{ info.max_position }}</b><small>{{ info.max_points }} pts · {{ info.max_wins }} {% if info.max_wins == 1 %}win{% else %}wins{% endif %}</small></div>
+              <div class="season-fact is-rb"><em>Red Bull</em><b>P{{ info.red_bull_position }}</b><small>{{ info.red_bull_points }} pts</small></div>
+              <div class="season-fact"><em>{% if info.final %}Drivers' champion{% else %}Drivers' leader{% endif %}</em><b>{{ info.driver_champion }}</b><small>{{ info.driver_team }}{% if info.driver_points %} · {{ info.driver_points }} pts{% endif %}</small></div>
+              <div class="season-fact"><em>{% if info.final %}Constructors' champion{% else %}Constructors' leader{% endif %}</em><b>{{ info.constructor_champion }}</b><small>{% if info.constructor_points %}{{ info.constructor_points }} pts{% endif %}</small></div>
+            </div>
+            {%- endif %}
             <span class="season-toggle" aria-hidden="true"></span>
           </summary>
-          <div class="sq-grid">
-            {%- for post in items %}{% include post-card.html post=post %}{% endfor %}
+          <div class="race-list">
+            {%- for post in items %}
+            {%- assign res = post.result | default: '' -%}
+            {%- assign rnum = res | remove: 'P' | plus: 0 %}
+            <a class="race-row{% if res == 'P1' %} is-win{% elsif res == 'P2' or res == 'P3' %} is-podium{% elsif rnum >= 4 and rnum <= 10 %} is-points{% elsif res contains 'D' or res == 'NC' %} is-out{% endif %}" href="{{ post.url | relative_url }}">
+              <span class="race-row-round">R{% if post.round < 10 %}0{% endif %}{{ post.round }}</span>
+              <span class="race-row-main"><b>{{ post.gp | replace: 'Grand Prix', 'GP' }}</b><small>{{ post.circuit }}</small></span>
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d" }}</time>
+              <span class="race-row-result">{{ res }}</span>
+            </a>
+            {%- endfor %}
           </div>
         </details>
         {%- endfor %}

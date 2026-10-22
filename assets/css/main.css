@@ -1101,17 +1101,35 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .cat-bar-empty { margin: 0; padding: 0 24px 20px 28px; font-size: 14px; color: var(--muted); }
 .sq-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-.season-group { margin-bottom: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); }
+.season-group { margin-bottom: 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
+.season-group[open] { border-color: var(--line-strong); }
 .season-group > summary {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  padding: 14px 18px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) 14px;
+  align-items: center;
+  gap: 20px 28px;
+  padding: 20px 22px 20px 26px;
   cursor: pointer;
   list-style: none;
+  background: linear-gradient(115deg, color-mix(in srgb, var(--red) 10%, var(--surface)) 0%, var(--surface) 50%);
 }
+.season-group > summary::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); }
 .season-group > summary::-webkit-details-marker { display: none; }
-.season-year { font-size: 22px; font-weight: 700; }
+.season-main { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.season-title { display: flex; align-items: center; gap: 10px; }
+.season-year { font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+.season-status { padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line-strong); font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.season-status.is-live { border-color: var(--red); color: var(--red); }
+.season-strip { display: flex; flex-wrap: wrap; gap: 3px; }
+.strip-cell { width: 14px; height: 14px; border-radius: 3px; background: var(--line-strong); }
+.strip-cell.is-win { background: var(--yellow); }
+.strip-cell.is-podium { background: var(--red); }
+.strip-cell.is-points { background: color-mix(in srgb, var(--text-2) 55%, transparent); }
+.strip-cell.is-out { background: transparent; box-shadow: inset 0 0 0 1.5px var(--muted); }
+.season-tally { font-size: 13px; color: var(--text-2); }
+.season-tally b { color: var(--text); }
+.season-tally span { color: var(--muted); }
 .season-meta { font-size: 14px; color: var(--muted); }
 .season-toggle,
 .map-group-more .tri {
@@ -1122,10 +1140,33 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
   border-top: 8px solid var(--muted);
   transition: transform 0.2s, border-top-color 0.2s;
 }
-.season-toggle { margin-left: auto; transform: rotate(-90deg); }
+.season-toggle { transform: rotate(-90deg); }
 .season-group > summary:hover .season-toggle { border-top-color: var(--red); }
 .season-group[open] .season-toggle { transform: rotate(0deg); border-top-color: var(--red); }
-.season-group > .sq-grid { padding: 0 18px 18px; }
+
+.race-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; padding: 16px 22px 22px 26px; border-top: 1px solid var(--line); }
+.race-row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto 50px;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px 9px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.race-row:hover { text-decoration: none; background: var(--bg-2); border-color: var(--line); }
+.race-row-round { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700; color: var(--muted); }
+.race-row-main { display: flex; flex-direction: column; min-width: 0; }
+.race-row-main b { font-size: 15px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.race-row-main small { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.race-row time { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.race-row-result { justify-self: end; min-width: 46px; padding: 3px 0; border-radius: 6px; background: var(--surface-2); font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; text-align: center; color: var(--text-2); }
+.race-row.is-win .race-row-result { background: var(--yellow); color: #0b1430; }
+.race-row.is-podium .race-row-result { background: var(--red); color: #fff; }
+.race-row.is-points .race-row-result { color: var(--text); }
+.race-row.is-out .race-row-result { background: transparent; box-shadow: inset 0 0 0 1px var(--line-strong); color: var(--muted); }
 
 .map-marker.is-dim { fill: var(--muted); }
 .map-back { margin-bottom: 10px; padding: 0; border: 0; background: none; color: var(--link); font: 600 13px/1.4 "Titillium Web", sans-serif; cursor: pointer; }
@@ -1167,13 +1208,23 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 }
 
 /* Season headers: champions and where Max / Red Bull stand */
-.season-group > summary { flex-wrap: wrap; align-items: center; }
-.season-facts { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; min-width: 0; }
-.season-fact { display: inline-flex; flex-direction: column; padding: 6px 12px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.season-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; min-width: 0; }
+.season-fact { display: flex; flex-direction: column; gap: 1px; min-width: 0; padding: 9px 12px; border-radius: 10px; background: var(--bg-2); border: 1px solid var(--line); line-height: 1.3; }
 .season-fact em { font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-.season-fact small { font-weight: 400; color: var(--text-2); }
-.season-fact.is-max { border-color: color-mix(in srgb, var(--red) 45%, var(--line)); }
-.season-fact.is-rb { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+.season-fact b { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.season-fact small { font-size: 12px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.season-fact.is-max { border-color: color-mix(in srgb, var(--yellow) 55%, var(--line)); }
+.season-fact.is-max b { color: var(--yellow-ink); }
+.season-fact.is-rb { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+@media (max-width: 900px) {
+  .season-group > summary { grid-template-columns: minmax(0, 1fr) 14px; }
+  .season-facts { grid-column: 1 / -1; grid-row: 2; }
+  .race-list { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .race-row { grid-template-columns: 34px minmax(0, 1fr) 46px; }
+  .race-row time { display: none; }
+}
 
 
 /* Driver profile */
