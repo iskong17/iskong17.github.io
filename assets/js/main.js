@@ -72,13 +72,28 @@
       document.querySelectorAll('.race-sub').forEach(function (s) { s.hidden = s.getAttribute('data-sub') !== sub; });
       activate(raceTabs.querySelectorAll('[data-sub]'), 'data-sub', sub);
     }
-    function showTopic(panel, topic) {
+    // Paper reviews also filter by subfield; only subfields used in the current topic get a chip.
+    function showTopic(panel, topic, subfield) {
       var tabs = panel.querySelector('.topic-tabs');
       if (!tabs) return;
-      var cards = panel.querySelectorAll('.sq-card');
+      var cards = panel.querySelectorAll('.sq-card, .paper-row');
+      var chips = panel.querySelectorAll('.subfield-chip');
+      var inTopic = function (c) { return topic === 'all' || c.getAttribute('data-topic') === topic; };
+      var used = {};
+      cards.forEach(function (c) {
+        if (!inTopic(c)) return;
+        (c.getAttribute('data-subfields') || '').split(' ').forEach(function (s) { if (s) used[s] = true; });
+      });
+      if (!subfield || (subfield !== 'all' && !used[subfield])) subfield = 'all';
+      chips.forEach(function (b) {
+        var key = b.getAttribute('data-subfield');
+        b.hidden = key !== 'all' && !used[key];
+      });
+      activate(chips, 'data-subfield', subfield);
       var any = false;
       cards.forEach(function (c) {
-        var show = topic === 'all' || c.getAttribute('data-topic') === topic;
+        var tags = ' ' + (c.getAttribute('data-subfields') || '') + ' ';
+        var show = inTopic(c) && (subfield === 'all' || tags.indexOf(' ' + subfield + ' ') !== -1);
         c.hidden = !show;
         if (show) any = true;
       });
@@ -97,7 +112,7 @@
       var panel = showPanel(parts[0] || 'all');
       if (panel === 'race') showRace(parts[1] || 'seasons');
       var p = document.querySelector('.blog-panel[data-panel="' + panel + '"]');
-      if (p) showTopic(p, parts[1] || 'all');
+      if (p) showTopic(p, parts[1] || 'all', parts[2]);
     }
     function go(hash) {
       history.replaceState(null, '', hash);
@@ -118,6 +133,14 @@
     document.querySelectorAll('.topic-tabs [data-topic]').forEach(function (b) {
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () { go('#' + panel + '/' + b.getAttribute('data-topic')); });
+    });
+    document.querySelectorAll('.subfield-chip').forEach(function (b) {
+      var panel = b.closest('.blog-panel').getAttribute('data-panel');
+      b.addEventListener('click', function () {
+        var topic = (location.hash.replace(/^#/, '').split('/')[1]) || 'all';
+        var sf = b.getAttribute('data-subfield');
+        go('#' + panel + '/' + topic + (sf === 'all' ? '' : '/' + sf));
+      });
     });
     window.addEventListener('hashchange', function () { route(location.hash); });
     route(location.hash);

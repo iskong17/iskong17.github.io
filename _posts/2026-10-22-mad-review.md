@@ -2,6 +2,7 @@
 title: "MAD: Ask the Model Which Modality the Question Needs"
 category: paper-review
 topic: mllm
+subfields: [hallucination, avllm]
 lang: en
 description: Ask the model whether a question needs audio, video, or both, and use the answer to weight each contrastive decoding branch.
 paper:
@@ -11,123 +12,48 @@ paper:
   url: "https://arxiv.org/abs/2601.21181"
 ---
 
-## TL;DR
+## Abstract
 
-Cross-modal hallucination happens when one modality interferes with generation about another, for example when a video of a fishing boat makes the model "hear" a fish splashing. MAD asks the model one extra question: does this question need audio, video, or both? The softmax over those three answers becomes per-branch weights in a four-branch contrastive decoding formula. Contrastive decoding (CD) strength then adapts to each question instead of staying fixed. It needs no training.
+Multimodal LLMs suffer from **cross-modal hallucination**: one modality interferes with generation about another, such as a video making the model "hear" a sound that is not in the audio. The authors argue this is not a representation problem inside each modality. The model fails to control how the modalities influence each other. The question to answer is: *for this question, how much should the model trust audio, and how much video?*
 
-## Problem
-
-- Multimodal LLMs suffer from **cross-modal hallucination**: one modality disturbs generation about another.
-- The authors argue this is not a representation problem inside each modality. The model fails to **control how the modalities influence each other**.
-- So the real question is: *to answer this question, how much should the model trust audio, and how much video?*
-
-Existing CD methods use a fixed contrastive strength $$\alpha_m$$ for every task, whether the question is about sound or about what is on screen.
+Existing contrastive decoding (CD) methods use a fixed contrastive strength for every question. MAD asks the model one extra question: does this question need audio, video, or both? It turns the answer into per-branch weights in a four-branch CD formula. It needs no training.
 
 ## Method
 
-### Preliminaries
-
-The inputs are video, audio, and question tokens:
-
-$$
-X_v = \{x^v_1, \dots, x^v_{n_v}\}, \quad
-X_a = \{x^a_1, \dots, x^a_{n_a}\}, \quad
-X_q = \{x^q_1, \dots, x^q_{n_q}\}
-$$
-
-$$
-y_t \sim p_\theta(y_t \mid X_v, X_a, X_q, y_{<t}) \propto \mathrm{logit}_\theta(y_t \mid X_v, X_a, X_q, y_{<t})
-$$
-
-Contrastive decoding for VLMs, written in terms of a clean and a degraded logit:
-
-$$
-z_{\text{CD}} = (1+\alpha)\, z_{\text{clean}} - \alpha\, z_{\text{degraded}}
-= z_{\text{clean}} + \alpha\,\underbrace{(z_{\text{clean}} - z_{\text{degraded}})}_{\text{contrastive signal}}
-$$
-
-In words, take the original logit and add $$\alpha$$ times the difference that the visual input makes. With $$\alpha = 0$$ it is plain decoding.
+![MAD overview](/images/blog/papers/mad-main.png)
+*MAD in two steps. Step 1 extracts modality weights from a modality query prompt. Step 2 combines four branch logits with those weights. Figure from the paper.*
 
 ### Weighted contrastive decoding
 
-For a modality $$m$$, define the contrastive signal $$\Delta_m$$ as the logit with $$X_m$$ minus the logit with a degraded $$\tilde X_m$$, so that $$\Delta_a = z(A) - z(\tilde A)$$ and $$\Delta_v = z(V) - z(\tilde V)$$:
+For modality $$m$$, the contrastive signal is the logit with $$X_m$$ minus the logit with a degraded $$\tilde X_m$$, for example $$\Delta_a = z(A) - z(\tilde A)$$. MAD splits the contrastive strength into two factors:
 
 $$
-\mathrm{logit}^{(m)}_{\text{CD}}(y_t) = \mathrm{logit}(y_t \mid X_m, X_q, y_{<t}) + \alpha_m \Delta_m
+\mathrm{logit}^{(m)}(y_t) = \mathrm{logit}(y_t \mid X_m, X_q, y_{<t}) + \gamma\, w_m \Delta_m
 $$
 
-MAD splits the strength into two factors:
+Here $$\gamma$$ is the global strength and $$w_m$$ is how important modality $$m$$ is **for this question**.
+
+### Step 1: Modality-adaptive weight extraction (top)
+
+The model gets the input plus a modality query prompt $$X_m$$ asking which modality the question needs. It does not generate an answer. MAD reads the next-token logits of three candidate words and applies a softmax:
 
 $$
-\alpha_m = \gamma \cdot w_m
+[w_{av}, w_v, w_a] = \mathrm{softmax}\big([z_{\text{both}}, z_{\text{video}}, z_{\text{audio}}]\big)
 $$
 
-- $$\gamma$$ is the global contrastive strength.
-- $$w_m$$ is how important modality $$m$$ is **for this question**.
+The weights follow the question type. Averaged over the benchmark, visual questions get $$w_v = 0.565$$, audio questions get $$w_a = 0.482$$, and audio-visual questions get $$w_{av} = 0.464$$.
 
-If $$w_a$$ is large, the term $$\gamma w_a \Delta_a$$ is large, so the audio contrast counts more.
+### Step 2: Modality-adaptive generation (bottom)
 
-### Step 1: Extract modality-adaptive weights
-
-The model gets the input plus a **modality query prompt** $$X_m$$ asking which modality the question needs. It does not generate a full answer. MAD reads the next-token logits for three candidate words:
+Like AVCD, MAD uses four branches: audio-visual $$z_{VA}$$, video-only $$z_{V\tilde A}$$, audio-only $$z_{\tilde V A}$$, and question-only $$z_{\tilde V \tilde A}$$. They form a square, and each edge is one CD term: visual CD with audio present or absent, and audio CD with video present or absent. The terms taken with the other modality present use $$w_{av}$$, and the terms taken with it absent use $$w_v$$ or $$w_a$$. Summing the four terms and collecting coefficients gives Eq. (9) in the figure:
 
 $$
-z_{av} = \mathrm{logit}(\text{both} \mid X_v, X_a, X_q, X_m), \quad
-z_v = \mathrm{logit}(\text{video} \mid \cdot), \quad
-z_a = \mathrm{logit}(\text{audio} \mid \cdot)
+z_{\text{MAD}} = (2 + 2\gamma w_{av})\, z_{VA} + (1 - \gamma w_{av} + \gamma w_a)\, z_{\tilde V A} + (1 - \gamma w_{av} + \gamma w_v)\, z_{V \tilde A} - \gamma (w_v + w_a)\, z_{\tilde V \tilde A}
 $$
 
-$$
-[w_{av}, w_v, w_a] = \mathrm{softmax}([z_{av}, z_v, z_a]), \qquad w_{av} + w_v + w_a = 1
-$$
+In the figure's example, the question asks about a hammer sound. The weights favour audio, the audio-only branch says "No", and MAD flips the original "Yes" to the correct "No".
 
-For an audio question this might give $$[w_{av}, w_v, w_a] = [0.10, 0.05, 0.85]$$. Averaged over the benchmark, the weights do follow the question type:
-
-| Question type | $$w_v$$ | $$w_a$$ | $$w_{av}$$ |
-|---|---|---|---|
-| Visual-related | **0.565** | 0.106 | 0.328 |
-| Audio-related | 0.237 | **0.482** | 0.279 |
-| Audio-visual-related | 0.297 | 0.237 | **0.464** |
-
-### Step 2: Modality-adaptive generation
-
-Write $$z_{m_1 m_2 \dots}$$ for the logit given those modalities, with a tilde for a degraded one. As in AVCD, there are four branches: $$VA,\ \tilde V A,\ V\tilde A,\ \tilde V \tilde A$$. They form a square: removing video moves horizontally, removing audio moves vertically.
-
-$$
-\begin{array}{ccc}
-(V, A) & \xrightarrow{\text{remove video}} & (\tilde V, A) \\
-\downarrow \text{remove audio} & & \downarrow \text{remove audio} \\
-(V, \tilde A) & \xrightarrow{\text{remove video}} & (\tilde V, \tilde A)
-\end{array}
-$$
-
-Each edge of the square is one CD term. MAD adds all four:
-
-$$
-\begin{aligned}
-\mathrm{logit}(y_t) =\;& \underbrace{(1+\alpha_{av}) z_{VA} - \alpha_{av} z_{\tilde V A}}_{\text{visual CD, audio present}}
-+ \underbrace{(1+\alpha_{av}) z_{VA} - \alpha_{av} z_{V \tilde A}}_{\text{audio CD, video present}} \\
-&+ \underbrace{(1+\alpha_{v}) z_{V\tilde A} - \alpha_{v} z_{\tilde V \tilde A}}_{\text{visual CD, audio absent}}
-+ \underbrace{(1+\alpha_{a}) z_{\tilde V A} - \alpha_{a} z_{\tilde V \tilde A}}_{\text{audio CD, video absent}}
-\end{aligned}
-$$
-
-The two CD terms taken with the other modality present use $$\alpha_{av}$$. The two taken with the other modality absent use the unimodal weights. Substituting $$\alpha_{av} = \gamma w_{av}$$, $$\alpha_v = \gamma w_v$$, $$\alpha_a = \gamma w_a$$ and collecting coefficients:
-
-$$
-\begin{aligned}
-z_{\text{MAD}} =\;& (2 + 2\gamma w_{av})\, z_{VA}
-+ (1 - \gamma w_{av} + \gamma w_a)\, z_{\tilde V A} \\
-&+ (1 - \gamma w_{av} + \gamma w_v)\, z_{V \tilde A}
-- \gamma (w_v + w_a)\, z_{\tilde V \tilde A}
-\end{aligned}
-$$
-
-### Pipeline
-
-**Question → self-assessment → $$(w_{av}, w_v, w_a)$$ → adaptive CD coefficients → $$z_{\text{MAD}}$$**
-
-## Experiments
+## Main Experiments
 
 CMM reports accuracy on visual-dominant, audio-dominant, and language-dominant subsets. AVHBench reports accuracy on video-driven audio hallucination and audio-driven video hallucination.
 
@@ -142,25 +68,16 @@ CMM reports accuracy on visual-dominant, audio-dominant, and language-dominant s
 | + AVCD | 66.3 | 72.8 | 81.0 | 73.3 | 75.8 | 79.7 | 77.8 |
 | **+ MAD** | **76.8** | **84.3** | 83.3 | **81.4** | **78.7** | **84.4** | **81.6** |
 
-The biggest jump is on CMM visual-dominant questions: +10.5 for VideoLLaMA2-AV and +12.3 for Qwen2.5-Omni. AVCD barely moves that column.
+- The biggest jump is on CMM visual-dominant questions: +10.5 for VideoLLaMA2-AV and +12.3 for Qwen2.5-Omni. AVCD barely moves that column.
+- Weighting by the full softmax (81.3) beats equal weights (79.4) and putting all weight on the argmax (78.7).
+- MAD does not hurt general audio-visual understanding on VideoLLaMA2-AV: OmniBench 36.3 → 36.8, WorldSense 23.3 → 25.6, MUSIC-AVQA 78.1 → 79.1.
 
-**How to fuse the weights** (VideoLLaMA2-AV, CMM). Weighting by the full softmax beats using equal weights or putting all weight on the argmax.
+## Limitations
 
-| Fusion | Visual Dom. | Audio Dom. | Lang. Dom. | Overall |
-|---|---|---|---|---|
-| Baseline | 71.8 | 80.0 | 68.8 | 73.5 |
-| Uniform | 77.5 | 83.3 | **77.5** | 79.4 |
-| Argmax | 78.5 | 80.5 | 77.0 | 78.7 |
-| **Weighted** | **82.3** | **84.3** | **77.5** | **81.3** |
+- **Cost.** Each token needs the four branches, plus one extra pass with the modality query prompt.
+- **Relevance is not agreement.** The weights say which modality is *relevant*, not whether the unimodal branches agree with the joint prediction. Two relevant modalities can still conflict, and MAD cannot detect that.
+- **The self-assessment must be right.** If the model misjudges which modality a question needs, the weights push the decoding the wrong way.
 
-**Which weights matter.** Dropping any one of $$w_a, w_v, w_{av}$$ costs 2.4–3.3 points overall (78.0, 78.3, and 78.9 vs. 81.3).
+## My Thoughts
 
-**General benchmarks.** On VideoLLaMA2-AV, MAD does not hurt general audio-visual understanding: OmniBench 36.3 → 36.8, WorldSense 23.3 → 25.6, MUSIC-AVQA 78.1 → 79.1.
-
-## Thoughts
-
-- Compared with [AVCD]({% post_url 2026-10-22-avcd-review %}), the branch structure is the same four logits. What changes is **where the weights come from**. AVCD uses attention dominance, which says what the model *is* looking at. MAD uses a self-assessment prompt, which says what the question *needs*. The visual-dominant column suggests that this difference matters a lot.
-- The self-assessment costs one extra forward pass with the modality query prompt, on top of the four branches.
-- The weights only say which modality is *relevant*. They do not say whether the audio-only and video-only branches agree with the joint prediction. Two relevant modalities can still conflict, and MAD has no way to detect that.
-
-<!-- TODO: add your own thoughts -->
+<!-- TODO -->

@@ -1,0 +1,19 @@
+{%- assign p = include.post -%}
+{%- assign cat = site.data.categories | where: "key", "paper-review" | first -%}
+{%- assign topic = cat.topics | where: "key", p.topic | first -%}
+<article class="paper-row" data-topic="{{ p.topic }}" data-subfields="{{ p.subfields | join: ' ' }}">
+  <div class="paper-row-main">
+    <span class="paper-row-kicker">{% if topic %}{{ topic.label }} · {% endif %}<time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time></span>
+    <h3 class="paper-row-title">{% if p.paper.url %}<a href="{{ p.paper.url }}" target="_blank" rel="noopener">{{ p.paper.title | default: p.title }}</a>{% else %}{{ p.paper.title | default: p.title }}{% endif %}</h3>
+    {%- if p.paper.authors %}<p class="paper-row-authors">{{ p.paper.authors }}</p>{% endif %}
+  </div>
+  <div class="paper-row-side">
+    {%- if p.paper.venue %}<span class="paper-row-venue">{{ p.paper.venue }}</span>{% endif %}
+    {%- if p.subfields %}
+    <span class="paper-row-tags">
+      {%- for key in p.subfields %}{% assign sf = cat.subfields | where: "key", key | first %}<span class="subfield-tag">{{ sf.label | default: key }}</span>{% endfor -%}
+    </span>
+    {%- endif %}
+    <a class="paper-row-review" href="{{ p.url | relative_url }}">Review {% include icon.html name="arrow" %}</a>
+  </div>
+</article>

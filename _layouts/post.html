@@ -12,6 +12,7 @@ layout: default
         {%- assign topic = cat.topics | where: "key", page.topic | first %}
         <span class="post-cat cat-{{ page.category | default: 'study' }}">{{ cat.short | default: cat.label | default: page.category }}</span>
         {%- if topic %}<span class="post-topic">{{ topic.label }}</span>{% endif %}
+        {%- for key in page.subfields %}{% assign sf = cat.subfields | where: "key", key | first %}<span class="subfield-tag">{{ sf.label | default: key }}</span>{% endfor %}
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
         <span>· {{ minutes }} min read</span>
       </div>

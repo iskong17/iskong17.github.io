@@ -18,6 +18,13 @@
     - { key: cv, label: "CV" }
     - { key: mllm, label: "MLLM" }
     - { key: ml, label: "ML" }
+  # Finer tags for paper reviews. A post lists the keys that apply in `subfields:`.
+  subfields:
+    - { key: tta, label: "TTA" }
+    - { key: 3dpc, label: "3DPC" }
+    - { key: hallucination, label: "Hallucination" }
+    - { key: vlm, label: "VLM" }
+    - { key: avllm, label: "AVLLM" }
 - key: gallery
   label: "Gallery"
   short: "Gallery"

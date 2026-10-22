@@ -74,7 +74,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       </div>
     </div>
 
-    <!-- Study / Gallery -->
+    <!-- Study / Paper Review / Gallery -->
     {%- for c in site.data.categories %}
     {%- if c.key != 'race' %}
     {%- assign posts = site.posts | where: "category", c.key -%}
@@ -93,7 +93,19 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         <aside class="map-panel" id="gallery-panel" aria-live="polite"></aside>
       </div>
       {%- endif %}
-      {%- if posts.size > 0 %}
+      {%- if c.subfields and posts.size > 0 %}
+      <div class="subfield-filter" role="group" aria-label="{{ c.label }} subfields">
+        <button type="button" class="subfield-chip is-active" data-subfield="all">All</button>
+        {%- for sf in c.subfields %}
+        <button type="button" class="subfield-chip" data-subfield="{{ sf.key }}">{{ sf.label }}</button>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+      {%- if posts.size > 0 and c.key == 'paper-review' %}
+      <div class="paper-list">
+        {%- for post in posts %}{% include paper-row.html post=post %}{% endfor %}
+      </div>
+      {%- elsif posts.size > 0 %}
       <div class="sq-grid">
         {%- for post in posts %}{% include post-card.html post=post %}{% endfor %}
       </div>

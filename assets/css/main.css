@@ -780,6 +780,68 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .sq-driver .sq-title { font-size: 20px; }
 .sq-driver.is-max { border-color: color-mix(in srgb, var(--team) 60%, transparent); }
 
+/* ---------- Paper review list ---------- */
+.subfield-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 16px; }
+.subfield-chip {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+.subfield-chip:hover { color: var(--text); border-color: var(--blue); }
+.subfield-chip.is-active { background: var(--blue); border-color: var(--blue); color: #fff; }
+.subfield-tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--blue) 16%, transparent);
+  color: var(--text);
+}
+
+.paper-list { display: flex; flex-direction: column; gap: 10px; }
+.paper-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 24px;
+  align-items: center;
+  padding: 16px 20px 16px 24px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.paper-row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--blue); }
+.paper-row:hover { border-color: var(--line-strong); }
+.paper-row-kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.paper-row-title { margin: 4px 0 0; font-size: 18px; line-height: 1.35; }
+.paper-row-title a { position: relative; z-index: 1; color: var(--text); }
+.paper-row-title a:hover { color: var(--blue); }
+.paper-row-authors { margin: 4px 0 0; font-size: 14px; color: var(--text-2); line-height: 1.5; }
+.paper-row-side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.paper-row-venue { font-size: 14px; font-weight: 700; color: var(--text); white-space: nowrap; }
+.paper-row-tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.paper-row-review { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-2); }
+.paper-row-review .icon { width: 14px; height: 14px; }
+/* The whole bar opens the review; only the paper title goes to arXiv. */
+.paper-row-review::after { content: ""; position: absolute; inset: 0; }
+.paper-row:hover .paper-row-review { color: var(--blue); text-decoration: none; }
+@media (max-width: 640px) {
+  .paper-row { grid-template-columns: minmax(0, 1fr); padding: 14px 16px 14px 20px; }
+  .paper-row-side { flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .paper-row-tags { justify-content: flex-start; }
+}
+
 /* ---------- Circuit and driver pages ---------- */
 .post-topic { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--line-strong); color: var(--text-2); }
 a.post-cat:hover { text-decoration: none; opacity: 0.9; }
