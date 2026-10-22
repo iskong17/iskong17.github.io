@@ -4,11 +4,11 @@
 - key: study
   label: "Study"
   short: "Study"
-  blurb: "Deep Learning · Linear Algebra · Computer Vision · Algorithm"
+  blurb: "Deep Learning · Linear Algebra · Machine Learning · Algorithm"
   topics:
     - { key: deep-learning, label: "Deep Learning" }
     - { key: linear-algebra, label: "Linear Algebra" }
-    - { key: computer-vision, label: "Computer Vision" }
+    - { key: machine-learning, label: "Machine Learning" }
     - { key: algorithm, label: "Algorithm" }
 - key: paper-review
   label: "Paper Review"

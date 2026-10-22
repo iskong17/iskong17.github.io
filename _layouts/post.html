@@ -27,9 +27,10 @@ layout: default
       </dl>
       {%- endif %}
 
-      {%- if page.slides or page.problems %}
+      {%- if page.slides or page.notes or page.problems %}
       <dl class="race-strip">
         {%- if page.slides %}<div><dt>Slides</dt><dd><a href="{{ page.slides }}" target="_blank" rel="noopener">Lecture slides (PDF)</a></dd></div>{% endif %}
+        {%- if page.notes %}<div><dt>Notes</dt><dd><a href="{{ page.notes }}" target="_blank" rel="noopener">{{ page.notes_label | default: "Lecture notes (PDF)" }}</a></dd></div>{% endif %}
         {%- if page.problems %}<div><dt>Problems</dt><dd><a href="{{ page.problems }}" target="_blank" rel="noopener">Worksheet (PDF)</a></dd></div>{% endif %}
         {%- if page.solutions %}<div><dt>Solutions</dt><dd><a href="{{ page.solutions }}" target="_blank" rel="noopener">Solutions (PDF)</a></dd></div>{% endif %}
       </dl>
