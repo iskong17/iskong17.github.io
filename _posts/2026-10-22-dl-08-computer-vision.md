@@ -3,6 +3,8 @@ title: "Deep Learning 8: Computer Vision"
 date: 2026-10-22 11:08:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 8
 card_title: "Lecture 8: Computer Vision"
 card_desc: "Object localization · IoU and sliding windows · YOLO and Faster R-CNN · Transpose convolution · U-Net"
 lang: ko

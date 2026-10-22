@@ -4,6 +4,8 @@ date: 2026-10-22 12:01:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 1
 card_title: "Discussion 1: Introduction & Logistics"
 card_desc: "Train/validation/test splits · Bayes' theorem · Estimators · Sigmoid and softmax derivatives · Risk"
 lang: ko

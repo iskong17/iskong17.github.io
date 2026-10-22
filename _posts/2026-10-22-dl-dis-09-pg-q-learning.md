@@ -4,6 +4,8 @@ date: 2026-10-22 12:09:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 9
 card_title: "Discussion 9: Policy Gradients & Q-Learning"
 card_desc: "Score function estimator · Reward-to-go and baselines · Bellman equations · Actor-critic · Q-learning and exploration"
 lang: ko

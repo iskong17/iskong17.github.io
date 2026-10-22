@@ -3,6 +3,8 @@ title: "Deep Learning 18: Latent Variable Models"
 date: 2026-10-22 11:18:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 18
 card_title: "Lecture 18: Latent Variable Models"
 card_desc: "Variational inference · ELBO · Reparameterization trick · VAE · Normalizing flows"
 lang: ko

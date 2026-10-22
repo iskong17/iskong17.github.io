@@ -3,6 +3,8 @@ title: "Deep Learning 7: Initialization and Batch Normalization"
 date: 2026-10-22 11:07:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 7
 card_title: "Lecture 7: Initialization and Batch Normalization"
 card_desc: "Standardization · Batch normalization · Xavier and He initialization · Gradient clipping · Ensembles and dropout"
 lang: ko

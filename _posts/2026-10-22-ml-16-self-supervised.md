@@ -3,6 +3,8 @@ title: "Machine Learning 16: Self-Supervised Learning"
 date: 2026-10-22 13:16:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 16
 card_title: "Lecture 16: Self-Supervised Learning"
 card_desc: "Foundation models · Pretraining and adaptation · Linear probing vs. finetuning · Contrastive learning (SimCLR) · Low-rank adaptation (LoRA)"
 lang: ko

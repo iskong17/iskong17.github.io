@@ -843,6 +843,89 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
   .paper-row-tags { justify-content: flex-start; }
 }
 
+/* ---------- Study series ---------- */
+/* Each Study topic has its own accent, used by cards, series headers and the in-post series box. */
+.topic-linear-algebra { --accent: var(--blue); }
+.topic-deep-learning { --accent: var(--purple); }
+.topic-machine-learning { --accent: var(--green); }
+.topic-algorithm { --accent: var(--yellow-ink); }
+
+.lecture-card {
+  --accent-soft: color-mix(in srgb, var(--accent, var(--blue)) 14%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--accent, var(--blue)) 9%, var(--surface)) 0%, var(--surface) 60%);
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.lecture-card::before { background: var(--accent, var(--blue)); }
+.lecture-card:hover { border-color: color-mix(in srgb, var(--accent, var(--blue)) 55%, transparent); box-shadow: 0 12px 28px -18px var(--accent, var(--blue)); }
+.lecture-card-top { position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.lecture-kind { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+.lecture-num { font-size: 42px; font-weight: 800; line-height: 0.9; letter-spacing: -1px; color: var(--accent, var(--blue)); font-variant-numeric: tabular-nums; }
+.lecture-card .sq-title { margin-top: 12px; font-size: 17px; -webkit-line-clamp: 3; }
+.lecture-tags { position: relative; list-style: none; margin: auto 0 0; padding: 10px 0 0; display: flex; flex-wrap: wrap; gap: 4px; max-height: 58px; overflow: hidden; }
+.lecture-tags li { max-width: 100%; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--text-2); font-size: 11px; line-height: 1.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lecture-tags li.is-more { background: transparent; color: var(--muted); padding-left: 2px; }
+
+.series-block { margin-bottom: 44px; }
+.series-head {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 18px 22px 18px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 16%, var(--surface)) 0%, var(--surface) 65%);
+  overflow: hidden;
+}
+.series-head::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+.series-kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+.series-head h2 { margin: 4px 0 2px; font-size: 24px; line-height: 1.25; }
+.series-head p { margin: 0; font-size: 14px; color: var(--text-2); }
+.series-head-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+.series-count { padding: 4px 10px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line); font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.series-count b { color: var(--text); }
+.series-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-2); white-space: nowrap; }
+.series-link .icon { width: 14px; height: 14px; }
+.series-link:hover { color: var(--accent); text-decoration: none; }
+
+.topic-bars .cat-bar[class*="topic-"] { border-left-color: var(--accent); }
+.topic-bars .cat-bar-head:hover .icon { color: var(--accent); }
+.topic-bars .cat-bar-posts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* In-post series box and series-aware previous / next */
+.series-wrap { max-width: 760px; margin: 0 auto; padding: 28px 24px 0; }
+.series-box { position: relative; padding: 14px 18px 12px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.series-box::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+.series-box-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.series-box-title { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.series-box-title b { font-size: 16px; line-height: 1.3; }
+.series-pos { font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+.series-pos small { font-size: 13px; color: var(--muted); }
+.series-progress { height: 4px; margin: 12px 0 4px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.series-progress span { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+.series-toc summary { display: inline-flex; align-items: center; gap: 6px; padding-top: 8px; font-size: 13px; font-weight: 700; color: var(--text-2); cursor: pointer; list-style: none; }
+.series-toc summary::-webkit-details-marker { display: none; }
+.series-toc summary::before { content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; }
+.series-toc[open] summary::before { transform: rotate(45deg); }
+.series-toc summary:hover { color: var(--text); }
+.series-toc ol { list-style: none; margin: 10px 0 4px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 16px; max-height: 380px; overflow-y: auto; }
+.series-toc li a { display: flex; gap: 10px; padding: 6px 8px; border-radius: 6px; color: var(--text-2); font-size: 14px; line-height: 1.4; }
+.series-toc li a:hover { background: var(--surface-2); color: var(--text); text-decoration: none; }
+.series-toc .toc-num { flex-shrink: 0; min-width: 20px; text-align: right; font-family: "JetBrains Mono", monospace; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.series-toc li.is-current a { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--text); font-weight: 700; }
+.series-toc li.is-current .toc-num { color: var(--accent); }
+.series-nav a:hover { border-color: var(--accent); }
+.series-nav small { color: var(--accent); }
+
+@media (max-width: 760px) {
+  .series-head { flex-direction: column; align-items: flex-start; }
+  .series-head-meta { flex-direction: row; align-items: center; }
+  .topic-bars .cat-bar-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .series-toc ol { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* ---------- Circuit and driver pages ---------- */
 .post-topic { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--line-strong); color: var(--text-2); }
 a.post-cat:hover { text-decoration: none; opacity: 0.9; }

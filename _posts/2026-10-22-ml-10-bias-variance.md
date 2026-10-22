@@ -3,6 +3,8 @@ title: "Machine Learning 10: Bias-Variance and Regularization"
 date: 2026-10-22 13:10:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 10
 card_title: "Lecture 10: Bias-Variance and Regularization"
 card_desc: "Bias-variance tradeoff · Double descent · Uniform convergence · Regularization · Implicit regularization"
 lang: ko

@@ -3,6 +3,8 @@ title: "Deep Learning 20: Adversarial Examples"
 date: 2026-10-22 11:20:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 20
 card_title: "Lecture 20: Adversarial Examples"
 card_desc: "Distribution shift · Calibration · Linear models hypothesis · FGSM · Adversarial training"
 lang: ko

@@ -3,6 +3,8 @@ title: "Linear Algebra 1: Vectors, Matrices, and Linear Systems"
 date: 2026-10-22 10:01:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 1
 card_title: "Lecture 1: Linear Systems"
 card_desc: "Vector and matrix notation · Ax = b · Identity and inverse · Rectangular systems"
 lang: ko

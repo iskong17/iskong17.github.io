@@ -3,6 +3,8 @@ title: "Algorithms 6: Binary Trees, Part 1"
 date: 2026-10-22 14:06:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 6
 card_title: "Lecture 6: Binary Trees, Part 1"
 card_desc: "Binary tree and traversal order · Successor and predecessor · Insert and delete in O(h) · Binary search tree · Subtree size augmentation"
 lang: ko

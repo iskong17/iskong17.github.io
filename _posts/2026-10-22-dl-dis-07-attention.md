@@ -4,6 +4,8 @@ date: 2026-10-22 12:07:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 7
 card_title: "Discussion 7: Attention & Transformers"
 card_desc: "Luong attention · QKV attention in matrix form · Scaled dot product · Transformer complexity"
 lang: ko

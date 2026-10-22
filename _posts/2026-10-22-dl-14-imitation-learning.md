@@ -3,6 +3,8 @@ title: "Deep Learning 14: Imitation Learning"
 date: 2026-10-22 11:14:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 14
 card_title: "Lecture 14: Imitation Learning"
 card_desc: "Prediction vs. control · Behavioral cloning · Distributional shift · Multimodal policies · DAgger"
 lang: ko

@@ -50,6 +50,35 @@ layout: default
     </div>
   </header>
 
+  {%- if page.series %}
+  {%- assign series = site.data.series | where: "key", page.series | first -%}
+  {%- assign series_posts = site.posts | where: "series", page.series | sort: "lecture" -%}
+  {%- assign series_kind = series.prefix | default: "Lecture" -%}
+  {%- for p in series_posts %}{% if p.url == page.url %}{% assign series_idx = forloop.index0 %}{% endif %}{% endfor -%}
+  {%- assign series_pos = series_idx | plus: 1 -%}
+  <div class="series-wrap">
+    <nav class="series-box topic-{{ page.topic }}" aria-label="{{ series.name }}">
+      <div class="series-box-head">
+        <div class="series-box-title">
+          <span class="series-kicker">Series</span>
+          <b>{{ series.name }}</b>
+        </div>
+        <span class="series-pos">{{ series_pos }} <small>/ {{ series_posts.size }}</small></span>
+      </div>
+      <div class="series-progress" aria-hidden="true"><span style="width: {{ series_pos | times: 100 | divided_by: series_posts.size }}%"></span></div>
+      <details class="series-toc">
+        <summary>All {% if series_kind == "Discussion" %}discussions{% else %}lectures{% endif %}</summary>
+        <ol>
+          {%- for p in series_posts %}
+          {%- assign p_prefix = series_kind | append: " " | append: p.lecture | append: ": " %}
+          <li{% if p.url == page.url %} class="is-current" aria-current="page"{% endif %}><a href="{{ p.url | relative_url }}"><span class="toc-num">{{ p.lecture }}</span><span>{{ p.card_title | remove_first: p_prefix }}</span></a></li>
+          {%- endfor %}
+        </ol>
+      </details>
+    </nav>
+  </div>
+  {%- endif %}
+
   <div class="post-body">
     {{ content }}
     {%- if page.auto %}
@@ -57,6 +86,22 @@ layout: default
     {%- endif %}
   </div>
 
+  {%- if page.series %}
+  {%- assign prev_idx = series_idx | minus: 1 -%}
+  {%- assign next_idx = series_idx | plus: 1 -%}
+  <nav class="post-nav series-nav topic-{{ page.topic }}" aria-label="{{ series.name }}">
+    {%- if series_idx > 0 %}
+    {%- assign sp_prev = series_posts[prev_idx] -%}
+    {%- assign prev_prefix = series_kind | append: " " | append: sp_prev.lecture | append: ": " %}
+    <a class="prev" href="{{ sp_prev.url | relative_url }}"><small>← {{ series_kind }} {{ sp_prev.lecture }}</small>{{ sp_prev.card_title | remove_first: prev_prefix }}</a>
+    {%- endif %}
+    {%- if next_idx < series_posts.size %}
+    {%- assign sp_next = series_posts[next_idx] -%}
+    {%- assign next_prefix = series_kind | append: " " | append: sp_next.lecture | append: ": " %}
+    <a class="next" href="{{ sp_next.url | relative_url }}"><small>{{ series_kind }} {{ sp_next.lecture }} →</small>{{ sp_next.card_title | remove_first: next_prefix }}</a>
+    {%- endif %}
+  </nav>
+  {%- else %}
   <nav class="post-nav" aria-label="More posts">
     {%- if page.previous %}
     <a class="prev" href="{{ page.previous.url | relative_url }}"><small>Previous</small>{{ page.previous.title }}</a>
@@ -65,4 +110,5 @@ layout: default
     <a class="next" href="{{ page.next.url | relative_url }}"><small>Next</small>{{ page.next.title }}</a>
     {%- endif %}
   </nav>
+  {%- endif %}
 </article>

@@ -3,6 +3,8 @@ title: "Deep Learning 12: Transformers"
 date: 2026-10-22 11:12:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 12
 card_title: "Lecture 12: Transformers"
 card_desc: "Self-attention · Positional encoding · Multi-head attention · Masked decoding · Layer normalization"
 lang: ko

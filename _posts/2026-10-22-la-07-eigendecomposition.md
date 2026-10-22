@@ -3,6 +3,8 @@ title: "Linear Algebra 7: Eigenvalues and Diagonalization"
 date: 2026-10-22 10:07:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 7
 card_title: "Lecture 7: Eigendecomposition"
 card_desc: "Eigenvalues and eigenvectors · Characteristic equation · Eigenspace · Diagonalization"
 lang: ko

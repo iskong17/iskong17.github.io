@@ -3,6 +3,8 @@ title: "Algorithms 13: Dijkstra"
 date: 2026-10-22 14:13:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 13
 card_title: "Lecture 13: Dijkstra"
 card_desc: "Non-negative edge weights · Changeable priority queue · Dijkstra's algorithm · Correctness proof · Heap choices"
 lang: ko

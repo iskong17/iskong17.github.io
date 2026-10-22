@@ -14,6 +14,8 @@
     <span class="sq-sub">Max Verstappen</span>
   </div>
 </a>
+{%- elsif p.series -%}
+{%- include lecture-card.html post=p -%}
 {%- else -%}
 {%- assign topic = cat.topics | where: "key", p.topic | first -%}
 <a class="sq-card cat-{{ cat_key }}{% if p.image %} has-image{% endif %}" href="{{ p.url | relative_url }}" data-category="{{ cat_key }}" data-topic="{{ p.topic }}"{% if p.image %} style="--bg: url('{{ p.image | relative_url }}')"{% endif %}>

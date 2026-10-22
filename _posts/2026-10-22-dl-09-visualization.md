@@ -3,6 +3,8 @@ title: "Deep Learning 9: Visualization and Style Transfer"
 date: 2026-10-22 11:09:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 9
 card_title: "Lecture 9: Visualization and Style Transfer"
 card_desc: "Filter and activation visualization · Guided backpropagation · Activation maximization · DeepDream · Neural style transfer"
 lang: ko

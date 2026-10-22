@@ -3,6 +3,8 @@ title: "Machine Learning 20: Model-Based RL and Value Function Approximation"
 date: 2026-10-22 13:20:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 20
 card_title: "Lecture 20: Model-Based RL and Value Function Approximation"
 card_desc: "Continuous state MDPs · Discretization and the curse of dimensionality · Learned simulators · Fitted value iteration"
 lang: ko

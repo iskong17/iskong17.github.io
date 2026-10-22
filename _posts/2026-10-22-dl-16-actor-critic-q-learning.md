@@ -3,6 +3,8 @@ title: "Deep Learning 16: Actor-Critic and Q-Learning"
 date: 2026-10-22 11:16:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 16
 card_title: "Lecture 16: Actor-Critic and Q-Learning"
 card_desc: "Value functions and advantage · Actor-critic · Fitted Q-iteration · Replay buffer · Target network (DQN)"
 lang: ko

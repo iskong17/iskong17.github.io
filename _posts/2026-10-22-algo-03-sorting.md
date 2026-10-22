@@ -3,6 +3,8 @@ title: "Algorithms 3: Sets and Sorting"
 date: 2026-10-22 14:03:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 3
 card_title: "Lecture 3: Sets and Sorting"
 card_desc: "Sorted array and binary search · Selection sort · Insertion sort · Merge sort · Solving recurrences"
 lang: ko

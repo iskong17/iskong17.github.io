@@ -3,6 +3,8 @@ title: "Deep Learning 21: Meta-Learning"
 date: 2026-10-22 11:21:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 21
 card_title: "Lecture 21: Meta-Learning"
 card_desc: "Few-shot learning · Black-box meta-learning · Prototypical networks · MAML · Meta-RL"
 lang: ko

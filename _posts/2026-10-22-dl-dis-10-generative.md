@@ -4,6 +4,8 @@ date: 2026-10-22 12:10:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 10
 card_title: "Discussion 10: Generative Models"
 card_desc: "PixelCNN vs PixelRNN · ELBO derivation · Reparameterization · Normalizing flows · Real-NVP Jacobian"
 lang: ko

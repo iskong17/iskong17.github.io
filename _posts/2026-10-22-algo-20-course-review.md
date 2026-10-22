@@ -3,6 +3,8 @@ title: "Algorithms 20: Course Review"
 date: 2026-10-22 14:20:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 20
 card_title: "Lecture 20: Course Review"
 card_desc: "Course goals · Polynomial vs. pseudopolynomial · Reduce or design recursively · Next steps in algorithms"
 lang: ko

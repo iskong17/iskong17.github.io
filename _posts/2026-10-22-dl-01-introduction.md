@@ -3,6 +3,8 @@ title: "Deep Learning 1: Introduction"
 date: 2026-10-22 11:01:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 1
 card_title: "Lecture 1: Introduction"
 card_desc: "Representation learning · Shallow vs. deep learning · Data, models, compute · Inductive bias"
 lang: ko

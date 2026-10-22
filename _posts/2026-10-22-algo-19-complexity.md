@@ -3,6 +3,8 @@ title: "Algorithms 19: Complexity"
 date: 2026-10-22 14:19:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 19
 card_title: "Lecture 19: Complexity"
 card_desc: "Decision problems · Decidability · P, NP, EXP, R · Reductions · NP-hardness and NP-completeness"
 lang: ko

@@ -3,6 +3,8 @@ title: "Linear Algebra 6: Orthogonal Projection, Gram-Schmidt, and QR"
 date: 2026-10-22 10:06:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 6
 card_title: "Lecture 6: Gram-Schmidt and QR"
 card_desc: "Orthonormal basis · Orthogonal projection · Gram-Schmidt · QR factorization"
 lang: ko

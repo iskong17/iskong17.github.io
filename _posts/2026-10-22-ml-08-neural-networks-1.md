@@ -3,6 +3,8 @@ title: "Machine Learning 8: Neural Networks 1"
 date: 2026-10-22 13:08:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 8
 card_title: "Lecture 8: Neural Networks 1"
 card_desc: "Non-linear models · Mini-batch SGD · Fully-connected networks · Activation functions · Vectorization"
 lang: ko

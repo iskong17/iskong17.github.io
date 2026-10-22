@@ -3,6 +3,8 @@ title: "Algorithms 1: Algorithms and Computation"
 date: 2026-10-22 14:01:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 1
 card_title: "Lecture 1: Algorithms and Computation"
 card_desc: "Problems and algorithms · Correctness by induction · Asymptotic notation · Word-RAM · Data structure interfaces"
 lang: ko

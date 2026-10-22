@@ -3,6 +3,8 @@ title: "Algorithms 2: Data Structures and Dynamic Arrays"
 date: 2026-10-22 14:02:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 2
 card_title: "Lecture 2: Data Structures and Dynamic Arrays"
 card_desc: "Sequence and Set interfaces · Array · Linked list · Dynamic array · Amortized analysis"
 lang: ko

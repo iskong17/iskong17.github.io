@@ -3,6 +3,8 @@ title: "Linear Algebra 3: Linear Independence, Basis, and Rank"
 date: 2026-10-22 10:03:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 3
 card_title: "Lecture 3: Basis and Rank"
 card_desc: "Linear independence · Subspace · Basis · Dimension · Rank"
 lang: ko

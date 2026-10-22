@@ -4,6 +4,8 @@ date: 2026-10-22 12:02:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 2
 card_title: "Discussion 2: Matrix Calculus & Optimization"
 card_desc: "Bias-variance decomposition · Ridge regression · Jacobians and chain rule · Matrix gradients · Momentum and adaptive methods"
 lang: ko

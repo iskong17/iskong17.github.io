@@ -3,6 +3,8 @@ title: "Machine Learning 6: Naive Bayes and Laplace Smoothing"
 date: 2026-10-22 13:06:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 6
 card_title: "Lecture 6: Naive Bayes and Laplace Smoothing"
 card_desc: "Naive Bayes classifier · Zero-probability problem · Laplace smoothing · Bernoulli vs. multinomial event models"
 lang: ko

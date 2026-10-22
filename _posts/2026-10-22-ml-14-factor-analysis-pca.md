@@ -3,6 +3,8 @@ title: "Machine Learning 14: Factor Analysis and PCA"
 date: 2026-10-22 13:14:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 14
 card_title: "Lecture 14: Factor Analysis and PCA"
 card_desc: "Singular covariance when d ≫ n · Gaussian marginals and conditionals · Factor analysis model · EM for factor analysis · Principal components"
 lang: ko

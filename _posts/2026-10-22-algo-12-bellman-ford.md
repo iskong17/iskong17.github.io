@@ -3,6 +3,8 @@ title: "Algorithms 12: Bellman-Ford"
 date: 2026-10-22 14:12:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 12
 card_title: "Lecture 12: Bellman-Ford"
 card_desc: "Simple shortest paths · k-edge distance · Negative cycle witness · Graph duplication · Bellman-Ford"
 lang: ko

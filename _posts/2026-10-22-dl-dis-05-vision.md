@@ -4,6 +4,8 @@ date: 2026-10-22 12:05:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 5
 card_title: "Discussion 5: Review of Vision Problems"
 card_desc: "Localization, detection, segmentation · Mean average precision · Transpose convolution · U-Net · Style transfer"
 lang: ko

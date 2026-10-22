@@ -3,6 +3,8 @@ title: "Deep Learning 17: Generative Models"
 date: 2026-10-22 11:17:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 17
 card_title: "Lecture 17: Generative Models"
 card_desc: "Autoregressive models (PixelRNN, PixelCNN) · Autoencoders · Sparse and denoising AEs · Latent variable models"
 lang: ko

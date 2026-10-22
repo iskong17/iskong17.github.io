@@ -3,6 +3,8 @@ title: "Machine Learning 3: Weighted Least Squares, Logistic Regression, Newton'
 date: 2026-10-22 13:03:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 3
 card_title: "Lecture 3: Weighted Least Squares, Logistic Regression, Newton's Method"
 card_desc: "Probabilistic interpretation of least squares · Locally weighted regression · Logistic regression · Perceptron · Newton's method"
 lang: ko

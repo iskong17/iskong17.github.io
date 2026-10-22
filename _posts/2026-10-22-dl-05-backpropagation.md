@@ -3,6 +3,8 @@ title: "Deep Learning 5: Backpropagation"
 date: 2026-10-22 11:05:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 5
 card_title: "Lecture 5: Backpropagation"
 card_desc: "Computation graphs · Learned features · Activation functions · Chain rule · Backpropagation recipes"
 lang: ko

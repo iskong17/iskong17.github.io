@@ -3,6 +3,8 @@ title: "Algorithms 11: Weighted Shortest Paths"
 date: 2026-10-22 14:11:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 11
 card_title: "Lecture 11: Weighted Shortest Paths"
 card_desc: "Weighted graphs · Negative-weight cycles · Shortest-paths tree · Relaxation · DAG Relaxation"
 lang: ko

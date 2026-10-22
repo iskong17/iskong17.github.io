@@ -3,6 +3,8 @@ title: "Machine Learning 1: Introduction"
 date: 2026-10-22 13:01:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 1
 card_title: "Lecture 1: Introduction"
 card_desc: "What is machine learning · Supervised learning · Regression vs. classification · Unsupervised learning · Reinforcement learning"
 lang: ko

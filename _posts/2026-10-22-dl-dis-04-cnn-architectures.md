@@ -4,6 +4,8 @@ date: 2026-10-22 12:04:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 4
 card_title: "Discussion 4: CNN Architectures & Dropout"
 card_desc: "ResNet skip connections · Batch norm backward pass · Ensembles and dropout · Xavier initialization · ReLU"
 lang: ko

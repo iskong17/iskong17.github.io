@@ -3,6 +3,8 @@ title: "Linear Algebra 8: Symmetric Matrices and Spectral Decomposition"
 date: 2026-10-22 10:08:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 8
 card_title: "Lecture 8: Spectral Decomposition"
 card_desc: "Symmetric matrices · Orthogonal diagonalization · Algebraic and geometric multiplicity · Spectral decomposition"
 lang: ko

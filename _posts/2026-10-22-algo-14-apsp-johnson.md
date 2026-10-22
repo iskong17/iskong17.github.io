@@ -3,6 +3,8 @@ title: "Algorithms 14: APSP and Johnson"
 date: 2026-10-22 14:14:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 14
 card_title: "Lecture 14: APSP and Johnson"
 card_desc: "All-pairs shortest paths · Reweighting · Potential function · Johnson's algorithm · Reduction"
 lang: ko

@@ -3,6 +3,8 @@ title: "Deep Learning 3: Error Analysis"
 date: 2026-10-22 11:03:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 3
 card_title: "Lecture 3: Error Analysis"
 card_desc: "Bias-variance tradeoff · Regularization · Bayesian prior · Weight decay · Train/validation/test split"
 lang: ko

@@ -3,6 +3,8 @@ title: "Deep Learning 4: Optimization"
 date: 2026-10-22 11:04:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 4
 card_title: "Lecture 4: Optimization"
 card_desc: "Loss landscape · Saddle points · Newton's method · Momentum, RMSProp, Adam · Stochastic gradient descent"
 lang: ko

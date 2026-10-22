@@ -3,6 +3,8 @@ title: "Linear Algebra 5: Inner Products and Least Squares"
 date: 2026-10-22 10:05:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 5
 card_title: "Lecture 5: Least Squares"
 card_desc: "Inner product · Norm · Orthogonality · Least squares · Normal equation"
 lang: ko

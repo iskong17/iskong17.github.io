@@ -4,6 +4,8 @@ date: 2026-10-22 12:12:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 12
 card_title: "Discussion 12: Meta Learning"
 card_desc: "Inner and outer loop · Matching and prototypical networks · MAML meta-gradient · Meta-RL hidden state"
 lang: ko

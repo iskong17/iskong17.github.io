@@ -4,6 +4,8 @@ date: 2026-10-22 12:08:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 8
 card_title: "Discussion 8: Pretraining & Imitation"
 card_desc: "Word2Vec and negative sampling · ELMo and BERT · MDP and trajectory likelihood · Behavior cloning · DAgger"
 lang: ko

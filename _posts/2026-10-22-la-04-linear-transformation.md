@@ -3,6 +3,8 @@ title: "Linear Algebra 4: Linear Transformations"
 date: 2026-10-22 10:04:00 +0900
 category: study
 topic: linear-algebra
+series: la
+lecture: 4
 card_title: "Lecture 4: Linear Transformations"
 card_desc: "Linearity · Standard matrix · Neural network layers · Onto and one-to-one"
 lang: ko

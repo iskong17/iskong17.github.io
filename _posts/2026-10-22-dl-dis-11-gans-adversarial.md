@@ -4,6 +4,8 @@ date: 2026-10-22 12:11:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 11
 card_title: "Discussion 11: GANs & Adversarial Attacks"
 card_desc: "Optimal discriminator · Lipschitz composition · Spectral normalization · FGSM · Adversarial training"
 lang: ko

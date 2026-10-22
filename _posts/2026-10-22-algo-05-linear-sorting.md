@@ -3,6 +3,8 @@ title: "Algorithms 5: Linear Sorting"
 date: 2026-10-22 14:05:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 5
 card_title: "Lecture 5: Linear Sorting"
 card_desc: "Comparison sort lower bound · Direct access array sort · Tuple sort and stability · Counting sort · Radix sort"
 lang: ko

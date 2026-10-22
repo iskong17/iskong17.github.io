@@ -3,6 +3,8 @@ title: "Algorithms 4: Hashing"
 date: 2026-10-22 14:04:00 +0900
 category: study
 topic: algorithm
+series: algo
+lecture: 4
 card_title: "Lecture 4: Hashing"
 card_desc: "Comparison model and decision trees · Search lower bound · Direct access array · Chaining · Universal hashing"
 lang: ko

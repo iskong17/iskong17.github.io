@@ -3,6 +3,8 @@ title: "Machine Learning 11: Feature and Model Selection, ML Advice"
 date: 2026-10-22 13:11:00 +0900
 category: study
 topic: machine-learning
+series: ml
+lecture: 11
 card_title: "Lecture 11: Feature and Model Selection, ML Advice"
 card_desc: "Cross validation · Feature selection · MAP estimation · Bayesian regularization · Diagnosing bias and variance"
 lang: ko

@@ -4,6 +4,8 @@ date: 2026-10-22 12:03:00 +0900
 category: study
 topic: deep-learning
 group: discussion
+series: dl-dis
+lecture: 3
 card_title: "Discussion 3: Backpropagation & CNNs"
 card_desc: "Softmax cross-entropy gradients · Skip connections · Convolution output shapes · Convolution as matrix multiplication · Convolution backward pass"
 lang: ko

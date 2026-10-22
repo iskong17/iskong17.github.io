@@ -3,6 +3,8 @@ title: "Deep Learning 15: Policy Gradients"
 date: 2026-10-22 11:15:00 +0900
 category: study
 topic: deep-learning
+series: dl
+lecture: 15
 card_title: "Lecture 15: Policy Gradients"
 card_desc: "Markov decision process · RL objective · REINFORCE · Reward-to-go and baselines · Importance sampling"
 lang: ko
