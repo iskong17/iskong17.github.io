@@ -263,20 +263,3 @@ body_class: page-home
     </div>
   </div>
 </section>
-
-<!-- Blog -->
-{%- if site.posts.size > 0 %}
-<section class="section">
-  <div class="container">
-    <div class="section-head-row">
-      {% include section-head.html title="Latest Posts" %}
-      <a class="more-link" href="{{ '/blog/' | relative_url }}">All posts {% include icon.html name="arrow" %}</a>
-    </div>
-    <div class="sq-grid sq-grid-4">
-      {%- for post in site.posts limit: 4 %}
-      {% include post-card.html post=post %}
-      {%- endfor %}
-    </div>
-  </div>
-</section>
-{%- endif %}
