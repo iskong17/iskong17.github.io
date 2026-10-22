@@ -275,4 +275,41 @@
       }).catch(function () { /* keep the widget hidden */ });
     }
   }
+
+  // Post table of contents: a fixed side panel on wide screens for posts with several sections.
+  // It lists the h2/h3 headings and highlights the one being read.
+  var postBody = document.querySelector('.post-body');
+  if (postBody && postBody.querySelectorAll('h2').length >= 3) {
+    var heads = Array.prototype.slice.call(postBody.querySelectorAll('h2, h3'));
+    var toc = document.createElement('nav');
+    toc.className = 'post-toc';
+    toc.setAttribute('aria-label', 'Contents');
+    var listHtml = '<p class="post-toc-title">Contents</p><ol>';
+    heads.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var label = h.textContent.replace(/\$\$/g, '').trim();
+      listHtml += '<li class="toc-' + h.tagName.toLowerCase() + '"><a href="#' + h.id + '">' +
+        label.replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }) + '</a></li>';
+    });
+    toc.innerHTML = listHtml + '</ol>';
+    postBody.parentNode.appendChild(toc);
+    var links = toc.querySelectorAll('a');
+    var setActive = function () {
+      var current = 0;
+      heads.forEach(function (h, i) { if (h.getBoundingClientRect().top < 140) current = i; });
+      links.forEach(function (a, i) { a.classList.toggle('is-active', i === current); });
+      var active = links[current];
+      if (active && toc.scrollHeight > toc.clientHeight) {
+        var top = active.offsetTop - toc.clientHeight / 2;
+        if (Math.abs(toc.scrollTop - top) > toc.clientHeight / 3) toc.scrollTop = top;
+      }
+    };
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { setActive(); ticking = false; });
+    }, { passive: true });
+    setActive();
+  }
 })();

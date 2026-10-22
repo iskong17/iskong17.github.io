@@ -1,6 +1,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% seo %}
+{%- unless page.image %}
+<!-- Share preview: pages without their own image use the Max Verstappen photo -->
+<meta property="og:image" content="{{ '/images/max-verstappen.jpg' | absolute_url }}">
+<meta property="og:image:width" content="450">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="Max Verstappen">
+<meta name="twitter:image" content="{{ '/images/max-verstappen.jpg' | absolute_url }}">
+{%- endunless %}
 <link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

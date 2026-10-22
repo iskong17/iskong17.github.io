@@ -992,6 +992,31 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
   .series-toc ol { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* ---------- Post table of contents (wide screens only) ---------- */
+.post-body h2, .post-body h3 { scroll-margin-top: 90px; }
+.post-toc { display: none; }
+@media (min-width: 1300px) {
+  .post-toc {
+    display: block;
+    position: fixed;
+    top: 110px;
+    left: calc(50% + 404px);
+    width: min(260px, calc(50vw - 430px));
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding: 4px 0 4px 14px;
+    border-left: 1px solid var(--line);
+    scrollbar-width: thin;
+  }
+}
+.post-toc-title { margin: 0 0 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.post-toc ol { list-style: none; margin: 0; padding: 0; }
+.post-toc li a { position: relative; display: block; padding: 4px 0; font-size: 13px; line-height: 1.45; color: var(--text-2); }
+.post-toc li.toc-h3 a { padding-left: 12px; font-size: 12.5px; color: var(--muted); }
+.post-toc li a:hover { color: var(--text); text-decoration: none; }
+.post-toc li a.is-active { color: var(--text); font-weight: 700; }
+.post-toc li a.is-active::before { content: ""; position: absolute; left: -15px; top: 4px; bottom: 4px; width: 2px; border-radius: 2px; background: var(--red); }
+
 /* ---------- F1: calendar rows and standings ---------- */
 .group-head-meta { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); }
 .circuit-list { display: flex; flex-direction: column; gap: 6px; }

@@ -80,7 +80,7 @@ layout: default
   {%- endif %}
 
   <div class="post-body">
-    {{ content }}
+    {{ content | replace: '<img src=', '<img loading="lazy" decoding="async" src=' }}
     {%- if page.auto %}
     <p class="auto-note">This report was generated automatically from <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1 API</a> data.</p>
     {%- endif %}
