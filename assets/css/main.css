@@ -850,20 +850,84 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-machine-learning { --accent: var(--green); }
 .topic-algorithm { --accent: var(--yellow-ink); }
 
-.lecture-card {
-  --accent-soft: color-mix(in srgb, var(--accent, var(--blue)) 14%, transparent);
-  background: linear-gradient(160deg, color-mix(in srgb, var(--accent, var(--blue)) 9%, var(--surface)) 0%, var(--surface) 60%);
-  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+/* Lecture rows: number, title and key concepts on one bar */
+.lecture-list { display: flex; flex-direction: column; gap: 8px; }
+.lecture-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px 14px 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  overflow: hidden;
+  transition: transform 0.15s, border-color 0.15s, background 0.15s;
 }
-.lecture-card::before { background: var(--accent, var(--blue)); }
-.lecture-card:hover { border-color: color-mix(in srgb, var(--accent, var(--blue)) 55%, transparent); box-shadow: 0 12px 28px -18px var(--accent, var(--blue)); }
-.lecture-card-top { position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-.lecture-kind { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
-.lecture-num { font-size: 42px; font-weight: 800; line-height: 0.9; letter-spacing: -1px; color: var(--accent, var(--blue)); font-variant-numeric: tabular-nums; }
-.lecture-card .sq-title { margin-top: 12px; font-size: 17px; -webkit-line-clamp: 3; }
-.lecture-tags { position: relative; list-style: none; margin: auto 0 0; padding: 10px 0 0; display: flex; flex-wrap: wrap; gap: 4px; max-height: 58px; overflow: hidden; }
-.lecture-tags li { max-width: 100%; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--text-2); font-size: 11px; line-height: 1.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lecture-tags li.is-more { background: transparent; color: var(--muted); padding-left: 2px; }
+.lecture-row:hover { text-decoration: none; transform: translateX(3px); border-color: color-mix(in srgb, var(--accent, var(--blue)) 55%, transparent); background: color-mix(in srgb, var(--accent, var(--blue)) 6%, var(--surface)); }
+.lecture-row-num {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: -14px 0;
+  border-right: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent, var(--blue)) 12%, transparent);
+  color: var(--accent, var(--blue));
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  font-variant-numeric: tabular-nums;
+}
+.lecture-row-num small { margin-bottom: 4px; font-family: "JetBrains Mono", monospace; font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+.lecture-row-main { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.lecture-row-title { font-size: 17px; font-weight: 700; line-height: 1.3; }
+.lecture-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.lecture-tags span { padding: 1px 9px; border-radius: 999px; background: color-mix(in srgb, var(--accent, var(--blue)) 13%, transparent); color: var(--text-2); font-size: 12px; line-height: 1.7; }
+.lecture-row > .icon { width: 18px; height: 18px; color: var(--muted); transition: transform 0.15s, color 0.15s; }
+.lecture-row:hover > .icon { color: var(--accent, var(--blue)); transform: translateX(3px); }
+.lecture-list-compact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 20px 20px; }
+.lecture-list-compact .lecture-row { background: var(--bg-2); }
+.lecture-list-compact .lecture-row-title { font-size: 15px; }
+.lecture-list-compact .lecture-tags { display: none; }
+
+/* Blog search */
+.blog-search { position: relative; display: flex; align-items: center; margin-bottom: 18px; }
+.blog-search .icon { position: absolute; left: 16px; width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
+.blog-search input {
+  width: 100%;
+  padding: 13px 48px 13px 46px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font: 500 16px/1.4 "Titillium Web", "Noto Sans KR", sans-serif;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.blog-search input::placeholder { color: var(--muted); }
+.blog-search input:focus { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-soft); }
+.blog-search kbd { position: absolute; right: 14px; padding: 1px 7px; border: 1px solid var(--line-strong); border-radius: 5px; font: 600 12px/1.5 "JetBrains Mono", monospace; color: var(--muted); pointer-events: none; }
+.blog-search input:focus + kbd, .blog-search input:not(:placeholder-shown) + kbd { display: none; }
+.blog-list.is-searching #blog-tabs,
+.blog-list.is-searching .blog-panel { display: none !important; }
+.search-results { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+.search-count { margin: 0 0 4px; font-size: 14px; color: var(--muted); }
+.search-count b { color: var(--text); }
+.search-hit { position: relative; display: flex; flex-direction: column; gap: 3px; padding: 12px 18px 12px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); overflow: hidden; }
+.search-hit::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--blue); }
+.search-hit.cat-race::before { background: var(--red); }
+.search-hit.cat-gallery::before { background: var(--yellow); }
+.search-hit.cat-paper-review::before { background: var(--purple); }
+.search-hit:hover { text-decoration: none; border-color: var(--line-strong); }
+.search-hit-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); }
+.search-hit-cat { font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-2); }
+.search-hit-title { font-size: 16px; line-height: 1.35; }
+.search-hit-desc { font-size: 14px; color: var(--text-2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .series-block { margin-bottom: 44px; }
 .series-head {
@@ -892,7 +956,6 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .topic-bars .cat-bar[class*="topic-"] { border-left-color: var(--accent); }
 .topic-bars .cat-bar-head:hover .icon { color: var(--accent); }
-.topic-bars .cat-bar-posts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 /* In-post series box and series-aware previous / next */
 .series-wrap { max-width: 760px; margin: 0 auto; padding: 28px 24px 0; }
@@ -922,7 +985,9 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 760px) {
   .series-head { flex-direction: column; align-items: flex-start; }
   .series-head-meta { flex-direction: row; align-items: center; }
-  .topic-bars .cat-bar-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lecture-list-compact { grid-template-columns: minmax(0, 1fr); }
+  .lecture-row { grid-template-columns: 60px minmax(0, 1fr) 16px; gap: 12px; padding-right: 12px; }
+  .lecture-row-num { font-size: 22px; }
   .series-toc ol { grid-template-columns: minmax(0, 1fr); }
 }
 

@@ -3,16 +3,13 @@
 {%- assign kind = s.prefix | default: "Lecture" -%}
 {%- assign prefix = kind | append: " " | append: p.lecture | append: ": " -%}
 {%- assign tags = p.card_desc | split: " · " -%}
-<a class="sq-card lecture-card topic-{{ p.topic }}" href="{{ p.url | relative_url }}" data-category="study" data-topic="{{ p.topic }}">
-  <div class="lecture-card-top">
-    <span class="lecture-kind">{{ kind }}</span>
-    <span class="lecture-num">{% if p.lecture < 10 %}0{% endif %}{{ p.lecture }}</span>
-  </div>
-  <h3 class="sq-title">{{ p.card_title | remove_first: prefix }}</h3>
-  {%- if tags.size > 0 %}
-  <ul class="lecture-tags">
-    {%- for t in tags limit: 3 %}<li>{{ t }}</li>{% endfor %}
-    {%- if tags.size > 3 %}<li class="is-more">+{{ tags.size | minus: 3 }}</li>{% endif %}
-  </ul>
-  {%- endif %}
+<a class="lecture-row topic-{{ p.topic }}" href="{{ p.url | relative_url }}" data-category="study" data-topic="{{ p.topic }}">
+  <span class="lecture-row-num"><small>{{ kind }}</small>{% if p.lecture < 10 %}0{% endif %}{{ p.lecture }}</span>
+  <span class="lecture-row-main">
+    <span class="lecture-row-title">{{ p.card_title | remove_first: prefix }}</span>
+    {%- if tags.size > 0 %}
+    <span class="lecture-tags">{% for t in tags %}<span>{{ t }}</span>{% endfor %}</span>
+    {%- endif %}
+  </span>
+  {% include icon.html name="arrow" %}
 </a>

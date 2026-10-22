@@ -82,7 +82,7 @@
       // Study's All view is a bar per topic; the flat grid shows only for one topic.
       var bars = panel.querySelector('.topic-bars');
       if (bars) bars.hidden = key !== 'all';
-      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row');
+      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row, .study-group .lecture-row');
       var any = !!bars && key === 'all';
       cards.forEach(function (c) {
         var show = key === 'all' || (bySub
@@ -93,7 +93,7 @@
       });
       // Study groups (notes, Discussions) hide on All and when none of their cards match.
       panel.querySelectorAll('.study-group').forEach(function (g) {
-        g.hidden = (!!bars && key === 'all') || !g.querySelector('.sq-card:not([hidden])');
+        g.hidden = (!!bars && key === 'all') || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
       });
       activate(tabs, attr, key);
       var empty = panel.querySelector('.topic-empty');
@@ -141,6 +141,46 @@
     });
     window.addEventListener('hashchange', function () { route(location.hash); });
     route(location.hash);
+
+    // Search: filters every post by title, description, key concepts, authors and so on.
+    // While a query is typed the tabs and panels step aside for a single result list.
+    var searchBox = document.getElementById('blog-search');
+    var results = document.getElementById('search-results');
+    var dataEl = document.getElementById('search-data');
+    if (searchBox && results && dataEl) {
+      var index = [];
+      try { index = JSON.parse(dataEl.textContent); } catch (e) { index = []; }
+      index.forEach(function (p) { p.h = [p.t, p.f, p.c, p.s, p.x, p.e].join(' ').toLowerCase(); });
+      var list = document.querySelector('.blog-list');
+      var esc = function (str) {
+        return String(str || '').replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; });
+      };
+      var search = function () {
+        var q = searchBox.value.trim().toLowerCase();
+        list.classList.toggle('is-searching', q.length > 0);
+        results.hidden = !q;
+        if (!q) { results.innerHTML = ''; return; }
+        var terms = q.split(/\s+/);
+        var hits = index.filter(function (p) { return terms.every(function (t) { return p.h.indexOf(t) !== -1; }); });
+        var html = '<p class="search-count"><b>' + hits.length + '</b> ' + (hits.length === 1 ? 'result' : 'results') + ' for “' + esc(searchBox.value.trim()) + '”</p>';
+        html += hits.slice(0, 60).map(function (p) {
+          return '<a class="search-hit cat-' + esc(p.k) + '" href="' + esc(p.u) + '">' +
+            '<span class="search-hit-meta"><span class="search-hit-cat">' + esc(p.c) + '</span>' + (p.s ? '<span>' + esc(p.s) + '</span>' : '') + '<time>' + esc(p.d) + '</time></span>' +
+            '<b class="search-hit-title">' + esc(p.t) + '</b>' +
+            (p.x ? '<span class="search-hit-desc">' + esc(p.x) + '</span>' : '') + '</a>';
+        }).join('');
+        if (hits.length > 60) html += '<p class="search-count">Showing the first 60. Add a word to narrow it down.</p>';
+        if (!hits.length) html += '<p class="empty">Nothing matches. Try another word.</p>';
+        results.innerHTML = html;
+      };
+      searchBox.addEventListener('input', search);
+      searchBox.addEventListener('keydown', function (e) { if (e.key === 'Escape') { searchBox.value = ''; search(); } });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === '/' && document.activeElement !== searchBox && !/input|textarea/i.test(document.activeElement.tagName)) {
+          e.preventDefault(); searchBox.focus();
+        }
+      });
+    }
   }
 
   // Lightbox for publication figures and certificates.

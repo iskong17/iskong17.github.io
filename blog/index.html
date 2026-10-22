@@ -17,6 +17,12 @@ description: Study notes, paper reviews, photos from conferences and travel, and
 
 <section class="blog-list">
   <div class="container">
+    <div class="blog-search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="search" id="blog-search" placeholder="Search posts, lectures, papers…" autocomplete="off" aria-label="Search the blog">
+      <kbd>/</kbd>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite" hidden></div>
     <div class="session-tabs" id="blog-tabs" role="tablist" aria-label="Blog categories">
       <button type="button" class="session-tab is-active" data-panel="all">All</button>
       {%- for c in site.data.categories %}
@@ -111,7 +117,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             {% include icon.html name="arrow" %}
           </button>
           {%- if tposts.size > 0 %}
-          <div class="cat-bar-posts">
+          <div class="{% if tseries %}lecture-list lecture-list-compact{% else %}cat-bar-posts{% endif %}">
             {%- for post in tfirst limit: 4 %}{% include post-card.html post=post %}{% endfor %}
           </div>
           {%- else %}
@@ -160,7 +166,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             {%- if s.url %}<a class="series-link" href="{{ s.url }}" target="_blank" rel="noopener">Course page {% include icon.html name="arrow" %}</a>{% endif %}
           </div>
         </header>
-        <div class="sq-grid">
+        <div class="lecture-list">
           {%- for post in sp %}{% include post-card.html post=post %}{% endfor %}
         </div>
       </section>
@@ -246,6 +252,19 @@ description: Study notes, paper reviews, photos from conferences and travel, and
     </div>
   </div>
 </section>
+
+{%- comment %} Search index: every post, with the fields the search box matches against. {% endcomment %}
+<script type="application/json" id="search-data">
+[
+  {%- for p in site.posts -%}
+  {%- assign cat = site.data.categories | where: "key", p.category | first -%}
+  {%- assign tp = cat.topics | where: "key", p.topic | first -%}
+  {%- assign sr = site.data.series | where: "key", p.series | first -%}
+  {%- capture extra -%}{{ p.card_desc }} {{ p.subfields | join: ' ' }} {{ p.paper.title }} {{ p.paper.authors }} {{ p.paper.venue }} {{ p.gp }} {{ p.circuit }} {{ p.location.name }} {{ p.location.country }} {{ sr.name }} {{ sr.course }}{%- endcapture %}
+  {"t": {{ p.card_title | default: p.title | jsonify }}, "u": {{ p.url | relative_url | jsonify }}, "c": {{ cat.short | default: p.category | jsonify }}, "k": {{ p.category | jsonify }}, "s": {{ tp.label | default: sr.name | default: p.paper.venue | jsonify }}, "d": {{ p.date | date: "%Y.%m.%d" | jsonify }}, "x": {{ p.description | default: "" | strip_html | jsonify }}, "e": {{ extra | strip_newlines | jsonify }}, "f": {{ p.title | jsonify }}}{% unless forloop.last %},{% endunless %}
+  {%- endfor %}
+]
+</script>
 
 {%- comment %} Map data: visited countries, gallery posts with a location, circuits. {% endcomment %}
 {%- assign gallery_posts = site.posts | where: "category", "gallery" -%}
