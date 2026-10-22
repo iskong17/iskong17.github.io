@@ -140,6 +140,22 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       <div class="paper-list">
         {%- for post in posts %}{% include paper-row.html post=post %}{% endfor %}
       </div>
+      {%- elsif posts.size > 0 and c.key == 'study' %}
+      {%- assign notes = posts | where_exp: "p", "p.group != 'discussion'" -%}
+      {%- assign discussions = posts | where: "group", "discussion" -%}
+      <div class="study-group">
+        <div class="sq-grid">
+          {%- for post in notes %}{% include post-card.html post=post %}{% endfor %}
+        </div>
+      </div>
+      {%- if discussions.size > 0 %}
+      <div class="study-group">
+        <div class="blog-group-head"><h2>Discussions</h2></div>
+        <div class="sq-grid">
+          {%- for post in discussions %}{% include post-card.html post=post %}{% endfor %}
+        </div>
+      </div>
+      {%- endif %}
       {%- elsif posts.size > 0 %}
       <div class="sq-grid">
         {%- for post in posts %}{% include post-card.html post=post %}{% endfor %}

@@ -81,11 +81,7 @@
       if (!panel.querySelector('[' + attr + '="' + key + '"]')) key = 'all';
       // Study's All view is a bar per topic; the flat grid shows only for one topic.
       var bars = panel.querySelector('.topic-bars');
-      var grid = panel.querySelector('.sq-grid');
-      if (bars) {
-        bars.hidden = key !== 'all';
-        if (grid) grid.hidden = key === 'all';
-      }
+      if (bars) bars.hidden = key !== 'all';
       var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row');
       var any = !!bars && key === 'all';
       cards.forEach(function (c) {
@@ -94,6 +90,10 @@
           : c.getAttribute('data-topic') === key);
         c.hidden = !show;
         if (show) any = true;
+      });
+      // Study groups (notes, Discussions) hide on All and when none of their cards match.
+      panel.querySelectorAll('.study-group').forEach(function (g) {
+        g.hidden = (!!bars && key === 'all') || !g.querySelector('.sq-card:not([hidden])');
       });
       activate(tabs, attr, key);
       var empty = panel.querySelector('.topic-empty');
