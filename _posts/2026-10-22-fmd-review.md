@@ -110,10 +110,10 @@ In the qualitative example below, vanilla decoding describes only what it sees, 
 ![FMD qualitative example](/images/blog/papers/fmd-qualitative.webp)
 *An audio-visual description example with VideoLLaMA2. Vanilla decoding gives a video-only caption; FMD adds the audio content (the stream and the occasional splash). Figure from the paper.*
 
-The fork-depth sweep on 200 AVHBench samples per task shows the trade-off behind the chosen $$L_{	ext{fork}}$$. Merging early keeps A→V and AV-matching accuracy at or above vanilla, while forking deeper helps V→A (audio-targeted) questions but hurts the other two sharply after about layer 15.
+The fork-depth sweep on 200 AVHBench samples per task shows the trade-off behind the chosen $$L_{\text{fork}}$$. Merging early keeps A→V and AV-matching accuracy at or above vanilla, while forking deeper helps V→A (audio-targeted) questions but hurts the other two sharply after about layer 15.
 
 ![Fork layer ablation](/images/blog/papers/fmd-fork-layer-ablation.webp)
-*Accuracy of VideoLLaMA2 with FMD as a function of $$L_{	ext{fork}}$$ for A→V, V→A and AV-matching questions (200 AVHBench samples each; dashed line = vanilla). No single depth is best for all three, and the paper picks an early one. Figure from the paper.*
+*Accuracy of VideoLLaMA2 with FMD as a function of $$L_{\text{fork}}$$ for A→V, V→A and AV-matching questions (200 AVHBench samples each; dashed line = vanilla). No single depth is best for all three, and the paper picks an early one. Figure from the paper.*
 
 ## Limitations
 

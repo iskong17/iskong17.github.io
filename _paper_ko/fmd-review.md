@@ -112,10 +112,10 @@ VideoLLaMA2에서 training-free인 다른 decoding 방법들과 비교하면(AVH
 ![FMD qualitative example](/images/blog/papers/fmd-qualitative.webp)
 *VideoLLaMA2의 audio-visual description 예시. Vanilla decoding은 video만 담은 caption을 내고, FMD는 audio 내용(개울 소리와 간간이 들리는 물 튀는 소리)을 더한다. 논문 Figure.*
 
-Task마다 AVHBench 200개 sample로 한 fork depth sweep은 선택된 $$L_{	ext{fork}}$$ 뒤의 trade-off를 보여 준다. 일찍 merge하면 A→V와 AV matching accuracy가 vanilla 이상으로 유지되고, 더 깊이 fork하면 V→A(audio 대상) 질문은 좋아지지만 나머지 둘은 약 layer 15 이후 크게 떨어진다.
+Task마다 AVHBench 200개 sample로 한 fork depth sweep은 선택된 $$L_{\text{fork}}$$ 뒤의 trade-off를 보여 준다. 일찍 merge하면 A→V와 AV matching accuracy가 vanilla 이상으로 유지되고, 더 깊이 fork하면 V→A(audio 대상) 질문은 좋아지지만 나머지 둘은 약 layer 15 이후 크게 떨어진다.
 
 ![Fork layer ablation](/images/blog/papers/fmd-fork-layer-ablation.webp)
-*A→V, V→A, AV matching 질문에 대해 $$L_{	ext{fork}}$$에 따른 FMD 적용 VideoLLaMA2의 accuracy(각 200개 AVHBench sample, 점선은 vanilla). 세 질문 모두에 최적인 depth는 없고, 논문은 early depth를 고른다. 논문 Figure.*
+*A→V, V→A, AV matching 질문에 대해 $$L_{\text{fork}}$$에 따른 FMD 적용 VideoLLaMA2의 accuracy(각 200개 AVHBench sample, 점선은 vanilla). 세 질문 모두에 최적인 depth는 없고, 논문은 early depth를 고른다. 논문 Figure.*
 
 ## Limitations
 
