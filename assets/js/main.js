@@ -60,6 +60,15 @@
         b.setAttribute('aria-selected', on ? 'true' : 'false');
       });
     }
+    // Multi-select chips: every value in the list is on, or "all" when the list is empty.
+    function activateMany(buttons, attr, values) {
+      buttons.forEach(function (b) {
+        var v = b.getAttribute(attr);
+        var on = values.length ? values.indexOf(v) !== -1 : v === 'all';
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
     function showPanel(name) {
       if (!document.querySelector('.blog-panel[data-panel="' + name + '"]')) name = 'all';
       panels.forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== name; });
@@ -72,25 +81,32 @@
       document.querySelectorAll('.race-sub').forEach(function (s) { s.hidden = s.getAttribute('data-sub') !== sub; });
       activate(raceTabs.querySelectorAll('[data-sub]'), 'data-sub', sub);
     }
-    // Study and Gallery filter by topic tab; Paper Review filters by subfield chip and venue chip.
-    var paperConf = 'all';
+    // Study and Gallery filter by topic tab; Paper Review filters by subfield chips and venue chips.
+    // Several topics or venues can be on at once: a paper shows if it matches any chosen topic and any chosen venue.
+    var paperConf = [];
     var studySeries = 'all';
     function showTopic(panel, key, series) {
       var bySub = !!panel.querySelector('.subfield-chip');
       var attr = bySub ? 'data-subfield' : 'data-topic';
       var tabs = panel.querySelectorAll(bySub ? '.subfield-chip' : '.topic-tabs [data-topic]');
       if (!tabs.length) return;
-      if (!panel.querySelector('[' + attr + '="' + key + '"]')) key = 'all';
+      var subs = [];
+      if (bySub) {
+        subs = key.split('+').filter(function (k) { return k !== 'all' && panel.querySelector('.subfield-chip[data-subfield="' + k + '"]'); });
+        key = subs.length ? subs.join('+') : 'all';
+      } else if (!panel.querySelector('[' + attr + '="' + key + '"]')) key = 'all';
       // Study's All view is a bar per topic; the flat grid shows only for one topic.
       var bars = panel.querySelector('.topic-bars');
       if (bars) bars.hidden = key !== 'all';
       var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row, .study-group .lecture-row, .gallery-row');
       var any = !!bars && key === 'all';
       cards.forEach(function (c) {
-        var show = key === 'all' || (bySub
-          ? (' ' + (c.getAttribute('data-subfields') || '') + ' ').indexOf(' ' + key + ' ') !== -1
-          : c.getAttribute('data-topic') === key);
-        if (bySub && paperConf !== 'all' && c.getAttribute('data-conf') !== paperConf) show = false;
+        var show;
+        if (bySub) {
+          var have = ' ' + (c.getAttribute('data-subfields') || '') + ' ';
+          show = (!subs.length || subs.some(function (k) { return have.indexOf(' ' + k + ' ') !== -1; })) &&
+            (!paperConf.length || paperConf.indexOf(c.getAttribute('data-conf')) !== -1);
+        } else show = key === 'all' || c.getAttribute('data-topic') === key;
         c.hidden = !show;
         if (show) any = true;
       });
@@ -117,8 +133,10 @@
         var other = seriesKey !== 'all' && g.getAttribute('data-series') !== seriesKey;
         g.hidden = (!!bars && key === 'all') || !!courseCards || other || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
       });
-      activate(tabs, attr, key);
-      if (bySub) activate(panel.querySelectorAll('.conf-chip'), 'data-conf', paperConf);
+      if (bySub) {
+        activateMany(tabs, attr, subs);
+        activateMany(panel.querySelectorAll('.conf-chip'), 'data-conf', paperConf);
+      } else activate(tabs, attr, key);
       var empty = panel.querySelector('.topic-empty');
       if (!empty) {
         empty = document.createElement('p');
@@ -145,8 +163,8 @@
     });
     document.querySelectorAll('[data-goto]').forEach(function (b) {
       b.addEventListener('click', function () {
-        if (b.hasAttribute('data-conf-goto')) paperConf = b.getAttribute('data-conf-goto');
-        else if (b.getAttribute('data-goto').indexOf('paper-review') === 0) paperConf = 'all';
+        if (b.hasAttribute('data-conf-goto')) paperConf = [b.getAttribute('data-conf-goto')];
+        else if (b.getAttribute('data-goto').indexOf('paper-review') === 0) paperConf = [];
         go('#' + b.getAttribute('data-goto'));
         window.scrollTo(0, blogTabs.offsetTop - 80);
       });
@@ -171,9 +189,12 @@
     var currentSub = function () { return (location.hash.replace(/^#/, '').split('/')[1]) || 'all'; };
     document.querySelectorAll('.conf-chip').forEach(function (b) {
       b.addEventListener('click', function () {
-        // Clicking the active venue again clears it.
+        // Each venue chip toggles on its own; All clears them.
         var cf = b.getAttribute('data-conf');
-        paperConf = (cf === paperConf) ? 'all' : cf;
+        var i = paperConf.indexOf(cf);
+        if (cf === 'all') paperConf = [];
+        else if (i === -1) paperConf.push(cf);
+        else paperConf.splice(i, 1);
         showTopic(b.closest('.blog-panel'), currentSub());
       });
     });
@@ -213,10 +234,14 @@
     document.querySelectorAll('.subfield-chip').forEach(function (b) {
       var panel = b.closest('.blog-panel').getAttribute('data-panel');
       b.addEventListener('click', function () {
-        // Clicking the active topic again clears it.
+        // Each topic chip toggles on its own; All clears them. The URL keeps the set, e.g. #paper-review/tta+vlm.
         var sf = b.getAttribute('data-subfield');
-        if (b.classList.contains('is-active')) sf = 'all';
-        go('#' + panel + (sf === 'all' ? '' : '/' + sf));
+        var on = currentSub().split('+').filter(function (k) { return k && k !== 'all'; });
+        var i = on.indexOf(sf);
+        if (sf === 'all') on = [];
+        else if (i === -1) on.push(sf);
+        else on.splice(i, 1);
+        go('#' + panel + (on.length ? '/' + on.join('+') : ''));
       });
     });
     window.addEventListener('hashchange', function () { route(location.hash); });
