@@ -19,6 +19,15 @@ Point cloud TTA methods mostly adapt the model with several backpropagation step
 
 Purge-Gate (PG) works at the token level. Corruptions such as background points or impulse noise hit some local patches much harder than others. PG measures how far each token is from a source prototype and removes the most divergent tokens before the attention layers. Nothing is updated. There are two variants: PG-SP uses stored source statistics, and PG-SF is fully source-free and uses the model's own [cls] token as the prototype.
 
+## Motivation
+
+The paper starts from a difference between images and point clouds. In 2D TTA, the input has a fixed size and a corruption is usually spread evenly over the image. In a point cloud, a shift can add new points (background clutter, impulse outliers) or perturb only some regions of the shape. So the damage is uneven: a few local patches are badly corrupted while the rest of the object is almost clean. Existing point cloud TTA methods ignore this and adapt the whole model, either with backpropagation (TENT, MATE, SMART-PC) or with class-level source prototypes (BFTT3D).
+
+![Token-level domain shift on a corrupted airplane](/images/blog/papers/purge-gate-motivation.webp)
+*From left to right: a clean airplane, the same shape corrupted with stray outlier points, its tokens ranked by PG-SF, and its tokens ranked by PG-SP. Red marks the most shifted tokens. Both scores put the stray outlier patches at the top, while patches on the fuselage and wings stay low. Figure from the paper.*
+
+The figure is the core observation: the shift is concentrated in specific tokens, and a simple distance to a source prototype is enough to find them. The analysis in the Method section explains why those tokens matter. Once noise dominates a token, its LayerNorm output points in a near-random direction, and the attention layer drifts toward uniform weights. The key insight is borrowed from token pruning in efficient transformers (e.g. Kim et al., 2022), which drops uninformative tokens to save compute. Purge-Gate drops the most shifted tokens instead, to protect attention from them. This needs no gradient step and no change to the weights.
+
 ## Method
 
 ![Purge-Gate overview](/images/blog/papers/purge-gate-main.png)
@@ -102,12 +111,27 @@ Mean top-1 accuracy (%, higher is better) over 15 corruptions. All methods use t
 
 For ShapeNet-C, the MATE and SMART-PC rows are the "Standard" variants.
 
+![Per-corruption accuracy on ScanObjectNN-C](/images/blog/papers/purge-gate-scanobjectnn-table.webp)
+*Table 1 of the paper: top-1 accuracy on each of the 15 ScanObjectNN-C corruptions, with the change over Source Only in parentheses. PG-SP is best on 13 of 15 corruptions. The two exceptions are occlusion and LiDAR, where every method stays at about 12% or below. Figure from the paper.*
+
+The per-corruption view shows where purging helps most. The biggest gains are on noise that adds or moves points: uniform noise (21.69 to 41.48), Gaussian noise (18.76 to 55.59) and impulse noise (18.42 to 38.90). Occlusion and LiDAR remove parts of the shape instead of adding bad points, so there is little to purge, and PG-SP gains almost nothing there.
+
 Cost against BFTT3D (batch size 32, one NVIDIA A6000; the six purge sizes were run one after another, not in parallel):
 
 | Method | Time per batch | GPU memory |
 |---|---|---|
 | BFTT3D | 173.94 ms | 7400 MiB |
 | PG-SP | 14.07 ms | 1300 MiB |
+
+![BatchNorm reset and cost against BFTT3D](/images/blog/papers/purge-gate-bn-reset-cost.webp)
+*(a) Mean accuracy on ScanObjectNN-C with and without the BatchNorm reset, for PG-SP and BFTT3D. (b) Time per batch and GPU memory at batch size 32. PG-SP stays ahead in both settings of (a), but the reset alone moves BFTT3D from 33.00 to 45.76. Figure from the paper.*
+
+Panel (a) separates the two ingredients. Without the reset, PG-SP still beats BFTT3D by about 7 points (39.86 vs. 33.00), which is the effect of purging alone. With the reset on both, the gap shrinks to about 3 points. Panel (b) is the cost table above as a plot.
+
+![Effect of purge size](/images/blog/papers/purge-gate-purge-size.webp)
+*Accuracy (black) and output entropy (red) for every purge size from 0 to 127, on Background (left) and Distortion (right) corruption from ScanObjectNN-C. The yellow band is the searched range [0, 32]. The orange line is the accuracy reached by the entropy-based choice among the six sizes, and the green line is the best accuracy inside [0, 32]. Figure from the paper.*
+
+This plot shows why entropy is a reasonable selector. As the purge size grows, accuracy rises while entropy falls, and past about 100 tokens both turn: accuracy collapses and entropy jumps. Within [0, 32], the entropy choice lands close to the best value (22.89 vs. about 24 on Background, 62.48 on Distortion). But on Background, the true peak is above 50% at around 100 purged tokens, far outside the search range.
 
 PG-SP and PG-SF give the best mean accuracy on ScanObjectNN-C and ModelNet40-C, ahead of TENT and the TTT methods, without any gradient step. ShapeNet-C is harder: most TTA methods fall below Source Only, and PG gains about 3 points, tied with SMART-PC. PG-SP is 12.4 times faster than BFTT3D and uses 5.5 times less memory. With a Point-Mamba backbone (Table 4), PG-SP improves ScanObjectNN-C from 29.11 to 41.42 and ModelNet-C from 58.32 to 68.61, but is slightly below Source Only on ShapeNet-C (51.66 vs. 51.92).
 

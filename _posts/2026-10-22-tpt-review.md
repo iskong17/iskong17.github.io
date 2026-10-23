@@ -19,6 +19,17 @@ CLIP can classify images zero-shot by comparing an image with text such as "a ph
 
 Test-time prompt tuning (TPT) learns the prompt from the single test sample it is about to classify. No training data and no labels are used. For image classification, TPT makes many augmented views of the test image, keeps the most confident ones, and updates the prompt so the averaged prediction over those views has low entropy. The same idea is also adapted to a context-dependent visual reasoning task (Bongard-HOI).
 
+## Motivation
+
+Prompt tuning treats the prompt embeddings like model weights and fits them to labeled data from a downstream task. The authors argue that the learned prompt is then tied to that training distribution. Table 1 already hints at this: CoOp and CoCoOp, trained on ImageNet, gain most on ImageNet and ImageNet-V2, which are close to the training data, but on ImageNet-A, -R, and -Sketch they are no better than an ensemble of 80 hand-crafted prompts.
+
+The cleaner evidence is a cross-dataset transfer test. A prompt is tuned on one fine-grained dataset (16 shots) and evaluated on another, and the accuracy is reported relative to zero-shot CLIP with a hand-crafted prompt, $$(acc - acc_{\text{base}})/acc_{\text{base}}$$. For example, CLIP-RN50 gets 61.75% on Flower102 with "a photo of a", but CoOp trained on DTD gets only 33.41% there, a relative change of $$-0.46$$.
+
+![Cross-dataset relative improvement heatmaps](/images/blog/papers/tpt-review-motivation.webp)
+*Relative accuracy change over zero-shot CLIP-RN50 when a prompt tuned on the row dataset is tested on the column dataset, for CoOp (a) and CoCoOp (b). Only the diagonal is positive; the bottom row (TPT, no source dataset) is positive everywhere. Figure from the paper.*
+
+Off the diagonal almost every cell is negative, so a prompt tuned on one dataset usually hurts on another, and the Average column is negative for every source dataset. CoCoOp's image-conditioned prompt makes most cells less negative but does not remove the drop. This motivates the key idea: instead of learning one prompt from a training distribution, learn a prompt for each test sample from that sample alone. Since there is no label, the signal must be unsupervised, and the paper uses consistency of predictions across augmented views. The bottom row, TPT, improves on all 10 datasets.
+
 ## Method
 
 ![TPT overview](/images/blog/papers/tpt-main.png)
@@ -98,6 +109,18 @@ The TPT + CoCoOp rows are left out here (ViT-B/16: 64.30 average, 62.61 OOD aver
 Only the Average column is shown. The 10 datasets are Flower102, DTD, Pets, Cars, UCF101, Caltech101, Food101, SUN397, Aircraft, and EuroSAT.
 
 With no training data, TPT has the best OOD average among the single methods on both backbones. Its largest gain is on ImageNet-A (+6.90 points over CLIP with ViT-B/16). CoOp and CoCoOp still win on in-distribution ImageNet and on ImageNet-V2, and TPT stacks on top of them. On Bongard-HOI, TPT with CLIP-RN50 reaches 66.59% average accuracy versus 62.46% for HOITrans, without using the Bongard-HOI training split.
+
+The ablations below use CLIP-RN50 and report the average top-1 accuracy over the five ImageNet benchmarks in Table 1.
+
+![Ablations on the tuned module and the confidence cutoff](/images/blog/papers/tpt-review-ablation.webp)
+*(a) MEMO-style test-time optimisation of different parts of CLIP: only prompt tuning clearly beats zero-shot CLIP (dashed line), the text encoder roughly matches it, and the visual encoder is worst. (b) Cutoff percentile $$\rho$$ in confidence selection: accuracy peaks at $$\rho = 0.1$$ and falls as more low-confidence views are kept. Figure from the paper.*
+
+Panel (a) supports the choice of the prompt as the only parameter to adapt; tuning the full model or the visual encoder on a single image ends below the zero-shot baseline. Panel (b) shows that keeping too few views ($$\rho$$ near 0) also hurts, so the cutoff is a trade-off between filtering noisy crops and keeping enough views for a stable average.
+
+![Accuracy versus number of views and optimisation steps](/images/blog/papers/tpt-review-efficiency.webp)
+*(a) Accuracy rises with the number of augmented views and plateaus around N = 64. (b) Going from 1 to 2 steps adds about 0.4 points, and more steps add almost nothing. Figure from the paper.*
+
+These curves are the basis of the default setting (64 views, 1 step): both extra views and extra steps cost inference time roughly linearly, and the gains past those points are small.
 
 ## Limitations
 

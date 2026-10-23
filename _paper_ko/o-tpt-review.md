@@ -21,6 +21,22 @@ Test-time prompt tuning(TPT)은 augmented view들에 대한 prediction entropy�
 
 O-TPT는 dispersion을 angular objective로 대체한다. Class text feature 간 pairwise cosine similarity 행렬을 identity 쪽으로 미는 penalty를 추가하여, feature들이 orthogonal에 가까워지도록 한다. 저자들은 text feature 간 cosine similarity가 낮을수록 ECE도 낮다는 것을 보이고, 이 단순한 constraint가 C-TPT와 Robust-Adapt 변형들보다 ECE를 더 많이 낮춘다는 것을 보인다.
 
+## Motivation
+
+출발점은 hand-crafted prompt에 대한 관찰이다. 서로 다른 prompt style은 CLIP에 거의 같은 accuracy를 주면서도 calibration은 크게 다를 수 있다. C-TPT는 이를 centroid 주변 text feature의 L2 dispersion으로 설명했다. 저자들은 대신 angle을 본다. Caltech101에서 여러 prompt style(zero-shot CLIP)에 대해 class text feature 간 pairwise cosine similarity의 분포를 그린다.
+
+![Cosine similarity distributions for different prompt styles](/images/blog/papers/o-tpt-motivation.webp)
+*Caltech101에서 hand-crafted prompt style별 class text feature 간 pairwise cosine similarity 분포. ECE가 낮은 prompt일수록 왼쪽(낮은 similarity, 큰 angle)에 위치하고, 가장 나쁜 prompt(ECE 15)는 accuracy(89)가 다른 prompt와 비슷한데도 0.86 근처에서 peak를 가진다. 논문 Figure.*
+
+순서가 깔끔하다. ECE 5.5-5.7인 prompt는 0.72-0.74 근처, ECE 7.84인 prompt는 0.80 근처, ECE 15인 prompt는 0.86 근처에서 peak를 가진다. Accuracy는 이 순서를 전혀 따르지 않는다. Appendix에서는 80개 prompt template과 7개 dataset으로 같은 확인을 반복하고, mean cosine similarity와 ECE 사이에 같은 관계를 찾는다. 즉 calibration 신호를 담는 것은 centroid 주변의 퍼짐만이 아니라 class feature 간 angle인 것으로 보인다.
+
+두 번째 근거는 test sample 단위의 분석이다. 저자들은 Flowers에서 TPT, C-TPT, O-TPT를 돌리고, test image마다 tuning된 class text feature의 mean cosine similarity를 기록한다.
+
+![Mean cosine similarity per test sample](/images/blog/papers/o-tpt-cosine-per-sample.webp)
+*Flowers(CLIP ViT-B/16)에서 test sample별 tuning된 text feature의 mean pairwise cosine similarity. TPT(초록)는 많은 sample에서 similarity를 CLIP initialization(보라)보다 높이며 크게 요동친다. C-TPT(파랑)는 대체로 낮지만 0.55-0.65까지 튀는 spike가 자주 나온다. O-TPT(빨강)는 0.49 근처에서 평평하게 유지된다. 논문 Figure.*
+
+TPT의 entropy minimization은 class feature들을 서로 끌어당기는 경우가 많고, 이때 overconfident해진다. C-TPT는 대부분의 sample에서 이를 고치지만, spike는 TPT가 실패하는 바로 그 어려운 sample에서 나타나며, 이들이 ECE가 높은 sample이다(아래 분석의 Group 1). O-TPT가 기반으로 하는 insight는, L2 dispersion은 모든 pair를 떼어놓지 않고 centroid만 옮겨도 만족될 수 있으므로 pairwise angle을 직접 penalize하는 편이 낫다는 것이다.
+
 ## Method
 
 ![O-TPT overview](/images/blog/papers/o-tpt-main.png)
@@ -80,6 +96,23 @@ Backbone은 CLIP ViT-B/16과 CLIP RN50이다. 지표는 top-1 accuracy(%)와 ECE
 | **O-TPT** | 57.80 | **4.88** | 41.16 | **9.69** |
 
 O-TPT는 두 benchmark와 두 backbone 모두에서 test-time 방법들 중 가장 낮은 평균 ECE를 기록한다. Fine-grained benchmark에서는 ECE가 zero-shot CLIP보다도 낮은데, 표의 다른 어떤 test-time 방법도 이를 달성하지 못한다. 논문 본문은 ViT-B/16 평균 ECE를 4.21로 인용하지만 표에는 4.23으로 되어 있으며, 여기서는 표의 값을 사용했다. Calibration 향상에는 accuracy 손실이 따른다. ViT-B/16 기준 fine-grained dataset에서 TPT 대비 약 0.6포인트, ImageNet 변형에서 2.1포인트이다. O-TPT는 CoOp prompt 위에 더했을 때(평균 ECE 7.91, C-TPT는 10.04, TPT는 18.36)와 MaPLe 위에 더했을 때에도 ECE를 낮춘다.
+
+Dataset별로 보면 평균만큼 균일하지는 않다. 논문의 teaser는 C-TPT 및 가장 좋은 Robust-Adapt 변형과 dataset별 ECE를 비교한다.
+
+![Per-dataset ECE radar plot](/images/blog/papers/o-tpt-radar.webp)
+*C-TPT(보라), Robust-adapt-Penalty-CTPT(주황), O-TPT(빨강)의 dataset별 ECE. 축마다 scale이 다르며 작을수록 좋다. O-TPT는 DTD, Flowers, Food, Aircraft에서 훨씬 낮지만, Cars에서는 다른 방법보다 높고 EuroSAT과 Pets에서는 C-TPT와 비슷하다. 논문 Figure.*
+
+가장 큰 향상은 C-TPT가 여전히 뚜렷하게 overconfident한 DTD, Flowers, Food에서 나온다. Cars에서는 O-TPT가 셋 중 가장 나쁘지만, 값이 모두 2 미만이므로 절대적인 차이는 작다.
+
+![Reliability diagrams for C-TPT and O-TPT](/images/blog/papers/o-tpt-reliability.webp)
+*Food101, DTD, Flowers에서 C-TPT(위)와 O-TPT(아래)의 reliability diagram(CLIP ViT-B/16). Bar가 diagonal 아래에 있으면 overconfidence, 위에 있으면 underconfidence이다. O-TPT는 DTD와 Flowers의 overconfident gap을 줄이고, Food에서 C-TPT의 약한 underconfidence를 없앤다. 논문 Figure.*
+
+Reliability diagram은 O-TPT가 overconfidence를 underconfidence로 바꾸기만 하는 것이 아님을 보여준다. Food에서는 diagonal 위에 있던 C-TPT의 bar를 diagonal에 맞추고, DTD와 Flowers에서는 C-TPT의 큰 빗금 gap이 작아진다. DTD는 중간 confidence 구간에 여전히 gap이 보인다.
+
+![Comparison with temperature scaling](/images/blog/papers/o-tpt-posthoc.webp)
+*5개 fine-grained dataset과 그 평균에서 TPT, temperature scaling을 적용한 TPT, C-TPT, O-TPT의 ECE. Temperature는 별도의 labeled validation set에서 학습되지만, 평균 ECE는 O-TPT가 가장 낮다. 논문 Figure.*
+
+이 비교가 중요한 이유는 temperature scaling이 test-time 방법에는 없는 label을 사용하기 때문이다. 이 plot에서 TPT+Temp는 평균적으로 plain TPT보다도 나쁘다(Cars와 Flowers에서는 도움이 되지만 Food, Caltech, DTD에서는 오히려 나빠진다). 이는 다른 split에서 학습된 단일 temperature가 sample별 prompt tuning에 잘 옮겨지지 않음을 시사한다.
 
 ## Limitations
 

@@ -21,6 +21,17 @@ CLIP은 이미지를 "a photo of a dog" 같은 텍스트와 비교하여 zero-sh
 
 Test-time prompt tuning(TPT)은 지금 분류하려는 단일 test sample로부터 prompt를 학습한다. Training data도 label도 사용하지 않는다. Image classification에서 TPT는 test image의 augmented view를 많이 만들고, 그중 confidence가 가장 높은 것들을 남긴 뒤, 그 view들에 대한 평균 prediction의 entropy가 낮아지도록 prompt를 갱신한다. 같은 아이디어를 context-dependent visual reasoning task(Bongard-HOI)에도 적용한다.
 
+## Motivation
+
+Prompt tuning은 prompt embedding을 model weight처럼 다루어 downstream task의 labeled data에 맞춘다. 저자들은 그 결과 학습된 prompt가 training distribution에 묶이게 된다고 주장한다. Table 1에서 이미 그 징후가 보인다. ImageNet으로 학습한 CoOp과 CoCoOp은 training data와 가까운 ImageNet과 ImageNet-V2에서 가장 많이 오르지만, ImageNet-A, -R, -Sketch에서는 hand-crafted prompt 80개의 ensemble보다 나을 것이 없다.
+
+더 분명한 근거는 cross-dataset transfer 실험이다. 한 fine-grained dataset에서 prompt를 tuning(16-shot)한 뒤 다른 dataset에서 평가하고, hand-crafted prompt를 쓴 zero-shot CLIP 대비 상대 accuracy 변화 $$(acc - acc_{\text{base}})/acc_{\text{base}}$$를 보고한다. 예를 들어 CLIP-RN50은 "a photo of a"로 Flower102에서 61.75%를 얻지만, DTD에서 학습한 CoOp은 Flower102에서 33.41%에 그쳐 상대 변화가 $$-0.46$$이다.
+
+![Cross-dataset relative improvement heatmaps](/images/blog/papers/tpt-review-motivation.webp)
+*행 dataset에서 tuning한 prompt를 열 dataset에서 test했을 때 zero-shot CLIP-RN50 대비 상대 accuracy 변화. (a) CoOp, (b) CoCoOp. 대각선만 양수이고, source dataset이 없는 맨 아래 행(TPT)은 모든 열에서 양수다. 논문 Figure.*
+
+대각선을 벗어난 칸은 거의 모두 음수다. 즉 한 dataset에서 tuning한 prompt는 대개 다른 dataset에서 성능을 떨어뜨리며, Average 열은 모든 source dataset에서 음수다. CoCoOp의 image-conditioned prompt는 대부분의 칸을 덜 음수로 만들지만 하락 자체를 없애지는 못한다. 여기서 핵심 아이디어가 나온다. Training distribution에서 prompt 하나를 배우는 대신, 각 test sample에 대해 그 sample만으로 prompt를 배운다. Label이 없으므로 신호는 unsupervised여야 하며, 논문은 augmented view 사이의 prediction consistency를 사용한다. 맨 아래 행의 TPT는 10개 dataset 모두에서 향상된다.
+
 ## Method
 
 ![TPT overview](/images/blog/papers/tpt-main.png)
@@ -100,6 +111,18 @@ TPT + CoCoOp 행은 여기서 생략했다(ViT-B/16: 평균 64.30, OOD 평균 62
 Average 열만 표시했다. 10개 dataset은 Flower102, DTD, Pets, Cars, UCF101, Caltech101, Food101, SUN397, Aircraft, EuroSAT이다.
 
 Training data 없이도 TPT는 두 backbone 모두에서 단일 방법들 중 가장 높은 OOD 평균을 기록한다. 가장 큰 향상은 ImageNet-A에서 나타난다(ViT-B/16에서 CLIP 대비 +6.90포인트). CoOp과 CoCoOp은 in-distribution ImageNet과 ImageNet-V2에서는 여전히 앞서며, TPT는 그 위에 더해 쓸 수 있다. Bongard-HOI에서 CLIP-RN50을 사용한 TPT는 Bongard-HOI training split을 사용하지 않고도 평균 accuracy 66.59%를 달성하며, HOITrans는 62.46%이다.
+
+아래 ablation은 CLIP-RN50을 사용하며, Table 1의 다섯 ImageNet benchmark에 대한 평균 top-1 accuracy를 보고한다.
+
+![Ablations on the tuned module and the confidence cutoff](/images/blog/papers/tpt-review-ablation.webp)
+*(a) CLIP의 서로 다른 부분에 대한 MEMO 방식 test-time optimization. Prompt tuning만 zero-shot CLIP(점선)을 분명히 넘고, text encoder는 비슷한 수준이며, visual encoder가 가장 나쁘다. (b) Confidence selection의 cutoff percentile $$\rho$$. Accuracy는 $$\rho = 0.1$$에서 최고이고, confidence가 낮은 view를 더 많이 남길수록 떨어진다. 논문 Figure.*
+
+(a)는 adapt할 parameter로 prompt만 고른 선택을 뒷받침한다. 단일 이미지로 전체 모델이나 visual encoder를 tuning하면 zero-shot baseline보다 낮아진다. (b)는 view를 너무 적게 남겨도($$\rho$$가 0에 가까움) 성능이 떨어짐을 보여 준다. 따라서 cutoff는 noisy crop을 걸러내는 것과 안정적인 평균을 위해 충분한 view를 남기는 것 사이의 trade-off이다.
+
+![Accuracy versus number of views and optimisation steps](/images/blog/papers/tpt-review-efficiency.webp)
+*(a) Augmented view 수가 늘수록 accuracy가 오르다가 N = 64 근처에서 plateau에 이른다. (b) 1 step에서 2 step으로 늘리면 약 0.4포인트 오르고, 그 이상은 거의 오르지 않는다. 논문 Figure.*
+
+이 곡선들이 default setting(64개 view, 1 step)의 근거다. View와 step을 늘리면 inference 시간이 대략 선형으로 늘지만, 그 지점을 넘어서는 이득이 작다.
 
 ## Limitations
 

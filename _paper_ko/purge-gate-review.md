@@ -21,6 +21,15 @@ Point cloud test-time adaptation(TTA) 방법들은 대부분 여러 번의 backp
 
 Purge-Gate(PG)는 token 수준에서 동작한다. Background point나 impulse noise 같은 corruption은 일부 local patch에 다른 patch보다 훨씬 크게 영향을 준다. PG는 각 token이 source prototype에서 얼마나 떨어져 있는지 측정하고, 가장 크게 벗어난 token들을 attention layer 이전에 제거한다. 아무것도 갱신하지 않는다. 두 가지 변형이 있다. PG-SP는 저장된 source statistics를 사용하고, PG-SF는 완전히 source-free하며 모델 자신의 [cls] token을 prototype으로 사용한다.
 
+## Motivation
+
+논문은 image와 point cloud의 차이에서 출발한다. 2D TTA에서는 입력 크기가 고정되어 있고 corruption이 보통 image 전체에 고르게 퍼져 있다. Point cloud에서는 distribution shift가 새로운 point(background clutter, impulse outlier)를 추가하거나 shape의 일부 영역만 교란할 수 있다. 그래서 손상이 고르지 않다. 몇몇 local patch는 심하게 corrupt되고 나머지 object는 거의 깨끗하다. 기존 point cloud TTA 방법들은 이를 무시하고 backpropagation(TENT, MATE, SMART-PC)이나 class-level source prototype(BFTT3D)으로 모델 전체를 적응시킨다.
+
+![Token-level domain shift on a corrupted airplane](/images/blog/papers/purge-gate-motivation.webp)
+*왼쪽부터 깨끗한 airplane, 흩어진 outlier point로 corrupt된 같은 shape, PG-SF로 순위를 매긴 token, PG-SP로 순위를 매긴 token이다. 빨간색이 가장 많이 shift된 token이다. 두 score 모두 떨어져 나온 outlier patch를 위쪽 순위에 두고, 동체와 날개 위의 patch는 낮게 둔다. 논문 Figure.*
+
+이 그림이 핵심 관찰이다. Shift는 특정 token에 집중되어 있고, source prototype까지의 단순한 거리만으로 그 token을 찾을 수 있다. Method 섹션의 분석은 이런 token이 왜 문제인지 설명한다. Noise가 token을 지배하면 LayerNorm 출력이 거의 random direction을 가리키고, attention layer는 uniform weight 쪽으로 흘러간다. 핵심 insight는 efficient transformer의 token pruning(예: Kim et al., 2022)에서 빌려온 것이다. Token pruning은 계산량을 줄이려고 uninformative token을 버린다. Purge-Gate는 대신 가장 많이 shift된 token을 버려서 attention을 보호한다. Gradient step도, weight 변경도 필요 없다.
+
 ## Method
 
 ![Purge-Gate overview](/images/blog/papers/purge-gate-main.png)
@@ -104,12 +113,27 @@ $$
 
 ShapeNet-C에서 MATE와 SMART-PC 행은 "Standard" 변형이다.
 
+![Per-corruption accuracy on ScanObjectNN-C](/images/blog/papers/purge-gate-scanobjectnn-table.webp)
+*논문의 Table 1: ScanObjectNN-C의 15개 corruption 각각에 대한 top-1 accuracy이며, 괄호 안은 Source Only 대비 변화량이다. PG-SP는 15개 중 13개 corruption에서 최고이다. 예외는 occlusion과 LiDAR로, 모든 방법이 약 12% 이하에 머문다. 논문 Figure.*
+
+Corruption별로 보면 purging이 어디서 가장 효과적인지 알 수 있다. 가장 큰 향상은 point를 추가하거나 옮기는 noise에서 나온다. Uniform noise(21.69에서 41.48), Gaussian noise(18.76에서 55.59), impulse noise(18.42에서 38.90)이다. Occlusion과 LiDAR는 나쁜 point를 더하는 대신 shape의 일부를 지우므로 제거할 token이 거의 없고, PG-SP의 향상도 거의 없다.
+
 BFTT3D 대비 비용(batch size 32, NVIDIA A6000 한 장, 여섯 가지 purge size는 병렬이 아니라 순차적으로 실행):
 
 | Method | Time per batch | GPU memory |
 |---|---|---|
 | BFTT3D | 173.94 ms | 7400 MiB |
 | PG-SP | 14.07 ms | 1300 MiB |
+
+![BatchNorm reset and cost against BFTT3D](/images/blog/papers/purge-gate-bn-reset-cost.webp)
+*(a) BatchNorm reset 유무에 따른 PG-SP와 BFTT3D의 ScanObjectNN-C 평균 accuracy. (b) Batch size 32에서 batch당 시간과 GPU memory. PG-SP는 (a)의 두 설정 모두에서 앞서지만, reset만으로도 BFTT3D가 33.00에서 45.76으로 오른다. 논문 Figure.*
+
+(a)는 두 요소를 분리해서 보여준다. Reset이 없어도 PG-SP는 BFTT3D보다 약 7포인트 높으며(39.86 vs. 33.00), 이것이 purging만의 효과이다. 두 방법 모두 reset을 쓰면 격차는 약 3포인트로 줄어든다. (b)는 위의 비용 표를 그림으로 나타낸 것이다.
+
+![Effect of purge size](/images/blog/papers/purge-gate-purge-size.webp)
+*ScanObjectNN-C의 Background(왼쪽)와 Distortion(오른쪽) corruption에서 0부터 127까지 모든 purge size에 대한 accuracy(검은색)와 출력 entropy(빨간색). 노란 띠는 탐색 범위 [0, 32]이다. 주황색 선은 여섯 개 size 중 entropy 기반 선택이 얻은 accuracy이고, 초록색 선은 [0, 32] 안의 최고 accuracy이다. 논문 Figure.*
+
+이 그림은 entropy가 왜 괜찮은 selector인지 보여준다. Purge size가 커질수록 accuracy는 오르고 entropy는 내려가며, 약 100개 token을 넘으면 둘 다 방향이 바뀐다. Accuracy는 급락하고 entropy는 치솟는다. [0, 32] 안에서 entropy 선택은 최고값에 가깝다(Background에서 22.89 vs. 약 24, Distortion에서 62.48). 하지만 Background에서 실제 최고점은 약 100개 token을 제거했을 때의 50% 이상으로, 탐색 범위 밖에 있다.
 
 PG-SP와 PG-SF는 ScanObjectNN-C와 ModelNet40-C에서 가장 높은 평균 accuracy를 기록하며, gradient step 없이도 TENT와 TTT 방법들을 앞선다. ShapeNet-C는 더 어렵다. 대부분의 TTA 방법이 Source Only보다 낮아지는 반면, PG는 약 3포인트를 얻어 SMART-PC와 동률이다. PG-SP는 BFTT3D보다 12.4배 빠르고 memory를 5.5배 적게 쓴다. Point-Mamba backbone(Table 4)에서 PG-SP는 ScanObjectNN-C를 29.11에서 41.42로, ModelNet-C를 58.32에서 68.61로 향상시키지만, ShapeNet-C에서는 Source Only보다 약간 낮다(51.66 vs. 51.92).
 

@@ -19,6 +19,22 @@ Test-time prompt tuning (TPT) adapts CLIP's text prompt to each test image by mi
 
 O-TPT replaces dispersion with an angular objective. It adds a penalty that pushes the matrix of pairwise cosine similarities between class text features toward the identity, so the features become close to orthogonal. The authors show that lower cosine similarity between text features goes with lower ECE, and that this simple constraint lowers ECE more than C-TPT and the Robust-Adapt variants.
 
+## Motivation
+
+The starting point is an observation about hand-crafted prompts: different prompt styles can give CLIP almost the same accuracy but very different calibration. C-TPT explained this with L2 dispersion of text features around their centroid. The authors look at the angles instead. For several prompt styles on Caltech101 (zero-shot CLIP), they plot the distribution of pairwise cosine similarities between the class text features.
+
+![Cosine similarity distributions for different prompt styles](/images/blog/papers/o-tpt-motivation.webp)
+*Distribution of pairwise cosine similarities between class text features on Caltech101, one curve per hand-crafted prompt style. Prompts with lower ECE sit further left (lower similarity, larger angles); the worst prompt (ECE 15) peaks near 0.86, even though its accuracy (89) is similar to the others. Figure from the paper.*
+
+The ordering is clean: the ECE 5.5-5.7 prompts peak around 0.72-0.74, the ECE 7.84 prompt near 0.80, and the ECE 15 prompt near 0.86. Accuracy does not follow this order at all. The appendix repeats the check with 80 prompt templates on seven datasets and finds the same relation between mean cosine similarity and ECE. So the angle between class features, not only their spread around a centroid, seems to carry the calibration signal.
+
+The second piece of evidence is per test sample. On Flowers, the authors run TPT, C-TPT and O-TPT and record, for each test image, the mean cosine similarity of the tuned class text features.
+
+![Mean cosine similarity per test sample](/images/blog/papers/o-tpt-cosine-per-sample.webp)
+*Mean pairwise cosine similarity of the tuned text features for each test sample on Flowers (CLIP ViT-B/16). TPT (green) pushes similarity above the CLIP initialization (purple) for many samples and fluctuates strongly. C-TPT (blue) mostly stays low but has frequent spikes back to 0.55-0.65. O-TPT (red) stays flat around 0.49. Figure from the paper.*
+
+TPT's entropy minimization often pulls class features together, which is when it becomes overconfident. C-TPT fixes this for most samples, but its spikes land on the same hard samples where TPT fails, and these are exactly the samples with high ECE (Group 1 in the analysis below). The insight O-TPT builds on is that L2 dispersion can be satisfied by moving the centroid without separating every pair, so it is better to penalize pairwise angles directly.
+
 ## Method
 
 ![O-TPT overview](/images/blog/papers/o-tpt-main.png)
@@ -78,6 +94,23 @@ Backbones are CLIP ViT-B/16 and CLIP RN50. Metrics are top-1 accuracy (%) and EC
 | **O-TPT** | 57.80 | **4.88** | 41.16 | **9.69** |
 
 O-TPT has the lowest average ECE among the test-time methods on both benchmarks and both backbones. On the fine-grained benchmarks its ECE is also below zero-shot CLIP, which no other test-time method in the table achieves. The text of the paper quotes 4.21 for the ViT-B/16 average ECE, while the table gives 4.23; the table value is used here. The calibration gain costs some accuracy: about 0.6 points versus TPT on fine-grained datasets with ViT-B/16, and 2.1 points on the ImageNet variants. O-TPT also lowers ECE when added on top of CoOp prompts (average ECE 7.91 vs. 10.04 for C-TPT and 18.36 for TPT) and on top of MaPLe.
+
+The per-dataset picture is less uniform than the averages. The paper's teaser compares ECE per dataset against C-TPT and the best Robust-Adapt variant.
+
+![Per-dataset ECE radar plot](/images/blog/papers/o-tpt-radar.webp)
+*ECE per fine-grained dataset for C-TPT (purple), Robust-adapt-Penalty-CTPT (orange) and O-TPT (red); each axis has its own scale and smaller is better. O-TPT is much lower on DTD, Flowers, Food and Aircraft, but higher than the others on Cars and about level with C-TPT on EuroSAT and Pets. Figure from the paper.*
+
+The biggest gains come on DTD, Flowers and Food, where C-TPT is still clearly overconfident. On Cars O-TPT is the worst of the three, but all values there are below 2, so the absolute difference is small.
+
+![Reliability diagrams for C-TPT and O-TPT](/images/blog/papers/o-tpt-reliability.webp)
+*Reliability diagrams (CLIP ViT-B/16) for C-TPT (top) and O-TPT (bottom) on Food101, DTD and Flowers. Bars below the diagonal mean overconfidence, bars above it underconfidence. O-TPT shrinks the overconfident gaps on DTD and Flowers and removes C-TPT's slight underconfidence on Food. Figure from the paper.*
+
+The reliability diagrams show that O-TPT does not just trade overconfidence for underconfidence: on Food the C-TPT bars sit above the diagonal and O-TPT moves them onto it, while on DTD and Flowers the large hatched gaps of C-TPT become smaller. DTD still has visible gaps at mid confidence.
+
+![Comparison with temperature scaling](/images/blog/papers/o-tpt-posthoc.webp)
+*ECE of TPT, TPT with temperature scaling, C-TPT and O-TPT on five fine-grained datasets and their average. The temperature is fit on a separate labeled validation set, yet O-TPT has the lowest average ECE. Figure from the paper.*
+
+This comparison matters because temperature scaling uses labels that a test-time method does not have. In this plot TPT+Temp is even worse than plain TPT on average (it helps on Cars and Flowers but hurts on Food, Caltech and DTD), which suggests a single temperature learned on another split does not transfer well to per-sample prompt tuning.
 
 ## Limitations
 
