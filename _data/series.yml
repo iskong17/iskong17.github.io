@@ -56,3 +56,8 @@
   instructor: "서지영"
   url: "https://thebook.io/080289/"
   prefix: "Chapter"
+- key: basic
+  topic: basic
+  name: "Basic Concepts"
+  course: "Short notes on concepts that come up across courses and papers"
+  prefix: "Note"
