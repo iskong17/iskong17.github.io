@@ -10,7 +10,7 @@ team: "Cadillac F1 Team"
 team_id: cadillac
 current:
   season: 2026
-  round: 17
+  round: 18
   position: 22
   points: 0
   wins: 0

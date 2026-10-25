@@ -10,7 +10,7 @@ team: "Williams"
 team_id: williams
 current:
   season: 2026
-  round: 17
+  round: 18
   position: 19
   points: 5
   wins: 0

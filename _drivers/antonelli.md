@@ -10,12 +10,12 @@ team: "Mercedes"
 team_id: mercedes
 current:
   season: 2026
-  round: 17
+  round: 18
   position: 1
-  points: 340
-  wins: 8
+  points: 365
+  wins: 9
 seasons:
-  - { season: 2026, position: "1", points: 340, wins: 8, team: "Mercedes" }
+  - { season: 2026, position: "1", points: 365, wins: 9, team: "Mercedes" }
   - { season: 2025, position: "7", points: 150, wins: 0, team: "Mercedes" }
 teams:
   - { years: "2025–2026", team: "Mercedes" }
