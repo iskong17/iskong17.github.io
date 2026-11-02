@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 37
+knowledge_group: machine-learning
 card_title: "Q 37: Why 'Naive' Bayes"
 card_desc: "Conditional independence · Bayes' rule · Generative classifier · Laplace smoothing"
 lang: ko

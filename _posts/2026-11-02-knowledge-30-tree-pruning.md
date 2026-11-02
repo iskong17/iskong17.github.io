@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 30
+knowledge_group: machine-learning
 card_title: "Q 30: Decision tree pruning"
 card_desc: "Pre-pruning · Post-pruning · Reduced error pruning · Cost-complexity · Ccp alpha"
 lang: ko

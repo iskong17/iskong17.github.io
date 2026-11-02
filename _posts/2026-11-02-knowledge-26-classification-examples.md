@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 26
+knowledge_group: machine-learning
 card_title: "Q 26: Classification use cases"
 card_desc: "Spam filtering · Credit scoring · Fraud detection · Image classification · Multi-label"
 lang: ko

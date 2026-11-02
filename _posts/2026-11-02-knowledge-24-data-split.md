@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 24
+knowledge_group: machine-learning
 card_title: "Q 24: Train, Validation, Test Split"
 card_desc: "Holdout · Confidence interval · k-fold CV · Stratified split · Data leakage"
 lang: ko

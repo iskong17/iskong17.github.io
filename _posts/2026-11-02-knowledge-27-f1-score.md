@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 27
+knowledge_group: machine-learning
 card_title: "Q 27: F1-score"
 card_desc: "Precision · Recall · Harmonic mean · F-beta · Macro and micro averaging"
 lang: ko

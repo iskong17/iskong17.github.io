@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 1
+knowledge_group: machine-learning
 card_title: "Q 1: What is machine learning?"
 card_desc: "Experience E, Task T, Performance P · Generalization · Empirical risk minimization"
 lang: ko

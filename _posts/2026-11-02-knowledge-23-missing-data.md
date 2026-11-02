@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 23
+knowledge_group: machine-learning
 card_title: "Q 23: Handling Missing Data"
 card_desc: "MCAR, MAR, MNAR · Deletion · Imputation · Missing indicator · Data leakage"
 lang: ko

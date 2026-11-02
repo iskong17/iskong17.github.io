@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 20
+knowledge_group: machine-learning
 card_title: "Q 20: Sigmoid Function"
 card_desc: "Logistic function · Log-odds · Binary classification · Saturation · Vanishing gradient"
 lang: ko

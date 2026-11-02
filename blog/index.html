@@ -202,20 +202,28 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             <span class="series-count"><b>{{ sp.size }}</b> questions</span>
           </div>
         </header>
-        <ul class="question-list">
-          {%- for post in sp %}
-          {%- assign answer = post.content | split: '<h2 id="자세한-설명"' | first | split: '</h2>' | last %}
-          <li class="question-item" data-category="study" data-topic="{{ post.topic }}">
-            <details>
-              <summary>{{ post.title }}</summary>
-              <div class="question-answer">
-                {{ answer }}
-                <a class="question-more" href="{{ post.url | relative_url }}">자세한 설명 보기 {% include icon.html name="arrow" %}</a>
-              </div>
-            </details>
-          </li>
-          {%- endfor %}
-        </ul>
+        {%- for g in s.groups %}
+        {%- assign gp = sp | where: "knowledge_group", g.key %}
+        {%- if gp.size > 0 %}
+        <div class="question-group">
+          <h3>{{ g.label }} <small>{{ gp.size }}</small></h3>
+          <ul class="question-list">
+            {%- for post in gp %}
+            {%- assign answer = post.content | split: '<h2 id="자세한-설명"' | first | split: '</h2>' | last %}
+            <li class="question-item" data-category="study" data-topic="{{ post.topic }}">
+              <details>
+                <summary>{{ post.title }}</summary>
+                <div class="question-answer">
+                  {{ answer }}
+                  <a class="question-more" href="{{ post.url | relative_url }}">자세한 설명 보기 {% include icon.html name="arrow" %}</a>
+                </div>
+              </details>
+            </li>
+            {%- endfor %}
+          </ul>
+        </div>
+        {%- endif %}
+        {%- endfor %}
       </section>
       {%- else %}
       <section class="study-group series-block topic-{{ s.topic }}" data-series="{{ s.key }}">

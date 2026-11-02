@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 31
+knowledge_group: machine-learning
 card_title: "Q 31: Accuracy vs performance"
 card_desc: "Accuracy paradox · Class imbalance · Cost-sensitive evaluation · Latency"
 lang: ko

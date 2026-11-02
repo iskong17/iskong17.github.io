@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 25
+knowledge_group: machine-learning
 card_title: "Q 25: Feature extraction for dimensionality reduction"
 card_desc: "PCA · LDA · Kernel PCA · Autoencoder · t-SNE"
 lang: ko

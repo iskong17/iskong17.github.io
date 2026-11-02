@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 7
+knowledge_group: machine-learning
 card_title: "Q 7: Machine learning vs big data"
 card_desc: "3Vs · Distributed processing · Learning from data · SGD · Data quality"
 lang: ko

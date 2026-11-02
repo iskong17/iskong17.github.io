@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 16
+knowledge_group: machine-learning
 card_title: "Q 16: Backpropagation"
 card_desc: "Chain rule · Computational graph · Reverse-mode autodiff · Vanishing gradient"
 lang: ko

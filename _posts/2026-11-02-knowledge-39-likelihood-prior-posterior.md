@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 39
+knowledge_group: statistics
 card_title: "Q 39: Likelihood, Prior, Posterior"
 card_desc: "Likelihood · Prior · Posterior · MLE · MAP"
 lang: ko

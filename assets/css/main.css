@@ -893,6 +893,9 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-basic { --accent: #0d9488; }
 
 /* Question series: a bullet per question that opens to show the answer */
+.question-group { margin-top: 24px; }
+.question-group h3 { margin: 0; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 18px; }
+.question-group h3 small { margin-left: 6px; font-size: 13px; font-weight: 500; color: var(--muted); }
 .question-list { margin: 12px 0 0; padding-left: 22px; list-style: disc; }
 .question-item { padding: 2px 0; line-height: 1.5; }
 .question-item::marker { color: var(--accent); }

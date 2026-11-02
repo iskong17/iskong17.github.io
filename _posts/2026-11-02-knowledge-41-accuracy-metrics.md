@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 41
+knowledge_group: machine-learning
 card_title: "Q 41: Common Accuracy Metrics"
 card_desc: "Accuracy · Precision · Recall · F1 · ROC-AUC · RMSE"
 lang: ko

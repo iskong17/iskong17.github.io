@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 36
+knowledge_group: machine-learning
 card_title: "Q 36: TPR and Recall"
 card_desc: "True positive rate · Recall · Sensitivity · False negative"
 lang: ko

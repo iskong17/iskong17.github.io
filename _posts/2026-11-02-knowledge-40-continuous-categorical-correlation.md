@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 40
+knowledge_group: statistics
 card_title: "Q 40: Continuous-Categorical Correlation"
 card_desc: "Point-biserial · ANOVA · Eta squared · Kruskal-Wallis · Mutual information"
 lang: ko

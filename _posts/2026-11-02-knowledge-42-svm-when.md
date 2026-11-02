@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 42
+knowledge_group: machine-learning
 card_title: "Q 42: When to Use SVM"
 card_desc: "Maximum margin · Kernel trick · High-dimensional data · Hinge loss · Scaling"
 lang: ko

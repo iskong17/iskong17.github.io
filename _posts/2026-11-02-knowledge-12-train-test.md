@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 12
+knowledge_group: machine-learning
 card_title: "Q 12: Training set vs test set"
 card_desc: "Generalization · Validation set · Selection bias · Data leakage · Standard error"
 lang: ko

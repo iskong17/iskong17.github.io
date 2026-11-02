@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 2
+knowledge_group: machine-learning
 card_title: "Q 2: Supervised vs unsupervised learning"
 card_desc: "Labels · p(y|x) vs p(x) · Clustering · Evaluation · Self-supervised"
 lang: ko

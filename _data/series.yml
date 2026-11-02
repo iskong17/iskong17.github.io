@@ -71,5 +71,9 @@
 - key: knowledge
   topic: basic
   name: "Knowledge"
-  course: "머신러닝 면접 질문과 관련 개념"
+  course: "통계, 머신러닝, 선형대수 면접 질문과 관련 개념"
   prefix: "Q"
+  groups:
+    - { key: statistics, label: "Statistics / Probability" }
+    - { key: machine-learning, label: "Machine Learning" }
+    - { key: linear-algebra, label: "Linear Algebra" }

@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 33
+knowledge_group: machine-learning
 card_title: "Q 33: KNN vs K-means"
 card_desc: "Supervised vs unsupervised · Lazy learning · Centroid · Lloyd's algorithm"
 lang: ko

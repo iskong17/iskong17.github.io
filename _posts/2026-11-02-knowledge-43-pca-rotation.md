@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 43
+knowledge_group: machine-learning
 card_title: "Q 43: Rotation in PCA"
 card_desc: "Orthogonal transform · Principal axes · Varimax · Explained variance · Loadings"
 lang: ko

@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 21
+knowledge_group: machine-learning
 card_title: "Q 21: Convex Function"
 card_desc: "Chord inequality · Hessian · Global minimum · Logistic loss · Non-convexity"
 lang: ko

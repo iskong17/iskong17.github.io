@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 5
+knowledge_group: machine-learning
 card_title: "Q 5: AI vs machine learning"
 card_desc: "Subset relation · Rule-based systems · Search · Learning from data"
 lang: ko

@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 9
+knowledge_group: machine-learning
 card_title: "Q 9: Inductive vs deductive learning"
 card_desc: "Induction · Deduction · Inductive bias · Explanation-based learning · No free lunch"
 lang: ko

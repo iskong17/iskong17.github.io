@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 38
+knowledge_group: machine-learning
 card_title: "Q 38: ROC Curve"
 card_desc: "TPR · FPR · Threshold · AUC · Class imbalance"
 lang: ko

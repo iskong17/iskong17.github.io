@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 22
+knowledge_group: machine-learning
 card_title: "Q 22: Useful ML Metrics"
 card_desc: "Precision and recall · AUC · RMSE and MAE · Log loss · NDCG"
 lang: ko

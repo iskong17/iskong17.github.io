@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 28
+knowledge_group: machine-learning
 card_title: "Q 28: Bias-Variance Tradeoff"
 card_desc: "Bias · Variance · Irreducible error · Model complexity · Regularization"
 lang: ko

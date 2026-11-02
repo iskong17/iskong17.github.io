@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 14
+knowledge_group: machine-learning
 card_title: "Q 14: Hash Table"
 card_desc: "Hash function · Collision · Load factor · Feature hashing · LSH"
 lang: ko

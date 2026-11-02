@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 13
+knowledge_group: machine-learning
 card_title: "Q 13: What is overfitting?"
 card_desc: "Generalization gap · Model complexity · Regularization · Early stopping · Double descent"
 lang: ko

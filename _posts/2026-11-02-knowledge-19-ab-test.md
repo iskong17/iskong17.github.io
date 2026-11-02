@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 19
+knowledge_group: statistics
 card_title: "Q 19: A/B Test"
 card_desc: "Randomization · Hypothesis test · p-value · Statistical power · Peeking"
 lang: ko

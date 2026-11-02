@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 11
+knowledge_group: machine-learning
 card_title: "Q 11: Choosing a classification algorithm"
 card_desc: "Metric first · Baseline · Cross-validation · Constraints · Error analysis"
 lang: ko

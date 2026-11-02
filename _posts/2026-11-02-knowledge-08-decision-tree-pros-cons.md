@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 8
+knowledge_group: machine-learning
 card_title: "Q 8: Decision tree pros and cons"
 card_desc: "Interpretability · Gini impurity · High variance · Axis-aligned splits · Bagging"
 lang: ko

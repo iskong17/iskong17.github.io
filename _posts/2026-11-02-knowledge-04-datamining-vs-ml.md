@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 4
+knowledge_group: machine-learning
 card_title: "Q 4: Data mining vs machine learning"
 card_desc: "Knowledge discovery · Prediction · KDD · Association rules · Lift"
 lang: ko

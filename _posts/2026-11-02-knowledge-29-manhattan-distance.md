@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 29
+knowledge_group: machine-learning
 card_title: "Q 29: Manhattan distance in K-means and KNN"
 card_desc: "L1 distance · Mean vs median · K-medians · K-medoids · KNN metrics"
 lang: ko

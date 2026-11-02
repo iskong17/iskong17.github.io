@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 18
+knowledge_group: machine-learning
 card_title: "Q 18: Classification vs Regression"
 card_desc: "Discrete label · Continuous target · Cross-entropy · MSE · Logistic regression"
 lang: ko

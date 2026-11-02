@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 34
+knowledge_group: statistics
 card_title: "Q 34: Bayes' Theorem"
 card_desc: "Conditional probability · Prior · Likelihood · Posterior · Base rate"
 lang: ko

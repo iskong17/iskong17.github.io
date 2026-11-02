@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 32
+knowledge_group: machine-learning
 card_title: "Q 32: Fourier transform"
 card_desc: "Frequency domain · DFT and FFT · Convolution theorem · Spectrogram"
 lang: ko

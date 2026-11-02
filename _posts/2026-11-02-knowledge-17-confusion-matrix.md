@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 17
+knowledge_group: machine-learning
 card_title: "Q 17: Confusion Matrix"
 card_desc: "TP, FP, FN, TN · Precision · Recall · Specificity · Class imbalance"
 lang: ko

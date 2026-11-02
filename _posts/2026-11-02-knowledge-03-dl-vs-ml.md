@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 3
+knowledge_group: machine-learning
 card_title: "Q 3: Deep learning vs machine learning"
 card_desc: "Subset relation · Representation learning · Feature engineering · Tabular vs unstructured"
 lang: ko

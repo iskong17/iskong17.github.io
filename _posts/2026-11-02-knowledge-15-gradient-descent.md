@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 15
+knowledge_group: machine-learning
 card_title: "Q 15: Gradient Descent"
 card_desc: "Gradient · Learning rate · Mini-batch SGD · Saddle point · Convergence"
 lang: ko

@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 6
+knowledge_group: machine-learning
 card_title: "Q 6: Five popular ML algorithms"
 card_desc: "Linear and logistic regression · Tree ensembles · SVM · KNN · Neural networks"
 lang: ko

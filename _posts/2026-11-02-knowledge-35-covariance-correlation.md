@@ -5,6 +5,7 @@ category: study
 topic: basic
 series: knowledge
 lecture: 35
+knowledge_group: statistics
 card_title: "Q 35: Covariance vs. Correlation"
 card_desc: "Covariance · Pearson correlation · Scale invariance · Linear relationship"
 lang: ko
