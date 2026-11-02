@@ -170,7 +170,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
           <span class="cat-card-bg" aria-hidden="true">{% include icon.html name=ticon %}</span>
           <span class="cat-card-top">
             <span class="cat-bar-icon">{% include icon.html name=ticon %}</span>
-            <span class="cat-card-count"><b>{{ sp.size }}</b>{% if s.prefix == "Discussion" %}discussions{% elsif s.prefix == "Chapter" %}chapters{% else %}lectures{% endif %}</span>
+            <span class="cat-card-count"><b>{{ sp.size }}</b>{% if s.prefix == "Discussion" %}discussions{% elsif s.prefix == "Chapter" %}chapters{% elsif s.prefix == "Q" %}questions{% else %}lectures{% endif %}</span>
           </span>
           <span class="cat-card-name">{{ s.name }}</span>
           <span class="topic-card-courses">
@@ -197,7 +197,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             <p>{{ s.course }}{% if s.instructor %} · {{ s.instructor }}{% endif %}</p>
           </div>
           <div class="series-head-meta">
-            <span class="series-count"><b>{{ sp.size }}</b> {% if s.prefix == "Discussion" %}discussions{% else %}lectures{% endif %}</span>
+            <span class="series-count"><b>{{ sp.size }}</b> {% if s.prefix == "Discussion" %}discussions{% elsif s.prefix == "Chapter" %}chapters{% elsif s.prefix == "Q" %}questions{% else %}lectures{% endif %}</span>
             {%- if s.url %}<a class="series-link" href="{{ s.url }}" target="_blank" rel="noopener">Course page {% include icon.html name="arrow" %}</a>{% endif %}
           </div>
         </header>

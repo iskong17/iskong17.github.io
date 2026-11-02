@@ -87,7 +87,7 @@ layout: default
         {%- else %}<span class="series-step next is-disabled"><small>Last</small><span>→</span></span>{% endif %}
       </div>
       <details class="series-toc">
-        <summary>All {% if series_kind == "Discussion" %}discussions{% else %}lectures{% endif %}</summary>
+        <summary>All {% if series_kind == "Discussion" %}discussions{% elsif series_kind == "Chapter" %}chapters{% elsif series_kind == "Q" %}questions{% else %}lectures{% endif %}</summary>
         <ol>
           {%- for p in series_posts %}
           {%- assign p_prefix = series_kind | append: " " | append: p.lecture | append: ": " %}
