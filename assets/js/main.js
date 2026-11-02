@@ -244,6 +244,32 @@
         go('#' + panel + (on.length ? '/' + on.join('+') : ''));
       });
     });
+    // Schedule: local times in KST, and a countdown to the next race. Past races stay, so the row order is the calendar.
+    var scheduleRows = document.querySelectorAll('.schedule-row');
+    if (scheduleRows.length) {
+      var nextRow = null;
+      scheduleRows.forEach(function (row) {
+        var when = new Date(row.getAttribute('data-start'));
+        row.querySelector('.schedule-time').textContent = when.toLocaleString('en-GB', { timeZone: 'Asia/Seoul', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+        if (!nextRow && when > Date.now()) nextRow = row;
+      });
+      var box = document.getElementById('next-race');
+      if (nextRow && box) {
+        nextRow.classList.add('is-next');
+        var start = new Date(nextRow.getAttribute('data-start'));
+        document.getElementById('next-race-name').textContent = nextRow.getAttribute('data-name');
+        document.getElementById('next-race-where').textContent = nextRow.getAttribute('data-where');
+        var counter = document.getElementById('next-race-count');
+        var tick = function () {
+          var left = Math.max(0, start - Date.now());
+          var d = Math.floor(left / 86400000), h = Math.floor(left / 3600000) % 24, m = Math.floor(left / 60000) % 60, sec = Math.floor(left / 1000) % 60;
+          counter.innerHTML = [[d, 'days'], [h, 'hours'], [m, 'min'], [sec, 'sec']].map(function (p) { return '<span><b>' + p[0] + '</b><small>' + p[1] + '</small></span>'; }).join('');
+        };
+        tick();
+        setInterval(tick, 1000);
+        box.hidden = false;
+      }
+    }
     window.addEventListener('hashchange', function () { route(location.hash); });
     route(location.hash);
 

@@ -272,6 +272,8 @@ description: Study notes, paper reviews, photos from conferences and travel, and
     <div class="blog-panel" data-panel="race" hidden>
       <div class="session-tabs session-tabs-sub" id="race-tabs" role="tablist" aria-label="Formula 1 sections">
         <button type="button" class="session-tab is-active" data-sub="seasons">Seasons</button>
+        <button type="button" class="session-tab" data-sub="schedule">Schedule</button>
+        <button type="button" class="session-tab" data-sub="standings">Standings</button>
         <button type="button" class="session-tab" data-sub="circuits">Circuits</button>
         <button type="button" class="session-tab" data-sub="drivers">Drivers</button>
       </div>
@@ -314,6 +316,14 @@ description: Study notes, paper reviews, photos from conferences and travel, and
             {%- endif %}
             <span class="season-toggle" aria-hidden="true"></span>
           </summary>
+          {%- assign charts = site.data.f1_charts[s.name] -%}
+          {%- if charts %}
+          <div class="season-charts">
+            {{ charts.points }}
+            {{ charts.gap }}
+            {{ charts.finish }}
+          </div>
+          {%- endif %}
           <div class="race-list">
             {%- for post in items %}
             {%- assign res = post.result | default: '' -%}
@@ -329,6 +339,52 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         </details>
         {%- endfor %}
         {%- if seasons.size == 0 %}<p class="empty">No race reports yet.</p>{% endif %}
+      </div>
+
+      {%- assign live = site.data.f1_live -%}
+      <div class="race-sub" data-sub="schedule" hidden>
+        <div class="next-race" id="next-race" hidden>
+          <span class="next-race-label">Next race</span>
+          <b id="next-race-name"></b>
+          <small id="next-race-where"></small>
+          <div class="next-race-count" id="next-race-count" aria-live="off"></div>
+        </div>
+        <div class="blog-group-head"><h2>{{ live.season }} schedule</h2><span class="group-head-meta">Times in KST</span></div>
+        <div class="schedule-list">
+          {%- for r in live.races %}
+          {%- assign rp = race_posts | where: "season", live.season | where: "round", r.round | first %}
+          <div class="schedule-row" data-start="{{ r.start }}" data-name="{{ r.name | escape }}" data-where="{{ r.locality | escape }}, {{ r.country | escape }}">
+            <span class="race-row-round">R{% if r.round < 10 %}0{% endif %}{{ r.round }}</span>
+            <span class="race-row-main"><b>{{ r.name | replace: 'Grand Prix', 'GP' }}{% if r.sprint %} <em>Sprint</em>{% endif %}</b><small>{{ r.locality }}, {{ r.country }}</small></span>
+            <time class="schedule-time" datetime="{{ r.start }}"></time>
+            {%- if rp %}<a class="schedule-result" href="{{ rp.url | relative_url }}">{{ rp.result }}</a>{% else %}<span class="schedule-result is-empty">–</span>{% endif %}
+          </div>
+          {%- endfor %}
+        </div>
+      </div>
+
+      <div class="race-sub" data-sub="standings" hidden>
+        <div class="blog-group-head"><h2>{{ live.season }} standings</h2><span class="group-head-meta">After round {{ live.round }}</span></div>
+        <div class="standings-grid">
+          <table class="standings-table">
+            <caption>Drivers</caption>
+            <thead><tr><th>Pos</th><th>Driver</th><th>Team</th><th>Wins</th><th>Pts</th></tr></thead>
+            <tbody>
+              {%- for d in live.drivers %}
+              <tr{% if d.id == 'max_verstappen' %} class="is-max"{% endif %}><td>{{ d.pos }}</td><td>{{ d.name }}</td><td>{{ d.team }}</td><td>{{ d.wins }}</td><td>{{ d.points }}</td></tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+          <table class="standings-table">
+            <caption>Constructors</caption>
+            <thead><tr><th>Pos</th><th>Team</th><th>Wins</th><th>Pts</th></tr></thead>
+            <tbody>
+              {%- for t in live.constructors %}
+              <tr{% if t.id == 'red_bull' %} class="is-max"{% endif %}><td>{{ t.pos }}</td><td>{{ t.name }}</td><td>{{ t.wins }}</td><td>{{ t.points }}</td></tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="race-sub" data-sub="circuits" hidden>

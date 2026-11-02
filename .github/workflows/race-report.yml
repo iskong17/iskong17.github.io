@@ -59,6 +59,7 @@ jobs:
           python3 scripts/f1_pages.py --drivers
           [ -n "$circuit" ] && python3 scripts/f1_pages.py --circuit "$circuit"
           python3 scripts/f1_pages.py --patch --seasons
+          python3 scripts/f1_extras.py --live --progress
 
       - name: Commit and publish
         env:
@@ -70,7 +71,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add _posts _circuits _drivers _data/f1_seasons.yml
+          git add _posts _circuits _drivers _data/f1_seasons.yml _data/f1_live.json _data/f1_charts
           git commit -m "Blog: race report $(git diff --cached --name-only -- _posts | head -1 | xargs basename)"
           git push
           # Pushes made with GITHUB_TOKEN may not start a Pages build, so request one.

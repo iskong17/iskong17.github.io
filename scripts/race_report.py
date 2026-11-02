@@ -79,8 +79,13 @@ def race_control_data(season, race, last_name="Verstappen"):
             return None
         key = sessions[0]["session_key"]
         me = next((d for d in openf1("drivers", session_key=key) if d.get("last_name") == last_name), None)
-        stints = openf1("stints", session_key=key, driver_number=me["driver_number"]) if me else []
-        return {"stints": stints, "messages": openf1("race_control", session_key=key)}
+        number = me["driver_number"] if me else None
+        return {
+            "stints": openf1("stints", session_key=key, driver_number=number) if me else [],
+            "laps": openf1("laps", session_key=key, driver_number=number) if me else [],
+            "weather": openf1("weather", session_key=key),
+            "messages": openf1("race_control", session_key=key),
+        }
     except Exception as e:
         print(f"OpenF1 data skipped: {e}")
         return None
@@ -100,6 +105,49 @@ def race_events(messages):
         if hit and "SERVED" not in hit.group(1):
             penalties.append((hit.group(2), hit.group(1).capitalize(), hit.group(3).lower()))
     return laps_of, list(dict.fromkeys(penalties))
+
+
+def clean_laps(lap_data, stops, first=None, last=None):
+    """Green-flag lap times: no lap 1, in or out laps, and nothing far off the median (safety car, traffic)."""
+    pit = {int(s["lap"]) for s in stops}
+    skip = {1} | pit | {l + 1 for l in pit}
+    times = [p["time"] for p in lap_data if p["time"] and p["lap"] not in skip]
+    if not times:
+        return []
+    limit = statistics.median(times) * 1.07
+    return [p["time"] for p in lap_data if p["time"] and p["lap"] not in skip and p["time"] < limit
+            and (first is None or first <= p["lap"] <= last)]
+
+
+def stint_table(stints, lap_data, stops):
+    rows = []
+    for i, st in enumerate(sorted((s for s in stints if s.get("lap_start") and s.get("lap_end")), key=lambda s: s["lap_start"]), 1):
+        times = clean_laps(lap_data, stops, st["lap_start"], st["lap_end"])
+        label = TYRES.get(st.get("compound"), (0, 0, "Unknown"))[2]
+        med = fmt_lap(statistics.median(times)) if times else "–"
+        rows.append(f"| {i} | {label} | {st['lap_start']}–{st['lap_end']} | {med} |")
+    return "| Stint | Tyre | Laps | Median clean lap |\n|---|---|---|---|\n" + "\n".join(rows) if rows else ""
+
+
+def conditions(weather):
+    """One line on the weather during the race. OpenF1 samples include the time before the start, which barely matters for a median."""
+    air = [w["air_temperature"] for w in weather if w.get("air_temperature") is not None]
+    track = [w["track_temperature"] for w in weather if w.get("track_temperature") is not None]
+    if not air or not track:
+        return ""
+    rain = any(w.get("rainfall") for w in weather)
+    return f"Air {statistics.median(air):.0f}°C, track {statistics.median(track):.0f}°C. {'Rain fell during the session.' if rain else 'No rain recorded.'}"
+
+
+def best_sectors(laps_):
+    best = []
+    for key in ("duration_sector_1", "duration_sector_2", "duration_sector_3"):
+        vals = [l[key] for l in laps_ if l.get(key)]
+        if not vals:
+            return ""
+        best.append(min(vals))
+    return (f"His best sectors were {best[0]:.3f}, {best[1]:.3f} and {best[2]:.3f} s, "
+            f"which add up to a theoretical best lap of {fmt_lap(sum(best))}.")
 
 
 def pit_label(stop, red_laps):
@@ -322,9 +370,14 @@ def build(season, rnd):
             items = ", ".join(pit_label(s, red_laps) for s in stops)
             out.append(f"### Pit stops\n\n{plural(len(stops), 'stop')}: {items}. Times are total pit lane time, entry to exit.")
 
+        weather_line = conditions(control["weather"]) if control else ""
+        if weather_line:
+            out.append("### Conditions\n\n" + weather_line)
+
         tyres = tyre_chart(control["stints"], lap_data[-1]["lap"]) if control and lap_data else ""
         if tyres:
-            out.append("### Tyres\n\n" + tyres)
+            table_ = stint_table(control["stints"], lap_data, stops)
+            out.append("### Tyres\n\n" + tyres + ("\n\n" + table_ if table_ else ""))
 
         excluded = {1} | set(pit_laps) | {l + 1 for l in pit_laps}
         clean = [p["time"] for p in lap_data if p["time"] and p["lap"] not in excluded]
@@ -337,11 +390,19 @@ def build(season, rnd):
                     "### Pace\n\n"
                     f"Over {len(clean)} clean laps (excluding lap 1, in and out laps, and safety car laps), "
                     f"his median lap was **{fmt_lap(med)}** with a spread of {statistics.pstdev(clean):.3f} s."
+                    + (" " + best_sectors(control["laps"]) if control and best_sectors(control["laps"]) else "")
                 )
 
         if mate:
             mate_txt = f"P{mate['positionText']}" if finished(mate) else f"{result_label(mate)} ({mate['status'].lower()})"
-            out.append(f"### Teammate\n\n{name(mate)}: P{mate['grid']} on the grid → {mate_txt}, {plural(float(mate['points']), 'point')}.")
+            mate_line = f"### Teammate\n\n{name(mate)}: P{mate['grid']} on the grid → {mate_txt}, {plural(float(mate['points']), 'point')}."
+            mine = clean_laps(lap_data, stops)
+            mate_id = mate["Driver"]["driverId"]
+            theirs = clean_laps(laps(season, rnd, mate_id), pitstops(season, rnd, mate_id))
+            if len(mine) >= 5 and len(theirs) >= 5:
+                gap = statistics.median(theirs) - statistics.median(mine)
+                mate_line += f" Median clean lap {fmt_lap(statistics.median(theirs))}, {abs(gap):.3f} s {'slower' if gap > 0 else 'faster'} than Max."
+            out.append(mate_line)
 
     event_lines = [f"- {kind}: {plural(len(laps_), 'lap').split()[1]} {', '.join(map(str, sorted(laps_)))}" for kind, laps_ in events.items() if laps_]
     event_lines += [f"- {code}: {penalty}, {reason}" for code, penalty, reason in penalties]
