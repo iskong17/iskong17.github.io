@@ -20,14 +20,9 @@ layout: default
     <figure class="track-map">
       <svg viewBox="{{ page.track_viewbox | default: '0 0 400 400' }}" role="img" aria-label="Track layout of {{ page.title }}"><path d="{{ page.track_path }}"/></svg>
       <figcaption>Drawn from car position data of the {{ page.track_source }} race (OpenF1).</figcaption>
-      {%- if page.circuit_id == 'albert_park' %}
-      {%- if page.circuit_id == 'albert_park' %}
-      <button type="button" class="track-game-open" data-track-game data-circuit="{{ page.circuit_id }}" data-name="{{ page.title | escape }}" data-label="{{ page.locality | escape }}" data-path="{{ page.track_path }}" data-viewbox="{{ page.track_viewbox }}">Drive this track</button>
-      {%- endif %}
+      <button type="button" class="track-game-open" data-track-game data-circuit="{{ page.circuit_id }}" data-name="{{ page.title | escape }}" data-path="{{ page.track_path }}">Drive this track</button>
     </figure>
-    {%- if page.circuit_id == 'albert_park' %}
     <script defer src="{{ '/assets/js/track-game.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
-    {%- endif %}
     {%- endif %}
     <div class="stat-cards">
       {%- if page.lap_record %}
