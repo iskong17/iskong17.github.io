@@ -10,12 +10,12 @@ team: "Ferrari"
 team_id: ferrari
 current:
   season: 2026
-  round: 18
+  round: 19
   position: 5
-  points: 233
+  points: 245
   wins: 1
 seasons:
-  - { season: 2026, position: "5", points: 233, wins: 1, team: "Ferrari" }
+  - { season: 2026, position: "5", points: 245, wins: 1, team: "Ferrari" }
   - { season: 2025, position: "5", points: 242, wins: 0, team: "Ferrari" }
   - { season: 2024, position: "3", points: 356, wins: 3, team: "Ferrari" }
   - { season: 2023, position: "5", points: 206, wins: 0, team: "Ferrari" }

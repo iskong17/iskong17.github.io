@@ -10,7 +10,7 @@ team: "Red Bull"
 team_id: red_bull
 current:
   season: 2026
-  round: 18
+  round: 19
   position: 8
   points: 105
   wins: 0

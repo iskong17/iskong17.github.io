@@ -10,7 +10,7 @@ team: "RB F1 Team"
 team_id: rb
 current:
   season: 2026
-  round: 18
+  round: 19
   position: 20
   points: 1
   wins: 0

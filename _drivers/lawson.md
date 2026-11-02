@@ -10,12 +10,12 @@ team: "Red Bull"
 team_id: red_bull
 current:
   season: 2026
-  round: 18
+  round: 19
   position: 9
-  points: 77
+  points: 79
   wins: 0
 seasons:
-  - { season: 2026, position: "9", points: 77, wins: 0, team: "RB F1 Team / Red Bull" }
+  - { season: 2026, position: "9", points: 79, wins: 0, team: "RB F1 Team / Red Bull" }
   - { season: 2025, position: "14", points: 38, wins: 0, team: "Red Bull / RB F1 Team" }
   - { season: 2024, position: "21", points: 4, wins: 0, team: "RB F1 Team" }
   - { season: 2023, position: "20", points: 2, wins: 0, team: "AlphaTauri" }

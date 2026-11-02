@@ -10,7 +10,7 @@ team: "Aston Martin"
 team_id: aston_martin
 current:
   season: 2026
-  round: 18
+  round: 19
   position: 21
   points: 0
   wins: 0
