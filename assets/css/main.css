@@ -1310,7 +1310,7 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .tg-revs i.on:nth-child(n+19) { background: #ff3b30; box-shadow: 0 0 8px #ff3b30; }
 .tg-times { position: absolute; top: 14px; left: 16px; display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 8px; background: rgba(0,0,0,.55); font-size: 13px; }
 .tg-times b { font-size: 24px; font-variant-numeric: tabular-nums; }
-.tg-note { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); font-size: 22px; font-weight: 700; color: #ffd23f; text-shadow: 0 1px 4px #000; }
+.tg-note { position: absolute; top: 44px; left: 50%; transform: translateX(-50%); font-size: 22px; font-weight: 700; color: #ffd23f; text-shadow: 0 1px 4px #000; }
 .tg-speed { position: absolute; bottom: 44px; left: 16px; display: grid; grid-template-columns: auto auto; column-gap: 10px; align-items: end; padding: 8px 14px; border-radius: 8px; background: rgba(0,0,0,.55); }
 .tg-speed b { font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; }
 .tg-speed small { grid-row: 2; font-size: 11px; color: #c3c7d0; }
@@ -1319,8 +1319,6 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .tg-map path { fill: none; stroke: #fff; stroke-width: 7; stroke-linejoin: round; }
 .tg-map circle { fill: #e10600; stroke: #fff; stroke-width: 2; }
 .tg-help { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); padding: 4px 12px; border-radius: 6px; background: rgba(0,0,0,.5); font-size: 12px; color: #d8dbe2; white-space: nowrap; }
-.tg-driver { position: absolute; top: 14px; left: 50%; margin-top: 12px; transform: translateX(-50%); font-size: 12px; color: #e8eaf0; text-shadow: 0 1px 3px #000; white-space: nowrap; }
-.tg-credit { position: absolute; right: 18px; bottom: 12px; font-size: 11px; color: #e8eaf0; text-shadow: 0 1px 3px #000; }
 .tg-close { position: absolute; top: 14px; right: 16px; padding: 6px 12px; border: 1px solid rgba(255,255,255,.5); border-radius: 6px; background: rgba(0,0,0,.45); color: #fff; font: inherit; font-size: 13px; cursor: pointer; }
 .track-map { margin: 0; padding: 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
 .track-map svg { display: block; width: 100%; height: auto; }

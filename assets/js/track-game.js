@@ -1,6 +1,5 @@
 /* Drive a circuit from the cockpit, on the real track outline. Arcade handling, flat ground.
-   The track is real car position data. Water, buildings and trees come from OpenStreetMap; barriers,
-   bridges and grandstands are generic.
+   The outline comes from car position data; scenery is generic and only suggests the place.
    Lap times compare with your own laps, not real ones. */
 (function (root) {
   'use strict';
@@ -224,7 +223,7 @@
     });
   }
 
-  function buildWorld(THREE, scene, track, name, real) {
+  function buildWorld(THREE, scene, track, name) {
     var N = track.pts.length;
     var lit = function (opts) { return new THREE.MeshLambertMaterial(opts); };
 
@@ -327,9 +326,13 @@
     // Trees, kept clear of the road and the barriers
     var trunk = new THREE.CylinderGeometry(0.35, 0.5, 5, 6);
     var crown = new THREE.IcosahedronGeometry(5.5, 1);
-    var spots = real.trees.filter(function (t) { return track.clearance(t[0], t[1]) > HALF_WIDTH + 22; }).map(function (t) {
-      return [t[0], t[1], 0.8 + Math.random() * 1.1];
-    });
+    var spots = [], tries = 0;
+    while (spots.length < 1500 && tries++ < 12000) {
+      var k = Math.floor(Math.random() * N), p = track.pts[k], n = track.normal[k];
+      var off = (Math.random() < .5 ? -1 : 1) * (HALF_WIDTH + 30 + Math.random() * Math.random() * 240);
+      var x = p[0] + n[0] * off, z = p[1] + n[1] * off;
+      if (track.clearance(x, z) > HALF_WIDTH + 24) spots.push([x, z, 0.8 + Math.random() * 1.1]);
+    }
     var trunks = new THREE.InstancedMesh(trunk, lit({ color: 0x5b4632 }), spots.length);
     var crowns = new THREE.InstancedMesh(crown, lit({ color: 0xffffff }), spots.length);
     var m = new THREE.Matrix4(), col = new THREE.Color();
@@ -340,41 +343,6 @@
       crowns.setColorAt(i, col);
     });
     scene.add(trunks); scene.add(crowns);
-
-    // Real water and buildings
-    var waterMat = new THREE.MeshPhongMaterial({ color: 0x4f86a8, shininess: 90, specular: 0x8899aa });
-    real.water.forEach(function (ring) {
-      var shape = new THREE.Shape(ring.map(function (p) { return new THREE.Vector2(p[0], p[1]); }));
-      var mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape), waterMat);
-      mesh.material.side = THREE.DoubleSide;
-      mesh.rotation.x = Math.PI / 2; // shape y becomes world z
-      mesh.position.y = -0.02;
-      scene.add(mesh);
-    });
-    var pos = [], colors = [], shade = new THREE.Color();
-    real.buildings.forEach(function (b) {
-      var ring = b.p, h = b.h;
-      if (track.clearance(ring[0][0], ring[0][1]) < HALF_WIDTH + 20) return;
-      shade.setHSL(.08, .08, .55 + Math.random() * .25);
-      var quad = function (a, b_, c_, f) {
-        [a, b_, c_].forEach(function (v) { pos.push(v[0], v[1], v[2]); colors.push(shade.r * f, shade.g * f, shade.b * f); });
-      };
-      ring.forEach(function (p, k) {
-        var q = ring[(k + 1) % ring.length];
-        var A = [p[0], 0, p[1]], B = [q[0], 0, q[1]], C = [q[0], h, q[1]], D = [p[0], h, p[1]];
-        var f = .72 + .22 * Math.abs(Math.cos(Math.atan2(q[1] - p[1], q[0] - p[0])));
-        quad(A, B, C, f); quad(A, C, D, f);
-      });
-      var flat = ring.map(function (p) { return new THREE.Vector2(p[0], p[1]); });
-      THREE.ShapeUtils.triangulateShape(flat, []).forEach(function (t) {
-        var top = t.map(function (n) { return [ring[n][0], h, ring[n][1]]; });
-        quad(top[0], top[1], top[2], 1.05);
-      });
-    });
-    var city = new THREE.BufferGeometry();
-    city.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-    city.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-    scene.add(new THREE.Mesh(city, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide })));
 
     // Overhead bridges: the start line and a few along the lap
     var banner = bannerTexture(THREE, name.toUpperCase());
@@ -443,15 +411,7 @@
     }, true);
     carbonTex.repeat.set(40, 40);
     var carbon = new THREE.MeshPhongMaterial({ map: carbonTex, shininess: 30, specular: 0x222222 });
-    // Team colours and race number only: no sponsor or team logos.
-    var paint = new THREE.MeshPhongMaterial({ color: 0x121f45, shininess: 18, specular: 0x222233 });
-    var noseTex = canvasTexture(THREE, 128, 512, function (g, w, h) {
-      g.fillStyle = '#121f45'; g.fillRect(0, 0, w, h);
-      g.fillStyle = '#d8102a'; g.fillRect(0, 0, w, 90);
-      g.fillStyle = '#f6c600'; g.fillRect(0, 90, w, 26);
-      g.fillStyle = '#ffffff'; g.font = '700 110px Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
-      g.fillText('3', w / 2, 240);
-    });
+    var paint = new THREE.MeshPhongMaterial({ color: 0x14224f, shininess: 70, specular: 0x555555 });
     var rubber = new THREE.MeshLambertMaterial({ color: 0x151517 });
 
     // Halo
@@ -463,12 +423,16 @@
     rim.scale.set(.62, .24, .78);
     rim.position.set(0, -.55, -.62);
     group.add(rim);
-    var nose = new THREE.Mesh(new THREE.CylinderGeometry(.09, .34, 2.5, 18), new THREE.MeshPhongMaterial({ map: noseTex, shininess: 18 }));
+    var nose = new THREE.Mesh(new THREE.CylinderGeometry(.09, .34, 2.5, 18), paint);
     nose.rotation.x = -Math.PI / 2 - .05;
     nose.position.set(0, -.52, -2.1);
     nose.scale.z = .6;
     group.add(nose);
-    var wing = new THREE.Mesh(new THREE.BoxGeometry(1.9, .03, .4), new THREE.MeshPhongMaterial({ color: 0xd8102a, shininess: 18 }));
+    var stripe = new THREE.Mesh(new THREE.BoxGeometry(.05, .02, 2.2), new THREE.MeshLambertMaterial({ color: 0xe10600 }));
+    stripe.position.set(0, -.415, -2.05);
+    stripe.rotation.x = -.05;
+    group.add(stripe);
+    var wing = new THREE.Mesh(new THREE.BoxGeometry(1.9, .03, .4), paint);
     wing.position.set(0, -.86, -3.25);
     group.add(wing);
 
@@ -530,7 +494,7 @@
     document.head.appendChild(s);
   }
 
-  function open(btn, real) {
+  function open(btn) {
     var id = btn.getAttribute('data-circuit');
     var name = btn.getAttribute('data-name');
     var label = btn.getAttribute('data-label') || name;
@@ -559,9 +523,7 @@
       '<div class="tg-note"></div>' +
       '<div class="tg-speed"><b></b><small>km/h</small><em></em></div>' +
       '<svg class="tg-map" viewBox="' + viewbox + '" aria-hidden="true"><path d="' + path + '"/><circle r="9"/></svg>' +
-      '<div class="tg-driver"><b>Max Verstappen</b> · No. 3 · Red Bull colours</div>' +
       '<div class="tg-help">↑ throttle · ↓ brake · ← → steer · R restart · Esc close</div>' +
-      '<div class="tg-credit">Map data © OpenStreetMap contributors</div>' +
       '<button type="button" class="tg-close">Close</button>';
     document.body.appendChild(box);
     document.documentElement.style.overflow = 'hidden';
@@ -582,7 +544,7 @@
     scene.add(camera);
 
     var track = analyseTrack(sim.pts);
-    buildWorld(THREE, scene, track, label, real);
+    buildWorld(THREE, scene, track, label);
     var cockpit = buildCockpit(THREE, camera);
     var mapDot = q('.tg-map circle');
     // The outline is stretched to the lap length, so scale the car's position back for the mini map.
@@ -665,8 +627,6 @@
         g.textAlign = 'center'; g.fillStyle = '#fff';
         g.font = '700 74px monospace'; g.fillText(gearFor(abs), 128, 84);
         g.font = '700 24px monospace'; g.fillStyle = '#6fe08a'; g.fillText(String(Math.round(abs * 3.6)), 46, 72);
-        g.font = '700 18px monospace'; g.fillStyle = '#9fb4ff'; g.fillText('VER 3', 128, 112);
-        g.font = '700 24px monospace';
         g.fillStyle = '#ffd23f'; g.fillText(sim.bestLap ? fmt(sim.bestLap).slice(0, 6) : '-', 208, 72);
         cockpit.screenTex.needsUpdate = true;
 
@@ -697,13 +657,10 @@
         btn.textContent = 'Loading…';
         btn.disabled = true;
         var ready = function () { btn.textContent = text; btn.disabled = false; };
-        var failed = function () { btn.textContent = 'Could not load the track'; };
         loadThree(function () {
-          fetch(btn.getAttribute('data-scene')).then(function (r) { return r.json(); }).then(function (real) {
-            ready();
-            try { open(btn, real); } catch (e) { btn.textContent = 'This browser cannot run the 3D view'; }
-          }).catch(failed);
-        }, failed);
+          ready();
+          try { open(btn); } catch (e) { btn.textContent = 'This browser cannot run the 3D view'; }
+        }, function () { btn.textContent = 'Could not load the 3D library'; });
       });
     });
   }
