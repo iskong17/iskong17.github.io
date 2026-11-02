@@ -892,18 +892,22 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-pytorch { --accent: #ee4c2c; }
 .topic-basic { --accent: #0d9488; }
 
-/* Question series: a collapsible header over a bullet list of questions */
-.question-group > summary { cursor: pointer; list-style: none; }
-.question-group > summary::-webkit-details-marker { display: none; }
-.question-group-name { display: block; font-size: 1.5rem; font-weight: 700; line-height: 1.25; color: var(--text); }
-.question-group-course { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
-.question-group-chevron { width: 9px; height: 9px; margin-left: 4px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform .15s; }
-.question-group[open] .question-group-chevron { transform: rotate(45deg); }
+/* Question series: a bullet per question that opens to show the answer */
 .question-list { margin: 12px 0 0; padding-left: 22px; list-style: disc; }
-.question-item { padding: 4px 0; line-height: 1.5; }
+.question-item { padding: 2px 0; line-height: 1.5; }
 .question-item::marker { color: var(--accent); }
-.question-item a { color: var(--text); text-decoration: none; }
-.question-item a:hover { color: var(--accent); text-decoration: underline; }
+.question-item summary { padding: 4px 0; cursor: pointer; list-style: none; color: var(--text); }
+.question-item summary::-webkit-details-marker { display: none; }
+.question-item summary::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-2px) rotate(-45deg); transition: transform .15s; }
+.question-item details[open] summary { font-weight: 700; }
+.question-item details[open] summary::after { transform: translateY(-3px) rotate(45deg); }
+.question-item summary:hover { color: var(--accent); }
+.question-answer { margin: 4px 0 12px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; color: var(--text-2); font-size: 15px; line-height: 1.7; }
+.question-answer blockquote { margin: 0; padding: 0; border: 0; }
+.question-answer p { margin: 0; }
+.question-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.question-more:hover { text-decoration: underline; }
+.question-more svg { width: 14px; height: 14px; }
 
 /* Lecture rows: number, title and key concepts on one bar */
 .lecture-list { display: flex; flex-direction: column; gap: 8px; }
