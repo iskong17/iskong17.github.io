@@ -12,10 +12,10 @@ current:
   season: 2026
   round: 19
   position: 12
-  points: 31
+  points: 27
   wins: 0
 seasons:
-  - { season: 2026, position: "12", points: 31, wins: 0, team: "Alpine F1 Team" }
+  - { season: 2026, position: "12", points: 27, wins: 0, team: "Alpine F1 Team" }
   - { season: 2025, position: "20", points: 0, wins: 0, team: "Alpine F1 Team" }
   - { season: 2024, position: "19", points: 5, wins: 0, team: "Williams" }
 teams:

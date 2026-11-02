@@ -12,10 +12,10 @@ current:
   season: 2026
   round: 19
   position: 8
-  points: 105
+  points: 107
   wins: 0
 seasons:
-  - { season: 2026, position: "8", points: 105, wins: 0, team: "Red Bull" }
+  - { season: 2026, position: "8", points: 107, wins: 0, team: "Red Bull" }
   - { season: 2025, position: "12", points: 51, wins: 0, team: "RB F1 Team" }
 teams:
   - { years: "2025", team: "RB F1 Team" }

@@ -11,11 +11,11 @@ team_id: audi
 current:
   season: 2026
   round: 19
-  position: 14
+  position: 15
   points: 13
   wins: 0
 seasons:
-  - { season: 2026, position: "14", points: 13, wins: 0, team: "Audi" }
+  - { season: 2026, position: "15", points: 13, wins: 0, team: "Audi" }
   - { season: 2025, position: "11", points: 51, wins: 0, team: "Sauber" }
   - { season: 2024, position: "11", points: 41, wins: 0, team: "Haas F1 Team" }
   - { season: 2023, position: "16", points: 9, wins: 0, team: "Haas F1 Team" }

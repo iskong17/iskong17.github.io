@@ -11,11 +11,11 @@ team_id: audi
 current:
   season: 2026
   round: 19
-  position: 15
-  points: 10
+  position: 14
+  points: 14
   wins: 0
 seasons:
-  - { season: 2026, position: "15", points: 10, wins: 0, team: "Audi" }
+  - { season: 2026, position: "14", points: 14, wins: 0, team: "Audi" }
   - { season: 2025, position: "19", points: 19, wins: 0, team: "Sauber" }
 teams:
   - { years: "2025", team: "Sauber" }

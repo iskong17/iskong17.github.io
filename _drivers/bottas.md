@@ -11,11 +11,11 @@ team_id: cadillac
 current:
   season: 2026
   round: 19
-  position: 22
+  position: 23
   points: 0
   wins: 0
 seasons:
-  - { season: 2026, position: "22", points: 0, wins: 0, team: "Cadillac F1 Team" }
+  - { season: 2026, position: "23", points: 0, wins: 0, team: "Cadillac F1 Team" }
   - { season: 2024, position: "22", points: 0, wins: 0, team: "Sauber" }
   - { season: 2023, position: "15", points: 10, wins: 0, team: "Alfa Romeo" }
   - { season: 2022, position: "10", points: 49, wins: 0, team: "Alfa Romeo" }
