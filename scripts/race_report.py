@@ -14,15 +14,24 @@ Usage:
 """
 
 import argparse
+import re
 import statistics
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from f1api import jolpica
+from f1api import jolpica, openf1
 
 DRIVER = "max_verstappen"
 KST = timezone(timedelta(hours=9))
 POSTS = Path(__file__).resolve().parent.parent / "_posts"
+
+TYRES = {  # compound: (fill, label color, short label)
+    "SOFT": ("#e10600", "#ffffff", "Soft"),
+    "MEDIUM": ("#f5c518", "#111111", "Medium"),
+    "HARD": ("#d9dce3", "#111111", "Hard"),
+    "INTERMEDIATE": ("#2e9e4f", "#ffffff", "Inter"),
+    "WET": ("#2f6fdf", "#ffffff", "Wet"),
+}
 
 STATUS_CODES = {"R": "DNF", "D": "DSQ", "W": "DNS", "N": "NC", "F": "DNQ", "E": "EX"}
 
@@ -59,6 +68,47 @@ def laps(season, rnd, driver):
 
 
 # ---------- helpers ----------
+
+def race_control_data(season, race, last_name="Verstappen"):
+    """Tyre stints and race control messages from OpenF1 (2023 onward). None when unavailable, so a report never depends on it."""
+    try:
+        day = datetime.strptime(race["date"], "%Y-%m-%d").date()
+        sessions = [s for s in openf1("sessions", year=season, session_name="Race")
+                    if abs((datetime.strptime(s["date_start"][:10], "%Y-%m-%d").date() - day).days) <= 1]
+        if not sessions:
+            return None
+        key = sessions[0]["session_key"]
+        me = next((d for d in openf1("drivers", session_key=key) if d.get("last_name") == last_name), None)
+        stints = openf1("stints", session_key=key, driver_number=me["driver_number"]) if me else []
+        return {"stints": stints, "messages": openf1("race_control", session_key=key)}
+    except Exception as e:
+        print(f"OpenF1 data skipped: {e}")
+        return None
+
+
+def race_events(messages):
+    """Laps of each neutralisation, and the penalties the stewards handed out."""
+    laps_of = {"Red flag": set(), "Safety car": set(), "Virtual safety car": set()}
+    penalties = []
+    for m in messages:
+        text, lap = m.get("message") or "", m.get("lap_number")
+        if lap and (m.get("flag") == "RED" or text.startswith("RED FLAG")):
+            laps_of["Red flag"].add(lap)
+        elif lap and m.get("category") == "SafetyCar" and text.endswith("DEPLOYED"):
+            laps_of["Virtual safety car" if "VIRTUAL" in text or text.startswith("VSC") else "Safety car"].add(lap)
+        hit = re.match(r"FIA STEWARDS: (.+ PENALTY) FOR CAR \d+ \((\w+)\) - (.+?)(?: \(\d\d:\d\d:\d\d\))?$", text)
+        if hit and "SERVED" not in hit.group(1):
+            penalties.append((hit.group(2), hit.group(1).capitalize(), hit.group(3).lower()))
+    return laps_of, list(dict.fromkeys(penalties))
+
+
+def pit_label(stop, red_laps):
+    """A stop in the pits during a red flag has a lane time of many minutes, which is not a stop time."""
+    duration = stop["duration"]
+    if int(stop["lap"]) in red_laps:
+        return f"lap {stop['lap']} (during the red flag)"
+    return f"lap {stop['lap']} ({duration})" if ":" in duration else f"lap {stop['lap']} ({duration} s)"
+
 
 def to_sec(s):
     if not s:
@@ -165,6 +215,37 @@ def position_chart(lap_data, grid, pit_laps):
     )
 
 
+def tyre_chart(stints, n_laps):
+    """Inline SVG strip of Max's tyre stints."""
+    stints = sorted((s for s in stints if s.get("lap_start") and s.get("lap_end")), key=lambda s: s["lap_start"])
+    if not stints or not n_laps:
+        return ""
+    w, h = 720, 64
+    left, right, top, bar = 44, 16, 6, 30
+
+    def x(lap):
+        return left + (w - left - right) * lap / n_laps
+
+    g = []
+    for s in stints:
+        fill, ink, label = TYRES.get(s.get("compound"), ("#8a90a0", "#ffffff", "Unknown"))
+        x0, x1 = x(s["lap_start"] - 1), x(min(s["lap_end"], n_laps))
+        count = min(s["lap_end"], n_laps) - s["lap_start"] + 1
+        age = s.get("tyre_age_at_start") or 0
+        text = f"{label} · {count} laps" + (f" (used +{age})" if age else "") if x1 - x0 > 150 else (f"{label} · {count}" if x1 - x0 > 70 else label[0])
+        g.append(f'<rect x="{x0:.1f}" y="{top}" width="{x1 - x0 - 2:.1f}" height="{bar}" rx="4" fill="{fill}"/>')
+        g.append(f'<text x="{(x0 + x1) / 2 - 1:.1f}" y="{top + 19}" text-anchor="middle" fill="{ink}" font-size="12" font-weight="700">{text}</text>')
+    step = 10 if n_laps > 30 else 5
+    for lap in range(0, n_laps + 1, step):
+        g.append(f'<text x="{x(lap):.1f}" y="{h - 8}" text-anchor="middle" style="fill: var(--muted)" font-size="11">{lap}</text>')
+    return (
+        '<figure class="race-chart">\n'
+        f'<svg viewBox="0 0 {w} {h}" role="img" aria-label="Tyre stints by lap">\n'
+        + "\n".join(g)
+        + "\n</svg>\n<figcaption>Max's tyre stints by lap.</figcaption>\n</figure>"
+    )
+
+
 # ---------- report ----------
 
 def build(season, rnd):
@@ -182,6 +263,9 @@ def build(season, rnd):
     cons = constructor_standings(season, rnd)
     lap_data = laps(season, rnd, DRIVER) if max_res else []
     stops = pitstops(season, rnd, DRIVER) if max_res else []
+    control = race_control_data(season, race)
+    events, penalties = race_events(control["messages"]) if control else ({}, [])
+    red_laps = events.get("Red flag", set())
 
     when = race_time_kst(race)
     gp = race["raceName"]
@@ -235,8 +319,12 @@ def build(season, rnd):
             out.append(chart)
 
         if stops:
-            items = ", ".join(f"lap {s['lap']} ({s['duration']} s)" for s in stops)
+            items = ", ".join(pit_label(s, red_laps) for s in stops)
             out.append(f"### Pit stops\n\n{plural(len(stops), 'stop')}: {items}. Times are total pit lane time, entry to exit.")
+
+        tyres = tyre_chart(control["stints"], lap_data[-1]["lap"]) if control and lap_data else ""
+        if tyres:
+            out.append("### Tyres\n\n" + tyres)
 
         excluded = {1} | set(pit_laps) | {l + 1 for l in pit_laps}
         clean = [p["time"] for p in lap_data if p["time"] and p["lap"] not in excluded]
@@ -254,6 +342,11 @@ def build(season, rnd):
         if mate:
             mate_txt = f"P{mate['positionText']}" if finished(mate) else f"{result_label(mate)} ({mate['status'].lower()})"
             out.append(f"### Teammate\n\n{name(mate)}: P{mate['grid']} on the grid → {mate_txt}, {plural(float(mate['points']), 'point')}.")
+
+    event_lines = [f"- {kind}: {plural(len(laps_), 'lap').split()[1]} {', '.join(map(str, sorted(laps_)))}" for kind, laps_ in events.items() if laps_]
+    event_lines += [f"- {code}: {penalty}, {reason}" for code, penalty, reason in penalties]
+    if event_lines:
+        out.append("## Race events\n\n" + "\n".join(event_lines))
 
     table = ["| Pos | Driver | Team | Grid | Time / Status | Pts |", "|---|---|---|---|---|---|"]
     shown = results[:10]

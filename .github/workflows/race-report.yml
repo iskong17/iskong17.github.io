@@ -8,6 +8,7 @@ on:
     - cron: "0 22 * * 0"  # Sun 22:00 UTC (Mon 07:00 KST)
     - cron: "0 10 * * 1"  # Mon 10:00 UTC
     - cron: "0 22 * * 1"  # Mon 22:00 UTC, in case results were late
+    - cron: "0 22 * * 3"  # Wed 22:00 UTC, rewrite the latest report if the classification changed after the race
   workflow_dispatch:
     inputs:
       round:
@@ -39,7 +40,7 @@ jobs:
       - name: Generate report
         env:
           ROUND: ${{ inputs.round }}
-          FORCE: ${{ inputs.force && '--force' || '' }}
+          FORCE: ${{ (inputs.force || github.event.schedule == '0 22 * * 3') && '--force' || '' }}
         run: |
           if [ -n "$ROUND" ]; then
             python3 scripts/race_report.py --season current --round "$ROUND" $FORCE
