@@ -892,6 +892,19 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-pytorch { --accent: #ee4c2c; }
 .topic-basic { --accent: #0d9488; }
 
+/* Question series: a collapsible header over a bullet list of questions */
+.question-group > summary { cursor: pointer; list-style: none; }
+.question-group > summary::-webkit-details-marker { display: none; }
+.question-group-name { display: block; font-size: 1.5rem; font-weight: 700; line-height: 1.25; color: var(--text); }
+.question-group-course { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
+.question-group-chevron { width: 9px; height: 9px; margin-left: 4px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform .15s; }
+.question-group[open] .question-group-chevron { transform: rotate(45deg); }
+.question-list { margin: 12px 0 0; padding-left: 22px; list-style: disc; }
+.question-item { padding: 4px 0; line-height: 1.5; }
+.question-item::marker { color: var(--accent); }
+.question-item a { color: var(--text); text-decoration: none; }
+.question-item a:hover { color: var(--accent); text-decoration: underline; }
+
 /* Lecture rows: number, title and key concepts on one bar */
 .lecture-list { display: flex; flex-direction: column; gap: 8px; }
 .lecture-row {

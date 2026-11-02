@@ -189,6 +189,28 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       {%- assign sp = posts | where: "series", s.key | sort: "lecture" -%}
       {%- if sp.size > 0 %}
       {%- assign st = c.topics | where: "key", s.topic | first %}
+      {%- if s.prefix == "Q" %}
+      <section class="study-group series-block topic-{{ s.topic }}" data-series="{{ s.key }}">
+        <details class="question-group" open>
+          <summary class="series-head">
+            <span class="series-head-text">
+              <span class="series-kicker">{{ st.label }}</span>
+              <span class="question-group-name">{{ s.name }}</span>
+              <span class="question-group-course">{{ s.course }}</span>
+            </span>
+            <span class="series-head-meta">
+              <span class="series-count"><b>{{ sp.size }}</b> questions</span>
+              <span class="question-group-chevron" aria-hidden="true"></span>
+            </span>
+          </summary>
+          <ul class="question-list">
+            {%- for post in sp %}
+            <li class="question-item" data-category="study" data-topic="{{ post.topic }}"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+            {%- endfor %}
+          </ul>
+        </details>
+      </section>
+      {%- else %}
       <section class="study-group series-block topic-{{ s.topic }}" data-series="{{ s.key }}">
         <header class="series-head">
           <div class="series-head-text">
@@ -205,6 +227,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
           {%- for post in sp %}{% include post-card.html post=post %}{% endfor %}
         </div>
       </section>
+      {%- endif %}
       {%- endif %}
       {%- endfor %}
       {%- assign loose = posts | where_exp: "p", "p.series == nil" -%}

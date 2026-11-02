@@ -98,7 +98,7 @@
       // Study's All view is a bar per topic; the flat grid shows only for one topic.
       var bars = panel.querySelector('.topic-bars');
       if (bars) bars.hidden = key !== 'all';
-      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row, .study-group .lecture-row, .gallery-row');
+      var cards = panel.querySelectorAll('.sq-grid > .sq-card, .paper-row, .study-group .lecture-row, .study-group .question-item, .gallery-row');
       var any = !!bars && key === 'all';
       cards.forEach(function (c) {
         var show;
@@ -131,7 +131,7 @@
       // Study groups (notes, Discussions) hide on All and when none of their cards match.
       panel.querySelectorAll('.study-group').forEach(function (g) {
         var other = seriesKey !== 'all' && g.getAttribute('data-series') !== seriesKey;
-        g.hidden = (!!bars && key === 'all') || !!courseCards || other || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden])');
+        g.hidden = (!!bars && key === 'all') || !!courseCards || other || !g.querySelector('.sq-card:not([hidden]), .lecture-row:not([hidden]), .question-item:not([hidden])');
       });
       if (bySub) {
         activateMany(tabs, attr, subs);
