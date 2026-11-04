@@ -7,6 +7,12 @@
   course: "Linear Algebra video lectures, YouTube"
   url: "https://www.youtube.com/playlist?list=PLVuwEl3g6OcIF-EEcerd5m5-Vw5jDpKN1"
   prefix: "Lecture"
+- key: hpla
+  topic: linear-algebra
+  name: "보이는 선형대수학"
+  course: "혁펜하임, YouTube"
+  url: "https://www.youtube.com/playlist?list=PL_iJu012NOxdZDxoGsYidMf2_bERIQaP0"
+  prefix: "Lecture"
 - key: dl
   topic: deep-learning
   name: "CS 182 · Deep Learning"
