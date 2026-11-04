@@ -1,6 +1,6 @@
 ---
 title: "보이는 선형대수학 2: 벡터의 연산, 전치, 내적, 노름"
-date: 2026-11-05 09:02:00 +0900
+date: 2026-11-05 00:02:00 +0900
 category: study
 topic: linear-algebra
 series: hpla

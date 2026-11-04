@@ -1,6 +1,6 @@
 ---
 title: "보이는 선형대수학 4: 역행렬과 직교 행렬, 랭크, 영공간, 해의 개수"
-date: 2026-11-05 09:04:00 +0900
+date: 2026-11-05 00:04:00 +0900
 category: study
 topic: linear-algebra
 series: hpla

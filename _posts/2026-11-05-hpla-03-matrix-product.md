@@ -1,6 +1,6 @@
 ---
 title: "보이는 선형대수학 3: 행렬 곱셈, span과 열 공간, 선형 독립과 기저"
-date: 2026-11-05 09:03:00 +0900
+date: 2026-11-05 00:03:00 +0900
 category: study
 topic: linear-algebra
 series: hpla
