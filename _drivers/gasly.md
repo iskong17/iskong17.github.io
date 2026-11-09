@@ -10,7 +10,7 @@ team: "Alpine F1 Team"
 team_id: alpine
 current:
   season: 2026
-  round: 19
+  round: 20
   position: 10
   points: 42
   wins: 0

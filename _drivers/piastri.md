@@ -10,12 +10,12 @@ team: "McLaren"
 team_id: mclaren
 current:
   season: 2026
-  round: 19
+  round: 20
   position: 7
-  points: 144
+  points: 152
   wins: 0
 seasons:
-  - { season: 2026, position: "7", points: 144, wins: 0, team: "McLaren" }
+  - { season: 2026, position: "7", points: 152, wins: 0, team: "McLaren" }
   - { season: 2025, position: "3", points: 410, wins: 7, team: "McLaren" }
   - { season: 2024, position: "4", points: 292, wins: 2, team: "McLaren" }
   - { season: 2023, position: "9", points: 97, wins: 0, team: "McLaren" }

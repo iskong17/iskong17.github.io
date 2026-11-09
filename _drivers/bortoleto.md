@@ -10,7 +10,7 @@ team: "Audi"
 team_id: audi
 current:
   season: 2026
-  round: 19
+  round: 20
   position: 14
   points: 14
   wins: 0

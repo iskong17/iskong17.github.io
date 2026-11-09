@@ -10,7 +10,7 @@ team: "Haas F1 Team"
 team_id: haas
 current:
   season: 2026
-  round: 19
+  round: 20
   position: 16
   points: 7
   wins: 0
