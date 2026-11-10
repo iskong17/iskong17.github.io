@@ -10,6 +10,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
 <section class="page-hero">
   <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
   <div class="container" style="position: relative;">
+    <a class="hero-action" href="{{ '/blog/schedule/' | relative_url }}">{% include icon.html name="calendar" %} Schedule</a>
     <p class="eyebrow">Study · Paper Review · Gallery · Formula 1</p>
     <h1>Blog</h1>
     <p>Study notes, paper reviews, photos from conferences and travel, and Formula 1 race reports.</p>
@@ -76,7 +77,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
         {%- for t in c.topics %}
         {%- assign tposts = posts | where: "topic", t.key -%}
         {%- assign tseries = site.data.series | where: "topic", t.key -%}
-        {%- case t.key %}{% when 'deep-learning' %}{% assign ticon = 'network' %}{% when 'linear-algebra' %}{% assign ticon = 'matrix' %}{% when 'machine-learning' %}{% assign ticon = 'chart' %}{% when 'algorithm' %}{% assign ticon = 'tree' %}{% when 'pytorch' %}{% assign ticon = 'flame' %}{% else %}{% assign ticon = 'book' %}{% endcase %}
+        {%- case t.key %}{% when 'deep-learning' %}{% assign ticon = 'network' %}{% when 'linear-algebra' %}{% assign ticon = 'matrix' %}{% when 'machine-learning' %}{% assign ticon = 'chart' %}{% when 'algorithm' %}{% assign ticon = 'tree' %}{% when 'pytorch' %}{% assign ticon = 'flame' %}{% when 'robotics' %}{% assign ticon = 'robot' %}{% else %}{% assign ticon = 'book' %}{% endcase %}
         <button type="button" class="cat-card topic-card topic-{{ t.key }}" data-goto="{{ c.key }}/{{ t.key }}">
           <span class="cat-card-bg" aria-hidden="true">{% include icon.html name=ticon %}</span>
           <span class="cat-card-top">
@@ -162,7 +163,7 @@ description: Study notes, paper reviews, photos from conferences and travel, and
       {%- assign tser = site.data.series | where: "topic", t.key -%}
       {%- assign live = 0 %}{% for s in tser %}{% assign sp = posts | where: "series", s.key %}{% if sp.size > 0 %}{% assign live = live | plus: 1 %}{% endif %}{% endfor %}
       {%- if live > 1 %}
-      {%- case t.key %}{% when 'deep-learning' %}{% assign ticon = 'network' %}{% when 'linear-algebra' %}{% assign ticon = 'matrix' %}{% when 'machine-learning' %}{% assign ticon = 'chart' %}{% when 'algorithm' %}{% assign ticon = 'tree' %}{% when 'pytorch' %}{% assign ticon = 'flame' %}{% else %}{% assign ticon = 'book' %}{% endcase %}
+      {%- case t.key %}{% when 'deep-learning' %}{% assign ticon = 'network' %}{% when 'linear-algebra' %}{% assign ticon = 'matrix' %}{% when 'machine-learning' %}{% assign ticon = 'chart' %}{% when 'algorithm' %}{% assign ticon = 'tree' %}{% when 'pytorch' %}{% assign ticon = 'flame' %}{% when 'robotics' %}{% assign ticon = 'robot' %}{% else %}{% assign ticon = 'book' %}{% endcase %}
       <div class="cat-cards topic-cards series-cards" data-topic="{{ t.key }}" hidden>
         {%- for s in tser %}
         {%- assign sp = posts | where: "series", s.key | sort: "lecture" -%}

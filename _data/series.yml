@@ -62,6 +62,13 @@
   instructor: "서지영"
   url: "https://thebook.io/080289/"
   prefix: "Chapter"
+- key: robotics
+  topic: robotics
+  name: "ROB 345 · Intro to Robotics"
+  course: "Princeton ROB 345 / 549, Fall 2026"
+  instructor: "Anirudha Majumdar"
+  url: "https://irom-lab.princeton.edu/intro-to-robotics/"
+  prefix: "Lecture"
 - key: see-matrix
   topic: basic
   name: "Visual Kernel"

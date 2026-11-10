@@ -1,0 +1,50 @@
+---
+layout: default
+title: Schedule
+lang: en
+permalink: /blog/schedule/
+description: Deadlines and dates for NLP, CV, ML and AI conferences, and the Formula 1 calendar with every session.
+---
+<section class="page-hero">
+  <div class="hero-bg" aria-hidden="true"><div class="hero-slash"></div></div>
+  <div class="container" style="position: relative;">
+    <p class="eyebrow"><a href="{{ '/blog/' | relative_url }}">Blog</a> · Schedule</p>
+    <h1>Schedule</h1>
+    <p>Conference deadlines and dates, and the Formula 1 calendar. Times are in Korean time (KST) unless marked AoE. Anything not announced yet is TBD.</p>
+  </div>
+</section>
+
+<section class="sched">
+  <div class="container">
+    <div class="sched-filters" role="group" aria-label="Filter">
+      <button type="button" class="sched-chip is-active" data-area="all">All</button>
+      <button type="button" class="sched-chip area-nlp" data-area="NLP">NLP <small>ACL · EMNLP · NAACL</small></button>
+      <button type="button" class="sched-chip area-cv" data-area="CV">CV <small>WACV · CVPR · ICCV · ECCV</small></button>
+      <button type="button" class="sched-chip area-ml" data-area="ML">ML <small>ICML · NeurIPS · ICLR</small></button>
+      <button type="button" class="sched-chip area-ai" data-area="AI">AI <small>AAAI</small></button>
+      <button type="button" class="sched-chip area-f1" data-area="F1">F1</button>
+    </div>
+
+    <div class="sched-next" id="sched-next" aria-live="polite"></div>
+
+    <div class="sched-cal">
+      <div class="sched-cal-head">
+        <button type="button" class="sched-nav" data-step="-1" aria-label="Previous month">‹</button>
+        <h2 id="sched-month"></h2>
+        <button type="button" class="sched-nav" data-step="1" aria-label="Next month">›</button>
+        <button type="button" class="sched-today">Today</button>
+      </div>
+      <div class="sched-grid" id="sched-grid"></div>
+      <ul class="sched-agenda" id="sched-agenda"></ul>
+    </div>
+
+    <h2 class="sched-title">Conferences</h2>
+    <div class="sched-confs" id="sched-confs"></div>
+
+    <h2 class="sched-title" id="sched-f1-title">Formula 1</h2>
+    <div class="sched-f1" id="sched-f1"></div>
+  </div>
+</section>
+
+<script id="sched-data" type="application/json">{"conferences": {{ site.data.conferences | jsonify }}, "f1": {{ site.data.f1_live.races | jsonify }}, "f1_season": {{ site.data.f1_live.season | jsonify }}, "f1_next": {{ site.data.f1_live.next_season | jsonify }}, "circuits": { {%- for c in site.circuits %}{{ c.circuit_id | jsonify }}: {{ c.url | relative_url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor -%} }}</script>
+<script defer src="{{ '/assets/js/schedule.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

@@ -4,7 +4,7 @@
 - key: study
   label: "Study"
   short: "Study"
-  blurb: "Deep Learning · Linear Algebra · Machine Learning · Algorithm · PyTorch · Basic"
+  blurb: "Deep Learning · Linear Algebra · Machine Learning · Algorithm · PyTorch · Robotics · Basic"
   intro: "Lecture-by-lecture notes from the courses I study: linear algebra, machine learning, deep learning, algorithms and PyTorch, plus short notes on basic concepts. Written in Korean, with the slides and videos linked."
   topics:
     - { key: deep-learning, label: "Deep Learning" }
@@ -12,6 +12,7 @@
     - { key: machine-learning, label: "Machine Learning" }
     - { key: algorithm, label: "Algorithm" }
     - { key: pytorch, label: "PyTorch" }
+    - { key: robotics, label: "Robotics" }
     - { key: basic, label: "Basic" }
 - key: paper-review
   label: "Paper Review"

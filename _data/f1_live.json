@@ -291,7 +291,29 @@
    "locality": "Melbourne",
    "country": "Australia",
    "start": "2026-03-08T04:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-03-06T01:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-03-06T05:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-03-07T01:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-03-07T05:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-03-08T04:00:00Z"
+    }
+   ]
   },
   {
    "round": 2,
@@ -301,7 +323,29 @@
    "locality": "Shanghai",
    "country": "China",
    "start": "2026-03-15T07:00:00Z",
-   "sprint": true
+   "sprint": true,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-03-13T03:30:00Z"
+    },
+    {
+     "key": "SQ",
+     "start": "2026-03-13T07:30:00Z"
+    },
+    {
+     "key": "Sprint",
+     "start": "2026-03-14T03:00:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-03-14T07:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-03-15T07:00:00Z"
+    }
+   ]
   },
   {
    "round": 3,
@@ -311,7 +355,29 @@
    "locality": "Suzuka",
    "country": "Japan",
    "start": "2026-03-29T05:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-03-27T02:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-03-27T06:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-03-28T02:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-03-28T06:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-03-29T05:00:00Z"
+    }
+   ]
   },
   {
    "round": 4,
@@ -321,7 +387,29 @@
    "locality": "Miami",
    "country": "USA",
    "start": "2026-05-03T20:00:00Z",
-   "sprint": true
+   "sprint": true,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-05-01T16:00:00Z"
+    },
+    {
+     "key": "SQ",
+     "start": "2026-05-01T20:30:00Z"
+    },
+    {
+     "key": "Sprint",
+     "start": "2026-05-02T16:00:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-05-02T20:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-05-03T20:00:00Z"
+    }
+   ]
   },
   {
    "round": 5,
@@ -331,7 +419,29 @@
    "locality": "Montreal",
    "country": "Canada",
    "start": "2026-05-24T20:00:00Z",
-   "sprint": true
+   "sprint": true,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-05-22T16:30:00Z"
+    },
+    {
+     "key": "SQ",
+     "start": "2026-05-22T20:30:00Z"
+    },
+    {
+     "key": "Sprint",
+     "start": "2026-05-23T16:00:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-05-23T20:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-05-24T20:00:00Z"
+    }
+   ]
   },
   {
    "round": 6,
@@ -341,7 +451,29 @@
    "locality": "Monte Carlo",
    "country": "Monaco",
    "start": "2026-06-07T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-06-05T11:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-06-05T15:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-06-06T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-06-06T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-06-07T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 7,
@@ -351,7 +483,29 @@
    "locality": "Barcelona",
    "country": "Spain",
    "start": "2026-06-14T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-06-12T11:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-06-12T15:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-06-13T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-06-13T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-06-14T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 8,
@@ -361,7 +515,29 @@
    "locality": "Spielberg",
    "country": "Austria",
    "start": "2026-06-28T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-06-26T11:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-06-26T15:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-06-27T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-06-27T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-06-28T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 9,
@@ -371,7 +547,29 @@
    "locality": "Silverstone",
    "country": "UK",
    "start": "2026-07-05T14:00:00Z",
-   "sprint": true
+   "sprint": true,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-07-03T11:30:00Z"
+    },
+    {
+     "key": "SQ",
+     "start": "2026-07-03T15:30:00Z"
+    },
+    {
+     "key": "Sprint",
+     "start": "2026-07-04T11:00:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-07-04T15:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-07-05T14:00:00Z"
+    }
+   ]
   },
   {
    "round": 10,
@@ -381,7 +579,29 @@
    "locality": "Spa",
    "country": "Belgium",
    "start": "2026-07-19T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-07-17T11:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-07-17T15:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-07-18T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-07-18T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-07-19T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 11,
@@ -391,7 +611,29 @@
    "locality": "Budapest",
    "country": "Hungary",
    "start": "2026-07-26T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-07-24T11:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-07-24T15:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-07-25T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-07-25T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-07-26T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 12,
@@ -401,7 +643,29 @@
    "locality": "Zandvoort",
    "country": "Netherlands",
    "start": "2026-08-23T13:00:00Z",
-   "sprint": true
+   "sprint": true,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-08-21T10:30:00Z"
+    },
+    {
+     "key": "SQ",
+     "start": "2026-08-21T14:30:00Z"
+    },
+    {
+     "key": "Sprint",
+     "start": "2026-08-22T10:00:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-08-22T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-08-23T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 13,
@@ -411,7 +675,29 @@
    "locality": "Monza",
    "country": "Italy",
    "start": "2026-09-06T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-09-04T10:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-09-04T14:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-09-05T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-09-05T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-09-06T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 14,
@@ -421,7 +707,29 @@
    "locality": "Madrid",
    "country": "Spain",
    "start": "2026-09-13T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-09-11T11:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-09-11T15:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-09-12T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-09-12T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-09-13T13:00:00Z"
+    }
+   ]
   },
   {
    "round": 15,
@@ -431,7 +739,29 @@
    "locality": "Baku",
    "country": "Azerbaijan",
    "start": "2026-09-26T11:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-09-24T08:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-09-24T12:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-09-25T08:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-09-25T12:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-09-26T11:00:00Z"
+    }
+   ]
   },
   {
    "round": 16,
@@ -441,7 +771,29 @@
    "locality": "Kuala Lumpur",
    "country": "Malaysia",
    "start": "2026-10-04T07:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-10-02T04:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-10-02T08:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-10-03T04:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-10-03T08:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-10-04T07:00:00Z"
+    }
+   ]
   },
   {
    "round": 17,
@@ -451,7 +803,29 @@
    "locality": "Marina Bay",
    "country": "Singapore",
    "start": "2026-10-11T12:00:00Z",
-   "sprint": true
+   "sprint": true,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-10-09T08:30:00Z"
+    },
+    {
+     "key": "SQ",
+     "start": "2026-10-09T12:30:00Z"
+    },
+    {
+     "key": "Sprint",
+     "start": "2026-10-10T09:00:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-10-10T13:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-10-11T12:00:00Z"
+    }
+   ]
   },
   {
    "round": 18,
@@ -461,7 +835,29 @@
    "locality": "Austin",
    "country": "USA",
    "start": "2026-10-25T20:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-10-23T17:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-10-23T21:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-10-24T17:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-10-24T21:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-10-25T20:00:00Z"
+    }
+   ]
   },
   {
    "round": 19,
@@ -471,7 +867,29 @@
    "locality": "Mexico City",
    "country": "Mexico",
    "start": "2026-11-01T20:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-10-30T18:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-10-30T22:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-10-31T17:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-10-31T21:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-11-01T20:00:00Z"
+    }
+   ]
   },
   {
    "round": 20,
@@ -481,7 +899,29 @@
    "locality": "São Paulo",
    "country": "Brazil",
    "start": "2026-11-08T17:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-11-06T15:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-11-06T19:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-11-07T14:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-11-07T18:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-11-08T17:00:00Z"
+    }
+   ]
   },
   {
    "round": 21,
@@ -491,7 +931,29 @@
    "locality": "Las Vegas",
    "country": "USA",
    "start": "2026-11-22T04:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-11-20T00:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-11-20T04:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-11-21T00:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-11-21T04:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-11-22T04:00:00Z"
+    }
+   ]
   },
   {
    "round": 22,
@@ -501,7 +963,29 @@
    "locality": "Lusail",
    "country": "Qatar",
    "start": "2026-11-29T16:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-11-27T13:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-11-27T17:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-11-28T14:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-11-28T18:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-11-29T16:00:00Z"
+    }
+   ]
   },
   {
    "round": 23,
@@ -511,7 +995,29 @@
    "locality": "Abu Dhabi",
    "country": "UAE",
    "start": "2026-12-06T13:00:00Z",
-   "sprint": false
+   "sprint": false,
+   "sessions": [
+    {
+     "key": "FP1",
+     "start": "2026-12-04T09:30:00Z"
+    },
+    {
+     "key": "FP2",
+     "start": "2026-12-04T13:00:00Z"
+    },
+    {
+     "key": "FP3",
+     "start": "2026-12-05T10:30:00Z"
+    },
+    {
+     "key": "Quali",
+     "start": "2026-12-05T14:00:00Z"
+    },
+    {
+     "key": "Race",
+     "start": "2026-12-06T13:00:00Z"
+    }
+   ]
   }
  ]
 }

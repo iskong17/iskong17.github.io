@@ -23,6 +23,22 @@ def full_name(d):
     return f"{d['givenName']} {d['familyName']}"
 
 
+SESSIONS = [("FirstPractice", "FP1"), ("SecondPractice", "FP2"), ("ThirdPractice", "FP3"),
+            ("SprintQualifying", "SQ"), ("Sprint", "Sprint"), ("Qualifying", "Quali")]
+
+
+def race_entry(r):
+    """One calendar row: where, and every session start in UTC (time is missing until it is confirmed)."""
+    def when(d):
+        return f"{d['date']}T{d['time']}" if d.get("time") else d["date"]
+    sessions = [{"key": label, "start": when(r[k])} for k, label in SESSIONS if k in r]
+    sessions.append({"key": "Race", "start": when(r)})
+    sessions.sort(key=lambda x: x["start"])
+    return {"round": int(r["round"]), "name": r["raceName"], "circuit": r["Circuit"]["circuitName"], "circuit_id": r["Circuit"]["circuitId"],
+            "locality": r["Circuit"]["Location"]["locality"], "country": r["Circuit"]["Location"]["country"],
+            "start": f"{r['date']}T{r.get('time', '00:00:00Z')}", "sprint": "Sprint" in r, "sessions": sessions}
+
+
 def live():
     ds = jolpica("current/driverStandings")["StandingsTable"]["StandingsLists"]
     cs = jolpica("current/constructorStandings")["StandingsTable"]["StandingsLists"]
@@ -41,13 +57,12 @@ def live():
              "points": float(s["points"]), "wins": int(s["wins"])}
             for s in (cs[0]["ConstructorStandings"] if cs else [])
         ],
-        "races": [
-            {"round": int(r["round"]), "name": r["raceName"], "circuit": r["Circuit"]["circuitName"], "circuit_id": r["Circuit"]["circuitId"],
-             "locality": r["Circuit"]["Location"]["locality"], "country": r["Circuit"]["Location"]["country"],
-             "start": f"{r['date']}T{r.get('time', '00:00:00Z')}", "sprint": "Sprint" in r}
-            for r in races["Races"]
-        ],
+        "races": [race_entry(r) for r in races["Races"]],
     }
+    # The next calendar, once it is published
+    upcoming = jolpica(f"{int(season) + 1}/races")["RaceTable"]["Races"]
+    if upcoming:
+        out["next_season"] = {"season": str(int(season) + 1), "races": [race_entry(r) for r in upcoming]}
     path = ROOT / "_data" / "f1_live.json"
     path.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"wrote {path.name}", flush=True)

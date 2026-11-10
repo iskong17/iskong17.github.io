@@ -917,6 +917,7 @@ a.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .topic-algorithm { --accent: var(--yellow-ink); }
 .topic-pytorch { --accent: #ee4c2c; }
 .topic-basic { --accent: #0d9488; }
+.topic-robotics { --accent: #7c3aed; }
 
 /* Question series: a bullet per question that opens to show the answer */
 .question-group { margin-top: 24px; }
@@ -1629,3 +1630,94 @@ a.post-cat:hover { text-decoration: none; opacity: 0.9; }
 .sub-tile.is-empty::before { background: var(--line-strong); }
 .cat-bar-subs > .sq-card { aspect-ratio: 1 / 1; }
 .cat-bar-subs .cat-bar-empty { grid-column: 1 / -1; padding: 0; }
+
+/* ---------- Schedule ---------- */
+.hero-action { position: absolute; top: 0; right: 24px; z-index: 1; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 600; font-size: 14px; text-decoration: none; transition: border-color .15s, color .15s; }
+.hero-action:hover { border-color: var(--red); color: var(--red); }
+.hero-action .icon { width: 18px; height: 18px; }
+.area-nlp { --area: #10b981; }
+.area-cv { --area: #3b82f6; }
+.area-ml { --area: #a855f7; }
+.area-ai { --area: #f59e0b; }
+.area-f1 { --area: var(--red); }
+.sched { padding: 32px 0 88px; }
+.sched-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.sched-chip { display: inline-flex; align-items: baseline; gap: 6px; padding: 7px 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--text-2); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.sched-chip small { font-size: 11px; font-weight: 500; color: var(--muted); }
+.sched-chip.is-active { border-color: var(--area, var(--red)); background: color-mix(in srgb, var(--area, var(--red)) 18%, var(--surface)); color: var(--text); }
+.sched-next { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 24px; }
+.sched-next:empty { display: none; }
+.sched-next-item { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border: 1px solid var(--line); border-left: 4px solid var(--area); border-radius: 10px; background: var(--surface); color: var(--text); text-decoration: none; }
+.sched-next-item small { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--area); }
+.sched-next-item span { font-size: 13px; color: var(--muted); }
+.sched-next-item em { position: absolute; top: 10px; right: 12px; font-family: "JetBrains Mono", monospace; font-size: 13px; font-style: normal; font-weight: 700; color: var(--text); }
+.sched-cal { margin-bottom: 40px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.sched-cal-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.sched-cal-head h2 { margin: 0; min-width: 190px; font-size: 22px; text-align: center; }
+.sched-nav, .sched-today { padding: 4px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: transparent; color: var(--text); font: inherit; font-size: 16px; cursor: pointer; }
+.sched-today { margin-left: auto; font-size: 13px; }
+.sched-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.sched-dow { padding: 6px; background: var(--bg-2); font-size: 11px; font-weight: 700; text-align: center; color: var(--muted); text-transform: uppercase; }
+.sched-day { min-height: 104px; min-width: 0; padding: 4px; background: var(--surface); }
+.sched-day.is-out { background: var(--bg-2); }
+.sched-day.is-out .sched-num { opacity: .4; }
+.sched-num { display: inline-block; min-width: 22px; padding: 1px 4px; border-radius: 6px; font-size: 12px; font-weight: 700; color: var(--text-2); text-align: center; }
+.sched-day.is-today .sched-num { background: var(--red); color: #fff; }
+.sched-evs { display: flex; flex-direction: column; gap: 2px; margin-top: 2px; }
+.sched-ev { display: block; overflow: hidden; padding: 1px 5px; border-left: 3px solid var(--area); border-radius: 4px; background: color-mix(in srgb, var(--area) 16%, transparent); color: var(--text); font-size: 11px; line-height: 1.5; white-space: nowrap; text-overflow: ellipsis; text-decoration: none; }
+.sched-ev small { color: var(--muted); font-size: 10px; }
+.sched-ev.ev-deadline { background: var(--area); color: #fff; font-weight: 700; }
+.sched-ev.ev-deadline small { color: rgba(255, 255, 255, .8); }
+.sched-ev.ev-race { font-weight: 700; }
+.sched-ev.ev-conf { background: color-mix(in srgb, var(--area) 30%, transparent); }
+.sched-dots { display: none; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+.sched-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--area); }
+.sched-agenda { display: none; margin: 14px 0 0; padding: 0; list-style: none; }
+.sched-agenda li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.sched-agenda li > span { display: flex; flex-wrap: wrap; gap: 4px; }
+.sched-agenda .sched-ev { white-space: normal; }
+.sched-title { margin: 0 0 14px; font-size: 24px; }
+.sched-confs { display: grid; gap: 24px; margin-bottom: 44px; }
+.sched-area { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.sched-area h3 { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; margin: 0; font-size: 15px; color: var(--area); letter-spacing: 1px; }
+.sched-area h3::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--area); }
+.sched-conf { padding: 14px 16px; border: 1px solid var(--line); border-top: 3px solid var(--area); border-radius: 12px; background: var(--surface); scroll-margin-top: 90px; }
+.sched-conf.is-past { opacity: .55; }
+.sched-conf header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.sched-conf header b { font-size: 18px; }
+.sched-conf header a { font-size: 12px; }
+.sched-conf dl { display: grid; gap: 6px; margin: 0; }
+.sched-conf dl > div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; font-size: 14px; }
+.sched-conf dt { padding-top: 2px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
+.sched-conf dd { margin: 0; }
+.sched-conf dd small { color: var(--muted); }
+.sched-conf dd em { margin-left: 4px; padding: 1px 7px; border-radius: 999px; background: var(--area); color: #fff; font-size: 12px; font-style: normal; font-weight: 700; }
+.sched-conf p { margin: 10px 0 0; font-size: 12.5px; color: var(--muted); }
+.tbd { display: inline-block; padding: 0 6px; border: 1px dashed var(--line-strong); border-radius: 4px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); }
+.sched-f1 h3 { margin: 0 0 10px; font-size: 16px; color: var(--muted); }
+.sched-table-wrap { overflow-x: auto; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 12px; }
+.sched-table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13px; }
+.sched-table th { padding: 8px 10px; background: var(--bg-2); color: var(--muted); font-size: 11px; text-align: left; text-transform: uppercase; letter-spacing: .6px; white-space: nowrap; }
+.sched-table td { padding: 8px 10px; border-top: 1px solid var(--line); color: var(--text-2); vertical-align: top; white-space: nowrap; }
+.sched-table td b { color: var(--text); font-family: "JetBrains Mono", monospace; }
+.sched-table td.rd { color: var(--muted); font-family: "JetBrains Mono", monospace; font-weight: 700; }
+.sched-table td.gp { min-width: 210px; white-space: normal; }
+.sched-table td.gp b { font-family: inherit; }
+.sched-table td.gp small { display: block; color: var(--muted); }
+.sched-table td.none { color: var(--muted); }
+.sched-table tr { scroll-margin-top: 90px; }
+.sched-table tr.is-past { opacity: .45; }
+.sched-table tr.is-next td { background: var(--red-soft); }
+.sched-table tr.is-next td.rd { box-shadow: inset 3px 0 0 var(--red); color: var(--red); }
+.sched-table .sprint { padding: 0 6px; border-radius: 4px; background: var(--yellow); color: #111; font-size: 10px; font-weight: 700; }
+.sched-note, .sched-empty { color: var(--muted); font-size: 14px; }
+@media (max-width: 760px) {
+  .hero-action { position: static; margin-bottom: 14px; }
+  .sched-day { min-height: 52px; }
+  .sched-evs { display: none; }
+  .sched-dots { display: flex; }
+  .sched-agenda { display: block; }
+  .sched-cal { padding: 10px; }
+  .sched-cal-head h2 { min-width: 0; font-size: 18px; }
+  .sched-chip small { display: none; }
+}
