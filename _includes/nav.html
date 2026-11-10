@@ -10,8 +10,9 @@
       <a href="{{ home }}#news">News</a>
       <a href="{{ home }}#publications">Publications</a>
       <a href="{{ home }}#career">Background</a>
-      <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} class="is-active"{% endif %}>Blog</a>
+      <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' and page.url != '/blog/schedule/' %} class="is-active"{% endif %}>Blog</a>
     </nav>
+    <a class="nav-schedule{% if page.url == '/blog/schedule/' %} is-active{% endif %}" href="{{ '/blog/schedule/' | relative_url }}" aria-label="Schedule">{% include icon.html name="calendar" %}<span>Schedule</span></a>
     <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
       <span class="theme-icon theme-icon-sun">{% include icon.html name="sun" %}</span>
       <span class="theme-icon theme-icon-moon">{% include icon.html name="moon" %}</span>

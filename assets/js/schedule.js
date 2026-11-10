@@ -43,8 +43,11 @@
   confs.forEach(function (c, i) {
     c.id = 'conf-' + c.name.toLowerCase() + '-' + c.year;
     var tag = c.name + ' ' + c.year;
-    if (isDate(c.abstract_deadline)) events.push({ day: dayKey(c.abstract_deadline), area: c.area, kind: 'deadline', label: tag + ' abstract', anchor: c.id, ms: deadlineMs(c.abstract_deadline, c.deadline_tz) });
-    if (isDate(c.submission_deadline)) events.push({ day: dayKey(c.submission_deadline), area: c.area, kind: 'deadline', label: tag + ' deadline', anchor: c.id, ms: deadlineMs(c.submission_deadline, c.deadline_tz) });
+    [['abstract_deadline', ' abstract'], ['submission_deadline', ' deadline']].forEach(function (d) {
+      if (!isDate(c[d[0]])) return;
+      var ms = deadlineMs(c[d[0]], c.deadline_tz);
+      events.push({ day: kstDay(ms), area: c.area, kind: 'deadline', label: tag + d[1], sub: kstTime(ms), anchor: c.id, ms: ms });
+    });
     if (isDate(c.notification)) events.push({ day: dayKey(c.notification), area: c.area, kind: 'note', label: tag + ' notification', anchor: c.id });
     if (isDate(c.start)) {
       var end = isDate(c.end) ? c.end : c.start;
@@ -148,13 +151,17 @@
       .sort(function (a, b) { return a.ms - b.ms; }).slice(0, 4);
     document.getElementById('sched-next').innerHTML = upcoming.map(function (e) {
       return '<a class="sched-next-item area-' + e.area.toLowerCase() + '" href="#' + e.anchor + '"><small>' + (e.kind === 'deadline' ? 'Deadline' : 'Race') + '</small><b>' + esc(e.label) + '</b><span>' +
-        fmtDay(e.kind === 'deadline' ? e.day : kstDay(e.ms)) + (e.kind === 'race' ? ' ' + kstTime(e.ms) + ' KST' : ' AoE') + '</span><em>' + until(e.ms) + '</em></a>';
+        fmtDay(kstDay(e.ms)) + ' ' + kstTime(e.ms) + ' KST</span><em>' + until(e.ms) + '</em></a>';
     }).join('');
   }
 
   // ---------- Conference table ----------
   var tbd = '<span class="tbd">TBD</span>';
-  var showDate = function (s) { return isDate(s) ? fmtDay(s, true) : tbd; };
+  // A deadline as its KST date and time
+  var kstDeadline = function (s, tz) {
+    var ms = deadlineMs(s, tz);
+    return fmtDay(kstDay(ms), true) + ' <b>' + kstTime(ms) + '</b> <small>KST</small>';
+  };
   function renderConfs() {
     var t = Date.now();
     var order = ['NLP', 'CV', 'ML', 'AI'];
@@ -170,9 +177,9 @@
         return '<article class="sched-conf' + (over ? ' is-past' : '') + '" id="' + c.id + '">' +
           '<header><b>' + esc(c.name) + ' ' + c.year + '</b>' + (c.url ? '<a href="' + esc(c.url) + '" target="_blank" rel="noopener">site ↗</a>' : '') + '</header>' +
           '<dl>' +
-          '<div><dt>Submission</dt><dd>' + showDate(c.submission_deadline) + (isDate(c.submission_deadline) ? ' <small>' + esc(c.deadline_tz || 'AoE') + '</small>' : '') +
+          '<div><dt>Submission</dt><dd>' + (isDate(c.submission_deadline) ? kstDeadline(c.submission_deadline, c.deadline_tz) : tbd) +
           (dl ? (dl > t ? ' <em>' + until(dl) + '</em>' : ' <small class="done">closed</small>') : '') +
-          (isDate(c.abstract_deadline) ? '<br><small>Abstract ' + fmtDay(c.abstract_deadline, true) + '</small>' : '') + '</dd></div>' +
+          (isDate(c.abstract_deadline) ? '<br><small>Abstract ' + kstDeadline(c.abstract_deadline, c.deadline_tz).replace(/<\/?(b|small)>/g, '') + '</small>' : '') + '</dd></div>' +
           '<div><dt>Conference</dt><dd>' + (isDate(c.start) ? fmtDay(c.start, true) + (isDate(c.end) && c.end !== c.start ? ' – ' + fmtDay(c.end, true) : '') : tbd) + '</dd></div>' +
           '<div><dt>Location</dt><dd>' + (place ? esc(place) : tbd) + (c.venue ? '<br><small>' + esc(c.venue) + '</small>' : '') + '</dd></div>' +
           '</dl>' + (c.note ? '<p>' + esc(c.note) + '</p>' : '') + '</article>';
