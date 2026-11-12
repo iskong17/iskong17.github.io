@@ -1019,5 +1019,516 @@
     }
    ]
   }
- ]
+ ],
+ "next_season": {
+  "season": "2027",
+  "source": "https://www.formula1.com/en/racing/2027",
+  "note": "Official calendar announced 16 Sep 2026; session times not announced yet.",
+  "races": [
+   {
+    "round": 1,
+    "name": "Bahrain Grand Prix",
+    "circuit": "Bahrain International Circuit",
+    "circuit_id": "bahrain",
+    "locality": "Sakhir",
+    "country": "Bahrain",
+    "start": "2027-03-14",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-03-12"
+     },
+     {
+      "key": "Race",
+      "start": "2027-03-14"
+     }
+    ]
+   },
+   {
+    "round": 2,
+    "name": "Saudi Arabian Grand Prix",
+    "circuit": "Jeddah Corniche Circuit",
+    "circuit_id": "jeddah",
+    "locality": "Jeddah",
+    "country": "Saudi Arabia",
+    "start": "2027-03-21",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-03-19"
+     },
+     {
+      "key": "Race",
+      "start": "2027-03-21"
+     }
+    ]
+   },
+   {
+    "round": 3,
+    "name": "Australian Grand Prix",
+    "circuit": "Albert Park Grand Prix Circuit",
+    "circuit_id": "albert_park",
+    "locality": "Melbourne",
+    "country": "Australia",
+    "start": "2027-04-04",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-04-02"
+     },
+     {
+      "key": "Race",
+      "start": "2027-04-04"
+     }
+    ]
+   },
+   {
+    "round": 4,
+    "name": "Japanese Grand Prix",
+    "circuit": "Suzuka Circuit",
+    "circuit_id": "suzuka",
+    "locality": "Suzuka",
+    "country": "Japan",
+    "start": "2027-04-11",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-04-09"
+     },
+     {
+      "key": "Race",
+      "start": "2027-04-11"
+     }
+    ]
+   },
+   {
+    "round": 5,
+    "name": "Chinese Grand Prix",
+    "circuit": "Shanghai International Circuit",
+    "circuit_id": "shanghai",
+    "locality": "Shanghai",
+    "country": "China",
+    "start": "2027-04-18",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-04-16"
+     },
+     {
+      "key": "Race",
+      "start": "2027-04-18"
+     }
+    ]
+   },
+   {
+    "round": 6,
+    "name": "Miami Grand Prix",
+    "circuit": "Miami International Autodrome",
+    "circuit_id": "miami",
+    "locality": "Miami",
+    "country": "USA",
+    "start": "2027-05-02",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-04-30"
+     },
+     {
+      "key": "Race",
+      "start": "2027-05-02"
+     }
+    ]
+   },
+   {
+    "round": 7,
+    "name": "Canadian Grand Prix",
+    "circuit": "Circuit Gilles Villeneuve",
+    "circuit_id": "villeneuve",
+    "locality": "Montreal",
+    "country": "Canada",
+    "start": "2027-05-23",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-05-21"
+     },
+     {
+      "key": "Race",
+      "start": "2027-05-23"
+     }
+    ]
+   },
+   {
+    "round": 8,
+    "name": "Monaco Grand Prix",
+    "circuit": "Circuit de Monaco",
+    "circuit_id": "monaco",
+    "locality": "Monte Carlo",
+    "country": "Monaco",
+    "start": "2027-06-06",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-06-04"
+     },
+     {
+      "key": "Race",
+      "start": "2027-06-06"
+     }
+    ]
+   },
+   {
+    "round": 9,
+    "name": "Portuguese Grand Prix",
+    "circuit": "Autódromo Internacional do Algarve",
+    "circuit_id": "portimao",
+    "locality": "Portimão",
+    "country": "Portugal",
+    "start": "2027-06-20",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-06-18"
+     },
+     {
+      "key": "Race",
+      "start": "2027-06-20"
+     }
+    ]
+   },
+   {
+    "round": 10,
+    "name": "British Grand Prix",
+    "circuit": "Silverstone Circuit",
+    "circuit_id": "silverstone",
+    "locality": "Silverstone",
+    "country": "UK",
+    "start": "2027-07-04",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-07-02"
+     },
+     {
+      "key": "Race",
+      "start": "2027-07-04"
+     }
+    ]
+   },
+   {
+    "round": 11,
+    "name": "Austrian Grand Prix",
+    "circuit": "Red Bull Ring",
+    "circuit_id": "red_bull_ring",
+    "locality": "Spielberg",
+    "country": "Austria",
+    "start": "2027-07-11",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-07-09"
+     },
+     {
+      "key": "Race",
+      "start": "2027-07-11"
+     }
+    ]
+   },
+   {
+    "round": 12,
+    "name": "Belgian Grand Prix",
+    "circuit": "Circuit de Spa-Francorchamps",
+    "circuit_id": "spa",
+    "locality": "Spa",
+    "country": "Belgium",
+    "start": "2027-07-25",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-07-23"
+     },
+     {
+      "key": "Race",
+      "start": "2027-07-25"
+     }
+    ]
+   },
+   {
+    "round": 13,
+    "name": "Hungarian Grand Prix",
+    "circuit": "Hungaroring",
+    "circuit_id": "hungaroring",
+    "locality": "Budapest",
+    "country": "Hungary",
+    "start": "2027-08-01",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-07-30"
+     },
+     {
+      "key": "Race",
+      "start": "2027-08-01"
+     }
+    ]
+   },
+   {
+    "round": 14,
+    "name": "Italian Grand Prix",
+    "circuit": "Autodromo Nazionale di Monza",
+    "circuit_id": "monza",
+    "locality": "Monza",
+    "country": "Italy",
+    "start": "2027-09-05",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-09-03"
+     },
+     {
+      "key": "Race",
+      "start": "2027-09-05"
+     }
+    ]
+   },
+   {
+    "round": 15,
+    "name": "Spanish Grand Prix",
+    "circuit": "Madring",
+    "circuit_id": "madring",
+    "locality": "Madrid",
+    "country": "Spain",
+    "start": "2027-09-12",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-09-10"
+     },
+     {
+      "key": "Race",
+      "start": "2027-09-12"
+     }
+    ]
+   },
+   {
+    "round": 16,
+    "name": "Azerbaijan Grand Prix",
+    "circuit": "Baku City Circuit",
+    "circuit_id": "baku",
+    "locality": "Baku",
+    "country": "Azerbaijan",
+    "start": "2027-09-26",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-09-24"
+     },
+     {
+      "key": "Race",
+      "start": "2027-09-26"
+     }
+    ]
+   },
+   {
+    "round": 17,
+    "name": "Turkish Grand Prix",
+    "circuit": "Istanbul Park",
+    "circuit_id": "istanbul",
+    "locality": "Istanbul",
+    "country": "Turkey",
+    "start": "2027-10-03",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-10-01"
+     },
+     {
+      "key": "Race",
+      "start": "2027-10-03"
+     }
+    ]
+   },
+   {
+    "round": 18,
+    "name": "Singapore Grand Prix",
+    "circuit": "Marina Bay Street Circuit",
+    "circuit_id": "marina_bay",
+    "locality": "Marina Bay",
+    "country": "Singapore",
+    "start": "2027-10-10",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-10-08"
+     },
+     {
+      "key": "Race",
+      "start": "2027-10-10"
+     }
+    ]
+   },
+   {
+    "round": 19,
+    "name": "United States Grand Prix",
+    "circuit": "Circuit of the Americas",
+    "circuit_id": "americas",
+    "locality": "Austin",
+    "country": "USA",
+    "start": "2027-10-24",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-10-22"
+     },
+     {
+      "key": "Race",
+      "start": "2027-10-24"
+     }
+    ]
+   },
+   {
+    "round": 20,
+    "name": "Mexico City Grand Prix",
+    "circuit": "Autódromo Hermanos Rodríguez",
+    "circuit_id": "rodriguez",
+    "locality": "Mexico City",
+    "country": "Mexico",
+    "start": "2027-10-31",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-10-29"
+     },
+     {
+      "key": "Race",
+      "start": "2027-10-31"
+     }
+    ]
+   },
+   {
+    "round": 21,
+    "name": "São Paulo Grand Prix",
+    "circuit": "Autódromo José Carlos Pace",
+    "circuit_id": "interlagos",
+    "locality": "São Paulo",
+    "country": "Brazil",
+    "start": "2027-11-07",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-11-05"
+     },
+     {
+      "key": "Race",
+      "start": "2027-11-07"
+     }
+    ]
+   },
+   {
+    "round": 22,
+    "name": "Las Vegas Grand Prix",
+    "circuit": "Las Vegas Strip Street Circuit",
+    "circuit_id": "vegas",
+    "locality": "Las Vegas",
+    "country": "USA",
+    "start": "2027-11-20",
+    "sprint": false,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-11-18"
+     },
+     {
+      "key": "Race",
+      "start": "2027-11-20"
+     }
+    ]
+   },
+   {
+    "round": 23,
+    "name": "Qatar Grand Prix",
+    "circuit": "Lusail International Circuit",
+    "circuit_id": "losail",
+    "locality": "Lusail",
+    "country": "Qatar",
+    "start": "2027-12-05",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-12-03"
+     },
+     {
+      "key": "Race",
+      "start": "2027-12-05"
+     }
+    ]
+   },
+   {
+    "round": 24,
+    "name": "Abu Dhabi Grand Prix",
+    "circuit": "Yas Marina Circuit",
+    "circuit_id": "yas_marina",
+    "locality": "Abu Dhabi",
+    "country": "UAE",
+    "start": "2027-12-12",
+    "sprint": true,
+    "times_tbd": true,
+    "sessions": [
+     {
+      "key": "FP1",
+      "start": "2027-12-10"
+     },
+     {
+      "key": "Race",
+      "start": "2027-12-12"
+     }
+    ]
+   }
+  ]
+ }
 }

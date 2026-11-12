@@ -63,6 +63,11 @@ def live():
     upcoming = jolpica(f"{int(season) + 1}/races")["RaceTable"]["Races"]
     if upcoming:
         out["next_season"] = {"season": str(int(season) + 1), "races": [race_entry(r) for r in upcoming]}
+    else:
+        # Announced calendars reach the API late; until then use the one entered by hand from formula1.com
+        manual = ROOT / "_data" / f"f1_calendar_{int(season) + 1}.json"
+        if manual.exists():
+            out["next_season"] = json.loads(manual.read_text(encoding="utf-8"))
     path = ROOT / "_data" / "f1_live.json"
     path.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"wrote {path.name}", flush=True)
