@@ -68,3 +68,14 @@
   selected: false
   badges: []
   links: []
+
+- id: aeao
+  title: "AEAO: Question-Adaptive Attention Budgets for Mitigating Cross-Modal Hallucinations in Audio-Visual Large Language Models"
+  authors: "<b>Inseok Kong</b>, Heeseung Kim"
+  venue: "Under Review"
+  venue_short: "Under Review"
+  image: /images/under_review.svg
+  status: preprint
+  selected: false
+  badges: [first-author]
+  links: []
