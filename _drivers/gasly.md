@@ -10,12 +10,12 @@ team: "Alpine F1 Team"
 team_id: alpine
 current:
   season: 2026
-  round: 20
+  round: 21
   position: 10
-  points: 42
+  points: 52
   wins: 0
 seasons:
-  - { season: 2026, position: "10", points: 42, wins: 0, team: "Alpine F1 Team" }
+  - { season: 2026, position: "10", points: 52, wins: 0, team: "Alpine F1 Team" }
   - { season: 2025, position: "18", points: 22, wins: 0, team: "Alpine F1 Team" }
   - { season: 2024, position: "10", points: 42, wins: 0, team: "Alpine F1 Team" }
   - { season: 2023, position: "11", points: 62, wins: 0, team: "Alpine F1 Team" }

@@ -1,13 +1,13 @@
 {
  "season": "2026",
- "round": 20,
+ "round": 21,
  "drivers": [
   {
    "pos": "1",
    "id": "antonelli",
    "name": "Andrea Kimi Antonelli",
    "team": "Mercedes",
-   "points": 390.0,
+   "points": 402.0,
    "wins": 9
   },
   {
@@ -15,47 +15,47 @@
    "id": "max_verstappen",
    "name": "Max Verstappen",
    "team": "Red Bull",
-   "points": 279.0,
-   "wins": 3
+   "points": 304.0,
+   "wins": 4
   },
   {
    "pos": "3",
-   "id": "russell",
-   "name": "George Russell",
-   "team": "Mercedes",
-   "points": 262.0,
-   "wins": 3
-  },
-  {
-   "pos": "4",
    "id": "hamilton",
    "name": "Lewis Hamilton",
    "team": "Ferrari",
-   "points": 261.0,
+   "points": 267.0,
    "wins": 1
+  },
+  {
+   "pos": "4",
+   "id": "russell",
+   "name": "George Russell",
+   "team": "Mercedes",
+   "points": 264.0,
+   "wins": 3
   },
   {
    "pos": "5",
-   "id": "leclerc",
-   "name": "Charles Leclerc",
-   "team": "Ferrari",
-   "points": 249.0,
-   "wins": 1
-  },
-  {
-   "pos": "6",
    "id": "norris",
    "name": "Lando Norris",
    "team": "McLaren",
-   "points": 246.0,
+   "points": 264.0,
    "wins": 3
+  },
+  {
+   "pos": "6",
+   "id": "leclerc",
+   "name": "Charles Leclerc",
+   "team": "Ferrari",
+   "points": 250.0,
+   "wins": 1
   },
   {
    "pos": "7",
    "id": "piastri",
    "name": "Oscar Piastri",
    "team": "McLaren",
-   "points": 152.0,
+   "points": 167.0,
    "wins": 0
   },
   {
@@ -79,7 +79,7 @@
    "id": "gasly",
    "name": "Pierre Gasly",
    "team": "Alpine F1 Team",
-   "points": 42.0,
+   "points": 52.0,
    "wins": 0
   },
   {
@@ -95,7 +95,7 @@
    "id": "colapinto",
    "name": "Franco Colapinto",
    "team": "Alpine F1 Team",
-   "points": 27.0,
+   "points": 35.0,
    "wins": 0
   },
   {
@@ -124,6 +124,14 @@
   },
   {
    "pos": "16",
+   "id": "sainz",
+   "name": "Carlos Sainz",
+   "team": "Williams",
+   "points": 11.0,
+   "wins": 0
+  },
+  {
+   "pos": "17",
    "id": "ocon",
    "name": "Esteban Ocon",
    "team": "Haas F1 Team",
@@ -131,18 +139,10 @@
    "wins": 0
   },
   {
-   "pos": "17",
+   "pos": "18",
    "id": "alonso",
    "name": "Fernando Alonso",
    "team": "Aston Martin",
-   "points": 7.0,
-   "wins": 0
-  },
-  {
-   "pos": "18",
-   "id": "sainz",
-   "name": "Carlos Sainz",
-   "team": "Williams",
    "points": 7.0,
    "wins": 0
   },
@@ -208,28 +208,28 @@
    "pos": "1",
    "id": "mercedes",
    "name": "Mercedes",
-   "points": 652.0,
+   "points": 666.0,
    "wins": 12
   },
   {
    "pos": "2",
    "id": "ferrari",
    "name": "Ferrari",
-   "points": 510.0,
+   "points": 517.0,
    "wins": 2
   },
   {
    "pos": "3",
    "id": "red_bull",
    "name": "Red Bull",
-   "points": 415.0,
-   "wins": 3
+   "points": 440.0,
+   "wins": 4
   },
   {
    "pos": "4",
    "id": "mclaren",
    "name": "McLaren",
-   "points": 398.0,
+   "points": 431.0,
    "wins": 3
   },
   {
@@ -243,7 +243,7 @@
    "pos": "6",
    "id": "alpine",
    "name": "Alpine F1 Team",
-   "points": 69.0,
+   "points": 87.0,
    "wins": 0
   },
   {
@@ -264,7 +264,7 @@
    "pos": "9",
    "id": "williams",
    "name": "Williams",
-   "points": 12.0,
+   "points": 16.0,
    "wins": 0
   },
   {

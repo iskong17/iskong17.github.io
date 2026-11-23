@@ -10,12 +10,12 @@ team: "Aston Martin"
 team_id: aston_martin
 current:
   season: 2026
-  round: 20
-  position: 17
+  round: 21
+  position: 18
   points: 7
   wins: 0
 seasons:
-  - { season: 2026, position: "17", points: 7, wins: 0, team: "Aston Martin" }
+  - { season: 2026, position: "18", points: 7, wins: 0, team: "Aston Martin" }
   - { season: 2025, position: "10", points: 56, wins: 0, team: "Aston Martin" }
   - { season: 2024, position: "9", points: 70, wins: 0, team: "Aston Martin" }
   - { season: 2023, position: "4", points: 206, wins: 0, team: "Aston Martin" }

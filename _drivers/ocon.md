@@ -10,12 +10,12 @@ team: "Haas F1 Team"
 team_id: haas
 current:
   season: 2026
-  round: 20
-  position: 16
+  round: 21
+  position: 17
   points: 7
   wins: 0
 seasons:
-  - { season: 2026, position: "16", points: 7, wins: 0, team: "Haas F1 Team" }
+  - { season: 2026, position: "17", points: 7, wins: 0, team: "Haas F1 Team" }
   - { season: 2025, position: "15", points: 38, wins: 0, team: "Haas F1 Team" }
   - { season: 2024, position: "14", points: 23, wins: 0, team: "Alpine F1 Team" }
   - { season: 2023, position: "12", points: 58, wins: 0, team: "Alpine F1 Team" }

@@ -10,12 +10,12 @@ team: "Williams"
 team_id: williams
 current:
   season: 2026
-  round: 20
-  position: 18
-  points: 7
+  round: 21
+  position: 16
+  points: 11
   wins: 0
 seasons:
-  - { season: 2026, position: "18", points: 7, wins: 0, team: "Williams" }
+  - { season: 2026, position: "16", points: 11, wins: 0, team: "Williams" }
   - { season: 2025, position: "9", points: 64, wins: 0, team: "Williams" }
   - { season: 2024, position: "5", points: 290, wins: 2, team: "Ferrari" }
   - { season: 2023, position: "7", points: 200, wins: 1, team: "Ferrari" }

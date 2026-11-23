@@ -67,14 +67,14 @@
   red_bull_points: 451
 "2026":
   final: false
-  round: 20
+  round: 21
   driver_champion: "Andrea Kimi Antonelli"
   driver_team: "Mercedes"
-  driver_points: 390
+  driver_points: 402
   constructor_champion: "Mercedes"
-  constructor_points: 652
+  constructor_points: 666
   max_position: 2
-  max_points: 279
-  max_wins: 3
+  max_points: 304
+  max_wins: 4
   red_bull_position: 3
-  red_bull_points: 415
+  red_bull_points: 440
