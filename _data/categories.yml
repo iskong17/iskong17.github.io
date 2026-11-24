@@ -17,7 +17,7 @@
 - key: paper-review
   label: "Paper Review"
   short: "Paper"
-  blurb: "TTA · Calibration · 3DPC · Hallucination · VLM · AVLLM · Diffusion"
+  blurb: "TTA · Calibration · 3DPC · Hallucination · VLM · AVLLM · Diffusion · ASR"
   intro: "Reviews of papers I read for research, mostly test-time adaptation and multimodal LLMs: the problem, the main figure, the key results and the limits."
   # Tags for paper reviews. A post lists the keys that apply in `subfields:`.
   subfields:
@@ -28,6 +28,7 @@
     - { key: vlm, label: "VLM" }
     - { key: avllm, label: "AVLLM" }
     - { key: diffusion, label: "Diffusion" }
+    - { key: asr, label: "ASR" }
 - key: gallery
   label: "Gallery"
   short: "Gallery"
